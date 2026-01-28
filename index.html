@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Polícia Legislativa - Sistema de Estudos</title>
+    <title>Polícia Legislativa - Caderno de Revisão</title>
     <style>
         * { 
             box-sizing: border-box;
@@ -1124,499 +1124,125 @@
         });
         
         // Dados atualizados para Polícia Legislativa da Câmara dos Deputados
-       const stateLinks = {
-    'CÂMARA DOS DEPUTADOS': {
-        // CONHECIMENTOS GERAIS
-        portugues: [
-            { text: '1. COMPREENSÃO E INTERPRETAÇÃO DE TEXTOS' },
-            { text: '1.1 Textos de gêneros variados' },
-            { text: '1.2 Reconhecimento de tipos e gêneros textuais' },
-            { text: '2. DOMÍNIO DA ORTOGRAFIA' },
-            { text: '3. DOMÍNIO DOS MECANISMOS DE COESÃO TEXTUAL' },
-            { text: '3.1 Emprego de elementos de referenciação, substituição e repetição' },
-            { text: '3.2 Emprego de conectores e outros elementos de sequenciação textual' },
-            { text: '3.3 Emprego de tempos e modos verbais' },
-            { text: '4. DOMÍNIO DA ESTRUTURA MORFOSSINTÁTICA DO PERÍODO' },
-            { text: '4.1 Emprego das classes de palavras' },
-            { text: '4.2 Relações de coordenação' },
-            { text: '4.2.1 Coordenação entre orações' },
-            { text: '4.2.2 Coordenação entre termos da oração' },
-            { text: '4.3 Relações de subordinação' },
-            { text: '4.3.1 Subordinação entre orações' },
-            { text: '4.3.2 Subordinação entre termos da oração' },
-            { text: '4.4 Emprego dos sinais de pontuação' },
-            { text: '4.5 Concordância verbal e nominal' },
-            { text: '4.6 Regência verbal e nominal' },
-            { text: '4.7 Emprego do sinal indicativo de crase' },
-            { text: '4.8 Colocação dos pronomes átonos' },
-            { text: '5. REESCRITA DE FRASES E PARÁGRAFOS' },
-            { text: '5.1 Significação das palavras' },
-            { text: '5.2 Substituição de palavras ou trechos de texto' },
-            { text: '5.3 Reorganização da estrutura de orações e períodos' },
-            { text: '5.4 Reescrita de textos de diferentes gêneros e níveis de formalidade' }
-        ],
-        ingles: [
-            { text: '1. COMPREENSÃO DE TEXTOS VARIADOS' },
-            { text: '1.1 Domínio do vocabulário e estrutura da língua' },
-            { text: '1.2 Identificação de ideias principais e secundárias' },
-            { text: '1.3 Identificação de ideias explícitas e implícitas' },
-            { text: '1.4 Relações intratextuais e intertextuais' },
-            { text: '2. ITENS GRAMATICAIS RELEVANTES' },
-            { text: '2.1 Para compreensão de conteúdos semânticos' },
-            { text: '3. CONHECIMENTO E USO DA LINGUAGEM' },
-            { text: '3.1 Formas contemporâneas da linguagem inglesa' }
-        ],
-        raciocinio: [
-            { text: '1. ESTRUTURAS LÓGICAS' },
-            { text: '2. LÓGICA DE ARGUMENTAÇÃO' },
-            { text: '2.1 Analogias' },
-            { text: '2.2 Inferências' },
-            { text: '2.3 Deduções e conclusões' },
-            { text: '3. LÓGICA SENTENCIAL (PROPOSICIONAL)' },
-            { text: '3.1 Proposições simples e compostas' },
-            { text: '3.2 Tabelas verdade' },
-            { text: '3.3 Equivalências' },
-            { text: '3.4 Leis de Morgan' },
-            { text: '3.5 Diagramas lógicos' },
-            { text: '4. LÓGICA DE PRIMEIRA ORDEM' },
-            { text: '5. PRINCÍPIOS DE CONTAGEM E PROBABILIDADE' },
-            { text: '6. OPERAÇÕES COM CONJUNTOS' },
-            { text: '7. RACIOCÍNIO LÓGICO' },
-            { text: '7.1 Problemas aritméticos' },
-            { text: '7.2 Problemas geométricos' },
-            { text: '7.3 Problemas matriciais' },
-            { text: '8. ESTATÍSTICA E PROBABILIDADE BÁSICAS' },
-            { text: '8.1 Medidas de tendência central' },
-            { text: '8.2 Medidas de dispersão' },
-            { text: '8.3 Formulação e validação de hipóteses' },
-            { text: '8.4 Amostragem, viés e erro' },
-            { text: '8.5 Normalização e padronização' },
-            { text: '8.6 Outliers' }
-        ],
-        constitucional: [
-            { text: '1. CONSTITUIÇÃO FEDERAL DE 1988' },
-            { text: '1.1 Conceito, contexto histórico e características' },
-            { text: '1.2 Estrutura do texto constitucional' },
-            { text: '2. PRINCÍPIOS FUNDAMENTAIS' },
-            { text: '3. DIREITOS E GARANTIAS FUNDAMENTAIS' },
-            { text: '3.1 Direitos e deveres individuais e coletivos' },
-            { text: '3.2 Direitos sociais' },
-            { text: '3.3 Nacionalidade' },
-            { text: '3.4 Direitos políticos' },
-            { text: '3.5 Partidos políticos' },
-            { text: '4. ORGANIZAÇÃO DO ESTADO' },
-            { text: '4.1 Organização político-administrativa' },
-            { text: '4.2 União, estados, municípios, Distrito Federal e territórios' },
-            { text: '4.3 Intervenção Federal' },
-            { text: '5. ADMINISTRAÇÃO PÚBLICA' },
-            { text: '5.1 Disposições gerais' },
-            { text: '5.2 Servidores públicos civis e militares' },
-            { text: '6. PODER LEGISLATIVO' },
-            { text: '6.1 Congresso Nacional e suas Casas' },
-            { text: '6.1.1 Atribuições' },
-            { text: '6.1.2 Competências' },
-            { text: '6.1.3 Reuniões e comissões' },
-            { text: '7. REGIME JURÍDICO-CONSTITUCIONAL DOS PARLAMENTARES' },
-            { text: '8. PROCESSO LEGISLATIVO' },
-            { text: '9. DEFESA DO ESTADO E DAS INSTITUIÇÕES DEMOCRÁTICAS' },
-            { text: '10. FORÇAS ARMADAS' },
-            { text: '11. SEGURANÇA PÚBLICA' },
-            { text: '11.1 Organização da segurança pública' },
-            { text: '12. REGIMENTO INTERNO DA CÂMARA DOS DEPUTADOS' },
-            { text: '12.1 Disposições preliminares' },
-            { text: '12.2 Órgãos da Câmara (arts. 1º a 24)' },
-            { text: '12.3 Sessões da Câmara (arts. 65 a 94)' },
-            { text: '12.4 Deputados (arts. 226 a 251)' },
-            { text: '12.5 Administração e economia interna (arts. 262 a 273)' },
-            { text: '13. RESOLUÇÃO DA CÂMARA DOS DEPUTADOS Nº 18/2003' },
-            { text: '13.1 E suas atualizações (sem anexos)' },
-            { text: '14. ATO DA MESA DA CÂMARA DOS DEPUTADOS Nº 234/2025' },
-            { text: '14.1 E suas disposições (sem anexos)' }
-        ],
-        administrativo: [
-            { text: '1. NOÇÕES DE ORGANIZAÇÃO ADMINISTRATIVA' },
-            { text: '1.1 Centralização, descentralização, concentração e desconcentração' },
-            { text: '1.2 Administração direta, indireta e funcional' },
-            { text: '1.3 Entidades da administração indireta' },
-            { text: '1.3.1 Autarquias' },
-            { text: '1.3.2 Fundações' },
-            { text: '1.3.3 Empresas públicas' },
-            { text: '1.3.4 Sociedades de economia mista' },
-            { text: '2. ATO ADMINISTRATIVO' },
-            { text: '2.1 Conceito, requisitos e atributos' },
-            { text: '2.2 Classificação e espécies' },
-            { text: '2.3 Extinção, nulidades e revogação' },
-            { text: '2.4 Parecer: responsabilidade do emissor' },
-            { text: '3. AGENTES PÚBLICOS' },
-            { text: '3.1 Legislação pertinente' },
-            { text: '3.2 Disposições constitucionais aplicáveis' },
-            { text: '3.3 Disposições doutrinárias' },
-            { text: '3.3.1 Conceito de agente público' },
-            { text: '3.3.2 Espécies de agentes públicos' },
-            { text: '3.3.3 Cargo, emprego e função pública' },
-            { text: '3.4 Requisição de pessoal' },
-            { text: '3.5 Regime jurídico dos servidores públicos federais' },
-            { text: '3.5.1 Admissão e demissão' },
-            { text: '3.5.2 Concurso público' },
-            { text: '3.5.3 Estágio probatório' },
-            { text: '3.5.4 Vencimento básico e acumulação' },
-            { text: '3.5.5 Licenças e seguridade social' },
-            { text: '3.6 Direitos, deveres e responsabilidades dos servidores públicos civis' },
-            { text: '4. DIREITO ADMINISTRATIVO DISCIPLINAR' },
-            { text: '4.1 Fontes e princípios' },
-            { text: '4.2 Ilícito de direito administrativo disciplinar' },
-            { text: '4.3 Procedimentos disciplinares da administração pública' },
-            { text: '4.4 Processo Administrativo Federal (Lei nº 9.784/1999)' },
-            { text: '5. PODERES ADMINISTRATIVOS' },
-            { text: '5.1 Discricionário, hierárquico, disciplinar, regulamentar e de polícia' },
-            { text: '5.2 Uso e abuso do poder' },
-            { text: '6. CONTROLE DA ADMINISTRAÇÃO PÚBLICA' },
-            { text: '6.1 Controle exercido pela administração pública' },
-            { text: '6.2 Controle judicial' },
-            { text: '6.3 Controle legislativo' },
-            { text: '7. RESPONSABILIDADE CIVIL DO ESTADO' },
-            { text: '7.1 Responsabilidade civil do Estado no direito brasileiro' },
-            { text: '7.1.1 Responsabilidade por ato comissivo do Estado' },
-            { text: '7.1.2 Responsabilidade por omissão do Estado' },
-            { text: '7.2 Requisitos para demonstração da responsabilidade do Estado' },
-            { text: '7.3 Causas excludentes e atenuantes da responsabilidade do Estado' },
-            { text: '8. IMPROBIDADE ADMINISTRATIVA' },
-            { text: '8.1 Lei nº 8.429/1992' },
-            { text: '9. LEI DE ACESSO À INFORMAÇÃO' },
-            { text: '9.1 Lei nº 12.527/2011' },
-            { text: '10. LEI GERAL DE PROTEÇÃO DE DADOS' },
-            { text: '10.1 Lei nº 13.709/2018' },
-            { text: '11. BENS PÚBLICOS' },
-            { text: '11.1 Classificação e caracteres jurídicos' },
-            { text: '11.2 Natureza jurídica do domínio público' },
-            { text: '12. REGIME JURÍDICO-ADMINISTRATIVO' },
-            { text: '12.1 Lei de Introdução às Normas do Direito Brasileiro (Lei nº 4.657/1942)' },
-            { text: '13. NOÇÕES DE LICITAÇÕES E CONTRATOS' },
-            { text: '13.1 Lei nº 14.133/2021' },
-            { text: '13.2 Licitação Pública' },
-            { text: '13.2.1 Conceito, princípios e finalidade' },
-            { text: '13.2.2 Modalidades de licitação' },
-            { text: '13.2.3 Dispensa e inexigibilidade de licitação' },
-            { text: '13.3 Contratos administrativos' },
-            { text: '13.3.1 Características do contrato administrativo' },
-            { text: '13.3.2 Formalização, gestão e fiscalização do contrato' },
-            { text: '13.3.2.1 Planejamento e fiscalização contratual' },
-            { text: '13.3.3 Papel do fiscalizador do contrato' },
-            { text: '13.3.4 Papel do preposto da contratada' },
-            { text: '13.3.5 Acompanhamento da execução contratual' },
-            { text: '13.3.6 Registro e notificação de irregularidades' },
-            { text: '13.4 Estudo Técnico Preliminar e Termo de Referência' },
-            { text: '13.5 Alteração do objeto: acréscimos e supressões' },
-            { text: '13.6 Prorrogação do prazo de vigência e de execução' },
-            { text: '13.7 Riscos contratuais e gestão econômico-financeira do contrato' },
-            { text: '13.8 Contratos de terceirização: cautelas em relação à responsabilidade trabalhista' },
-            { text: '13.9 Responsabilidades da administração e da contratada' },
-            { text: '14. NOÇÕES DE ADMINISTRAÇÃO ORÇAMENTÁRIA E FINANCEIRA' },
-            { text: '14.1 Programação, execução e controle de recursos orçamentários e financeiros' },
-            { text: '14.2 Fases da despesa pública' },
-            { text: '14.2.1 Pré-empenho, empenho, liquidação e pagamento' },
-            { text: '14.3 Controle e pagamento de restos a pagar' },
-            { text: '14.4 Controle de despesas de exercícios anteriores' },
-            { text: '14.5 Suprimento de fundos' }
-        ],
-        informatica: [
-            { text: '1. NOÇÕES DE SISTEMAS OPERACIONAIS' },
-            { text: '1.1 Windows' },
-            { text: '1.2 Android' },
-            { text: '1.3 iOS' },
-            { text: '2. NAVEGAÇÃO E FERRAMENTAS' },
-            { text: '2.1 Navegadores de Internet' },
-            { text: '2.2 Webmail' },
-            { text: '2.3 Ferramentas de produtividade' },
-            { text: '3. NOÇÕES DE SEGURANÇA DA INFORMAÇÃO' },
-            { text: '3.1 Responsabilidades e deveres dos usuários de serviços de TI' },
-            { text: '3.2 Malware' },
-            { text: '3.2.1 Vírus' },
-            { text: '3.2.2 Worms' },
-            { text: '3.2.3 Cavalos de Troia (trojans)' },
-            { text: '3.2.4 Spyware' },
-            { text: '3.2.5 Ransomware' },
-            { text: '3.2.6 Backdoor' },
-            { text: '3.2.7 Zero-day exploits' },
-            { text: '3.2.8 Keyloggers' },
-            { text: '3.3 Ataques de engenharia social' },
-            { text: '3.3.1 Phishing' },
-            { text: '3.3.2 Vishing' },
-            { text: '3.4 Aplicativos para segurança' },
-            { text: '3.4.1 Antivírus' },
-            { text: '3.4.2 Endpoint Detection and Response (EDR)' },
-            { text: '3.4.3 Firewall' },
-            { text: '3.4.4 Anti-spyware' },
-            { text: '3.4.5 Gerenciadores de senhas' },
-            { text: '3.5 Assinatura e certificação digital' },
-            { text: '4. NOÇÕES DE BANCOS DE DADOS' },
-            { text: '4.1 Conceitos básicos e características' },
-            { text: '4.2 Tipos de dados' },
-            { text: '4.2.1 Dados estruturados' },
-            { text: '4.2.2 Dados não estruturados' },
-            { text: '4.3 Chaves e relacionamentos' },
-            { text: '5. NOÇÕES DE REDES DE COMPUTADORES' },
-            { text: '5.1 Tipos de redes' },
-            { text: '5.1.1 LAN (Local Area Network)' },
-            { text: '5.1.2 MAN (Metropolitan Area Network)' },
-            { text: '5.1.3 WAN (Wide Area Network)' },
-            { text: '5.2 Internet e Intranet' },
-            { text: '5.3 Arquitetura TCP/IP' },
-            { text: '5.3.1 NAT (Network Address Translation)' },
-            { text: '5.4 Acesso remoto a computadores' },
-            { text: '5.4.1 VPN (Virtual Private Network)' },
-            { text: '5.4.2 RDP (Remote Desktop Protocol)' },
-            { text: '6. NOÇÕES DE APRENDIZADO DE MÁQUINA' },
-            { text: '6.1 Mineração de dados' },
-            { text: '6.1.1 Conceituação e características' },
-            { text: '6.2 Big data' },
-            { text: '6.2.1 Conceito, premissas e aplicação' },
-            { text: '6.3 IA Generativa' },
-            { text: '6.3.1 Principais características' },
-            { text: '7. NOÇÕES DE FORENSE COMPUTACIONAL' },
-            { text: '7.1 Técnicas de recuperação de arquivos apagados' },
-            { text: '7.2 Identificação, isolamento, preservação e coleta de vestígio cibernético' },
-            { text: '7.3 Cadeia de custódia' },
-            { text: '7.4 Log de eventos do Windows' }
-        ],
-        
-        // CONHECIMENTOS ESPECÍFICOS
-        penal: [
-            { text: '1. DIREITO PENAL' },
-            { text: '1.1 Princípios básicos do direito penal' },
-            { text: '2. A LEI PENAL' },
-            { text: '2.1 Características, fontes e interpretação' },
-            { text: '2.2 Vigência e aplicação' },
-            { text: '2.3 Lei penal no tempo e no espaço' },
-            { text: '2.4 Imunidade' },
-            { text: '2.5 Condições de punibilidade' },
-            { text: '2.6 Concurso aparente de normas' },
-            { text: '3. TEORIA GERAL DO CRIME' },
-            { text: '3.1 Conceito, objeto e sujeitos' },
-            { text: '3.2 Conduta, tipicidade e culpabilidade' },
-            { text: '3.3 Bem jurídico' },
-            { text: '3.4 Tempo e lugar do crime' },
-            { text: '3.5 Punibilidade' },
-            { text: '3.6 Concurso de crimes e crime continuado' },
-            { text: '4. TEORIA DO TIPO' },
-            { text: '4.1 Crime doloso e crime culposo' },
-            { text: '4.2 Crime qualificado pelo resultado e crime preterdoloso' },
-            { text: '4.3 Erro de tipo' },
-            { text: '4.4 Classificação jurídica dos crimes' },
-            { text: '4.5 Crimes comissivos e omissivos' },
-            { text: '4.6 Crimes de dano e de perigo' },
-            { text: '4.7 Punibilidade: causas de extinção' },
-            { text: '4.8 Iter criminis' },
-            { text: '4.9 Consumação e tentativa' },
-            { text: '4.10 Desistência voluntária e arrependimento eficaz' },
-            { text: '4.11 Arrependimento posterior' },
-            { text: '4.12 Crime impossível' },
-            { text: '5. ILICITUDE' },
-            { text: '5.1 Causas de exclusão da ilicitude' },
-            { text: '5.1.1 Estado de necessidade' },
-            { text: '5.1.2 Legítima defesa' },
-            { text: '5.1.3 Estrito cumprimento do dever legal' },
-            { text: '5.1.4 Exercício regular de direito' },
-            { text: '6. CULPABILIDADE' },
-            { text: '6.1 Causas de exclusão da culpabilidade' },
-            { text: '6.2 Imputabilidade' },
-            { text: '6.3 Erro de proibição' },
-            { text: '7. CONCURSO DE AGENTES' },
-            { text: '7.1 Autoria e participação' },
-            { text: '7.2 Conduta delituosa' },
-            { text: '7.3 Resultado' },
-            { text: '7.4 Relação de causalidade' },
-            { text: '7.5 Imputação' },
-            { text: '8. PUNIBILIDADE E CAUSAS DE EXTINÇÃO' },
-            { text: '9. CRIMES' },
-            { text: '9.1 Crimes contra a pessoa' },
-            { text: '9.2 Crimes contra o patrimônio' },
-            { text: '9.3 Crimes contra a incolumidade pública' },
-            { text: '9.4 Crimes contra a fé pública' },
-            { text: '9.5 Crimes contra a administração pública' },
-            { text: '9.6 Crimes contra o Estado Democrático de Direito' },
-            { text: '10. EXECUÇÃO PENAL' },
-            { text: '10.1 Noções gerais' }
-        ],
-        processual_penal: [
-            { text: '11. DIREITO PROCESSUAL PENAL' },
-            { text: '11.1 Princípios gerais, conceito e finalidade' },
-            { text: '11.2 Características e fontes' },
-            { text: '12. LEI PROCESSUAL PENAL' },
-            { text: '12.1 Fontes, eficácia e interpretação' },
-            { text: '12.2 Analogia e imunidades' },
-            { text: '12.3 Sistemas de processo penal' },
-            { text: '13. INQUÉRITO POLICIAL' },
-            { text: '13.1 Histórico, natureza e conceito' },
-            { text: '13.2 Finalidade, características e fundamento' },
-            { text: '13.3 Titularidade e grau de cognição' },
-            { text: '13.4 Valor probatório' },
-            { text: '13.5 Formas de instauração' },
-            { text: '13.6 Notitia criminis e delatio criminis' },
-            { text: '13.7 Procedimentos investigativos' },
-            { text: '13.8 Indiciamento' },
-            { text: '13.9 Garantias do investigado' },
-            { text: '13.10 Conclusão e prazos' },
-            { text: '14. PROCESSO CRIMINAL' },
-            { text: '14.1 Finalidade, pressupostos e sistemas' },
-            { text: '15. AÇÃO PENAL' },
-            { text: '15.1 Conceito, características e espécies' },
-            { text: '15.2 Condições da ação penal' },
-            { text: '16. TERMO CIRCUNSTANCIADO DE OCORRÊNCIA' },
-            { text: '16.1 Atos processuais' },
-            { text: '16.2 Forma, lugar e tempo' },
-            { text: '17. PROVAS' },
-            { text: '17.1 Conceito, objeto e classificação' },
-            { text: '17.2 Sistemas de avaliação' },
-            { text: '17.3 Princípios gerais da prova' },
-            { text: '17.4 Procedimento probatório' },
-            { text: '17.5 Valoração e ônus da prova' },
-            { text: '17.6 Provas ilícitas' },
-            { text: '17.7 Meios de prova' },
-            { text: '17.7.1 Perícias' },
-            { text: '17.7.2 Interrogatório' },
-            { text: '17.7.3 Confissão' },
-            { text: '17.7.4 Testemunhas' },
-            { text: '17.7.5 Reconhecimento de pessoas e coisas' },
-            { text: '17.7.6 Acareação' },
-            { text: '17.7.7 Documentos' },
-            { text: '17.7.8 Indícios' },
-            { text: '17.8 Busca e apreensão' },
-            { text: '18. PRISÃO, MEDIDAS CAUTELARES E LIBERDADE PROVISÓRIA' },
-            { text: '18.1 Conceito e espécies' },
-            { text: '18.2 Mandado de prisão e cumprimento' },
-            { text: '19. CITAÇÃO, INTIMAÇÃO E INTERDIÇÃO DE DIREITO' },
-            { text: '20. PROCEDIMENTOS DOS CRIMES DE RESPONSABILIDADE' },
-            { text: '20.1 Crimes de responsabilidade dos funcionários públicos' },
-            { text: '21. PROCEDIMENTO CRIMINAL DE CRIMES COMUNS' },
-            { text: '22. DILIGÊNCIAS INVESTIGATÓRIAS' },
-            { text: '23. LEGISLAÇÃO ESPECIAL' },
-            { text: '23.1 Decreto-Lei nº 3.688/1941 (Lei das Contravenções Penais)' },
-            { text: '23.2 Lei nº 5.553/1968 (Apresentação e uso de documento de identificação pessoal)' },
-            { text: '23.3 Lei nº 7.960/1989 (Prisão Temporária)' },
-            { text: '23.4 Lei nº 9.099/1995 (Juizados especiais criminais)' },
-            { text: '23.5 Lei nº 9.296/1996 (Interceptação telefônica)' },
-            { text: '23.6 Lei nº 9.503/1997 (Código de Trânsito Brasileiro)' },
-            { text: '23.6.1 Crimes de trânsito' },
-            { text: '23.7 Lei nº 10.826/2003 (Estatuto do desarmamento)' },
-            { text: '23.8 Lei nº 11.343/2006 (Tráfico ilícito e uso indevido de substâncias entorpecentes)' },
-            { text: '23.9 Lei nº 12.850/2013 (Crime organizado)' },
-            { text: '23.10 Lei nº 13.869/2019 (Crimes de abuso de autoridade)' },
-            { text: '23.11 Decreto nº 11.491/2023 (Crime Cibernético)' },
-            { text: '24. SÚMULAS DOS TRIBUNAIS SUPERIORES' },
-            { text: '24.1 Supremo Tribunal Federal' },
-            { text: '24.2 Superior Tribunal de Justiça' }
-        ],
-        criminologia: [
-            { text: '1. CRIMINOLOGIA' },
-            { text: '1.1 Conceito' },
-            { text: '1.2 Métodos' },
-            { text: '1.2.1 Empirismo' },
-            { text: '1.2.2 Interdisciplinaridade' },
-            { text: '1.3 Objetos da criminologia' },
-            { text: '1.3.1 Delito' },
-            { text: '1.3.2 Delinquente' },
-            { text: '1.3.3 Vítima' },
-            { text: '1.3.4 Controle social' },
-            { text: '1.4 Funções da criminologia' },
-            { text: '1.4.1 Criminologia e política criminal' },
-            { text: '1.4.2 Direito Penal sob o aspecto da criminologia' },
-            { text: '1.5 Modelos teóricos da criminologia' },
-            { text: '1.5.1 Teorias sociológicas' },
-            { text: '1.6 Prevenção da infração penal' },
-            { text: '1.6.1 No Estado democrático de direito' },
-            { text: '1.6.2 Prevenção primária' },
-            { text: '1.6.3 Prevenção secundária' },
-            { text: '1.6.4 Prevenção terciária' },
-            { text: '1.7 Modelos de reação ao crime' },
-            { text: '2. CRIMINALÍSTICA' },
-            { text: '2.1 Definição' },
-            { text: '2.2 Histórico' },
-            { text: '2.3 Doutrina' },
-            { text: '3. PERÍCIA' },
-            { text: '3.1 Definição e conceitos' },
-            { text: '3.2 Requisição' },
-            { text: '3.3 Prazos para elaboração' },
-            { text: '3.3.1 Exame pericial' },
-            { text: '3.3.2 Laudo pericial' },
-            { text: '3.4 Tipologias periciais' },
-            { text: '3.4.1 Documentoscópica' },
-            { text: '3.4.2 Audiovisual' },
-            { text: '3.4.3 Grafotécnica' },
-            { text: '4. LOCAIS DE CRIME' },
-            { text: '4.1 Conceituação e classificação' },
-            { text: '4.2 Isolamento e preservação de local de crime' },
-            { text: '4.3 Finalidades dos levantamentos' },
-            { text: '4.3.1 Locais de crime contra a pessoa' },
-            { text: '4.3.2 Locais de crime contra o patrimônio' },
-            { text: '5. CADEIA DE CUSTÓDIA' },
-            { text: '5.1 Conceitos' },
-            { text: '5.2 Etapas' },
-            { text: '5.3 Fase interna' },
-            { text: '5.4 Fase externa' },
-            { text: '6. RASTREABILIDADE' },
-            { text: '7. VESTÍGIOS DE INTERESSE FORENSE' },
-            { text: '7.1 Conceitos básicos' },
-            { text: '7.1.1 Vestígio' },
-            { text: '7.1.2 Evidência' },
-            { text: '7.1.3 Indício' },
-            { text: '7.2 Processamento pericial de locais de crime' },
-            { text: '7.2.1 Busca de vestígios' },
-            { text: '7.2.2 Documentação do local (Fixação)' },
-            { text: '7.2.3 Coleta de vestígios' },
-            { text: '7.2.4 Acondicionamento e transporte de vestígios' },
-            { text: '7.2.5 Liberação do local' }
-        ],
-        direitos_humanos: [
-            { text: '1. DIREITOS HUMANOS' },
-            { text: '1.1 Conceito, princípios essenciais e gerações' },
-            { text: '1.2 Direitos humanos na Constituição Federal de 1988' },
-            { text: '1.3 Convenção Americana sobre Direitos Humanos (Pacto de São José da Costa Rica)' },
-            { text: '1.3.1 Decreto nº 678/1992' },
-            { text: '1.3.2 Anexos da Convenção' },
-            { text: '1.4 Sistema de Proteção' },
-            { text: '2. DECLARAÇÃO UNIVERSAL DOS DIREITOS HUMANOS DE 1948' },
-            { text: '3. LEGISLAÇÃO CORRELATA' },
-            { text: '3.1 Lei nº 13.060/2014 e Decreto 12.341/2024' },
-            { text: '3.1.1 Uso dos instrumentos de menor potencial ofensivo' },
-            { text: '3.2 Código de Conduta para Funcionários Responsáveis pela Aplicação da Lei' },
-            { text: '3.2.1 Resolução nº 34/169 da ONU' },
-            { text: '3.3 Princípios Básicos sobre a Utilização da Força e de Armas de Fogo' },
-            { text: '3.3.1 8º Congresso da ONU para a Prevenção do Crime e o Tratamento dos Delinquentes (Havana, 1990)' }
-        ],
-        inteligencia: [
-            { text: '1. ATIVIDADE DE INTELIGÊNCIA' },
-            { text: '1.1 Conceitos de Inteligência' },
-            { text: '1.1.1 Escopo e categorias de Inteligência' },
-            { text: '1.1.2 Inteligência, contrainteligência, contramedidas de vigilância técnica' },
-            { text: '1.1.3 Operações de Inteligência' },
-            { text: '1.2 Funções da atividade de Inteligência' },
-            { text: '1.3 Metodologia de produção de conhecimentos' },
-            { text: '2. POLÍTICA NACIONAL DE INTELIGÊNCIA' },
-            { text: '2.1 Decreto nº 8.793/2016 e suas alterações' },
-            { text: '2.2 Pressupostos da atividade de Inteligência' },
-            { text: '2.3 O Estado, a sociedade e a Inteligência' },
-            { text: '2.4 Ambientes internacional e nacional' },
-            { text: '2.5 Instrumentos da atividade de Inteligência' },
-            { text: '2.6 Principais ameaças' },
-            { text: '2.7 Objetivos da Inteligência nacional' },
-            { text: '2.8 Diretrizes de Inteligência' },
-            { text: '3. ANÁLISE DE RISCO NA ATIVIDADE DE INTELIGÊNCIA' },
-            { text: '3.1 Conceitos básicos' },
-            { text: '3.1.1 Risco' },
-            { text: '3.1.2 Ameaça' },
-            { text: '3.1.3 Vulnerabilidade' },
-            { text: '3.2 Metodologias de análise de risco' },
-            { text: '3.2.1 Empregadas na atividade de inteligência' },
-            { text: '4. CONTROLE DA ATIVIDADE DE INTELIGÊNCIA' },
-            { text: '4.1 Noções básicas' },
-            { text: '5. SEGURANÇA DA INFORMAÇÃO' },
-            { text: '5.1 Discrição e segurança de informações' },
-            { text: '5.2 Graus de sigilo e atributos básicos' },
-            { text: '5.3 Criptografia e cibersegurança' }
-        ]
-    }
-};
+        const stateLinks = {
+            'CÂMARA DOS DEPUTADOS': {
+                // CONHECIMENTOS GERAIS
+                portugues: [
+                    { text: '1. COMPREENSÃO E INTERPRETAÇÃO DE TEXTOS. Textos de gêneros variados. Reconhecimento de tipos e gêneros textuais' },
+                    { text: '2. DOMÍNIO DA ORTOGRAFIA' },
+                    { text: '3. DOMÍNIO DOS MECANISMOS DE COESÃO TEXTUAL. Emprego de elementos de referenciação, substituição e repetição. Emprego de conectores e outros elementos de sequenciação textual. Emprego de tempos e modos verbais' },
+                    { text: '4. DOMÍNIO DA ESTRUTURA MORFOSSINTÁTICA DO PERÍODO. Emprego das classes de palavras. Relações de coordenação entre orações e entre termos da oração. Relações de subordinação entre orações e entre termos da oração. Emprego dos sinais de pontuação. Concordância verbal e nominal. Regência verbal e nominal. Emprego do sinal indicativo de crase. Colocação dos pronomes átonos' },
+                    { text: '5. REESCRITA DE FRASES E PARÁGRAFOS. Significação das palavras. Substituição de palavras ou trechos de texto. Reorganização da estrutura de orações e períodos. Reescrita de textos de diferentes gêneros e níveis de formalidade' }
+                ],
+                ingles: [
+                    { text: '1. COMPREENSÃO DE TEXTOS VARIADOS. Domínio do vocabulário e estrutura da língua. Identificação de ideias principais e secundárias. Identificação de ideias explícitas e implícitas. Relações intratextuais e intertextuais' },
+                    { text: '2. ITENS GRAMATICAIS RELEVANTES. Para compreensão de conteúdos semânticos' },
+                    { text: '3. CONHECIMENTO E USO DA LINGUAGEM. Formas contemporâneas da linguagem inglesa' }
+                ],
+                raciocinio: [
+                    { text: '1. ESTRUTURAS LÓGICAS' },
+                    { text: '2. LÓGICA DE ARGUMENTAÇÃO. Analogias. Inferências. Deduções e conclusões' },
+                    { text: '3. LÓGICA SENTENCIAL (PROPOSICIONAL). Proposições simples e compostas. Tabelas verdade. Equivalências. Leis de Morgan. Diagramas lógicos' },
+                    { text: '4. LÓGICA DE PRIMEIRA ORDEM' },
+                    { text: '5. PRINCÍPIOS DE CONTAGEM E PROBABILIDADE' },
+                    { text: '6. OPERAÇÕES COM CONJUNTOS' },
+                    { text: '7. RACIOCÍNIO LÓGICO. Problemas aritméticos. Problemas geométricos. Problemas matriciais' },
+                    { text: '8. ESTATÍSTICA E PROBABILIDADE BÁSICAS. Medidas de tendência central. Medidas de dispersão. Formulação e validação de hipóteses. Amostragem, viés e erro. Normalização e padronização. Outliers' }
+                ],
+                constitucional: [
+                    { text: '1. CONSTITUIÇÃO FEDERAL DE 1988. Conceito, contexto histórico e características. Estrutura do texto constitucional' },
+                    { text: '2. PRINCÍPIOS FUNDAMENTAIS' },
+                    { text: '3. DIREITOS E GARANTIAS FUNDAMENTAIS. Direitos e deveres individuais e coletivos. Direitos sociais. Nacionalidade. Direitos políticos. Partidos políticos' },
+                    { text: '4. ORGANIZAÇÃO DO ESTADO. Organização político-administrativa. União, estados, municípios, Distrito Federal e territórios. Intervenção Federal' },
+                    { text: '5. ADMINISTRAÇÃO PÚBLICA. Disposições gerais. Servidores públicos civis e militares' },
+                    { text: '6. PODER LEGISLATIVO. Congresso Nacional e suas Casas. Atribuições. Competências. Reuniões e comissões' },
+                    { text: '7. REGIME JURÍDICO-CONSTITUCIONAL DOS PARLAMENTARES' },
+                    { text: '8. PROCESSO LEGISLATIVO' },
+                    { text: '9. DEFESA DO ESTADO E DAS INSTITUIÇÕES DEMOCRÁTICAS' },
+                    { text: '10. FORÇAS ARMADAS' },
+                    { text: '11. SEGURANÇA PÚBLICA. Organização da segurança pública' },
+                    { text: '12. REGIMENTO INTERNO DA CÂMARA DOS DEPUTADOS. Disposições preliminares. Órgãos da Câmara (arts. 1º a 24). Sessões da Câmara (arts. 65 a 94). Deputados (arts. 226 a 251). Administração e economia interna (arts. 262 a 273)' },
+                    { text: '13. RESOLUÇÃO DA CÂMARA DOS DEPUTADOS Nº 18/2003. E suas atualizações (sem anexos)' },
+                    { text: '14. ATO DA MESA DA CÂMARA DOS DEPUTADOS Nº 234/2025. E suas disposições (sem anexos)' }
+                ],
+                administrativo: [
+                    { text: '1. NOÇÕES DE ORGANIZAÇÃO ADMINISTRATIVA. Centralização, descentralização, concentração e desconcentração. Administração direta, indireta e funcional. Entidades da administração indireta: Autarquias, Fundações, Empresas públicas, Sociedades de economia mista' },
+                    { text: '2. ATO ADMINISTRATIVO. Conceito, requisitos e atributos. Classificação e espécies. Extinção, nulidades e revogação. Parecer: responsabilidade do emissor' },
+                    { text: '3. AGENTES PÚBLICOS. Legislação pertinente. Disposições constitucionais aplicáveis. Disposições doutrinárias: Conceito de agente público, Espécies de agentes públicos, Cargo, emprego e função pública. Requisição de pessoal. Regime jurídico dos servidores públicos federais: Admissão e demissão, Concurso público, Estágio probatório, Vencimento básico e acumulação, Licenças e seguridade social. Direitos, deveres e responsabilidades dos servidores públicos civis' },
+                    { text: '4. DIREITO ADMINISTRATIVO DISCIPLINAR. Fontes e princípios. Ilícito de direito administrativo disciplinar. Procedimentos disciplinares da administração pública. Processo Administrativo Federal (Lei nº 9.784/1999)' },
+                    { text: '5. PODERES ADMINISTRATIVOS. Discricionário, hierárquico, disciplinar, regulamentar e de polícia. Uso e abuso do poder' },
+                    { text: '6. CONTROLE DA ADMINISTRAÇÃO PÚBLICA. Controle exercido pela administração pública. Controle judicial. Controle legislativo' },
+                    { text: '7. RESPONSABILIDADE CIVIL DO ESTADO. Responsabilidade civil do Estado no direito brasileiro: Responsabilidade por ato comissivo do Estado, Responsabilidade por omissão do Estado. Requisitos para demonstração da responsabilidade do Estado. Causas excludentes e atenuantes da responsabilidade do Estado' },
+                    { text: '8. IMPROBIDADE ADMINISTRATIVA. Lei nº 8.429/1992' },
+                    { text: '9. LEI DE ACESSO À INFORMAÇÃO. Lei nº 12.527/2011' },
+                    { text: '10. LEI GERAL DE PROTEÇÃO DE DADOS. Lei nº 13.709/2018' },
+                    { text: '11. BENS PÚBLICOS. Classificação e caracteres jurídicos. Natureza jurídica do domínio público' },
+                    { text: '12. REGIME JURÍDICO-ADMINISTRATIVO. Lei de Introdução às Normas do Direito Brasileiro (Lei nº 4.657/1942)' },
+                    { text: '13. NOÇÕES DE LICITAÇÕES E CONTRATOS. Lei nº 14.133/2021. Licitação Pública: Conceito, princípios e finalidade, Modalidades de licitação, Dispensa e inexigibilidade de licitação. Contratos administrativos: Características do contrato administrativo, Formalização, gestão e fiscalização do contrato, Planejamento e fiscalização contratual, Papel do fiscalizador do contrato, Papel do preposto da contratada, Acompanhamento da execução contratual, Registro e notificação de irregularidades. Estudo Técnico Preliminar e Termo de Referência. Alteração do objeto: acréscimos e supressões. Prorrogação do prazo de vigência e de execução. Riscos contratuais e gestão econômico-financeira do contrato. Contratos de terceirização: cautelas em relação à responsabilidade trabalhista. Responsabilidades da administração e da contratada' },
+                    { text: '14. NOÇÕES DE ADMINISTRAÇÃO ORÇAMENTÁRIA E FINANCEIRA. Programação, execução e controle de recursos orçamentários e financeiros. Fases da despesa pública: Pré-empenho, empenho, liquidação e pagamento. Controle e pagamento de restos a pagar. Controle de despesas de exercícios anteriores. Suprimento de fundos' }
+                ],
+                informatica: [
+                    { text: '1. NOÇÕES DE SISTEMAS OPERACIONAIS. Windows. Android. iOS' },
+                    { text: '2. NAVEGAÇÃO E FERRAMENTAS. Navegadores de Internet. Webmail. Ferramentas de produtividade' },
+                    { text: '3. NOÇÕES DE SEGURANÇA DA INFORMAÇÃO. Responsabilidades e deveres dos usuários de serviços de TI. Malware: Vírus, Worms, Cavalos de Troia (trojans), Spyware, Ransomware, Backdoor, Zero-day exploits, Keyloggers. Ataques de engenharia social: Phishing, Vishing. Aplicativos para segurança: Antivírus, Endpoint Detection and Response (EDR), Firewall, Anti-spyware, Gerenciadores de senhas. Assinatura e certificação digital' },
+                    { text: '4. NOÇÕES DE BANCOS DE DADOS. Conceitos básicos e características. Tipos de dados: Dados estruturados, Dados não estruturados. Chaves e relacionamentos' },
+                    { text: '5. NOÇÕES DE REDES DE COMPUTADORES. Tipos de redes: LAN (Local Area Network), MAN (Metropolitan Area Network), WAN (Wide Area Network). Internet e Intranet. Arquitetura TCP/IP: NAT (Network Address Translation). Acesso remoto a computadores: VPN (Virtual Private Network), RDP (Remote Desktop Protocol)' },
+                    { text: '6. NOÇÕES DE APRENDIZADO DE MÁQUINA. Mineração de dados: Conceituação e características. Big data: Conceito, premissas e aplicação. IA Generativa: Principais características' },
+                    { text: '7. NOÇÕES DE FORENSE COMPUTACIONAL. Técnicas de recuperação de arquivos apagados. Identificação, isolamento, preservação e coleta de vestígio cibernético. Cadeia de custódia. Log de eventos do Windows' }
+                ],
+                
+                // CONHECIMENTOS ESPECÍFICOS
+                penal: [
+                    { text: '1. DIREITO PENAL. Princípios básicos do direito penal' },
+                    { text: '2. A LEI PENAL. Características, fontes e interpretação. Vigência e aplicação. Lei penal no tempo e no espaço. Imunidade. Condições de punibilidade. Concurso aparente de normas' },
+                    { text: '3. TEORIA GERAL DO CRIME. Conceito, objeto e sujeitos. Conduta, tipicidade e culpabilidade. Bem jurídico. Tempo e lugar do crime. Punibilidade. Concurso de crimes e crime continuado' },
+                    { text: '4. TEORIA DO TIPO. Crime doloso e crime culposo. Crime qualificado pelo resultado e crime preterdoloso. Erro de tipo. Classificação jurídica dos crimes. Crimes comissivos e omissivos. Crimes de dano e de perigo. Punibilidade: causas de extinção. Iter criminis. Consumação e tentativa. Desistência voluntária e arrependimento eficaz. Arrependimento posterior. Crime impossível' },
+                    { text: '5. ILICITUDE. Causas de exclusão da ilicitude: Estado de necessidade, Legítima defesa, Estrito cumprimento do dever legal, Exercício regular de direito' },
+                    { text: '6. CULPABILIDADE. Causas de exclusão da culpabilidade. Imputabilidade. Erro de proibição' },
+                    { text: '7. CONCURSO DE AGENTES. Autoria e participação. Conduta delituosa. Resultado. Relação de causalidade. Imputação' },
+                    { text: '8. PUNIBILIDADE E CAUSAS DE EXTINÇÃO' },
+                    { text: '9. CRIMES. Crimes contra a pessoa. Crimes contra o patrimônio. Crimes contra a incolumidade pública. Crimes contra a fé pública. Crimes contra a administração pública. Crimes contra o Estado Democrático de Direito' },
+                    { text: '10. EXECUÇÃO PENAL. Noções gerais' }
+                ],
+                processual_penal: [
+                    { text: '11. DIREITO PROCESSUAL PENAL. Princípios gerais, conceito e finalidade. Características e fontes' },
+                    { text: '12. LEI PROCESSUAL PENAL. Fontes, eficácia e interpretação. Analogia e imunidades. Sistemas de processo penal' },
+                    { text: '13. INQUÉRITO POLICIAL. Histórico, natureza e conceito. Finalidade, características e fundamento. Titularidade e grau de cognição. Valor probatório. Formas de instauração. Notitia criminis e delatio criminis. Procedimentos investigativos. Indiciamento. Garantias do investigado. Conclusão e prazos' },
+                    { text: '14. PROCESSO CRIMINAL. Finalidade, pressupostos e sistemas' },
+                    { text: '15. AÇÃO PENAL. Conceito, características e espécies. Condições da ação penal' },
+                    { text: '16. TERMO CIRCUNSTANCIADO DE OCORRÊNCIA. Atos processuais. Forma, lugar e tempo' },
+                    { text: '17. PROVAS. Conceito, objeto e classificação. Sistemas de avaliação. Princípios gerais da prova. Procedimento probatório. Valoração e ônus da prova. Provas ilícitas. Meios de prova: Perícias, Interrogatório, Confissão, Testemunhas, Reconhecimento de pessoas e coisas, Acareação, Documentos, Indícios. Busca e apreensão' },
+                    { text: '18. PRISÃO, MEDIDAS CAUTELARES E LIBERDADE PROVISÓRIA. Conceito e espécies. Mandado de prisão e cumprimento' },
+                    { text: '19. CITAÇÃO, INTIMAÇÃO E INTERDIÇÃO DE DIREITO' },
+                    { text: '20. PROCEDIMENTOS DOS CRIMES DE RESPONSABILIDADE. Crimes de responsabilidade dos funcionários públicos' },
+                    { text: '21. PROCEDIMENTO CRIMINAL DE CRIMES COMUNS' },
+                    { text: '22. DILIGÊNCIAS INVESTIGATÓRIAS' },
+                    { text: '23. LEGISLAÇÃO ESPECIAL. Decreto-Lei nº 3.688/1941 (Lei das Contravenções Penais). Lei nº 5.553/1968 (Apresentação e uso de documento de identificação pessoal). Lei nº 7.960/1989 (Prisão Temporária). Lei nº 9.099/1995 (Juizados especiais criminais). Lei nº 9.296/1996 (Interceptação telefônica). Lei nº 9.503/1997 (Código de Trânsito Brasileiro): Crimes de trânsito. Lei nº 10.826/2003 (Estatuto do desarmamento). Lei nº 11.343/2006 (Tráfico ilícito e uso indevido de substâncias entorpecentes). Lei nº 12.850/2013 (Crime organizado). Lei nº 13.869/2019 (Crimes de abuso de autoridade). Decreto nº 11.491/2023 (Crime Cibernético)' },
+                    { text: '24. SÚMULAS DOS TRIBUNAIS SUPERIORES. Supremo Tribunal Federal. Superior Tribunal de Justiça' }
+                ],
+                criminologia: [
+                    { text: '1. CRIMINOLOGIA. Conceito. Métodos: Empirismo, Interdisciplinaridade. Objetos da criminologia: Delito, Delinquente, Vítima, Controle social. Funções da criminologia: Criminologia e política criminal, Direito Penal sob o aspecto da criminologia. Modelos teóricos da criminologia: Teorias sociológicas. Prevenção da infração penal: No Estado democrático de direito, Prevenção primária, Prevenção secundária, Prevenção terciária. Modelos de reação ao crime' },
+                    { text: '2. CRIMINALÍSTICA. Definição. Histórico. Doutrina' },
+                    { text: '3. PERÍCIA. Definição e conceitos. Requisição. Prazos para elaboração: Exame pericial, Laudo pericial. Tipologias periciais: Documentoscópica, Audiovisual, Grafotécnica' },
+                    { text: '4. LOCAIS DE CRIME. Conceituação e classificação. Isolamento e preservação de local de crime. Finalidades dos levantamentos: Locais de crime contra a pessoa, Locais de crime contra o patrimônio' },
+                    { text: '5. CADEIA DE CUSTÓDIA. Conceitos. Etapas. Fase interna. Fase externa' },
+                    { text: '6. RASTREABILIDADE' },
+                    { text: '7. VESTÍGIOS DE INTERESSE FORENSE. Conceitos básicos: Vestígio, Evidência, Indício. Processamento pericial de locais de crime: Busca de vestígios, Documentação do local (Fixação), Coleta de vestígios, Acondicionamento e transporte de vestígios, Liberação do local' }
+                ],
+                direitos_humanos: [
+                    { text: '1. DIREITOS HUMANOS. Conceito, princípios essenciais e gerações. Direitos humanos na Constituição Federal de 1988. Convenção Americana sobre Direitos Humanos (Pacto de São José da Costa Rica): Decreto nº 678/1992, Anexos da Convenção. Sistema de Proteção' },
+                    { text: '2. DECLARAÇÃO UNIVERSAL DOS DIREITOS HUMANOS DE 1948' },
+                    { text: '3. LEGISLAÇÃO CORRELATA. Lei nº 13.060/2014 e Decreto 12.341/2024: Uso dos instrumentos de menor potencial offensivo. Código de Conduta para Funcionários Responsáveis pela Aplicação da Lei: Resolução nº 34/169 da ONU. Princípios Básicos sobre a Utilização da Força e de Armas de Fogo: 8º Congresso da ONU para a Prevenção do Crime e o Tratamento dos Delinquentes (Havana, 1990)' }
+                ],
+                inteligencia: [
+                    { text: '1. ATIVIDADE DE INTELIGÊNCIA. Conceitos de Inteligência: Escopo e categorias de Inteligência, Inteligência, contrainteligência, contramedidas de vigilância técnica, Operações de Inteligência. Funções da atividade de Inteligência. Metodologia de produção de conhecimentos' },
+                    { text: '2. POLÍTICA NACIONAL DE INTELIGÊNCIA. Decreto nº 8.793/2016 e suas alterações. Pressupostos da atividade de Inteligência. O Estado, a sociedade e a Inteligência. Ambientes internacional e nacional. Instrumentos da atividade de Inteligência. Principais ameaças. Objetivos da Inteligência nacional. Diretrizes de Inteligência' },
+                    { text: '3. ANÁLISE DE RISCO NA ATIVIDADE DE INTELIGÊNCIA. Conceitos básicos: Risco, Ameaça, Vulnerabilidade. Metodologias de análise de risco: Empregadas na atividade de inteligência' },
+                    { text: '4. CONTROLE DA ATIVIDADE DE INTELIGÊNCIA. Noções básicas' },
+                    { text: '5. SEGURANÇA DA INFORMAÇÃO. Discrição e segurança de informações. Graus de sigilo e atributos básicos. Criptografia e cibersegurança' }
+                ]
+            }
+        };
 
         // Sistema de progresso
         let progressData = {};
@@ -2032,80 +1658,13 @@
         
         // Função para criar grupos de conteúdo
         function createContentGroup(items, org, category, startIndex) {
-            // Agrupa itens por número principal (1, 2, 3, etc.)
-            const groups = {};
-            
-            items.forEach((item, index) => {
-                const text = item.text;
-                const match = text.match(/^(\d+(?:\.\d+)*)/);
-                let groupKey = '0'; // Default para itens sem número
-                
-                if (match) {
-                    groupKey = match[1].split('.')[0]; // Pega apenas o número principal
-                }
-                
-                if (!groups[groupKey]) {
-                    groups[groupKey] = [];
-                }
-                
-                groups[groupKey].push({
-                    text: text,
-                    originalIndex: startIndex + index
-                });
-            });
-            
             // Cria os grupos
             const fragment = document.createDocumentFragment();
             
-            Object.keys(groups).sort((a, b) => {
-                if (a === '0') return 1;
-                if (b === '0') return -1;
-                return parseInt(a) - parseInt(b);
-            }).forEach(groupKey => {
-                const groupItems = groups[groupKey];
-                
-                if (groupItems.length === 1) {
-                    // Se só tem um item no grupo, cria item normal
-                    const item = groupItems[0];
-                    const contentItem = createContentItem(item.text, org, category, item.originalIndex);
-                    fragment.appendChild(contentItem);
-                } else {
-                    // Cria grupo expansível
-                    const groupDiv = document.createElement('div');
-                    groupDiv.className = 'content-group';
-                    
-                    const header = document.createElement('div');
-                    header.className = 'group-header';
-                    
-                    // Usa o primeiro item para o título do grupo
-                    const firstItem = groupItems[0];
-                    const titleMatch = firstItem.text.match(/^(\d+(?:\.\d+)*)\s+(.+)/);
-                    
-                    if (titleMatch) {
-                        header.textContent = `${titleMatch[1]} ${titleMatch[2]}`;
-                    } else {
-                        header.textContent = firstItem.text.substring(0, 50) + (firstItem.text.length > 50 ? '...' : '');
-                    }
-                    
-                    const contentDiv = document.createElement('div');
-                    contentDiv.className = 'group-content';
-                    
-                    // Adiciona todos os itens do grupo
-                    groupItems.forEach(item => {
-                        const contentItem = createContentItem(item.text, org, category, item.originalIndex);
-                        contentDiv.appendChild(contentItem);
-                    });
-                    
-                    // Toggle do grupo
-                    header.addEventListener('click', function() {
-                        this.classList.toggle('collapsed');
-                        contentDiv.classList.toggle('hidden');
-                    });
-                    
-                    groupDiv.appendChild(header);
-                    groupDiv.appendChild(contentDiv);
-                    fragment.appendChild(groupDiv);
-                }
+            // Cada item já está aglutinado, então criamos apenas itens normais
+            items.forEach((item, index) => {
+                const contentItem = createContentItem(item.text, org, category, startIndex + index);
+                fragment.appendChild(contentItem);
             });
             
             return fragment;
@@ -2430,4 +1989,3 @@
     </script>
 </body>
 </html>
-
