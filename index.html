@@ -360,8 +360,6 @@
         
         .discipline-btn {
             padding: 30px 20px;
-            background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%);
-            color: white;
             border: none;
             border-radius: var(--radius);
             cursor: pointer;
@@ -377,6 +375,24 @@
             min-height: 140px;
             position: relative;
             overflow: hidden;
+        }
+        
+        /* Estilo para disciplinas normais (azul) */
+        .discipline-btn.normal {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%);
+            color: white;
+        }
+        
+        /* Estilo para disciplinas vermelhas (Direito Penal e Processual Penal) */
+        .discipline-btn.red {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+        }
+        
+        /* Estilo para disciplinas amarelas (Criminologia, Direitos Humanos, Inteligência) */
+        .discipline-btn.yellow {
+            background: linear-gradient(135deg, #f39c12 0%, #d68910 100%);
+            color: white;
         }
         
         .discipline-btn::before {
@@ -401,6 +417,32 @@
             background: rgba(255,255,255,0.2);
             padding: 4px 12px;
             border-radius: 20px;
+        }
+        
+        /* Badges/Flags */
+        .discipline-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.7em;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            z-index: 2;
+        }
+        
+        .badge-red {
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #e74c3c;
+            border: 1px solid #e74c3c;
+        }
+        
+        .badge-yellow {
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #f39c12;
+            border: 1px solid #f39c12;
         }
         
         /* Back button */
@@ -1036,27 +1078,27 @@
         
         <!-- Disciplinas de Conhecimentos Gerais -->
         <div class="disciplines-container" id="disciplinasGerais">
-            <button class="discipline-btn" data-disciplina="portugues">
+            <button class="discipline-btn normal" data-disciplina="portugues">
                 LÍNGUA PORTUGUESA
                 <div class="progress" id="portuguesProgressBtn">0/0</div>
             </button>
-            <button class="discipline-btn" data-disciplina="ingles">
+            <button class="discipline-btn normal" data-disciplina="ingles">
                 LÍNGUA INGLESA
                 <div class="progress" id="inglesProgressBtn">0/0</div>
             </button>
-            <button class="discipline-btn" data-disciplina="raciocinio">
+            <button class="discipline-btn normal" data-disciplina="raciocinio">
                 RACIOCÍNIO LÓGICO E ESTATÍSTICA
                 <div class="progress" id="raciocinioProgressBtn">0/0</div>
             </button>
-            <button class="discipline-btn" data-disciplina="constitucional">
+            <button class="discipline-btn normal" data-disciplina="constitucional">
                 DIREITO CONSTITUCIONAL
                 <div class="progress" id="constitucionalProgressBtn">0/0</div>
             </button>
-            <button class="discipline-btn" data-disciplina="administrativo">
+            <button class="discipline-btn normal" data-disciplina="administrativo">
                 DIREITO ADMINISTRATIVO
                 <div class="progress" id="administrativoProgressBtn">0/0</div>
             </button>
-            <button class="discipline-btn" data-disciplina="informatica">
+            <button class="discipline-btn normal" data-disciplina="informatica">
                 INFORMÁTICA E DADOS
                 <div class="progress" id="informaticaProgressBtn">0/0</div>
             </button>
@@ -1064,25 +1106,30 @@
         
         <!-- Disciplinas de Conhecimentos Específicos -->
         <div class="disciplines-container" id="disciplinasEspecificos">
-            <button class="discipline-btn" data-disciplina="penal">
+            <button class="discipline-btn red" data-disciplina="penal">
                 DIREITO PENAL
                 <div class="progress" id="penalProgressBtn">0/0</div>
+                <div class="discipline-badge badge-red">Peça Técnica</div>
             </button>
-            <button class="discipline-btn" data-disciplina="processual_penal">
+            <button class="discipline-btn red" data-disciplina="processual_penal">
                 DIREITO PROCESSUAL PENAL
                 <div class="progress" id="processualPenalProgressBtn">0/0</div>
+                <div class="discipline-badge badge-red">Peça Técnica</div>
             </button>
-            <button class="discipline-btn" data-disciplina="criminologia">
+            <button class="discipline-btn yellow" data-disciplina="criminologia">
                 CRIMINOLOGIA
                 <div class="progress" id="criminologiaProgressBtn">0/0</div>
+                <div class="discipline-badge badge-yellow">Discursiva</div>
             </button>
-            <button class="discipline-btn" data-disciplina="direitos_humanos">
+            <button class="discipline-btn yellow" data-disciplina="direitos_humanos">
                 DIREITOS HUMANOS
                 <div class="progress" id="direitosHumanosProgressBtn">0/0</div>
+                <div class="discipline-badge badge-yellow">Discursiva</div>
             </button>
-            <button class="discipline-btn" data-disciplina="inteligencia">
+            <button class="discipline-btn yellow" data-disciplina="inteligencia">
                 INTELIGÊNCIA
                 <div class="progress" id="inteligenciaProgressBtn">0/0</div>
+                <div class="discipline-badge badge-yellow">Discursiva</div>
             </button>
         </div>
         
