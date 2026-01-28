@@ -434,6 +434,7 @@
             box-shadow: var(--shadow);
             padding: 30px;
             margin-top: 30px;
+            display: none; /* Inicialmente escondido */
         }
         
         .state-info h2 {
@@ -503,6 +504,11 @@
             background-color: var(--white);
             transition: var(--transition);
             box-shadow: var(--shadow);
+            display: none; /* Inicialmente escondida */
+        }
+        
+        .category.active {
+            display: block; /* Mostra quando ativa */
         }
         
         .category:hover {
@@ -939,6 +945,11 @@
         .group-content.hidden {
             display: none;
         }
+        
+        /* Estado inicial - apenas botões principais */
+        .initial-state {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -1008,7 +1019,7 @@
             </div>
         </div>
         
-        <!-- Botões principais -->
+        <!-- Botões principais - Estado inicial -->
         <div class="main-categories" id="mainCategories">
             <button class="main-category-btn" data-category="geral">
                 CONHECIMENTOS GERAIS
@@ -1021,7 +1032,7 @@
         </div>
         
         <!-- Botão voltar -->
-        <button class="back-btn" id="backBtn">Voltar</button>
+        <button class="back-btn" id="backBtn">Voltar para Categorias</button>
         
         <!-- Disciplinas de Conhecimentos Gerais -->
         <div class="disciplines-container" id="disciplinasGerais">
@@ -1081,7 +1092,7 @@
                 <button class="filter-btn active" data-filter="all">Todos</button>
                 <button class="filter-btn" data-filter="pending">Pendentes</button>
                 <button class="filter-btn" data-filter="completed">Concluídos</button>
-                <button class="filter-btn" id="showAllBtn">Todas as Disciplinas</button>
+                <button class="filter-btn" id="showAllBtn">Mostrar Todas as Disciplinas</button>
             </div>
             
             <div class="state-categories" id="stateCategories">
@@ -1267,9 +1278,6 @@
             // Carregar progresso
             await loadProgress();
             
-            // Carregar conteúdo da Câmara automaticamente
-            loadStateContent('CÂMARA DOS DEPUTADOS', 'CÂMARA DOS DEPUTADOS');
-            
             // Atualizar status de sincronização
             updateSyncStatus();
             
@@ -1282,7 +1290,7 @@
                 document.querySelector('.nav-links').classList.toggle('active');
             });
             
-            // Botões principais
+            // Botões principais - Mostrar disciplinas da categoria
             document.querySelectorAll('.main-category-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const category = this.dataset.category;
@@ -1293,6 +1301,14 @@
             // Botão voltar
             document.getElementById('backBtn').addEventListener('click', function() {
                 showMainCategories();
+            });
+            
+            // Botões de disciplinas - Mostrar conteúdo específico
+            document.querySelectorAll('.discipline-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const disciplina = this.getAttribute('data-disciplina');
+                    showDisciplineContent(disciplina);
+                });
             });
             
             // Filtros
@@ -1329,17 +1345,9 @@
             document.getElementById('disciplineSelect').addEventListener('change', function() {
                 const selectedDiscipline = this.value;
                 if (selectedDiscipline) {
-                    showOnlySelectedDiscipline(selectedDiscipline);
+                    showDisciplineContent(selectedDiscipline);
                     this.value = '';
                 }
-            });
-            
-            // Botões de disciplinas
-            document.querySelectorAll('.discipline-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const disciplina = this.getAttribute('data-disciplina');
-                    showOnlySelectedDiscipline(disciplina);
-                });
             });
             
             // Botão para mostrar todas as disciplinas
@@ -1370,9 +1378,16 @@
 
         // Mostrar disciplinas por categoria principal
         function showDisciplinesByCategory(category) {
+            // Esconde os botões principais
             document.getElementById('mainCategories').style.display = 'none';
+            
+            // Mostra o botão voltar
             document.getElementById('backBtn').style.display = 'block';
             
+            // Esconde o conteúdo das disciplinas se estiver visível
+            document.getElementById('stateInfo').style.display = 'none';
+            
+            // Mostra as disciplinas da categoria selecionada
             if (category === 'geral') {
                 document.getElementById('disciplinasGerais').style.display = 'grid';
                 document.getElementById('disciplinasEspecificos').style.display = 'none';
@@ -1389,11 +1404,88 @@
 
         // Voltar para categorias principais
         function showMainCategories() {
+            // Mostra os botões principais
             document.getElementById('mainCategories').style.display = 'flex';
+            
+            // Esconde o botão voltar
             document.getElementById('backBtn').style.display = 'none';
+            
+            // Esconde as disciplinas
             document.getElementById('disciplinasGerais').style.display = 'none';
             document.getElementById('disciplinasEspecificos').style.display = 'none';
+            
+            // Esconde o conteúdo das disciplinas
+            document.getElementById('stateInfo').style.display = 'none';
+            
             currentMainCategory = null;
+            currentDiscipline = null;
+        }
+
+        // Mostrar conteúdo de uma disciplina específica
+        function showDisciplineContent(disciplinaKey) {
+            // Esconde as disciplinas
+            document.getElementById('disciplinasGerais').style.display = 'none';
+            document.getElementById('disciplinasEspecificos').style.display = 'none';
+            
+            // Atualiza o botão voltar para voltar para as disciplinas
+            document.getElementById('backBtn').style.display = 'block';
+            document.getElementById('backBtn').textContent = '← Voltar para Disciplinas';
+            
+            // Define a disciplina atual
+            currentDiscipline = disciplinaKey;
+            
+            // Carrega o conteúdo da disciplina
+            loadDisciplineContent(disciplinaKey);
+            
+            // Mostra a seção de conteúdo
+            document.getElementById('stateInfo').style.display = 'block';
+            
+            // Rola para o conteúdo
+            document.getElementById('stateInfo').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Função para carregar conteúdo de uma disciplina específica
+        function loadDisciplineContent(disciplinaKey) {
+            const stateName = 'CÂMARA DOS DEPUTADOS';
+            
+            // Atualiza o nome da disciplina
+            const displayName = getCategoryDisplayName(disciplinaKey);
+            document.getElementById('stateName').textContent = `${displayName}`;
+            
+            // Limpa categorias anteriores
+            const stateCategories = document.getElementById('stateCategories');
+            stateCategories.innerHTML = '';
+            
+            // Verifica se há dados para esta disciplina
+            if (stateLinks[stateName] && stateLinks[stateName][disciplinaKey]) {
+                const links = stateLinks[stateName][disciplinaKey];
+                
+                // Cria uma única categoria para esta disciplina
+                const categoryDiv = document.createElement('div');
+                categoryDiv.className = 'category active';
+                categoryDiv.setAttribute('data-disciplina', displayName);
+                
+                const categoryTitle = document.createElement('h3');
+                categoryTitle.innerHTML = `${displayName} <span class="category-progress" id="${disciplinaKey}Progress">0/0</span>`;
+                
+                const linksContainer = document.createElement('div');
+                linksContainer.className = 'links';
+                linksContainer.id = `${disciplinaKey}Links`;
+                
+                categoryDiv.appendChild(categoryTitle);
+                categoryDiv.appendChild(linksContainer);
+                stateCategories.appendChild(categoryDiv);
+                
+                // Adiciona os itens de conteúdo
+                const groupedContent = createContentGroup(links, stateName, disciplinaKey, 0);
+                linksContainer.appendChild(groupedContent);
+                
+                // Atualiza o progresso da categoria
+                updateCategoryProgress(stateName, disciplinaKey);
+            }
+            
+            // Atualiza display de progresso
+            updateProgressDisplay();
         }
 
         // Função para fazer requisições para o Google Apps Script
@@ -1522,12 +1614,12 @@
             const geralCategories = ['portugues', 'ingles', 'raciocinio', 'constitucional', 'administrativo', 'informatica'];
             const especificoCategories = ['penal', 'processual_penal', 'criminologia', 'direitos_humanos', 'inteligencia'];
             
-            const currentOrg = document.getElementById('stateName').textContent;
+            const currentOrg = 'CÂMARA DOS DEPUTADOS';
             
             // Progresso Conhecimentos Gerais
             let geralTotal = 0;
             let geralCompleted = 0;
-            if (currentOrg && progressData[currentOrg]) {
+            if (progressData[currentOrg]) {
                 geralCategories.forEach(category => {
                     const categoryData = progressData[currentOrg][category] || {};
                     const categoryItems = Object.keys(categoryData).length;
@@ -1547,7 +1639,7 @@
             // Progresso Conhecimentos Específicos
             let especificoTotal = 0;
             let especificoCompleted = 0;
-            if (currentOrg && progressData[currentOrg]) {
+            if (progressData[currentOrg]) {
                 especificoCategories.forEach(category => {
                     const categoryData = progressData[currentOrg][category] || {};
                     const categoryItems = Object.keys(categoryData).length;
@@ -1563,6 +1655,11 @@
                 });
             }
             document.getElementById('especificoProgressBtn').textContent = `${especificoCompleted}/${especificoTotal}`;
+            
+            // Atualiza o progresso da disciplina atual se estiver aberta
+            if (currentDiscipline && progressData[currentOrg] && progressData[currentOrg][currentDiscipline]) {
+                updateCategoryProgress(currentOrg, currentDiscipline);
+            }
         }
         
         // Função para criar um item de conteúdo agrupado
@@ -1733,57 +1830,6 @@
             });
         }
         
-        // Função para carregar conteúdo de um órgão
-        function loadStateContent(stateId, stateName) {
-            currentState = stateId;
-            
-            // Atualiza o nome do órgão
-            document.getElementById('stateName').textContent = stateName;
-            
-            // Limpa categorias anteriores
-            const stateCategories = document.getElementById('stateCategories');
-            stateCategories.innerHTML = '';
-            
-            // Verifica se há dados para este órgão
-            if (stateLinks[stateId]) {
-                const links = stateLinks[stateId];
-                const categories = [
-                    'portugues', 'ingles', 'raciocinio', 'constitucional', 'administrativo', 'informatica',
-                    'penal', 'processual_penal', 'criminologia', 'direitos_humanos', 'inteligencia'
-                ];
-                
-                // Adiciona conteúdo para cada categoria
-                categories.forEach(category => {
-                    if (links[category] && links[category].length > 0) {
-                        const categoryDiv = document.createElement('div');
-                        categoryDiv.className = 'category';
-                        categoryDiv.setAttribute('data-disciplina', getCategoryDisplayName(category));
-                        
-                        const categoryTitle = document.createElement('h3');
-                        categoryTitle.innerHTML = `${getCategoryDisplayName(category)} <span class="category-progress" id="${category}Progress">0/0</span>`;
-                        
-                        const linksContainer = document.createElement('div');
-                        linksContainer.className = 'links';
-                        linksContainer.id = `${category}Links`;
-                        
-                        categoryDiv.appendChild(categoryTitle);
-                        categoryDiv.appendChild(linksContainer);
-                        stateCategories.appendChild(categoryDiv);
-                        
-                        // Adiciona os itens de conteúdo agrupados
-                        const groupedContent = createContentGroup(links[category], stateName, category, 0);
-                        linksContainer.appendChild(groupedContent);
-                        
-                        // Atualiza o progresso da categoria
-                        updateCategoryProgress(stateName, category);
-                    }
-                });
-            }
-            
-            // Atualiza display de progresso
-            updateProgressDisplay();
-        }
-        
         // Atualizar progresso da categoria
         function updateCategoryProgress(org, category) {
             const categoryData = progressData[org] && progressData[org][category] ? progressData[org][category] : {};
@@ -1815,7 +1861,7 @@
             
             switch(filterType) {
                 case 'disciplina':
-                    // Filtra disciplinas
+                    // Filtra disciplinas - só funciona se houver disciplinas visíveis
                     document.querySelectorAll('.category').forEach(category => {
                         const disciplinaName = category.getAttribute('data-disciplina').toLowerCase();
                         if (disciplinaName.includes(searchTerm)) {
@@ -1886,40 +1932,12 @@
             return categoryMap[categoryKey] || categoryKey;
         }
         
-        // Função para mostrar apenas a disciplina selecionada
-        function showOnlySelectedDiscipline(disciplinaKey) {
-            // Obtém o nome de exibição da disciplina
-            const displayName = getCategoryDisplayName(disciplinaKey);
-            
-            // Oculta todas as disciplinas
-            document.querySelectorAll('.category').forEach(category => {
-                category.style.display = 'none';
-            });
-            
-            // Mostra apenas a disciplina selecionada
-            const selectedCategory = document.querySelector(`.category[data-disciplina="${displayName}"]`);
-            if (selectedCategory) {
-                selectedCategory.style.display = 'block';
-                
-                // Rola até a disciplina selecionada
-                selectedCategory.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                
-                // Destaca a disciplina por alguns segundos
-                selectedCategory.style.boxShadow = '0 0 0 3px rgba(41, 128, 185, 0.5)';
-                selectedCategory.style.transition = 'box-shadow 0.3s';
-                
-                setTimeout(() => {
-                    selectedCategory.style.boxShadow = '';
-                }, 2000); 
-            }
-        }
-        
-        // Função para mostrar todas as disciplinas novamente
+        // Função para mostrar todas as disciplinas novamente (se necessário)
         function showAllDisciplines() {
-            document.querySelectorAll('.category').forEach(category => {
-                category.style.display = 'block';
-            });
-            currentDiscipline = null;
+            // Esta função agora mostra todas as categorias dentro da disciplina aberta
+            // Como só temos uma disciplina aberta por vez, esta função tem efeito limitado
+            // Mantida para compatibilidade com o botão
+            alert('No momento, apenas uma disciplina pode ser visualizada por vez. Use o botão "Voltar para Disciplinas" para escolher outra.');
         }
         
         // Função para exportar dados
@@ -1972,8 +1990,10 @@
                     // Salvar dados importados
                     saveProgress();
                     
-                    // Recarregar a interface
-                    loadStateContent(currentState, currentState);
+                    // Se uma disciplina estiver aberta, recarregar seu conteúdo
+                    if (currentDiscipline) {
+                        loadDisciplineContent(currentDiscipline);
+                    }
                     
                     // Fechar modal
                     document.getElementById('importModal').style.display = 'none';
