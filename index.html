@@ -137,6 +137,88 @@
             position: relative;
         }
         
+        /* Login Container */
+        .login-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 30px;
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+        }
+        
+        .login-container h2 {
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+        
+        .login-input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid var(--light);
+            border-radius: var(--radius);
+            font-size: 1em;
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-size: 1.1em;
+            margin-top: 20px;
+        }
+        
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+        
+        .login-status {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: var(--radius);
+            display: none;
+        }
+        
+        .login-status.error {
+            background: #fde8e8;
+            color: var(--danger);
+            display: block;
+        }
+        
+        .login-status.success {
+            background: #e8f6ef;
+            color: var(--success);
+            display: block;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+        }
+        
+        .logout-btn {
+            background: var(--danger);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+        
+        .app-content {
+            display: none;
+        }
+        
         /* Progress Summary */
         .progress-summary {
             background-color: var(--white);
@@ -1003,6 +1085,10 @@
             <li><a href="#progresso">Meu Progresso</a></li>
             <li><a href="#disciplinas">Disciplinas</a></li>
         </ul>
+        <div class="user-info" id="userInfo" style="display: none;">
+            <span id="userName"></span>
+            <button class="logout-btn" id="logoutBtn">Sair</button>
+        </div>
     </div>
     
     <header>
@@ -1010,164 +1096,177 @@
         <p>Câmara dos Deputados</p>
     </header>
 
-    <div class="progress-summary">
-        <h3>Meu Progresso Geral</h3>
-        <div class="progress-bar">
-            <div class="progress-fill" id="overallProgress" style="width: 0%"></div>
-        </div>
-        <p id="progressText">0% concluído</p>
-        
-        <div class="data-controls">
-            <button class="export-btn" id="exportBtn">📤 Exportar Dados</button>
-            <button class="import-btn" id="importBtn">📥 Importar Dados</button>
-        </div>
+    <!-- Login Area -->
+    <div class="login-container" id="loginArea">
+        <h2>Login</h2>
+        <input type="text" class="login-input" id="loginEmail" placeholder="Seu email">
+        <input type="password" class="login-input" id="loginPassword" placeholder="Sua senha">
+        <button class="login-btn" id="loginBtn">Entrar</button>
+        <button class="login-btn" id="registerBtn" style="background: var(--success); margin-top: 10px;">Criar Nova Conta</button>
+        <div class="login-status" id="loginStatus"></div>
     </div>
 
-    <div class="container">
-        <div class="search-container">
-            <input type="text" class="search-input" placeholder="Pesquisar disciplinas ou conteúdos...">
-            <div class="search-filters">
-                <div class="filter-option">
-                    <input type="radio" id="filter-all" name="search-filter" value="all" checked>
-                    <label for="filter-all">Todos</label>
+    <!-- Main App Content -->
+    <div class="app-content" id="appContent">
+        <div class="progress-summary">
+            <h3>Meu Progresso Geral - <span id="currentUserDisplay"></span></h3>
+            <div class="progress-bar">
+                <div class="progress-fill" id="overallProgress" style="width: 0%"></div>
+            </div>
+            <p id="progressText">0% concluído</p>
+            
+            <div class="data-controls">
+                <button class="export-btn" id="exportBtn">📤 Exportar Dados</button>
+                <button class="import-btn" id="importBtn">📥 Importar Dados</button>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Pesquisar disciplinas ou conteúdos...">
+                <div class="search-filters">
+                    <div class="filter-option">
+                        <input type="radio" id="filter-all" name="search-filter" value="all" checked>
+                        <label for="filter-all">Todos</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="radio" id="filter-disciplina" name="search-filter" value="disciplina">
+                        <label for="filter-disciplina">Disciplinas</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="radio" id="filter-conteudo" name="search-filter" value="conteudo">
+                        <label for="filter-conteudo">Conteúdos</label>
+                    </div>
                 </div>
-                <div class="filter-option">
-                    <input type="radio" id="filter-disciplina" name="search-filter" value="disciplina">
-                    <label for="filter-disciplina">Disciplinas</label>
-                </div>
-                <div class="filter-option">
-                    <input type="radio" id="filter-conteudo" name="search-filter" value="conteudo">
-                    <label for="filter-conteudo">Conteúdos</label>
+                
+                <div class="discipline-dropdown">
+                    <select id="disciplineSelect">
+                        <option value="">Selecione uma disciplina...</option>
+                        <!-- CONHECIMENTOS GERAIS -->
+                        <option value="portugues">LÍNGUA PORTUGUESA</option>
+                        <option value="ingles">LÍNGUA INGLESA</option>
+                        <option value="raciocinio">RACIOCÍNIO LÓGICO E ESTATÍSTICA</option>
+                        <option value="constitucional">DIREITO CONSTITUCIONAL</option>
+                        <option value="administrativo">DIREITO ADMINISTRATIVO</option>
+                        <option value="informatica">INFORMÁTICA E DADOS</option>
+                        <!-- CONHECIMENTOS ESPECÍFICOS -->
+                        <option value="penal">DIREITO PENAL</option>
+                        <option value="processual_penal">DIREITO PROCESSUAL PENAL</option>
+                        <option value="criminologia">CRIMINOLOGIA</option>
+                        <option value="direitos_humanos">DIREITOS HUMANOS</option>
+                        <option value="inteligencia">INTELIGÊNCIA</option>
+                    </select>
                 </div>
             </div>
             
-            <div class="discipline-dropdown">
-                <select id="disciplineSelect">
-                    <option value="">Selecione uma disciplina...</option>
-                    <!-- CONHECIMENTOS GERAIS -->
-                    <option value="portugues">LÍNGUA PORTUGUESA</option>
-                    <option value="ingles">LÍNGUA INGLESA</option>
-                    <option value="raciocinio">RACIOCÍNIO LÓGICO E ESTATÍSTICA</option>
-                    <option value="constitucional">DIREITO CONSTITUCIONAL</option>
-                    <option value="administrativo">DIREITO ADMINISTRATIVO</option>
-                    <option value="informatica">INFORMÁTICA E DADOS</option>
-                    <!-- CONHECIMENTOS ESPECÍFICOS -->
-                    <option value="penal">DIREITO PENAL</option>
-                    <option value="processual_penal">DIREITO PROCESSUAL PENAL</option>
-                    <option value="criminologia">CRIMINOLOGIA</option>
-                    <option value="direitos_humanos">DIREITOS HUMANOS</option>
-                    <option value="inteligencia">INTELIGÊNCIA</option>
-                </select>
-            </div>
-        </div>
-        
-        <!-- Botões principais - Estado inicial -->
-        <div class="main-categories" id="mainCategories">
-            <button class="main-category-btn" data-category="geral">
-                CONHECIMENTOS GERAIS
-                <div class="progress" id="geralProgressBtn">0/0</div>
-            </button>
-            <button class="main-category-btn" data-category="especifico">
-                CONHECIMENTOS ESPECÍFICOS
-                <div class="progress" id="especificoProgressBtn">0/0</div>
-            </button>
-        </div>
-        
-        <!-- Botão voltar -->
-        <button class="back-btn" id="backBtn">Voltar para Categorias</button>
-        
-        <!-- Disciplinas de Conhecimentos Gerais -->
-        <div class="disciplines-container" id="disciplinasGerais">
-            <button class="discipline-btn normal" data-disciplina="portugues">
-                LÍNGUA PORTUGUESA
-                <div class="progress" id="portuguesProgressBtn">0/0</div>
-            </button>
-            <button class="discipline-btn normal" data-disciplina="ingles">
-                LÍNGUA INGLESA
-                <div class="progress" id="inglesProgressBtn">0/0</div>
-            </button>
-            <button class="discipline-btn normal" data-disciplina="raciocinio">
-                RACIOCÍNIO LÓGICO E ESTATÍSTICA
-                <div class="progress" id="raciocinioProgressBtn">0/0</div>
-            </button>
-            <button class="discipline-btn normal" data-disciplina="constitucional">
-                DIREITO CONSTITUCIONAL
-                <div class="progress" id="constitucionalProgressBtn">0/0</div>
-            </button>
-            <button class="discipline-btn normal" data-disciplina="administrativo">
-                DIREITO ADMINISTRATIVO
-                <div class="progress" id="administrativoProgressBtn">0/0</div>
-            </button>
-            <button class="discipline-btn normal" data-disciplina="informatica">
-                INFORMÁTICA E DADOS
-                <div class="progress" id="informaticaProgressBtn">0/0</div>
-            </button>
-        </div>
-        
-        <!-- Disciplinas de Conhecimentos Específicos -->
-        <div class="disciplines-container" id="disciplinasEspecificos">
-            <button class="discipline-btn red" data-disciplina="penal">
-                DIREITO PENAL
-                <div class="progress" id="penalProgressBtn">0/0</div>
-                <div class="discipline-badge badge-red">Peça Técnica</div>
-            </button>
-            <button class="discipline-btn red" data-disciplina="processual_penal">
-                DIREITO PROCESSUAL PENAL
-                <div class="progress" id="processualPenalProgressBtn">0/0</div>
-                <div class="discipline-badge badge-red">Peça Técnica</div>
-            </button>
-            <button class="discipline-btn yellow" data-disciplina="criminologia">
-                CRIMINOLOGIA
-                <div class="progress" id="criminologiaProgressBtn">0/0</div>
-                <div class="discipline-badge badge-yellow">Discursiva</div>
-            </button>
-            <button class="discipline-btn yellow" data-disciplina="direitos_humanos">
-                DIREITOS HUMANOS
-                <div class="progress" id="direitosHumanosProgressBtn">0/0</div>
-                <div class="discipline-badge badge-yellow">Discursiva</div>
-            </button>
-            <button class="discipline-btn yellow" data-disciplina="inteligencia">
-                INTELIGÊNCIA
-                <div class="progress" id="inteligenciaProgressBtn">0/0</div>
-                <div class="discipline-badge badge-yellow">Discursiva</div>
-            </button>
-        </div>
-        
-        <div id="stateInfo" class="state-info">
-            <h2 id="stateName">CÂMARA DOS DEPUTADOS</h2>
-            <div class="controls">
-                <button class="filter-btn active" data-filter="all">Todos</button>
-                <button class="filter-btn" data-filter="pending">Pendentes</button>
-                <button class="filter-btn" data-filter="completed">Concluídos</button>
-                <button class="filter-btn" id="showAllBtn">Mostrar Todas as Disciplinas</button>
+            <!-- Botões principais - Estado inicial -->
+            <div class="main-categories" id="mainCategories">
+                <button class="main-category-btn" data-category="geral">
+                    CONHECIMENTOS GERAIS
+                    <div class="progress" id="geralProgressBtn">0/0</div>
+                </button>
+                <button class="main-category-btn" data-category="especifico">
+                    CONHECIMENTOS ESPECÍFICOS
+                    <div class="progress" id="especificoProgressBtn">0/0</div>
+                </button>
             </div>
             
-            <div class="state-categories" id="stateCategories">
-                <!-- Conteúdo será carregado dinamicamente aqui -->
+            <!-- Botão voltar -->
+            <button class="back-btn" id="backBtn">Voltar para Categorias</button>
+            
+            <!-- Disciplinas de Conhecimentos Gerais -->
+            <div class="disciplines-container" id="disciplinasGerais">
+                <button class="discipline-btn normal" data-disciplina="portugues">
+                    LÍNGUA PORTUGUESA
+                    <div class="progress" id="portuguesProgressBtn">0/0</div>
+                </button>
+                <button class="discipline-btn normal" data-disciplina="ingles">
+                    LÍNGUA INGLESA
+                    <div class="progress" id="inglesProgressBtn">0/0</div>
+                </button>
+                <button class="discipline-btn normal" data-disciplina="raciocinio">
+                    RACIOCÍNIO LÓGICO E ESTATÍSTICA
+                    <div class="progress" id="raciocinioProgressBtn">0/0</div>
+                </button>
+                <button class="discipline-btn normal" data-disciplina="constitucional">
+                    DIREITO CONSTITUCIONAL
+                    <div class="progress" id="constitucionalProgressBtn">0/0</div>
+                </button>
+                <button class="discipline-btn normal" data-disciplina="administrativo">
+                    DIREITO ADMINISTRATIVO
+                    <div class="progress" id="administrativoProgressBtn">0/0</div>
+                </button>
+                <button class="discipline-btn normal" data-disciplina="informatica">
+                    INFORMÁTICA E DADOS
+                    <div class="progress" id="informaticaProgressBtn">0/0</div>
+                </button>
+            </div>
+            
+            <!-- Disciplinas de Conhecimentos Específicos -->
+            <div class="disciplines-container" id="disciplinasEspecificos">
+                <button class="discipline-btn red" data-disciplina="penal">
+                    DIREITO PENAL
+                    <div class="progress" id="penalProgressBtn">0/0</div>
+                    <div class="discipline-badge badge-red">Peça Técnica</div>
+                </button>
+                <button class="discipline-btn red" data-disciplina="processual_penal">
+                    DIREITO PROCESSUAL PENAL
+                    <div class="progress" id="processualPenalProgressBtn">0/0</div>
+                    <div class="discipline-badge badge-red">Peça Técnica</div>
+                </button>
+                <button class="discipline-btn yellow" data-disciplina="criminologia">
+                    CRIMINOLOGIA
+                    <div class="progress" id="criminologiaProgressBtn">0/0</div>
+                    <div class="discipline-badge badge-yellow">Discursiva</div>
+                </button>
+                <button class="discipline-btn yellow" data-disciplina="direitos_humanos">
+                    DIREITOS HUMANOS
+                    <div class="progress" id="direitosHumanosProgressBtn">0/0</div>
+                    <div class="discipline-badge badge-yellow">Discursiva</div>
+                </button>
+                <button class="discipline-btn yellow" data-disciplina="inteligencia">
+                    INTELIGÊNCIA
+                    <div class="progress" id="inteligenciaProgressBtn">0/0</div>
+                    <div class="discipline-badge badge-yellow">Discursiva</div>
+                </button>
+            </div>
+            
+            <div id="stateInfo" class="state-info">
+                <h2 id="stateName">CÂMARA DOS DEPUTADOS</h2>
+                <div class="controls">
+                    <button class="filter-btn active" data-filter="all">Todos</button>
+                    <button class="filter-btn" data-filter="pending">Pendentes</button>
+                    <button class="filter-btn" data-filter="completed">Concluídos</button>
+                    <button class="filter-btn" id="showAllBtn">Mostrar Todas as Disciplinas</button>
+                </div>
+                
+                <div class="state-categories" id="stateCategories">
+                    <!-- Conteúdo será carregado dinamicamente aqui -->
+                </div>
             </div>
         </div>
-    </div>
-    
-    <footer>
-        <p>Atualizado em <span id="updateDate"></span> | Polícia Legislativa - Câmara dos Deputados</p>
-        <p>© 2025 Caderno de Revisão - Todos os direitos reservados</p>
-    </footer>
+        
+        <footer>
+            <p>Atualizado em <span id="updateDate"></span> | Polícia Legislativa - Câmara dos Deputados</p>
+            <p>© 2025 Caderno de Revisão - Todos os direitos reservados</p>
+        </footer>
 
-    <!-- Modal para importação de dados -->
-    <div class="modal" id="importModal">
-        <div class="modal-content">
-            <h3>Importar Dados</h3>
-            <p>Cole aqui os dados exportados de outro dispositivo:</p>
-            <textarea id="importData" placeholder="Cole os dados JSON aqui..."></textarea>
-            <div class="modal-actions">
-                <button class="modal-btn modal-cancel" id="cancelImport">Cancelar</button>
-                <button class="modal-btn modal-confirm" id="confirmImport">Importar</button>
+        <!-- Modal para importação de dados -->
+        <div class="modal" id="importModal">
+            <div class="modal-content">
+                <h3>Importar Dados</h3>
+                <p>Cole aqui os dados exportados de outro dispositivo:</p>
+                <textarea id="importData" placeholder="Cole os dados JSON aqui..."></textarea>
+                <div class="modal-actions">
+                    <button class="modal-btn modal-cancel" id="cancelImport">Cancelar</button>
+                    <button class="modal-btn modal-confirm" id="confirmImport">Importar</button>
+                </div>
             </div>
         </div>
-    </div>
 
-    <button class="sync-btn" id="syncButton">🔄 Sincronizar</button>
-    <div class="sync-status offline" id="syncStatus">Offline</div>
+        <button class="sync-btn" id="syncButton">🔄 Sincronizar</button>
+        <div class="sync-status offline" id="syncStatus">Offline</div>
+    </div>
 
     <script>
         // Configuração do Google Apps Script
@@ -1302,13 +1401,14 @@
             }
         };
 
-        // Sistema de progresso
+        // Sistema de progresso e autenticação
         let progressData = {};
         let linkData = {};
         let isOnline = false;
         let currentState = 'CÂMARA DOS DEPUTADOS';
         let currentDiscipline = null;
         let currentMainCategory = null;
+        let currentUser = null;
 
         // Inicialização da aplicação
         document.addEventListener('DOMContentLoaded', function() {
@@ -1322,11 +1422,12 @@
             // Configurar event listeners
             setupEventListeners();
             
-            // Carregar progresso
-            await loadProgress();
-            
-            // Atualizar status de sincronização
-            updateSyncStatus();
+            // Verificar se já está logado
+            const savedUser = localStorage.getItem('currentUser');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                await loginUser(currentUser.email, currentUser.password, false);
+            }
             
             console.log('Aplicação inicializada com sucesso!');
         }
@@ -1335,6 +1436,23 @@
             // Menu responsivo
             document.querySelector('.menu-toggle').addEventListener('click', function() {
                 document.querySelector('.nav-links').classList.toggle('active');
+            });
+            
+            // Login e Registro
+            document.getElementById('loginBtn').addEventListener('click', function() {
+                const email = document.getElementById('loginEmail').value;
+                const password = document.getElementById('loginPassword').value;
+                loginUser(email, password, true);
+            });
+            
+            document.getElementById('registerBtn').addEventListener('click', function() {
+                const email = document.getElementById('loginEmail').value;
+                const password = document.getElementById('loginPassword').value;
+                registerUser(email, password);
+            });
+            
+            document.getElementById('logoutBtn').addEventListener('click', function() {
+                logoutUser();
             });
             
             // Botões principais - Mostrar disciplinas da categoria
@@ -1421,6 +1539,197 @@
             document.getElementById('confirmImport').addEventListener('click', function() {
                 importData();
             });
+        }
+
+        // Função de login
+        async function loginUser(email, password, showMessage = true) {
+            if (!email || !password) {
+                showLoginStatus('Preencha email e senha', 'error');
+                return;
+            }
+            
+            try {
+                const result = await makeRequest('login', { email, password });
+                
+                if (result.success) {
+                    currentUser = { email, password };
+                    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                    
+                    document.getElementById('loginArea').style.display = 'none';
+                    document.getElementById('appContent').style.display = 'block';
+                    document.getElementById('userInfo').style.display = 'flex';
+                    document.getElementById('userName').textContent = email.split('@')[0];
+                    document.getElementById('currentUserDisplay').textContent = email.split('@')[0];
+                    
+                    progressData = result.progressData || {};
+                    linkData = result.linkData || {};
+                    
+                    if (showMessage) {
+                        showLoginStatus('Login realizado com sucesso!', 'success');
+                    }
+                    
+                    updateProgressDisplay();
+                } else {
+                    showLoginStatus(result.message || 'Erro no login', 'error');
+                }
+            } catch (error) {
+                console.error('Erro no login:', error);
+                showLoginStatus('Erro ao conectar ao servidor', 'error');
+            }
+        }
+
+        // Função de registro
+        async function registerUser(email, password) {
+            if (!email || !password) {
+                showLoginStatus('Preencha email e senha', 'error');
+                return;
+            }
+            
+            try {
+                const result = await makeRequest('register', { email, password });
+                
+                if (result.success) {
+                    showLoginStatus('Conta criada com sucesso! Faça o login.', 'success');
+                } else {
+                    showLoginStatus(result.message || 'Erro ao criar conta', 'error');
+                }
+            } catch (error) {
+                console.error('Erro no registro:', error);
+                showLoginStatus('Erro ao conectar ao servidor', 'error');
+            }
+        }
+
+        // Função de logout
+        function logoutUser() {
+            currentUser = null;
+            localStorage.removeItem('currentUser');
+            
+            document.getElementById('loginArea').style.display = 'block';
+            document.getElementById('appContent').style.display = 'none';
+            document.getElementById('userInfo').style.display = 'none';
+            document.getElementById('loginEmail').value = '';
+            document.getElementById('loginPassword').value = '';
+            
+            progressData = {};
+            linkData = {};
+        }
+
+        // Mostrar status do login
+        function showLoginStatus(message, type) {
+            const statusDiv = document.getElementById('loginStatus');
+            statusDiv.textContent = message;
+            statusDiv.className = `login-status ${type}`;
+        }
+
+        // Função para fazer requisições para o Google Apps Script
+        async function makeRequest(action, data = {}) {
+            try {
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        action: action,
+                        data: data
+                    })
+                });
+                
+                const result = await response.json();
+                isOnline = true;
+                updateSyncStatus();
+                return result;
+            } catch (error) {
+                console.error('Erro na requisição:', error);
+                isOnline = false;
+                updateSyncStatus();
+                
+                // Fallback para localStorage apenas para getProgress
+                if (action === 'getProgress' && currentUser) {
+                    const userKey = `progress_${currentUser.email}`;
+                    const storedProgress = JSON.parse(localStorage.getItem(userKey)) || { progressData: {}, linkData: {} };
+                    
+                    return {
+                        success: true,
+                        progressData: storedProgress.progressData || {},
+                        linkData: storedProgress.linkData || {}
+                    };
+                }
+                
+                return { success: false, message: 'Servidor offline' };
+            }
+        }
+
+        // Atualizar status de sincronização
+        function updateSyncStatus() {
+            const syncStatus = document.getElementById('syncStatus');
+            if (isOnline) {
+                syncStatus.textContent = 'Online';
+                syncStatus.className = 'sync-status online';
+            } else {
+                syncStatus.textContent = 'Offline';
+                syncStatus.className = 'sync-status offline';
+            }
+        }
+
+        // Função para salvar progresso
+        async function saveProgress() {
+            if (!currentUser) return;
+            
+            // Salva localmente como fallback
+            const userKey = `progress_${currentUser.email}`;
+            localStorage.setItem(userKey, JSON.stringify({ progressData, linkData }));
+            
+            // Tenta salvar no servidor
+            try {
+                const result = await makeRequest('saveProgress', {
+                    email: currentUser.email,
+                    password: currentUser.password,
+                    progressData: progressData,
+                    linkData: linkData
+                });
+                
+                if (result.success) {
+                    console.log('Dados salvos no servidor');
+                } else {
+                    console.warn('Não foi possível salvar no servidor, usando localStorage');
+                }
+            } catch (error) {
+                console.warn('Servidor offline, dados salvos localmente');
+            }
+            
+            updateProgressDisplay();
+        }
+
+        // Função para carregar progresso
+        async function loadProgress() {
+            if (!currentUser) return;
+            
+            try {
+                const result = await makeRequest('getProgress', {
+                    email: currentUser.email,
+                    password: currentUser.password
+                });
+                
+                if (result.success) {
+                    progressData = result.progressData || {};
+                    linkData = result.linkData || {};
+                } else {
+                    // Fallback para localStorage
+                    const userKey = `progress_${currentUser.email}`;
+                    const stored = JSON.parse(localStorage.getItem(userKey)) || { progressData: {}, linkData: {} };
+                    progressData = stored.progressData || {};
+                    linkData = stored.linkData || {};
+                }
+            } catch (error) {
+                console.warn('Erro ao carregar do servidor, usando localStorage');
+                const userKey = `progress_${currentUser.email}`;
+                const stored = JSON.parse(localStorage.getItem(userKey)) || { progressData: {}, linkData: {} };
+                progressData = stored.progressData || {};
+                linkData = stored.linkData || {};
+            }
+            
+            updateProgressDisplay();
         }
 
         // Mostrar disciplinas por categoria principal
@@ -1532,106 +1841,6 @@
             }
             
             // Atualiza display de progresso
-            updateProgressDisplay();
-        }
-
-        // Função para fazer requisições para o Google Apps Script
-        async function makeRequest(action, data = {}) {
-            try {
-                const response = await fetch(SCRIPT_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        action: action,
-                        data: data
-                    })
-                });
-                
-                const result = await response.json();
-                isOnline = true;
-                updateSyncStatus();
-                return result;
-            } catch (error) {
-                console.error('Erro na requisição:', error);
-                isOnline = false;
-                updateSyncStatus();
-                return loadFromLocalStorage(action);
-            }
-        }
-
-        // Fallback para localStorage
-        function loadFromLocalStorage(action) {
-            if (action === 'getProgress') {
-                const storedProgress = JSON.parse(localStorage.getItem('progressData')) || {};
-                const storedLinkData = JSON.parse(localStorage.getItem('linkData')) || {};
-                
-                return {
-                    success: true,
-                    progressData: storedProgress,
-                    linkData: storedLinkData
-                };
-            }
-            return { success: false };
-        }
-
-        // Atualizar status de sincronização
-        function updateSyncStatus() {
-            const syncStatus = document.getElementById('syncStatus');
-            if (isOnline) {
-                syncStatus.textContent = 'Online';
-                syncStatus.className = 'sync-status online';
-            } else {
-                syncStatus.textContent = 'Offline';
-                syncStatus.className = 'sync-status offline';
-            }
-        }
-
-        // Função para salvar progresso
-        async function saveProgress() {
-            // Salva localmente como fallback
-            localStorage.setItem('progressData', JSON.stringify(progressData));
-            localStorage.setItem('linkData', JSON.stringify(linkData));
-            
-            // Tenta salvar no servidor
-            try {
-                const result = await makeRequest('saveProgress', {
-                    progressData: progressData,
-                    linkData: linkData
-                });
-                
-                if (result.success) {
-                    console.log('Dados salvos no servidor');
-                } else {
-                    console.warn('Não foi possível salvar no servidor, usando localStorage');
-                }
-            } catch (error) {
-                console.warn('Servidor offline, dados salvos localmente');
-            }
-            
-            updateProgressDisplay();
-        }
-
-        // Função para carregar progresso
-        async function loadProgress() {
-            try {
-                const result = await makeRequest('getProgress');
-                
-                if (result.success) {
-                    progressData = result.progressData || {};
-                    linkData = result.linkData || {};
-                } else {
-                    // Fallback para localStorage
-                    progressData = JSON.parse(localStorage.getItem('progressData')) || {};
-                    linkData = JSON.parse(localStorage.getItem('linkData')) || {};
-                }
-            } catch (error) {
-                console.warn('Erro ao carregar do servidor, usando localStorage');
-                progressData = JSON.parse(localStorage.getItem('progressData')) || {};
-                linkData = JSON.parse(localStorage.getItem('linkData')) || {};
-            }
-            
             updateProgressDisplay();
         }
 
