@@ -1270,7 +1270,7 @@
 
     <script>
         // Configuração do Google Apps Script
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxMYxUEqiFbclyT1in7J6Ts87U0o2PjgZW6SN1Yw7xFO0jgS07l89xbrguYTt_frMW-/exec';
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwjAyN8dtG-J-SXil0aWopzrmSye4JAvDYh9GKtHaVIz2tfZodhFESWEvjk2jUlvk79/exec';
         
         // Data de atualização
         document.getElementById('updateDate').textContent = new Date().toLocaleDateString('pt-BR');
@@ -1622,7 +1622,7 @@
         }
 
         // Função para fazer requisições para o Google Apps Script
-        async function makeRequest(action, data = {}) {
+       /* async function makeRequest(action, data = {}) {
             try {
                 const response = await fetch(SCRIPT_URL, {
                     method: 'POST',
@@ -1658,7 +1658,59 @@
                 
                 return { success: false, message: 'Servidor offline' };
             }
-        }
+        }*/
+        // Função para fazer requisições usando JSONP
+async function makeRequest(action, data = {}) {
+    return new Promise((resolve, reject) => {
+        // Criar um callback único
+        const callbackName = 'jsonp_cb_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        
+        // Construir URL com parâmetros
+        const params = new URLSearchParams({
+            callback: callbackName,
+            action: action,
+            data: JSON.stringify(data)
+        }).toString();
+        
+        const url = SCRIPT_URL + '?' + params;
+        
+        // Criar elemento script
+        const script = document.createElement('script');
+        script.src = url;
+        
+        // Callback global
+        window[callbackName] = function(response) {
+            // Limpar
+            delete window[callbackName];
+            document.body.removeChild(script);
+            
+            // Resolver ou rejeitar
+            if (response.success) {
+                isOnline = true;
+                updateSyncStatus();
+                resolve(response);
+            } else {
+                isOnline = false;
+                updateSyncStatus();
+                reject(response);
+            }
+        };
+        
+        // Timeout
+        const timeout = setTimeout(() => {
+            if (window[callbackName]) {
+                delete window[callbackName];
+                document.body.removeChild(script);
+                isOnline = false;
+                updateSyncStatus();
+                reject(new Error('Timeout'));
+            }
+        }, 10000);
+        
+        // Adicionar ao documento
+        document.body.appendChild(script);
+    });
+}
 
         // Atualizar status de sincronização
         function updateSyncStatus() {
