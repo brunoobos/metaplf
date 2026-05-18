@@ -110,6 +110,25 @@
             margin-top: 0.5rem;
         }
 
+        .role-badge {
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
+        .role-admin {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .role-student {
+            background: #27ae60;
+            color: white;
+        }
+
         /* ==================== HOME SCREEN ==================== */
         .home-container {
             min-height: 100vh;
@@ -233,66 +252,6 @@
             text-align: center;
             color: #5c6e82;
             margin-bottom: 2rem;
-        }
-
-        /* Links úteis section */
-        .links-section {
-            background: white;
-            border-radius: 24px;
-            margin: 2rem;
-            padding: 2rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-
-        .links-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-
-        .link-card {
-            background: #f8fafc;
-            border-radius: 16px;
-            padding: 1.2rem;
-            transition: all 0.2s;
-            border: 1px solid #eef2f8;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .link-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
-            border-color: #0056a7;
-        }
-
-        .link-icon {
-            width: 50px;
-            height: 50px;
-            background: #e8f0fe;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: #0056a7;
-        }
-
-        .link-info {
-            flex: 1;
-        }
-
-        .link-info h4 {
-            color: #1f2d3d;
-            margin-bottom: 0.3rem;
-        }
-
-        .link-info p {
-            color: #5c6e82;
-            font-size: 0.8rem;
         }
 
         .cards-grid {
@@ -533,6 +492,7 @@
             display: flex;
             align-items: flex-start;
             gap: 1rem;
+            flex-wrap: wrap;
         }
 
         .content-checkbox {
@@ -566,6 +526,24 @@
 
         .btn-link:hover {
             background: #e2e8f0;
+        }
+
+        .btn-edit {
+            background: #3498db;
+            color: white;
+        }
+
+        .btn-edit:hover {
+            background: #2980b9;
+        }
+
+        .btn-delete {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .btn-delete:hover {
+            background: #c0392b;
         }
 
         .link-container {
@@ -606,7 +584,7 @@
             z-index: 100;
         }
 
-        /* Modal de links */
+        /* Modal de edição de link */
         .modal {
             display: none;
             position: fixed;
@@ -644,6 +622,26 @@
             border-radius: 40px;
             cursor: pointer;
         }
+        .admin-panel {
+            background: white;
+            border-radius: 24px;
+            margin: 2rem;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        .admin-stats {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+        .stat-card {
+            text-align: center;
+            padding: 1rem;
+            background: #e8f0fe;
+            border-radius: 16px;
+            min-width: 150px;
+        }
 
         @media (max-width: 768px) {
             .main-header {
@@ -657,9 +655,6 @@
             }
             .content-header {
                 flex-direction: column;
-            }
-            .links-grid {
-                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -693,10 +688,10 @@
         <div class="nav-menu">
             <a id="navHomeLink">Início</a>
             <a id="navDisciplinasLink">Disciplinas</a>
-            <a id="navLinksLink">Links úteis</a>
             <div id="userInfoHome" style="display: none;" class="user-info-header">
                 <i class="fas fa-user-circle"></i>
                 <span id="userNameHome"></span>
+                <span id="userRoleBadge" class="role-badge"></span>
                 <button id="logoutHomeBtn" class="logout-header-btn">Sair</button>
             </div>
         </div>
@@ -707,14 +702,26 @@
         <p>Conteúdo atualizado conforme o último edital, com acompanhamento de progresso e material exclusivo.</p>
     </section>
 
-    <!-- SEÇÃO DE LINKS ÚTEIS -->
-    <div class="links-section" id="linksSection">
-        <h2 style="color: #0056a7; margin-bottom: 0.5rem;"><i class="fas fa-link"></i> Links úteis para sua preparação</h2>
-        <p style="color: #5c6e82;">Acesse materiais complementares, legislação e sites oficiais</p>
-        <div id="linksGrid" class="links-grid"></div>
-        <div style="margin-top: 1.5rem; text-align: center;">
-            <button id="addLinkBtn" class="filter-btn" style="background: #0056a7; color: white;"><i class="fas fa-plus"></i> Adicionar novo link</button>
+    <!-- Painel do Administrador (só visível para admin) -->
+    <div id="adminPanel" class="admin-panel" style="display: none;">
+        <h2 style="color: #0056a7;"><i class="fas fa-shield-alt"></i> Painel do Administrador</h2>
+        <p>Gerencie os links de estudo que serão visualizados por todos os alunos</p>
+        <div class="admin-stats">
+            <div class="stat-card">
+                <i class="fas fa-link" style="font-size: 2rem;"></i>
+                <h3 id="totalLinksCount">0</h3>
+                <p>Links cadastrados</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-users" style="font-size: 2rem;"></i>
+                <h3 id="totalStudentsCount">0</h3>
+                <p>Alunos matriculados</p>
+            </div>
         </div>
+        <p style="margin-top: 1rem; font-size: 0.85rem; color: #5c6e82;">
+            <i class="fas fa-info-circle"></i> Como administrador, você pode adicionar, editar e remover links nos tópicos das disciplinas.
+            Os alunos só poderão visualizar esses links.
+        </p>
     </div>
 
     <h2 class="section-title">Trilhas de estudo</h2>
@@ -758,8 +765,8 @@
             <i id="courseIcon" class="fas fa-book"></i>
             <span id="courseTitle"></span>
         </div>
-        <div class="user-info-mini" style="display: flex; justify-content: space-between;">
-            <span><i class="fas fa-user-circle"></i> <span id="courseUserName"></span></span>
+        <div class="user-info-mini" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+            <span><i class="fas fa-user-circle"></i> <span id="courseUserName"></span> <span id="courseUserRole" class="role-badge"></span></span>
             <span id="courseProgressText">0% concluído</span>
         </div>
         <div class="progress-stats">
@@ -780,22 +787,22 @@
     <button id="logoutFromCourse" class="logout-fab"><i class="fas fa-sign-out-alt"></i> Sair</button>
 </div>
 
-<!-- MODAL PARA ADICIONAR LINK -->
+<!-- MODAL PARA EDITAR LINK (ADMIN) -->
 <div id="linkModal" class="modal">
     <div class="modal-content">
-        <h3 style="color: #0056a7; margin-bottom: 1rem;"><i class="fas fa-plus"></i> Adicionar link útil</h3>
-        <input type="text" id="linkTitle" placeholder="Título do link (ex: Legislação atualizada)">
-        <input type="url" id="linkUrl" placeholder="URL do site (ex: https://www.planalto.gov.br)">
-        <textarea id="linkDescription" rows="2" placeholder="Descrição (opcional)"></textarea>
+        <h3 id="modalTitle" style="color: #0056a7; margin-bottom: 1rem;"><i class="fas fa-edit"></i> Gerenciar link</h3>
+        <input type="url" id="linkUrl" placeholder="URL do material (ex: https://www.exemplo.com)">
+        <textarea id="linkDescription" rows="2" placeholder="Descrição do link (opcional)"></textarea>
         <div class="modal-buttons">
             <button id="saveLinkBtn" style="background: #0056a7; color: white; border: none;">Salvar</button>
+            <button id="deleteLinkBtn" style="background: #e74c3c; color: white; border: none; display: none;">Excluir</button>
             <button id="cancelLinkBtn" style="background: #eef2f6; border: none;">Cancelar</button>
         </div>
     </div>
 </div>
 
 <script>
-    // ==================== TODAS AS DISCIPLINAS ====================
+    // ==================== DADOS DAS DISCIPLINAS ====================
     const disciplinesData = {
         portugues: { name: "LÍNGUA PORTUGUESA", icon: "fas fa-language", category: "basicos",
             contents: ["1. Compreensão e interpretação de textos.", "2. Reconhecimento de tipos e gêneros textuais.", "3. Domínio da ortografia oficial.", "4. Mecanismos de coesão textual.", "5. Estrutura morfossintática do período.", "6. Reescrita de frases e parágrafos."] },
@@ -819,31 +826,36 @@
             contents: ["1. CTB - objetivos e conceitos.", "2. Sistema Nacional de Trânsito.", "3. Normas de circulação.", "4. Sinalização.", "5. Infrações e penalidades.", "6. Processo administrativo.", "7. Crimes de trânsito.", "8. Direção defensiva.", "9. Resolução 04/1998", "10. Resolução 14/1998", "11. Resolução 24/1998", "12. Resolução 36/1998", "13. Resolução 92/1999", "14. Resolução 110/2000", "15. Resolução 160/2004", "16. Resolução 210/2006", "17. Resolução 211/2006", "18. Resolução 216/2006", "19. Resolução 227/2007", "20. Resolução 253/2007", "21. Resolução 254/2007", "22. Resolução 290/2008", "23. Resolução 349/2010", "24. Resolução 360/2010", "25. Resolução 432/2013", "26. Resolução 441/2013", "27. Resolução 471/2013", "28. Resolução 508/2014", "29. Resolução 520/2015", "30. Resolução 525/2015", "31. Resolução 552/2015", "32. Resolução 561/2015", "33. Resolução 667/2017", "34. Resolução 735/2018", "35. Resolução 740/2018", "36. Resolução 780/2019", "37. Resolução 789/2020", "38. Resolução 798/2020", "39. Resolução 803/2020", "40. Resolução 806/2020", "41. Resolução 809/2020", "42. Resolução 810/2020"] }
     };
 
-    // Links padrão
-    const defaultLinks = [
-        { title: "Planalto - Legislação", url: "https://www.planalto.gov.br", description: "Todas as leis e decretos federais", icon: "fas fa-gavel" },
-        { title: "CESPE/Cebraspe", url: "https://www.cebraspe.org.br", description: "Provas anteriores e simulados", icon: "fas fa-file-alt" },
-        { title: "PRF - Portal Oficial", url: "https://www.gov.br/prf", description: "Notícias e informações oficiais", icon: "fas fa-car" },
-        { title: "Doutrina atualizada", url: "https://www.jusbrasil.com.br", description: "Jurisprudência e artigos", icon: "fas fa-book" }
-    ];
+    // Usuários padrão
+    const defaultUsers = {
+        "admin@mentoria.com": { password: "admin123", role: "admin", name: "Administrador", createdAt: new Date().toISOString() }
+    };
 
     // Estado
     let currentUser = null;
+    let currentUserRole = null;
     let currentDiscipline = null;
     let progressData = {};
-    let linkData = {};
-    let userLinks = []; // Links personalizados do usuário
-    let currentFilter = "all";
+    let globalLinks = {}; // Links globais (gerenciados pelo admin) - formato: { "disciplina_index": { url: "...", description: "..." } }
+    let currentEditingLink = null; // { discipline, index }
 
     // ==================== FUNÇÕES DE USUÁRIO ====================
-    function getUsers() { return JSON.parse(localStorage.getItem('mentoria_users') || '{}'); }
+    function getUsers() { 
+        const users = localStorage.getItem('mentoria_users');
+        if (users) return JSON.parse(users);
+        // Inicializar com admin padrão
+        localStorage.setItem('mentoria_users', JSON.stringify(defaultUsers));
+        return defaultUsers;
+    }
     function saveUsers(users) { localStorage.setItem('mentoria_users', JSON.stringify(users)); }
     
     function login(email, password) {
         const users = getUsers();
         if (users[email] && users[email].password === password) {
             currentUser = email;
+            currentUserRole = users[email].role;
             localStorage.setItem('mentoria_current_user', email);
+            localStorage.setItem('mentoria_current_user_role', currentUserRole);
             loadUserData();
             document.getElementById('loginOverlay').style.display = 'none';
             showHomeScreen();
@@ -863,45 +875,83 @@
             document.getElementById('loginError').textContent = "Email já cadastrado!";
             return false;
         }
-        users[email] = { password, createdAt: new Date().toISOString() };
+        // Novo usuário é sempre ALUNO (role: "student")
+        users[email] = { 
+            password: password, 
+            role: "student", 
+            name: email.split('@')[0],
+            createdAt: new Date().toISOString() 
+        };
         saveUsers(users);
-        document.getElementById('loginError').textContent = "Conta criada! Faça login.";
+        document.getElementById('loginError').textContent = "Conta criada com sucesso! Faça login.";
         return true;
     }
     
     function logout() {
         currentUser = null;
+        currentUserRole = null;
         currentDiscipline = null;
         localStorage.removeItem('mentoria_current_user');
+        localStorage.removeItem('mentoria_current_user_role');
         progressData = {};
-        linkData = {};
-        userLinks = [];
         document.getElementById('homeContainer').style.display = 'none';
         document.getElementById('courseContainer').style.display = 'none';
         document.getElementById('loginOverlay').style.display = 'flex';
     }
     
     function loadUserData() {
+        // Carregar progresso do aluno
         const savedProgress = localStorage.getItem(`mentoria_progress_${currentUser}`);
         progressData = savedProgress ? JSON.parse(savedProgress) : {};
-        const savedLinks = localStorage.getItem(`mentoria_links_${currentUser}`);
-        linkData = savedLinks ? JSON.parse(savedLinks) : {};
-        const savedUserLinks = localStorage.getItem(`mentoria_user_links_${currentUser}`);
-        userLinks = savedUserLinks ? JSON.parse(savedUserLinks) : [...defaultLinks];
+        
+        // Carregar links globais (gerenciados pelo admin)
+        const savedGlobalLinks = localStorage.getItem('mentoria_global_links');
+        if (savedGlobalLinks) {
+            globalLinks = JSON.parse(savedGlobalLinks);
+        } else {
+            // Inicializar com alguns links de exemplo
+            globalLinks = {
+                "penal_0": { url: "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm", description: "Código Penal completo - Planalto" },
+                "penal_1": { url: "https://www.youtube.com/watch?v=exemplo", description: "Vídeo aula sobre aplicação da lei penal" },
+                "inteligencia_0": { url: "https://www.planalto.gov.br/ccivil_03/leis/l9503.htm", description: "Código de Trânsito Brasileiro - Lei 9.503/97" },
+                "constitucional_0": { url: "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm", description: "Constituição Federal" }
+            };
+            localStorage.setItem('mentoria_global_links', JSON.stringify(globalLinks));
+        }
+    }
+    
+    function saveGlobalLinks() {
+        localStorage.setItem('mentoria_global_links', JSON.stringify(globalLinks));
+        // Atualizar visualização se estiver em uma disciplina
+        if (currentDiscipline) {
+            renderContents();
+        }
+        // Atualizar estatísticas do admin
+        if (currentUserRole === 'admin') {
+            updateAdminStats();
+        }
     }
     
     function saveProgress() {
         if (currentUser) {
             localStorage.setItem(`mentoria_progress_${currentUser}`, JSON.stringify(progressData));
-            localStorage.setItem(`mentoria_links_${currentUser}`, JSON.stringify(linkData));
-            localStorage.setItem(`mentoria_user_links_${currentUser}`, JSON.stringify(userLinks));
         }
     }
     
-    function saveUserLinks() {
-        if (currentUser) {
-            localStorage.setItem(`mentoria_user_links_${currentUser}`, JSON.stringify(userLinks));
-        }
+    // ==================== FUNÇÕES DE ADMIN ====================
+    function updateAdminStats() {
+        if (currentUserRole !== 'admin') return;
+        
+        const totalLinks = Object.keys(globalLinks).length;
+        document.getElementById('totalLinksCount').textContent = totalLinks;
+        
+        const users = getUsers();
+        const students = Object.keys(users).filter(email => users[email].role === 'student').length;
+        document.getElementById('totalStudentsCount').textContent = students;
+    }
+    
+    function isAdmin() {
+        return currentUserRole === 'admin';
     }
     
     // ==================== PROGRESSO ====================
@@ -924,64 +974,58 @@
         updateHomeDisciplinesGrid();
     }
     
-    function saveLink(index, url) {
-        if (!currentDiscipline) return;
-        const key = `${currentDiscipline}_${index}`;
-        if (url) linkData[key] = url;
-        else delete linkData[key];
-        saveProgress();
+    // ==================== GERENCIAMENTO DE LINKS (ADMIN) ====================
+    function openLinkModal(discipline, index) {
+        if (!isAdmin()) return;
+        
+        currentEditingLink = { discipline, index };
+        const linkKey = `${discipline}_${index}`;
+        const existingLink = globalLinks[linkKey];
+        
+        document.getElementById('modalTitle').innerHTML = '<i class="fas fa-edit"></i> Gerenciar link do tópico';
+        document.getElementById('linkUrl').value = existingLink?.url || '';
+        document.getElementById('linkDescription').value = existingLink?.description || '';
+        
+        if (existingLink) {
+            document.getElementById('deleteLinkBtn').style.display = 'block';
+        } else {
+            document.getElementById('deleteLinkBtn').style.display = 'none';
+        }
+        
+        document.getElementById('linkModal').style.display = 'flex';
+    }
+    
+    function saveLinkFromModal() {
+        if (!currentEditingLink) return;
+        
+        const url = document.getElementById('linkUrl').value;
+        const description = document.getElementById('linkDescription').value;
+        const linkKey = `${currentEditingLink.discipline}_${currentEditingLink.index}`;
+        
+        if (url) {
+            globalLinks[linkKey] = { url: url, description: description };
+        } else {
+            delete globalLinks[linkKey];
+        }
+        
+        saveGlobalLinks();
+        closeModal();
         renderContents();
     }
     
-    // ==================== LINKS ÚTEIS ====================
-    function renderLinks() {
-        const grid = document.getElementById('linksGrid');
-        if (!grid) return;
-        grid.innerHTML = '';
+    function deleteLinkFromModal() {
+        if (!currentEditingLink) return;
         
-        userLinks.forEach((link, idx) => {
-            const card = document.createElement('a');
-            card.href = link.url;
-            card.target = "_blank";
-            card.className = 'link-card';
-            card.innerHTML = `
-                <div class="link-icon"><i class="${link.icon || 'fas fa-link'}"></i></div>
-                <div class="link-info">
-                    <h4>${link.title}</h4>
-                    <p>${link.description || 'Clique para acessar'}</p>
-                </div>
-                <button class="delete-link-btn" data-index="${idx}" style="background: none; border: none; color: #e74c3c; cursor: pointer;" onclick="event.stopPropagation(); deleteLink(${idx})"><i class="fas fa-trash"></i></button>
-            `;
-            grid.appendChild(card);
-        });
-        
-        if (userLinks.length === 0) {
-            grid.innerHTML = '<p style="text-align: center; color: #5c6e82;">Nenhum link adicionado. Clique em "Adicionar novo link" para começar.</p>';
-        }
+        const linkKey = `${currentEditingLink.discipline}_${currentEditingLink.index}`;
+        delete globalLinks[linkKey];
+        saveGlobalLinks();
+        closeModal();
+        renderContents();
     }
     
-    function addLink(title, url, description) {
-        if (!title || !url) {
-            alert("Preencha o título e a URL!");
-            return false;
-        }
-        userLinks.push({
-            title: title,
-            url: url,
-            description: description || "",
-            icon: "fas fa-link"
-        });
-        saveUserLinks();
-        renderLinks();
-        return true;
-    }
-    
-    function deleteLink(index) {
-        if (confirm("Remover este link?")) {
-            userLinks.splice(index, 1);
-            saveUserLinks();
-            renderLinks();
-        }
+    function closeModal() {
+        document.getElementById('linkModal').style.display = 'none';
+        currentEditingLink = null;
     }
     
     // ==================== HOME SCREEN ====================
@@ -990,11 +1034,25 @@
         document.getElementById('courseContainer').style.display = 'none';
         currentDiscipline = null;
         
+        // Atualizar informações do usuário
+        const users = getUsers();
+        const userData = users[currentUser];
         document.getElementById('userInfoHome').style.display = 'flex';
-        document.getElementById('userNameHome').textContent = currentUser.split('@')[0];
+        document.getElementById('userNameHome').textContent = userData.name || currentUser.split('@')[0];
+        
+        const roleBadge = document.getElementById('userRoleBadge');
+        if (currentUserRole === 'admin') {
+            roleBadge.textContent = 'Administrador';
+            roleBadge.className = 'role-badge role-admin';
+            document.getElementById('adminPanel').style.display = 'block';
+            updateAdminStats();
+        } else {
+            roleBadge.textContent = 'Aluno';
+            roleBadge.className = 'role-badge role-student';
+            document.getElementById('adminPanel').style.display = 'none';
+        }
         
         updateHomeDisciplinesGrid();
-        renderLinks();
     }
     
     function updateHomeDisciplinesGrid() {
@@ -1031,7 +1089,19 @@
         const discipline = disciplinesData[disciplineId];
         document.getElementById('courseTitle').textContent = discipline.name;
         document.getElementById('courseIcon').className = discipline.icon;
-        document.getElementById('courseUserName').textContent = currentUser.split('@')[0];
+        
+        const users = getUsers();
+        const userData = users[currentUser];
+        document.getElementById('courseUserName').textContent = userData.name || currentUser.split('@')[0];
+        
+        const courseRoleBadge = document.getElementById('courseUserRole');
+        if (currentUserRole === 'admin') {
+            courseRoleBadge.textContent = 'Administrador';
+            courseRoleBadge.className = 'role-badge role-admin';
+        } else {
+            courseRoleBadge.textContent = 'Aluno';
+            courseRoleBadge.className = 'role-badge role-student';
+        }
         
         updateCourseProgress();
         renderContents();
@@ -1063,20 +1133,33 @@
             if (!shouldShow) return;
             
             const linkKey = `${currentDiscipline}_${idx}`;
-            const hasLink = linkData[linkKey];
+            const link = globalLinks[linkKey];
+            const isAdminUser = isAdmin();
             
             html += `
                 <div class="content-item ${isCompleted ? 'completed' : ''}">
                     <div class="content-header">
                         <input type="checkbox" class="content-checkbox" ${isCompleted ? 'checked' : ''} onchange="toggleContent(${idx})">
                         <div class="content-text"><strong>Tópico ${idx+1}</strong><br>${text}</div>
+                        ${isAdminUser ? `
                         <div class="content-actions">
-                            <button class="btn-link" onclick="showLinkInput(${idx})"><i class="fas fa-link"></i> ${hasLink ? 'Editar' : 'Adicionar link'}</button>
+                            <button class="btn-link btn-edit" onclick="openLinkModal('${currentDiscipline}', ${idx})">
+                                <i class="fas fa-edit"></i> ${link ? 'Editar link' : 'Adicionar link'}
+                            </button>
                         </div>
+                        ` : ''}
                     </div>
-                    <div id="linkContainer_${idx}" class="link-container">
-                        ${hasLink ? `<a href="${linkData[linkKey]}" target="_blank"><i class="fas fa-external-link-alt"></i> Material de apoio</a> <button class="btn-link" onclick="removeLinkAndRefresh(${idx})">Remover</button>` : ''}
+                    ${link ? `
+                    <div class="link-container">
+                        <a href="${link.url}" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Material de apoio: ${link.description || 'Clique para acessar'}
+                        </a>
                     </div>
+                    ` : (isAdminUser ? `
+                    <div class="link-container" style="color: #999; font-style: italic;">
+                        <i class="fas fa-info-circle"></i> Nenhum link adicionado. Clique em "Adicionar link" para incluir material de apoio.
+                    </div>
+                    ` : '')}
                 </div>
             `;
         });
@@ -1086,52 +1169,6 @@
         }
         
         document.getElementById('contentsList').innerHTML = html;
-    }
-    
-    // Funções globais
-    window.toggleContent = toggleContent;
-    window.showLinkInput = function(index) {
-        const container = document.getElementById(`linkContainer_${index}`);
-        const currentLink = linkData[`${currentDiscipline}_${index}`] || '';
-        container.innerHTML = `
-            <input type="url" id="linkInput_${index}" class="link-input" placeholder="https://..." value="${currentLink}">
-            <div style="margin-top: 0.5rem;">
-                <button class="btn-link" onclick="saveLinkAndRefresh(${index})">Salvar</button>
-                <button class="btn-link" onclick="cancelLink(${index})">Cancelar</button>
-            </div>
-        `;
-    };
-    window.saveLinkAndRefresh = function(index) {
-        const input = document.getElementById(`linkInput_${index}`);
-        if (input) saveLink(index, input.value);
-    };
-    window.removeLinkAndRefresh = function(index) {
-        saveLink(index, null);
-    };
-    window.cancelLink = function(index) {
-        renderContents();
-    };
-    window.deleteLink = deleteLink;
-    
-    // ==================== MODAL ====================
-    function showAddLinkModal() {
-        document.getElementById('linkModal').style.display = 'flex';
-        document.getElementById('linkTitle').value = '';
-        document.getElementById('linkUrl').value = '';
-        document.getElementById('linkDescription').value = '';
-    }
-    
-    function closeModal() {
-        document.getElementById('linkModal').style.display = 'none';
-    }
-    
-    function saveModalLink() {
-        const title = document.getElementById('linkTitle').value;
-        const url = document.getElementById('linkUrl').value;
-        const description = document.getElementById('linkDescription').value;
-        if (addLink(title, url, description)) {
-            closeModal();
-        }
     }
     
     // ==================== EVENT LISTENERS ====================
@@ -1153,15 +1190,9 @@
         document.getElementById('logoHomeBtn').addEventListener('click', showHomeScreen);
         document.getElementById('navHomeLink').addEventListener('click', showHomeScreen);
         document.getElementById('navDisciplinasLink').addEventListener('click', showHomeScreen);
-        document.getElementById('navLinksLink').addEventListener('click', () => {
-            if (currentUser) {
-                showHomeScreen();
-                document.getElementById('linksSection').scrollIntoView({ behavior: 'smooth' });
-            }
-        });
         
-        document.getElementById('addLinkBtn').addEventListener('click', showAddLinkModal);
-        document.getElementById('saveLinkBtn').addEventListener('click', saveModalLink);
+        document.getElementById('saveLinkBtn').addEventListener('click', saveLinkFromModal);
+        document.getElementById('deleteLinkBtn').addEventListener('click', deleteLinkFromModal);
         document.getElementById('cancelLinkBtn').addEventListener('click', closeModal);
         
         document.querySelectorAll('.card[data-category]').forEach(card => {
@@ -1184,15 +1215,21 @@
         };
     }
     
+    // Tornar funções globais para onclick
+    window.toggleContent = toggleContent;
+    window.openLinkModal = openLinkModal;
+    
     // ==================== INICIALIZAÇÃO ====================
     function init() {
         setupEventListeners();
         
         const savedUser = localStorage.getItem('mentoria_current_user');
-        if (savedUser) {
+        const savedRole = localStorage.getItem('mentoria_current_user_role');
+        if (savedUser && savedRole) {
             const users = getUsers();
             if (users[savedUser]) {
                 currentUser = savedUser;
+                currentUserRole = savedRole;
                 loadUserData();
                 showHomeScreen();
                 document.getElementById('loginOverlay').style.display = 'none';
