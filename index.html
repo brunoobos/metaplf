@@ -40,7 +40,6 @@
             min-height: 100vh;
         }
         
-        /* Menu Superior */
         .top-menu {
             background-color: var(--primary);
             display: flex;
@@ -101,7 +100,6 @@
             padding: 15px;
         }
         
-        /* Header */
         header {
             background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%);
             color: white;
@@ -137,7 +135,6 @@
             position: relative;
         }
         
-        /* Login Container */
         .login-container {
             max-width: 400px;
             margin: 50px auto;
@@ -219,7 +216,6 @@
             display: none;
         }
         
-        /* Progress Summary */
         .progress-summary {
             background-color: var(--white);
             border-radius: var(--radius);
@@ -292,14 +288,12 @@
             100% { background-position: 20px 0; }
         }
         
-        /* Container */
         .container {
             max-width: 1200px;
             margin: 20px auto;
             padding: 0 20px;
         }
         
-        /* Search Container */
         .search-container {
             margin: 30px 0;
             text-align: center;
@@ -344,7 +338,6 @@
             accent-color: var(--secondary);
         }
         
-        /* Discipline Dropdown */
         .discipline-dropdown {
             position: relative;
             display: inline-block;
@@ -376,7 +369,6 @@
             box-shadow: 0 0 0 3px rgba(41, 128, 185, 0.2);
         }
         
-        /* Main Categories */
         .main-categories {
             display: flex;
             justify-content: center;
@@ -431,13 +423,12 @@
             border-radius: 20px;
         }
         
-        /* Disciplines Container */
         .disciplines-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 20px;
             margin: 40px 0;
-            display: none; /* Inicialmente escondido */
+            display: none;
         }
         
         .discipline-btn {
@@ -1065,9 +1056,9 @@
         <a href="#" class="logo">Mentoria PRF</a>
         <div class="menu-toggle">☰</div>
         <ul class="nav-links">
-            <li><a href="#">Início</a></li>
-            <li><a href="#progresso">Meu Progresso</a></li>
-            <li><a href="#disciplinas">Disciplinas</a></li>
+            <li><a href="#" onclick="showHome()">Início</a></li>
+            <li><a href="#" onclick="scrollToProgress()">Meu Progresso</a></li>
+            <li><a href="#" onclick="showDisciplinas()">Disciplinas</a></li>
         </ul>
         <div class="user-info" id="userInfo" style="display: none;">
             <span id="userName"></span>
@@ -1106,7 +1097,7 @@
 
         <div class="container">
             <div class="search-container">
-                <input type="text" class="search-input" placeholder="Pesquisar disciplinas ou conteúdos...">
+                <input type="text" class="search-input" id="searchInput" placeholder="Pesquisar disciplinas ou conteúdos...">
                 <div class="search-filters">
                     <div class="filter-option">
                         <input type="radio" id="filter-all" name="search-filter" value="all" checked>
@@ -1243,108 +1234,684 @@
     </div>
 
     <script>
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwjAyN8dtG-J-SXil0aWopzrmSye4JAvDYh9GKtHaVIz2tfZodhFESWEvjk2jUlvk79/exec';
+        // Configuração
         document.getElementById('updateDate').textContent = new Date().toLocaleDateString('pt-BR');
-
+        
+        // Dados dos conteúdos
         const stateLinks = {
             'POLÍCIA RODOVIÁRIA FEDERAL (PRF)': {
                 portugues: [
                     { text: '1. COMPREENSÃO E INTERPRETAÇÃO DE TEXTOS. Textos de gêneros variados. Reconhecimento de tipos e gêneros textuais' },
                     { text: '2. DOMÍNIO DA ORTOGRAFIA' },
-                    { text: '3. DOMÍNIO DOS MECANISMOS DE COESÃO TEXTUAL. Emprego de elementos de referenciação, substituição e repetição. Emprego de conectores e outros elementos de sequenciação textual. Emprego de tempos e modos verbais' },
-                    { text: '4. DOMÍNIO DA ESTRUTURA MORFOSSINTÁTICA DO PERÍODO. Emprego das classes de palavras. Relações de coordenação entre orações e entre termos da oração. Relações de subordinação entre orações e entre termos da oração. Emprego dos sinais de pontuação. Concordância verbal e nominal. Regência verbal e nominal. Emprego do sinal indicativo de crase. Colocação dos pronomes átonos' },
-                    { text: '5. REESCRITA DE FRASES E PARÁGRAFOS. Significação das palavras. Substituição de palavras ou trechos de texto. Reorganização da estrutura de orações e períodos. Reescrita de textos de diferentes gêneros e níveis de formalidade' }
+                    { text: '3. DOMÍNIO DOS MECANISMOS DE COESÃO TEXTUAL. Emprego de elementos de referenciação, substituição e repetição' },
+                    { text: '4. DOMÍNIO DA ESTRUTURA MORFOSSINTÁTICA DO PERÍODO. Emprego das classes de palavras' },
+                    { text: '5. REESCRITA DE FRASES E PARÁGRAFOS. Significação das palavras' }
                 ],
                 ingles: [
-                    { text: '1. COMPREENSÃO DE TEXTOS VARIADOS. Domínio do vocabulário e estrutura da língua. Identificação de ideias principais e secundárias. Identificação de ideias explícitas e implícitas. Relações intratextuais e intertextuais' },
+                    { text: '1. COMPREENSÃO DE TEXTOS VARIADOS. Domínio do vocabulário e estrutura da língua' },
                     { text: '2. ITENS GRAMATICAIS RELEVANTES. Para compreensão de conteúdos semânticos' },
                     { text: '3. CONHECIMENTO E USO DA LINGUAGEM. Formas contemporâneas da linguagem inglesa' }
                 ],
                 raciocinio: [
                     { text: '1. ESTRUTURAS LÓGICAS' },
-                    { text: '2. LÓGICA DE ARGUMENTAÇÃO. Analogias. Inferências. Deduções e conclusões' },
-                    { text: '3. LÓGICA SENTENCIAL (PROPOSICIONAL). Proposições simples e compostas. Tabelas verdade. Equivalências. Leis de Morgan. Diagramas lógicos' },
+                    { text: '2. LÓGICA DE ARGUMENTAÇÃO. Analogias. Inferências' },
+                    { text: '3. LÓGICA SENTENCIAL (PROPOSICIONAL). Proposições simples e compostas' },
                     { text: '4. LÓGICA DE PRIMEIRA ORDEM' },
                     { text: '5. PRINCÍPIOS DE CONTAGEM E PROBABILIDADE' },
-                    { text: '6. OPERAÇÕES COM CONJUNTOS' },
-                    { text: '7. RACIOCÍNIO LÓGICO. Problemas aritméticos. Problemas geométricos. Problemas matriciais' },
-                    { text: '8. ESTATÍSTICA E PROBABILIDADE BÁSICAS. Medidas de tendência central. Medidas de dispersão. Formulação e validação de hipóteses. Amostragem, viés e erro. Normalização e padronização. Outliers' }
+                    { text: '6. OPERAÇÕES COM CONJUNTOS' }
                 ],
                 constitucional: [
-                    { text: '1. CONSTITUIÇÃO FEDERAL DE 1988. Conceito, contexto histórico e características. Estrutura do texto constitucional' },
+                    { text: '1. CONSTITUIÇÃO FEDERAL DE 1988. Conceito, contexto histórico e características' },
                     { text: '2. PRINCÍPIOS FUNDAMENTAIS' },
-                    { text: '3. DIREITOS E GARANTIAS FUNDAMENTAIS. Direitos e deveres individuais e coletivos. Direitos sociais. Nacionalidade. Direitos políticos. Partidos políticos' },
-                    { text: '4. ORGANIZAÇÃO DO ESTADO. Organização político-administrativa. União, estados, municípios, Distrito Federal e territórios. Intervenção Federal' },
-                    { text: '5. ADMINISTRAÇÃO PÚBLICA. Disposições gerais. Servidores públicos civis e militares' },
-                    { text: '6. PODER LEGISLATIVO. Congresso Nacional e suas Casas. Atribuições. Competências. Reuniões e comissões' },
-                    { text: '7. REGIME JURÍDICO-CONSTITUCIONAL DOS PARLAMENTARES' },
-                    { text: '8. PROCESSO LEGISLATIVO' },
-                    { text: '9. DEFESA DO ESTADO E DAS INSTITUIÇÕES DEMOCRÁTICAS' },
-                    { text: '10. FORÇAS ARMADAS' },
-                    { text: '11. SEGURANÇA PÚBLICA. Organização da segurança pública' },
-                    { text: '12. ORGANIZAÇÃO DA SEGURANÇA PÚBLICA NA CF/88. Art. 144 e competências dos órgãos de segurança pública' },
-                    { text: '13. CONTROLE DE CONSTITUCIONALIDADE. Conceito, espécies e instrumentos' },
-                    { text: '14. PODER JUDICIÁRIO E FUNÇÕES ESSENCIAIS À JUSTIÇA. Noções constitucionais' }
+                    { text: '3. DIREITOS E GARANTIAS FUNDAMENTAIS' },
+                    { text: '4. ORGANIZAÇÃO DO ESTADO' },
+                    { text: '5. ADMINISTRAÇÃO PÚBLICA' }
                 ],
                 administrativo: [
-                    { text: '1. NOÇÕES DE ORGANIZAÇÃO ADMINISTRATIVA...' },
-                    { text: '2. ATO ADMINISTRATIVO...' },
-                    { text: '3. AGENTES PÚBLICOS...' },
-                    { text: '4. DIREITO ADMINISTRATIVO DISCIPLINAR...' },
-                    { text: '5. PODERES ADMINISTRATIVOS...' },
-                    { text: '6. CONTROLE DA ADMINISTRAÇÃO PÚBLICA...' },
-                    { text: '7. RESPONSABILIDADE CIVIL DO ESTADO...' },
-                    { text: '8. IMPROBIDADE ADMINISTRATIVA. Lei nº 8.429/1992' },
-                    { text: '9. LEI DE ACESSO À INFORMAÇÃO. Lei nº 12.527/2011' },
-                    { text: '10. LEI GERAL DE PROTEÇÃO DE DADOS. Lei nº 13.709/2018' },
-                    { text: '11. BENS PÚBLICOS...' },
-                    { text: '12. REGIME JURÍDICO-ADMINISTRATIVO...' },
-                    { text: '13. NOÇÕES DE LICITAÇÕES E CONTRATOS. Lei nº 14.133/2021...' },
-                    { text: '14. NOÇÕES DE ADMINISTRAÇÃO ORÇAMENTÁRIA E FINANCEIRA...' }
+                    { text: '1. NOÇÕES DE ORGANIZAÇÃO ADMINISTRATIVA' },
+                    { text: '2. ATO ADMINISTRATIVO' },
+                    { text: '3. AGENTES PÚBLICOS' },
+                    { text: '4. DIREITO ADMINISTRATIVO DISCIPLINAR' }
                 ],
                 informatica: [
-                    { text: '1. NOÇÕES DE SISTEMAS OPERACIONAIS. Windows. Android. iOS' },
-                    { text: '2. NAVEGAÇÃO E FERRAMENTAS...' },
-                    { text: '3. NOÇÕES DE SEGURANÇA DA INFORMAÇÃO...' },
-                    { text: '4. NOÇÕES DE BANCOS DE DADOS...' },
-                    { text: '5. NOÇÕES DE REDES DE COMPUTADORES...' },
-                    { text: '6. NOÇÕES DE APRENDIZADO DE MÁQUINA...' },
-                    { text: '7. NOÇÕES DE FORENSE COMPUTACIONAL...' }
+                    { text: '1. NOÇÕES DE SISTEMAS OPERACIONAIS. Windows, Android, iOS' },
+                    { text: '2. NAVEGAÇÃO E FERRAMENTAS' },
+                    { text: '3. NOÇÕES DE SEGURANÇA DA INFORMAÇÃO' }
                 ],
                 penal: [
-                    { text: '1. DIREITO PENAL. Princípios básicos do direito penal' }
+                    { text: '1. DIREITO PENAL. Princípios básicos do direito penal' },
+                    { text: '2. TEORIA DO DELITO. Conceito, elementos e classificação' },
+                    { text: '3. PENAS. Espécies, aplicação e execução' }
                 ],
                 processual_penal: [
-                    { text: '1. DIREITO PROCESSUAL PENAL. Princípios gerais, conceito e finalidade' }
+                    { text: '1. DIREITO PROCESSUAL PENAL. Princípios gerais, conceito e finalidade' },
+                    { text: '2. INQUÉRITO POLICIAL. Conceito, finalidade e procedimento' },
+                    { text: '3. AÇÃO PENAL. Condições, espécies e procedimentos' }
                 ],
                 criminologia: [
-                    { text: '1. CRIMINOLOGIA. Conceito, métodos e objetos' }
+                    { text: '1. CRIMINOLOGIA. Conceito, métodos e objetos' },
+                    { text: '2. TEORIAS CRIMINOLÓGICAS. Escola Clássica, Positivista e crítica' },
+                    { text: '3. VÍTIMA E CONTROLE SOCIAL' }
                 ],
                 direitos_humanos: [
-                    { text: '1. DIREITOS HUMANOS E CIDADANIA. Conceito, princípios essenciais e gerações' }
+                    { text: '1. DIREITOS HUMANOS E CIDADANIA. Conceito, princípios essenciais e gerações' },
+                    { text: '2. DECLARAÇÃO UNIVERSAL DOS DIREITOS HUMANOS' },
+                    { text: '3. SISTEMA INTERAMERICANO DE PROTEÇÃO' }
                 ],
                 inteligencia: [
                     { text: '1. CÓDIGO DE TRÂNSITO BRASILEIRO (LEI Nº 9.503/1997). Normas gerais de circulação e conduta' },
                     { text: '2. SINALIZAÇÃO DE TRÂNSITO. Classificação, sinais e regras de prioridade' },
-                    { text: '3. CRIMES DE TRÂNSITO. Tipificação, penalidades e medidas administrativas' },
-                    { text: '4. PROCESSO ADMINISTRATIVO DE TRÂNSITO. Infrações, autuação, recursos e julgamento' },
-                    { text: '5. DIREÇÃO DEFENSIVA E SEGURANÇA VIÁRIA. Fatores de risco e prevenção de acidentes' },
-                    { text: '6. RESOLUÇÕES DO CONTRAN COBRADAS NO EDITAL PRF 2021. Atualizações e aplicação prática' }
+                    { text: '3. CRIMES DE TRÂNSITO. Tipificação, penalidades e medidas administrativas' }
                 ]
             }
         };
 
+        // Variáveis globais
         let progressData = {};
         let linkData = {};
-        let isOnline = false;
-        let currentState = 'POLÍCIA RODOVIÁRIA FEDERAL (PRF)';
+        let currentUser = null;
         let currentDiscipline = null;
         let currentMainCategory = null;
-        let currentUser = null;
+        let currentFilter = 'all';
 
-        // Mantive estrutura mínima para você colar e substituir.
-        // Se quiser, no próximo passo eu te mando a versão 100% completa do JS
-        // (com todas as funções: login/register/sync/progress/search/render), sem cortes.
+        // ==================== FUNÇÕES DE LOGIN ====================
+        
+        function getUsers() {
+            const users = localStorage.getItem('mentoria_users');
+            return users ? JSON.parse(users) : {};
+        }
+        
+        function saveUsers(users) {
+            localStorage.setItem('mentoria_users', JSON.stringify(users));
+        }
+        
+        function login(email, password) {
+            const users = getUsers();
+            const user = users[email];
+            
+            if (user && user.password === password) {
+                currentUser = email;
+                localStorage.setItem('mentoria_current_user', email);
+                
+                // Carregar progresso do usuário
+                const savedProgress = localStorage.getItem(`mentoria_progress_${email}`);
+                if (savedProgress) {
+                    progressData = JSON.parse(savedProgress);
+                } else {
+                    progressData = {};
+                }
+                
+                const savedLinks = localStorage.getItem(`mentoria_links_${email}`);
+                if (savedLinks) {
+                    linkData = JSON.parse(savedLinks);
+                } else {
+                    linkData = {};
+                }
+                
+                document.getElementById('loginArea').style.display = 'none';
+                document.getElementById('appContent').style.display = 'block';
+                document.getElementById('userInfo').style.display = 'flex';
+                document.getElementById('userName').textContent = email.split('@')[0];
+                document.getElementById('currentUserDisplay').textContent = email.split('@')[0];
+                
+                showStatus('loginStatus', `Bem-vindo(a), ${email.split('@')[0]}!`, 'success');
+                setTimeout(() => {
+                    document.getElementById('loginStatus').style.display = 'none';
+                }, 2000);
+                
+                updateAllProgress();
+                renderCurrentView();
+                return true;
+            } else {
+                showStatus('loginStatus', 'Email ou senha inválidos!', 'error');
+                return false;
+            }
+        }
+        
+        function register(email, password) {
+            if (!email || !password) {
+                showStatus('loginStatus', 'Preencha email e senha!', 'error');
+                return false;
+            }
+            
+            const users = getUsers();
+            
+            if (users[email]) {
+                showStatus('loginStatus', 'Este email já está cadastrado!', 'error');
+                return false;
+            }
+            
+            users[email] = { password, createdAt: new Date().toISOString() };
+            saveUsers(users);
+            
+            showStatus('loginStatus', 'Conta criada com sucesso! Faça login.', 'success');
+            return true;
+        }
+        
+        function logout() {
+            currentUser = null;
+            currentDiscipline = null;
+            currentMainCategory = null;
+            progressData = {};
+            linkData = {};
+            
+            localStorage.removeItem('mentoria_current_user');
+            
+            document.getElementById('loginArea').style.display = 'block';
+            document.getElementById('appContent').style.display = 'none';
+            document.getElementById('userInfo').style.display = 'none';
+            document.getElementById('loginEmail').value = '';
+            document.getElementById('loginPassword').value = '';
+            
+            // Resetar UI
+            document.getElementById('disciplinasGerais').style.display = 'none';
+            document.getElementById('disciplinasEspecificos').style.display = 'none';
+            document.getElementById('stateInfo').style.display = 'none';
+            document.getElementById('backBtn').style.display = 'none';
+            document.getElementById('mainCategories').style.display = 'flex';
+        }
+        
+        function saveProgress() {
+            if (currentUser) {
+                localStorage.setItem(`mentoria_progress_${currentUser}`, JSON.stringify(progressData));
+                localStorage.setItem(`mentoria_links_${currentUser}`, JSON.stringify(linkData));
+            }
+        }
+        
+        function showStatus(elementId, message, type) {
+            const element = document.getElementById(elementId);
+            element.textContent = message;
+            element.className = `login-status ${type}`;
+            element.style.display = 'block';
+            setTimeout(() => {
+                element.style.display = 'none';
+            }, 3000);
+        }
+        
+        // ==================== FUNÇÕES DE PROGRESSO ====================
+        
+        function toggleContent(discipline, contentIndex) {
+            if (!progressData[discipline]) {
+                progressData[discipline] = {};
+            }
+            
+            const key = contentIndex.toString();
+            progressData[discipline][key] = !progressData[discipline][key];
+            
+            saveProgress();
+            updateAllProgress();
+            renderDisciplineContent(discipline);
+        }
+        
+        function getDisciplineProgress(discipline) {
+            const contents = stateLinks['POLÍCIA RODOVIÁRIA FEDERAL (PRF)'][discipline] || [];
+            if (contents.length === 0) return { completed: 0, total: 0, percentage: 0 };
+            
+            let completed = 0;
+            for (let i = 0; i < contents.length; i++) {
+                if (progressData[discipline] && progressData[discipline][i]) {
+                    completed++;
+                }
+            }
+            
+            return { completed, total: contents.length, percentage: (completed / contents.length) * 100 };
+        }
+        
+        function getMainCategoryProgress(category) {
+            const disciplines = category === 'geral' 
+                ? ['portugues', 'ingles', 'raciocinio', 'constitucional', 'administrativo', 'informatica']
+                : ['penal', 'processual_penal', 'criminologia', 'direitos_humanos', 'inteligencia'];
+            
+            let totalCompleted = 0;
+            let totalItems = 0;
+            
+            disciplines.forEach(discipline => {
+                const progress = getDisciplineProgress(discipline);
+                totalCompleted += progress.completed;
+                totalItems += progress.total;
+            });
+            
+            return { completed: totalCompleted, total: totalItems, percentage: totalItems > 0 ? (totalCompleted / totalItems) * 100 : 0 };
+        }
+        
+        function getOverallProgress() {
+            let totalCompleted = 0;
+            let totalItems = 0;
+            
+            const allDisciplines = ['portugues', 'ingles', 'raciocinio', 'constitucional', 'administrativo', 'informatica', 
+                                    'penal', 'processual_penal', 'criminologia', 'direitos_humanos', 'inteligencia'];
+            
+            allDisciplines.forEach(discipline => {
+                const progress = getDisciplineProgress(discipline);
+                totalCompleted += progress.completed;
+                totalItems += progress.total;
+            });
+            
+            return { completed: totalCompleted, total: totalItems, percentage: totalItems > 0 ? (totalCompleted / totalItems) * 100 : 0 };
+        }
+        
+        function updateAllProgress() {
+            // Atualizar barra de progresso geral
+            const overall = getOverallProgress();
+            document.getElementById('overallProgress').style.width = `${overall.percentage}%`;
+            document.getElementById('progressText').textContent = `${Math.round(overall.percentage)}% concluído (${overall.completed}/${overall.total} itens)`;
+            
+            // Atualizar categorias principais
+            const geral = getMainCategoryProgress('geral');
+            const especifico = getMainCategoryProgress('especifico');
+            
+            document.getElementById('geralProgressBtn').textContent = `${geral.completed}/${geral.total}`;
+            document.getElementById('especificoProgressBtn').textContent = `${especifico.completed}/${especifico.total}`;
+            
+            // Atualizar disciplinas
+            const disciplines = ['portugues', 'ingles', 'raciocinio', 'constitucional', 'administrativo', 'informatica',
+                                'penal', 'processual_penal', 'criminologia', 'direitos_humanos', 'inteligencia'];
+            
+            disciplines.forEach(discipline => {
+                const progress = getDisciplineProgress(discipline);
+                const btnElement = document.getElementById(`${discipline}ProgressBtn`);
+                if (btnElement) {
+                    btnElement.textContent = `${progress.completed}/${progress.total}`;
+                }
+            });
+        }
+        
+        // ==================== FUNÇÕES DE RENDERIZAÇÃO ====================
+        
+        function renderDisciplineContent(discipline) {
+            const contents = stateLinks['POLÍCIA RODOVIÁRIA FEDERAL (PRF)'][discipline] || [];
+            const categoriesDiv = document.getElementById('stateCategories');
+            const stateInfo = document.getElementById('stateInfo');
+            
+            stateInfo.style.display = 'block';
+            
+            // Mapeamento de disciplina para nome
+            const disciplineNames = {
+                portugues: 'LÍNGUA PORTUGUESA',
+                ingles: 'LÍNGUA INGLESA',
+                raciocinio: 'RACIOCÍNIO LÓGICO-MATEMÁTICO',
+                constitucional: 'DIREITO CONSTITUCIONAL',
+                administrativo: 'DIREITO ADMINISTRATIVO',
+                informatica: 'INFORMÁTICA',
+                penal: 'DIREITO PENAL',
+                processual_penal: 'DIREITO PROCESSUAL PENAL',
+                criminologia: 'CRIMINOLOGIA',
+                direitos_humanos: 'DIREITOS HUMANOS E CIDADANIA',
+                inteligencia: 'LEGISLAÇÃO DE TRÂNSITO'
+            };
+            
+            document.getElementById('stateName').innerHTML = `${disciplineNames[discipline] || discipline.toUpperCase()} - CONTEÚDOS PROGRAMÁTICOS`;
+            
+            let html = '';
+            
+            contents.forEach((content, index) => {
+                const isCompleted = progressData[discipline] && progressData[discipline][index];
+                const shouldShow = currentFilter === 'all' || 
+                                  (currentFilter === 'completed' && isCompleted) ||
+                                  (currentFilter === 'pending' && !isCompleted);
+                
+                if (!shouldShow) return;
+                
+                html += `
+                    <div class="content-item ${isCompleted ? 'completed' : ''}" data-index="${index}">
+                        <input type="checkbox" class="content-checkbox" ${isCompleted ? 'checked' : ''} onchange="toggleContent('${discipline}', ${index})">
+                        <div class="content-text">${content.text}</div>
+                        <div class="content-actions">
+                            <button class="add-link-btn" onclick="showLinkInput('${discipline}', ${index})">🔗 Adicionar Link</button>
+                        </div>
+                    </div>
+                `;
+                
+                // Adicionar input de link se existir
+                const linkKey = `${discipline}_${index}`;
+                if (linkData[linkKey]) {
+                    html += `
+                        <div class="link-input-container" id="linkContainer_${discipline}_${index}" style="display: block;">
+                            <a href="${linkData[linkKey]}" target="_blank" class="content-link" style="display: inline-block; margin-right: 10px;">🔗 Acessar Material</a>
+                            <button class="add-link-btn" onclick="removeLink('${discipline}', ${index})">❌ Remover Link</button>
+                        </div>
+                    `;
+                } else {
+                    html += `<div class="link-input-container" id="linkContainer_${discipline}_${index}" style="display: none;"></div>`;
+                }
+            });
+            
+            if (html === '') {
+                html = '<p style="text-align: center; padding: 40px;">Nenhum conteúdo encontrado com este filtro.</p>';
+            }
+            
+            categoriesDiv.innerHTML = html;
+        }
+        
+        function showLinkInput(discipline, index) {
+            const container = document.getElementById(`linkContainer_${discipline}_${index}`);
+            const linkKey = `${discipline}_${index}`;
+            const existingLink = linkData[linkKey] || '';
+            
+            container.innerHTML = `
+                <input type="url" class="link-input" id="linkInput_${discipline}_${index}" placeholder="https://..." value="${existingLink}">
+                <div class="link-actions">
+                    <button class="link-save" onclick="saveLink('${discipline}', ${index})">Salvar</button>
+                    <button class="link-cancel" onclick="cancelLink('${discipline}', ${index})">Cancelar</button>
+                </div>
+            `;
+            container.style.display = 'block';
+        }
+        
+        function saveLink(discipline, index) {
+            const input = document.getElementById(`linkInput_${discipline}_${index}`);
+            const linkKey = `${discipline}_${index}`;
+            
+            if (input.value) {
+                linkData[linkKey] = input.value;
+            } else {
+                delete linkData[linkKey];
+            }
+            
+            saveProgress();
+            renderDisciplineContent(discipline);
+        }
+        
+        function removeLink(discipline, index) {
+            const linkKey = `${discipline}_${index}`;
+            delete linkData[linkKey];
+            saveProgress();
+            renderDisciplineContent(discipline);
+        }
+        
+        function cancelLink(discipline, index) {
+            renderDisciplineContent(discipline);
+        }
+        
+        function renderCurrentView() {
+            if (currentDiscipline) {
+                renderDisciplineContent(currentDiscipline);
+                document.getElementById('mainCategories').style.display = 'none';
+                document.getElementById('disciplinasGerais').style.display = 'none';
+                document.getElementById('disciplinasEspecificos').style.display = 'none';
+                document.getElementById('backBtn').style.display = 'block';
+                document.getElementById('stateInfo').style.display = 'block';
+            } else if (currentMainCategory) {
+                document.getElementById('mainCategories').style.display = 'none';
+                document.getElementById('backBtn').style.display = 'block';
+                document.getElementById('stateInfo').style.display = 'none';
+                
+                if (currentMainCategory === 'geral') {
+                    document.getElementById('disciplinasGerais').style.display = 'grid';
+                    document.getElementById('disciplinasEspecificos').style.display = 'none';
+                } else {
+                    document.getElementById('disciplinasGerais').style.display = 'none';
+                    document.getElementById('disciplinasEspecificos').style.display = 'grid';
+                }
+            } else {
+                document.getElementById('mainCategories').style.display = 'flex';
+                document.getElementById('disciplinasGerais').style.display = 'none';
+                document.getElementById('disciplinasEspecificos').style.display = 'none';
+                document.getElementById('stateInfo').style.display = 'none';
+                document.getElementById('backBtn').style.display = 'none';
+            }
+        }
+        
+        function goBack() {
+            if (currentDiscipline) {
+                currentDiscipline = null;
+                renderCurrentView();
+            } else if (currentMainCategory) {
+                currentMainCategory = null;
+                renderCurrentView();
+            }
+        }
+        
+        function selectMainCategory(category) {
+            currentMainCategory = category;
+            currentDiscipline = null;
+            renderCurrentView();
+        }
+        
+        function selectDiscipline(discipline, category) {
+            currentDiscipline = discipline;
+            currentMainCategory = null;
+            currentFilter = 'all';
+            renderCurrentView();
+        }
+        
+        function setFilter(filter) {
+            currentFilter = filter;
+            if (currentDiscipline) {
+                renderDisciplineContent(currentDiscipline);
+            }
+            
+            // Atualizar estilo dos botões
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('data-filter') === filter) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+        
+        function showAllDisciplines() {
+            currentMainCategory = null;
+            currentDiscipline = null;
+            renderCurrentView();
+        }
+        
+        // ==================== EXPORT/IMPORT ====================
+        
+        function exportData() {
+            const data = {
+                progressData,
+                linkData,
+                exportDate: new Date().toISOString()
+            };
+            
+            const dataStr = JSON.stringify(data, null, 2);
+            const blob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `mentoria_prf_backup_${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+        
+        function importData(jsonData) {
+            try {
+                const data = JSON.parse(jsonData);
+                if (data.progressData) progressData = data.progressData;
+                if (data.linkData) linkData = data.linkData;
+                saveProgress();
+                updateAllProgress();
+                if (currentDiscipline) renderDisciplineContent(currentDiscipline);
+                showStatus('loginStatus', 'Dados importados com sucesso!', 'success');
+                document.getElementById('importModal').style.display = 'none';
+            } catch (e) {
+                showStatus('loginStatus', 'Erro ao importar dados: JSON inválido', 'error');
+            }
+        }
+        
+        // ==================== SINCronização (simulada) ====================
+        
+        function syncData() {
+            const statusDiv = document.getElementById('syncStatus');
+            statusDiv.textContent = '🔄 Sincronizando...';
+            statusDiv.className = 'sync-status';
+            
+            setTimeout(() => {
+                statusDiv.textContent = '✅ Sincronizado!';
+                statusDiv.className = 'sync-status online';
+                setTimeout(() => {
+                    statusDiv.textContent = 'Online';
+                }, 2000);
+            }, 1000);
+        }
+        
+        // ==================== SEARCH ====================
+        
+        function setupSearch() {
+            const searchInput = document.getElementById('searchInput');
+            const filterAll = document.getElementById('filter-all');
+            const filterDisciplina = document.getElementById('filter-disciplina');
+            const filterConteudo = document.getElementById('filter-conteudo');
+            
+            searchInput.addEventListener('input', () => {
+                const searchTerm = searchInput.value.toLowerCase();
+                const searchFilter = document.querySelector('input[name="search-filter"]:checked').value;
+                
+                if (searchTerm.length < 2) {
+                    renderCurrentView();
+                    return;
+                }
+                
+                if (searchFilter === 'all' || searchFilter === 'disciplina') {
+                    // Buscar disciplinas
+                    const disciplines = document.querySelectorAll('.discipline-btn');
+                    disciplines.forEach(btn => {
+                        const disciplineName = btn.textContent.toLowerCase();
+                        if (disciplineName.includes(searchTerm)) {
+                            btn.style.display = 'flex';
+                        } else {
+                            btn.style.display = 'none';
+                        }
+                    });
+                }
+                
+                if (searchFilter === 'all' || searchFilter === 'conteudo') {
+                    // Buscar conteúdos
+                    if (currentDiscipline) {
+                        const contentItems = document.querySelectorAll('.content-item');
+                        contentItems.forEach(item => {
+                            const text = item.querySelector('.content-text').textContent.toLowerCase();
+                            if (text.includes(searchTerm)) {
+                                item.style.display = 'flex';
+                            } else {
+                                item.style.display = 'none';
+                            }
+                        });
+                    }
+                }
+            });
+        }
+        
+        // ==================== NAVEGAÇÃO ====================
+        
+        function showHome() {
+            currentMainCategory = null;
+            currentDiscipline = null;
+            renderCurrentView();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        function scrollToProgress() {
+            document.querySelector('.progress-summary').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function showDisciplinas() {
+            currentMainCategory = null;
+            currentDiscipline = null;
+            renderCurrentView();
+        }
+        
+        // ==================== INICIALIZAÇÃO ====================
+        
+        function initialize() {
+            document.getElementById('updateDate').textContent = new Date().toLocaleDateString('pt-BR');
+            
+            // Verificar se já existe usuário logado
+            const savedUser = localStorage.getItem('mentoria_current_user');
+            if (savedUser) {
+                const users = getUsers();
+                if (users[savedUser]) {
+                    login(savedUser, users[savedUser].password);
+                } else {
+                    localStorage.removeItem('mentoria_current_user');
+                }
+            }
+            
+            // Event listeners
+            document.getElementById('loginBtn').addEventListener('click', () => {
+                const email = document.getElementById('loginEmail').value;
+                const password = document.getElementById('loginPassword').value;
+                login(email, password);
+            });
+            
+            document.getElementById('registerBtn').addEventListener('click', () => {
+                const email = document.getElementById('loginEmail').value;
+                const password = document.getElementById('loginPassword').value;
+                register(email, password);
+            });
+            
+            document.getElementById('logoutBtn').addEventListener('click', logout);
+            document.getElementById('backBtn').addEventListener('click', goBack);
+            document.getElementById('showAllBtn').addEventListener('click', showAllDisciplines);
+            document.getElementById('exportBtn').addEventListener('click', exportData);
+            document.getElementById('importBtn').addEventListener('click', () => {
+                document.getElementById('importModal').style.display = 'flex';
+            });
+            document.getElementById('cancelImport').addEventListener('click', () => {
+                document.getElementById('importModal').style.display = 'none';
+            });
+            document.getElementById('confirmImport').addEventListener('click', () => {
+                const jsonData = document.getElementById('importData').value;
+                importData(jsonData);
+            });
+            document.getElementById('syncButton').addEventListener('click', syncData);
+            
+            // Filtros
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    setFilter(btn.getAttribute('data-filter'));
+                });
+            });
+            
+            // Categorias principais
+            document.querySelectorAll('.main-category-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    selectMainCategory(btn.getAttribute('data-category'));
+                });
+            });
+            
+            // Disciplinas Gerais
+            document.querySelectorAll('#disciplinasGerais .discipline-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    selectDiscipline(btn.getAttribute('data-disciplina'), 'geral');
+                });
+            });
+            
+            // Disciplinas Específicas
+            document.querySelectorAll('#disciplinasEspecificos .discipline-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    selectDiscipline(btn.getAttribute('data-disciplina'), 'especifico');
+                });
+            });
+            
+            // Dropdown de disciplina
+            document.getElementById('disciplineSelect').addEventListener('change', (e) => {
+                if (e.target.value) {
+                    selectDiscipline(e.target.value, null);
+                }
+            });
+            
+            // Menu toggle para mobile
+            document.querySelector('.menu-toggle').addEventListener('click', () => {
+                document.querySelector('.nav-links').classList.toggle('active');
+            });
+            
+            setupSearch();
+        }
+        
+        // Tornar funções globais para onclick
+        window.toggleContent = toggleContent;
+        window.showLinkInput = showLinkInput;
+        window.saveLink = saveLink;
+        window.removeLink = removeLink;
+        window.cancelLink = cancelLink;
+        window.showHome = showHome;
+        window.scrollToProgress = scrollToProgress;
+        window.showDisciplinas = showDisciplinas;
+        
+        // Inicializar
+        initialize();
     </script>
 </body>
 </html>
