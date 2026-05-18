@@ -2,358 +2,121 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Mentoria PRF | Plataforma Cloud</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentoria PRF | Plataforma de Estudos</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        * {
-            margin: 0;  
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #f0f4f8;
-            color: #1f2d3d;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f0f4f8; color: #1f2d3d; }
+        
+        /* Login */
         .login-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.7); display: flex;
+            align-items: center; justify-content: center; z-index: 1000;
         }
         .login-card {
-            background: white;
-            border-radius: 32px;
-            padding: 2.5rem;
-            max-width: 400px;
-            width: 90%;
-            text-align: center;
+            background: white; border-radius: 32px; padding: 2.5rem;
+            max-width: 400px; width: 90%; text-align: center;
         }
-        .login-card .logo-icon {
-            font-size: 3rem;
-            color: #0056a7;
-            margin-bottom: 1rem;
-        }
-        .login-card h2 {
-            color: #0056a7;
-            margin-bottom: 0.5rem;
-        }
+        .login-card .logo-icon { font-size: 3rem; color: #0056a7; margin-bottom: 1rem; }
+        .login-card h2 { color: #0056a7; margin-bottom: 0.5rem; }
         .login-card input {
-            width: 100%;
-            padding: 0.8rem;
-            margin: 0.5rem 0;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            font-size: 1rem;
+            width: 100%; padding: 0.8rem; margin: 0.5rem 0;
+            border: 2px solid #e2e8f0; border-radius: 12px; font-size: 1rem;
         }
         .login-card button {
-            width: 100%;
-            padding: 0.8rem;
-            margin-top: 0.5rem;
-            background: #0056a7;
-            color: white;
-            border: none;
-            border-radius: 40px;
-            font-size: 1rem;
-            cursor: pointer;
-            font-weight: 600;
+            width: 100%; padding: 0.8rem; margin-top: 0.5rem;
+            background: #0056a7; color: white; border: none;
+            border-radius: 40px; font-size: 1rem; cursor: pointer; font-weight: 600;
         }
-        .login-card .register-btn {
-            background: #eef2f6;
-            color: #0056a7;
-        }
-        .error-msg {
-            color: #e74c3c;
-            font-size: 0.8rem;
-            margin-top: 0.5rem;
-        }
+        .login-card .register-btn { background: #eef2f6; color: #0056a7; }
+        .error-msg { color: #e74c3c; font-size: 0.8rem; margin-top: 0.5rem; }
+        
+        /* Header */
         .main-header {
-            background: white;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            border-bottom: 1px solid #e2e8f0;
+            background: white; padding: 1rem 2rem;
+            display: flex; justify-content: space-between; align-items: center;
+            flex-wrap: wrap; border-bottom: 1px solid #e2e8f0;
         }
-        .logo-area {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            cursor: pointer;
-        }
-        .logo-icon {
-            background: #0056a7;
-            width: 40px;
-            height: 40px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
-            color: white;
-        }
-        .logo-text h1 {
-            font-size: 1.3rem;
-            color: #0056a7;
-        }
+        .logo-area { display: flex; align-items: center; gap: 0.8rem; cursor: pointer; }
+        .logo-icon { background: #0056a7; width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; color: white; }
+        .logo-text h1 { font-size: 1.3rem; color: #0056a7; }
         .user-info {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            background: #f0f4f8;
-            padding: 0.5rem 1rem;
-            border-radius: 40px;
+            display: flex; align-items: center; gap: 1rem;
+            background: #f0f4f8; padding: 0.5rem 1rem; border-radius: 40px;
         }
-        .role-badge {
-            padding: 0.2rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.7rem;
-            font-weight: 600;
-        }
-        .role-admin {
-            background: #e74c3c;
-            color: white;
-        }
-        .role-student {
-            background: #27ae60;
-            color: white;
-        }
-        .logout-btn {
-            background: #e74c3c;
-            color: white;
-            border: none;
-            padding: 0.3rem 1rem;
-            border-radius: 40px;
-            cursor: pointer;
-        }
-        .hero {
-            background: linear-gradient(135deg, #e8f0fe, #ffffff);
-            padding: 3rem 2rem;
-            text-align: center;
-        }
-        .hero h1 {
-            font-size: 2rem;
-            color: #0056a7;
-        }
-        .admin-panel {
-            background: white;
-            margin: 2rem;
-            padding: 1.5rem;
-            border-radius: 24px;
-            display: none;
-        }
-        .admin-stats {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin-top: 1rem;
-        }
-        .stat-card {
-            background: #e8f0fe;
-            padding: 1rem;
-            border-radius: 16px;
-            text-align: center;
-            min-width: 150px;
-        }
-        .section-title {
-            text-align: center;
-            margin: 2rem 0 1rem;
-            font-size: 1.5rem;
-        }
+        .role-badge { padding: 0.2rem 0.8rem; border-radius: 20px; font-size: 0.7rem; font-weight: 600; }
+        .role-admin { background: #e74c3c; color: white; }
+        .role-student { background: #27ae60; color: white; }
+        .logout-btn { background: #e74c3c; color: white; border: none; padding: 0.3rem 1rem; border-radius: 40px; cursor: pointer; }
+        
+        /* Hero */
+        .hero { background: linear-gradient(135deg, #e8f0fe, #ffffff); padding: 3rem 2rem; text-align: center; }
+        .hero h1 { font-size: 2rem; color: #0056a7; }
+        
+        /* Admin Panel */
+        .admin-panel { background: white; margin: 2rem; padding: 1.5rem; border-radius: 24px; display: none; }
+        .admin-stats { display: flex; gap: 1rem; justify-content: center; margin-top: 1rem; }
+        .stat-card { background: #e8f0fe; padding: 1rem; border-radius: 16px; text-align: center; min-width: 150px; }
+        
+        /* Disciplinas */
+        .section-title { text-align: center; margin: 2rem 0 1rem; font-size: 1.5rem; }
         .disciplines-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem;
-            max-width: 1200px;
-            margin: 0 auto 2rem;
-            padding: 0 2rem;
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem; max-width: 1200px; margin: 0 auto 2rem; padding: 0 2rem;
         }
         .discipline-card {
-            background: white;
-            border-radius: 20px;
-            padding: 1.5rem;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
+            background: white; border-radius: 20px; padding: 1.5rem;
+            text-align: center; cursor: pointer; transition: all 0.3s;
             border: 1px solid #eef2f8;
         }
-        .discipline-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-        .discipline-icon {
-            font-size: 2.5rem;
-            color: #0056a7;
-            margin-bottom: 1rem;
-        }
-        .progress-bar {
-            height: 6px;
-            background: #e2e8f0;
-            border-radius: 3px;
-            margin: 0.8rem 0;
-            overflow: hidden;
-        }
-        .progress-fill {
-            height: 100%;
-            background: #0056a7;
-            width: 0%;
-        }
-        .course-container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-        .course-header {
-            background: white;
-            border-radius: 24px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-        .back-btn {
-            background: #eef2f6;
-            color: #0056a7;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 40px;
-            cursor: pointer;
-            margin-bottom: 1rem;
-        }
-        .course-title {
-            font-size: 1.5rem;
-            color: #0056a7;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin: 1rem 0;
-        }
-        .filters {
-            display: flex;
-            gap: 0.5rem;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-        }
-        .filter-btn {
-            background: #f0f4f8;
-            border: none;
-            padding: 0.4rem 1.2rem;
-            border-radius: 40px;
-            cursor: pointer;
-        }
-        .filter-btn.active {
-            background: #0056a7;
-            color: white;
-        }
-        .contents-list {
-            background: white;
-            border-radius: 24px;
-            padding: 1rem;
-        }
-        .content-item {
-            padding: 1rem;
-            border-bottom: 1px solid #eef2f8;
-        }
-        .content-item.completed {
-            background: #f0fdf4;
-            border-left: 4px solid #0056a7;
-        }
-        .content-header {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.8rem;
-            flex-wrap: wrap;
-        }
-        .content-checkbox {
-            width: 20px;
-            height: 20px;
-            margin-top: 2px;
-            cursor: pointer;
-        }
-        .content-text {
-            flex: 1;
-        }
-        .link-btn {
-            background: #3498db;
-            color: white;
-            border: none;
-            padding: 0.2rem 0.8rem;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 0.7rem;
-        }
-        .link-container {
-            margin-top: 0.5rem;
-            padding-left: 2rem;
-        }
-        .link-container a {
-            color: #0056a7;
-            text-decoration: none;
-            font-size: 0.85rem;
-        }
+        .discipline-card:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .discipline-icon { font-size: 2.5rem; color: #0056a7; margin-bottom: 1rem; }
+        .progress-bar { height: 6px; background: #e2e8f0; border-radius: 3px; margin: 0.8rem 0; overflow: hidden; }
+        .progress-fill { height: 100%; background: #0056a7; width: 0%; }
+        
+        /* Curso */
+        .course-container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+        .course-header { background: white; border-radius: 24px; padding: 1.5rem; margin-bottom: 1.5rem; }
+        .back-btn { background: #eef2f6; color: #0056a7; border: none; padding: 0.5rem 1rem; border-radius: 40px; cursor: pointer; margin-bottom: 1rem; }
+        .course-title { font-size: 1.5rem; color: #0056a7; display: flex; align-items: center; gap: 0.5rem; margin: 1rem 0; }
+        .filters { display: flex; gap: 0.5rem; justify-content: center; margin-bottom: 1.5rem; }
+        .filter-btn { background: #f0f4f8; border: none; padding: 0.4rem 1.2rem; border-radius: 40px; cursor: pointer; }
+        .filter-btn.active { background: #0056a7; color: white; }
+        .contents-list { background: white; border-radius: 24px; padding: 1rem; }
+        .content-item { padding: 1rem; border-bottom: 1px solid #eef2f8; }
+        .content-item.completed { background: #f0fdf4; border-left: 4px solid #0056a7; }
+        .content-header { display: flex; align-items: flex-start; gap: 0.8rem; flex-wrap: wrap; }
+        .content-checkbox { width: 20px; height: 20px; margin-top: 2px; cursor: pointer; }
+        .content-text { flex: 1; }
+        .link-btn { background: #3498db; color: white; border: none; padding: 0.2rem 0.8rem; border-radius: 20px; cursor: pointer; font-size: 0.7rem; }
+        .link-container { margin-top: 0.5rem; padding-left: 2rem; }
+        .link-container a { color: #0056a7; text-decoration: none; font-size: 0.85rem; }
+        
+        /* Modal */
         .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.5);
-            align-items: center;
-            justify-content: center;
-            z-index: 1001;
+            display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.5); align-items: center; justify-content: center; z-index: 1001;
         }
         .modal-content {
-            background: white;
-            border-radius: 24px;
-            padding: 1.5rem;
-            max-width: 450px;
-            width: 90%;
+            background: white; border-radius: 24px; padding: 1.5rem;
+            max-width: 450px; width: 90%;
         }
         .modal-content input, .modal-content textarea {
-            width: 100%;
-            padding: 0.7rem;
-            margin: 0.5rem 0;
-            border: 1px solid #ddd;
-            border-radius: 12px;
+            width: 100%; padding: 0.7rem; margin: 0.5rem 0;
+            border: 1px solid #ddd; border-radius: 12px;
         }
-        .modal-buttons {
-            display: flex;
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
-        .modal-buttons button {
-            flex: 1;
-            padding: 0.5rem;
-            border-radius: 40px;
-            cursor: pointer;
-            border: none;
-        }
-        .footer {
-            background: #1a2a3a;
-            color: white;
-            text-align: center;
-            padding: 1.5rem;
-            margin-top: 2rem;
-        }
+        .modal-buttons { display: flex; gap: 0.5rem; margin-top: 1rem; }
+        .modal-buttons button { flex: 1; padding: 0.5rem; border-radius: 40px; cursor: pointer; border: none; }
+        
+        .footer { background: #1a2a3a; color: white; text-align: center; padding: 1.5rem; margin-top: 2rem; }
+        
         @media (max-width: 768px) {
-            .main-header {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            .disciplines-grid {
-                padding: 0 1rem;
-            }
-            .course-container {
-                padding: 1rem;
-            }
+            .main-header { flex-direction: column; gap: 1rem; }
+            .disciplines-grid { padding: 0 1rem; }
+            .course-container { padding: 1rem; }
         }
     </style>
 </head>
@@ -371,7 +134,7 @@
         <button id="doRegisterBtn" class="register-btn">Criar nova conta</button>
         <div id="loginMsg" class="error-msg"></div>
         <div style="margin-top: 1rem; font-size: 0.7rem; color: #666;">
-            Admin: admin@mentoria.com / admin123
+            👑 Admin: admin@mentoria.com / admin123
         </div>
     </div>
 </div>
@@ -381,9 +144,7 @@
     <header class="main-header">
         <div class="logo-area" id="goHomeBtn">
             <div class="logo-icon"><i class="fas fa-gavel"></i></div>
-            <div class="logo-text">
-                <h1>Mentoria PRF</h1>
-            </div>
+            <div class="logo-text"><h1>Mentoria PRF</h1></div>
         </div>
         <div class="user-info">
             <i class="fas fa-user-circle"></i>
@@ -401,25 +162,15 @@
     <div id="adminPanel" class="admin-panel">
         <h3 style="color:#0056a7;"><i class="fas fa-shield-alt"></i> Painel do Administrador</h3>
         <div class="admin-stats">
-            <div class="stat-card">
-                <i class="fas fa-link" style="font-size: 1.5rem;"></i>
-                <h3 id="totalLinks">0</h3>
-                <p>Links</p>
-            </div>
-            <div class="stat-card">
-                <i class="fas fa-users" style="font-size: 1.5rem;"></i>
-                <h3 id="totalStudents">0</h3>
-                <p>Alunos</p>
-            </div>
+            <div class="stat-card"><i class="fas fa-link" style="font-size: 1.5rem;"></i><h3 id="totalLinks">0</h3><p>Links</p></div>
+            <div class="stat-card"><i class="fas fa-users" style="font-size: 1.5rem;"></i><h3 id="totalStudents">0</h3><p>Alunos</p></div>
         </div>
     </div>
 
     <h2 class="section-title">Disciplinas</h2>
     <div id="disciplinesGrid" class="disciplines-grid"></div>
 
-    <footer class="footer">
-        <p>Mentoria PRF - Plataforma de estudos</p>
-    </footer>
+    <footer class="footer"><p>Mentoria PRF - Plataforma de estudos</p></footer>
 </div>
 
 <!-- TELA DO CURSO -->
@@ -427,17 +178,12 @@
     <div class="course-container">
         <div class="course-header">
             <button id="backToHomeBtn" class="back-btn"><i class="fas fa-arrow-left"></i> Voltar</button>
-            <div class="course-title">
-                <i id="courseIcon" class="fas fa-book"></i>
-                <span id="courseTitle"></span>
-            </div>
+            <div class="course-title"><i id="courseIcon" class="fas fa-book"></i><span id="courseTitle"></span></div>
             <div style="display: flex; justify-content: space-between; margin-top: 0.5rem; flex-wrap: wrap;">
                 <span><i class="fas fa-user"></i> <span id="courseUserName"></span> <span id="courseRoleBadge" class="role-badge"></span></span>
                 <span id="courseProgressPercent">0%</span>
             </div>
-            <div class="progress-bar" style="margin-top: 0.5rem;">
-                <div id="courseProgressFill" class="progress-fill" style="width: 0%;"></div>
-            </div>
+            <div class="progress-bar" style="margin-top: 0.5rem;"><div id="courseProgressFill" class="progress-fill" style="width: 0%;"></div></div>
         </div>
 
         <div class="filters">
@@ -452,7 +198,7 @@
     </div>
 </div>
 
-<!-- MODAL DE LINK -->
+<!-- MODAL -->
 <div id="linkModal" class="modal">
     <div class="modal-content">
         <h3 style="color:#0056a7;"><i class="fas fa-link"></i> Gerenciar Link</h3>
@@ -467,27 +213,144 @@
 </div>
 
 <script>
-    // ==================== CONFIGURAÇÃO DAS URLs DA API ====================
-    // URLs fornecidas por você - a primeira para dados, a segunda para execução
-    const API_URL = "https://script.google.com/macros/s/AKfycbzxODxFknWHWUC9fsliUOMUbgJE8_ndVIz6lIBkKA88ftTcHzNL6TJRiB2neDTQrIyScw/exec";
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby8BYH9aUt_pe7jx6b7GzF_Rp4UGFPzf8TxPBPEJzVx_PPwqGaNSux5ZB2rmk5vuYk3Bg/exec";
-    
-    // Usar a primeira URL como principal
-    const API_ENDPOINT = API_URL;
-    
     // ==================== DADOS DAS DISCIPLINAS ====================
     const DISCIPLINAS = {
         portugues: { nome: "LÍNGUA PORTUGUESA", icone: "fas fa-language",
-            conteudos: ["Compreensão e interpretação de textos", "Tipos e gêneros textuais", "Ortografia oficial", "Coesão textual", "Estrutura morfossintática", "Reescrita de frases"] },
+            conteudos: [
+                "1. Compreensão e interpretação de textos",
+                "2. Tipos e gêneros textuais", 
+                "3. Ortografia oficial",
+                "4. Coesão textual",
+                "5. Estrutura morfossintática do período",
+                "6. Reescrita de frases e parágrafos"
+            ] 
+        },
         raciocinio: { nome: "RACIOCÍNIO LÓGICO", icone: "fas fa-chart-line",
-            conteudos: ["Estruturas lógicas", "Lógica de argumentação", "Lógica sentencial", "Lógica de primeira ordem", "Princípios de contagem", "Operações com conjuntos"] },
+            conteudos: [
+                "1. Estruturas lógicas",
+                "2. Lógica de argumentação", 
+                "3. Lógica sentencial (proposicional)",
+                "4. Lógica de primeira ordem",
+                "5. Princípios de contagem e probabilidade",
+                "6. Operações com conjuntos",
+                "7. Raciocínio lógico com problemas aritméticos",
+                "8. Estatística e probabilidade básicas"
+            ] 
+        },
         constitucional: { nome: "DIREITO CONSTITUCIONAL", icone: "fas fa-balance-scale",
-            conteudos: ["Princípios fundamentais", "Direitos e garantias", "Organização do Estado", "Administração Pública", "Poder Legislativo", "Poder Judiciário"] },
+            conteudos: [
+                "1. Princípios fundamentais da CF/88",
+                "2. Direitos e garantias fundamentais", 
+                "3. Organização do Estado",
+                "4. Administração Pública",
+                "5. Poder Legislativo, Executivo e Judiciário",
+                "6. Funções essenciais à justiça",
+                "7. Controle de constitucionalidade"
+            ] 
+        },
         penal: { nome: "DIREITO PENAL", icone: "fas fa-gavel",
-            conteudos: ["Princípios básicos", "Aplicação da lei penal", "Tipicidade", "Ilicitude", "Culpabilidade", "Crimes contra a pessoa", "Crimes contra o patrimônio"] },
+            conteudos: [
+                "1. Princípios básicos do direito penal",
+                "2. Aplicação da lei penal no tempo", 
+                "3. Aplicação da lei penal no espaço",
+                "4. Tipicidade (crime doloso e culposo)",
+                "5. Erro de tipo",
+                "6. Crime consumado e tentado",
+                "7. Ilicitude e causas de exclusão",
+                "8. Culpabilidade e causas de exclusão",
+                "9. Crimes contra a pessoa",
+                "10. Crimes contra o patrimônio",
+                "11. Crimes contra a Administração Pública"
+            ] 
+        },
         transito: { nome: "LEGISLAÇÃO DE TRÂNSITO", icone: "fas fa-car",
-            conteudos: ["CTB - conceitos", "Sistema Nacional de Trânsito", "Normas de circulação", "Sinalização", "Infrações e penalidades", "Crimes de trânsito", "Resolução 04/1998", "Resolução 14/1998", "Resolução 24/1998"] }
+            conteudos: [
+                "1. CTB - Lei 9.503/97: objetivos e conceitos",
+                "2. Sistema Nacional de Trânsito",
+                "3. Normas gerais de circulação e conduta",
+                "4. Sinalização de trânsito",
+                "5. Infrações: tipificação e penalidades",
+                "6. Processo administrativo de imposição de penalidades",
+                "7. Crimes de trânsito (arts. 302 a 312-A)",
+                "8. Direção defensiva e primeiros socorros",
+                "9. Resolução CONTRAN 04/1998 - Sinalização",
+                "10. Resolução CONTRAN 14/1998 - Processo administrativo",
+                "11. Resolução CONTRAN 24/1998 - Medidas administrativas",
+                "12. Resolução CONTRAN 36/1998 - Exames de aptidão",
+                "13. Resolução CONTRAN 210/2006 - Identificação de veículos",
+                "14. Resolução CONTRAN 253/2007 - Inspeção veicular",
+                "15. Resolução CONTRAN 432/2013 - Notificação eletrônica",
+                "16. Resolução CONTRAN 471/2013 - Aplicação de multas",
+                "17. Resolução CONTRAN 667/2017 - Fiscalização",
+                "18. Resolução CONTRAN 780/2019 - Atualizações do CTB",
+                "19. Resolução CONTRAN 789/2020 - Fiscalização",
+                "20. Resolução CONTRAN 803/2020 - Pontuação da CNH"
+            ] 
+        }
     };
+
+    // ==================== GERENCIAMENTO DE DADOS (localStorage) ====================
+    // Isso simula a "nuvem" - mas os dados ficam salvos no navegador
+    // Para usar nuvem real, seria necessário um backend
+    
+    function getUsers() {
+        const users = localStorage.getItem('mentoria_usuarios');
+        if (users) return JSON.parse(users);
+        
+        // Usuário admin padrão
+        const defaultUsers = {
+            "admin@mentoria.com": {
+                senha: "admin123",
+                tipo: "admin",
+                nome: "Administrador",
+                criado: new Date().toISOString()
+            }
+        };
+        localStorage.setItem('mentoria_usuarios', JSON.stringify(defaultUsers));
+        return defaultUsers;
+    }
+    
+    function saveUsers(users) {
+        localStorage.setItem('mentoria_usuarios', JSON.stringify(users));
+    }
+    
+    function getProgresso(email) {
+        const progress = localStorage.getItem(`mentoria_progresso_${email}`);
+        return progress ? JSON.parse(progress) : {};
+    }
+    
+    function saveProgresso(email, progresso) {
+        localStorage.setItem(`mentoria_progresso_${email}`, JSON.stringify(progresso));
+    }
+    
+    function getLinksGlobais() {
+        const links = localStorage.getItem('mentoria_links_globais');
+        if (links) return JSON.parse(links);
+        
+        // Links padrão
+        const defaultLinks = {
+            "penal_0": { url: "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm", desc: "Código Penal Completo" },
+            "transito_0": { url: "https://www.planalto.gov.br/ccivil_03/leis/l9503.htm", desc: "Código de Trânsito Brasileiro - Lei 9.503/97" },
+            "constitucional_0": { url: "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm", desc: "Constituição Federal de 1988" },
+            "raciocinio_0": { url: "https://www.todamateria.com.br/raciocinio-logico/", desc: "Material de apoio - Raciocínio Lógico" },
+            "portugues_0": { url: "https://www.concursosnobrasil.com.br/portugues/", desc: "Gramática para concursos" }
+        };
+        localStorage.setItem('mentoria_links_globais', JSON.stringify(defaultLinks));
+        return defaultLinks;
+    }
+    
+    function saveLinksGlobais(links) {
+        localStorage.setItem('mentoria_links_globais', JSON.stringify(links));
+    }
+    
+    function contarAlunos() {
+        const users = getUsers();
+        let total = 0;
+        for (const email in users) {
+            if (users[email].tipo === 'aluno') total++;
+        }
+        return total;
+    }
 
     // ==================== ESTADO GLOBAL ====================
     let usuarioAtual = null;
@@ -498,118 +361,58 @@
     let linksGlobais = {};
     let linkEditando = null;
 
-    // ==================== FUNÇÕES DE API ====================
-    async function chamarAPI(params) {
-        const url = new URL(API_ENDPOINT);
-        Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
-        
-        try {
-            const resposta = await fetch(url.toString(), {
-                method: 'GET',
-                mode: 'cors',
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            });
-            const texto = await resposta.text();
-            try {
-                return JSON.parse(texto);
-            } catch(e) {
-                console.error("Resposta não é JSON:", texto);
-                return { sucesso: false, erro: "Resposta inválida do servidor" };
-            }
-        } catch (erro) {
-            console.error("Erro na API:", erro);
-            return { sucesso: false, erro: "Falha na conexão com o servidor" };
-        }
-    }
-
-    async function loginAPI(email, senha) {
-        const resultado = await chamarAPI({ acao: 'login', email, senha });
-        if (resultado && resultado.sucesso) {
+    // ==================== FUNÇÕES DE AUTENTICAÇÃO ====================
+    function login(email, senha) {
+        const users = getUsers();
+        if (users[email] && users[email].senha === senha) {
             usuarioAtual = email;
-            tipoUsuario = resultado.tipo;
-            localStorage.setItem('usuario_prf_atual', email);
-            localStorage.setItem('tipo_prf_atual', tipoUsuario);
-            await carregarDadosCloud();
+            tipoUsuario = users[email].tipo;
+            progresso = getProgresso(email);
+            linksGlobais = getLinksGlobais();
             mostrarTelaHome();
             return true;
         }
+        document.getElementById('loginMsg').innerHTML = '<span style="color:#e74c3c;">❌ Email ou senha inválidos!</span>';
         return false;
     }
-
-    async function registrarAPI(email, senha) {
-        const nome = email.split('@')[0];
-        const resultado = await chamarAPI({ acao: 'registrar', email, senha, nome });
-        if (resultado && resultado.sucesso) {
-            document.getElementById('loginMsg').innerText = "Conta criada! Faça login.";
-            return true;
+    
+    function registrar(email, senha) {
+        if (!email || !senha) {
+            document.getElementById('loginMsg').innerHTML = '<span style="color:#e74c3c;">❌ Preencha todos os campos!</span>';
+            return false;
         }
-        document.getElementById('loginMsg').innerText = resultado?.erro || "Erro ao criar conta";
-        return false;
-    }
-
-    async function carregarProgressoCloud() {
-        const resultado = await chamarAPI({ acao: 'carregar_progresso', email: usuarioAtual });
-        return resultado || {};
-    }
-
-    async function salvarProgressoCloud(disciplina, indice, concluido) {
-        await chamarAPI({ 
-            acao: 'salvar_progresso', 
-            email: usuarioAtual, 
-            disciplina, 
-            indice, 
-            concluido: concluido ? 'true' : 'false' 
-        });
-    }
-
-    async function carregarLinksCloud() {
-        const resultado = await chamarAPI({ acao: 'carregar_links' });
-        return resultado || {};
-    }
-
-    async function salvarLinkCloud(disciplina, indice, url, desc) {
-        await chamarAPI({ 
-            acao: 'salvar_link', 
-            disciplina, 
-            indice, 
-            url: url || '', 
-            desc: desc || '', 
-            admin: usuarioAtual 
-        });
-    }
-
-    async function carregarDadosCloud() {
-        try {
-            // Carregar progresso
-            const progressoCloud = await carregarProgressoCloud();
-            progresso = progressoCloud || {};
-            
-            // Carregar links globais
-            const linksCloud = await carregarLinksCloud();
-            linksGlobais = linksCloud || {};
-            
-            // Se não houver links, adicionar links padrão
-            if (Object.keys(linksGlobais).length === 0) {
-                const linksPadrao = {
-                    "penal_0": { url: "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm", desc: "Código Penal Completo" },
-                    "transito_0": { url: "https://www.planalto.gov.br/ccivil_03/leis/l9503.htm", desc: "Código de Trânsito Brasileiro" },
-                    "constitucional_0": { url: "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm", desc: "Constituição Federal" }
-                };
-                for (const [chave, link] of Object.entries(linksPadrao)) {
-                    const [disciplina, indice] = chave.split('_');
-                    await salvarLinkCloud(disciplina, parseInt(indice), link.url, link.desc);
-                    linksGlobais[chave] = link;
-                }
-            }
-        } catch (erro) {
-            console.error("Erro ao carregar dados:", erro);
+        
+        const users = getUsers();
+        if (users[email]) {
+            document.getElementById('loginMsg').innerHTML = '<span style="color:#e74c3c;">❌ Email já cadastrado!</span>';
+            return false;
         }
+        
+        users[email] = {
+            senha: senha,
+            tipo: "aluno",
+            nome: email.split('@')[0],
+            criado: new Date().toISOString()
+        };
+        saveUsers(users);
+        document.getElementById('loginMsg').innerHTML = '<span style="color:#27ae60;">✅ Conta criada com sucesso! Faça login.</span>';
+        return true;
+    }
+    
+    function logout() {
+        usuarioAtual = null;
+        tipoUsuario = null;
+        disciplinaAtual = null;
+        document.getElementById('homeScreen').style.display = 'none';
+        document.getElementById('courseScreen').style.display = 'none';
+        document.getElementById('loginScreen').style.display = 'flex';
+        document.getElementById('emailInput').value = '';
+        document.getElementById('passwordInput').value = '';
+        document.getElementById('loginMsg').innerHTML = '';
     }
 
     // ==================== PROGRESSO ====================
-    function obterProgresso(disciplinaId) {
+    function obterProgressoDisciplina(disciplinaId) {
         const conteudos = DISCIPLINAS[disciplinaId]?.conteudos || [];
         let concluidos = 0;
         for (let i = 0; i < conteudos.length; i++) {
@@ -618,13 +421,11 @@
         const total = conteudos.length;
         return { concluidos, total, percentual: total ? (concluidos / total) * 100 : 0 };
     }
-
-    async function alternarConteudoCloud(disciplinaId, indice) {
+    
+    function alternarConteudo(disciplinaId, indice) {
         if (!progresso[disciplinaId]) progresso[disciplinaId] = {};
-        const novoEstado = !progresso[disciplinaId][indice];
-        progresso[disciplinaId][indice] = novoEstado;
-        
-        await salvarProgressoCloud(disciplinaId, indice, novoEstado);
+        progresso[disciplinaId][indice] = !progresso[disciplinaId][indice];
+        saveProgresso(usuarioAtual, progresso);
         
         if (disciplinaAtual === disciplinaId) {
             atualizarProgressoCurso();
@@ -636,24 +437,17 @@
     // ==================== LINKS ====================
     function abrirModalLink(disciplinaId, indice) {
         if (tipoUsuario !== 'admin') return;
-        
         linkEditando = { disciplinaId, indice };
         const chave = `${disciplinaId}_${indice}`;
         const link = linksGlobais[chave];
         
         document.getElementById('modalUrl').value = link?.url || '';
         document.getElementById('modalDesc').value = link?.desc || '';
-        
-        if (link) {
-            document.getElementById('modalDeleteBtn').style.display = 'block';
-        } else {
-            document.getElementById('modalDeleteBtn').style.display = 'none';
-        }
-        
+        document.getElementById('modalDeleteBtn').style.display = link ? 'block' : 'none';
         document.getElementById('linkModal').style.display = 'flex';
     }
-
-    async function salvarLinkModal() {
+    
+    function salvarLinkModal() {
         if (!linkEditando) return;
         const { disciplinaId, indice } = linkEditando;
         const url = document.getElementById('modalUrl').value;
@@ -662,42 +456,36 @@
         
         if (url) {
             linksGlobais[chave] = { url, desc };
-            await salvarLinkCloud(disciplinaId, indice, url, desc);
         } else {
             delete linksGlobais[chave];
-            await salvarLinkCloud(disciplinaId, indice, '', '');
         }
         
+        saveLinksGlobais(linksGlobais);
         fecharModal();
         if (disciplinaAtual === disciplinaId) renderizarConteudos();
         if (tipoUsuario === 'admin') atualizarStatsAdmin();
     }
-
-    async function excluirLinkModal() {
+    
+    function excluirLinkModal() {
         if (!linkEditando) return;
         const { disciplinaId, indice } = linkEditando;
-        const chave = `${disciplinaId}_${indice}`;
-        delete linksGlobais[chave];
-        await salvarLinkCloud(disciplinaId, indice, '', '');
+        delete linksGlobais[`${disciplinaId}_${indice}`];
+        saveLinksGlobais(linksGlobais);
         fecharModal();
         if (disciplinaAtual === disciplinaId) renderizarConteudos();
         if (tipoUsuario === 'admin') atualizarStatsAdmin();
     }
-
+    
     function fecharModal() {
         document.getElementById('linkModal').style.display = 'none';
         linkEditando = null;
     }
 
     // ==================== ADMIN ====================
-    async function atualizarStatsAdmin() {
+    function atualizarStatsAdmin() {
         if (tipoUsuario !== 'admin') return;
-        const totalLinks = Object.keys(linksGlobais).length;
-        document.getElementById('totalLinks').innerText = totalLinks;
-        
-        const resultado = await chamarAPI({ acao: 'contar_alunos' });
-        const totalAlunos = resultado?.total || 0;
-        document.getElementById('totalStudents').innerText = totalAlunos;
+        document.getElementById('totalLinks').innerText = Object.keys(linksGlobais).length;
+        document.getElementById('totalStudents').innerText = contarAlunos();
     }
 
     // ==================== RENDERIZAÇÃO ====================
@@ -707,8 +495,7 @@
         document.getElementById('courseScreen').style.display = 'none';
         disciplinaAtual = null;
         
-        const nomeExibicao = usuarioAtual ? usuarioAtual.split('@')[0] : 'Usuário';
-        document.getElementById('userNameDisplay').innerText = nomeExibicao;
+        document.getElementById('userNameDisplay').innerText = usuarioAtual.split('@')[0];
         
         const roleSpan = document.getElementById('roleDisplay');
         if (tipoUsuario === 'admin') {
@@ -724,13 +511,13 @@
         
         renderizarGradeDisciplinas();
     }
-
+    
     function renderizarGradeDisciplinas() {
         const grid = document.getElementById('disciplinesGrid');
         grid.innerHTML = '';
         
         for (const [id, dados] of Object.entries(DISCIPLINAS)) {
-            const prog = obterProgresso(id);
+            const prog = obterProgressoDisciplina(id);
             const card = document.createElement('div');
             card.className = 'discipline-card';
             card.innerHTML = `
@@ -744,7 +531,7 @@
             grid.appendChild(card);
         }
     }
-
+    
     function abrirCurso(disciplinaId) {
         disciplinaAtual = disciplinaId;
         filtroAtual = "all";
@@ -754,9 +541,7 @@
         const dados = DISCIPLINAS[disciplinaId];
         document.getElementById('courseTitle').innerText = dados.nome;
         document.getElementById('courseIcon').className = dados.icone;
-        
-        const nomeExibicao = usuarioAtual ? usuarioAtual.split('@')[0] : 'Usuário';
-        document.getElementById('courseUserName').innerText = nomeExibicao;
+        document.getElementById('courseUserName').innerText = usuarioAtual.split('@')[0];
         
         const roleSpanCurso = document.getElementById('courseRoleBadge');
         if (tipoUsuario === 'admin') {
@@ -770,19 +555,18 @@
         atualizarProgressoCurso();
         renderizarConteudos();
         
-        // Reset filtros
         document.querySelectorAll('#courseScreen .filter-btn').forEach(btn => {
             btn.classList.remove('active');
             if (btn.dataset.filter === 'all') btn.classList.add('active');
         });
     }
-
+    
     function atualizarProgressoCurso() {
-        const prog = obterProgresso(disciplinaAtual);
+        const prog = obterProgressoDisciplina(disciplinaAtual);
         document.getElementById('courseProgressFill').style.width = `${prog.percentual}%`;
         document.getElementById('courseProgressPercent').innerText = `${Math.round(prog.percentual)}%`;
     }
-
+    
     function renderizarConteudos() {
         const dados = DISCIPLINAS[disciplinaAtual];
         const container = document.getElementById('contentsContainer');
@@ -795,27 +579,18 @@
                           (filtroAtual === 'pending' && !concluido);
             if (!exibir) return;
             
-            const chaveLink = `${disciplinaAtual}_${idx}`;
-            const link = linksGlobais[chaveLink];
+            const link = linksGlobais[`${disciplinaAtual}_${idx}`];
             const isAdmin = tipoUsuario === 'admin';
             
             html += `
                 <div class="content-item ${concluido ? 'completed' : ''}">
                     <div class="content-header">
                         <input type="checkbox" class="content-checkbox" ${concluido ? 'checked' : ''} 
-                               onclick="alternarConteudoCloud('${disciplinaAtual}', ${idx})">
+                               onclick="alternarConteudo('${disciplinaAtual}', ${idx})">
                         <div class="content-text"><strong>Tópico ${idx+1}</strong><br>${texto}</div>
-                        ${isAdmin ? `
-                        <button class="link-btn" onclick="abrirModalLink('${disciplinaAtual}', ${idx})">
-                            <i class="fas fa-edit"></i> ${link ? 'Editar' : 'Adicionar'} link
-                        </button>
-                        ` : ''}
+                        ${isAdmin ? `<button class="link-btn" onclick="abrirModalLink('${disciplinaAtual}', ${idx})"><i class="fas fa-edit"></i> ${link ? 'Editar' : 'Adicionar'} link</button>` : ''}
                     </div>
-                    ${link ? `
-                    <div class="link-container">
-                        <a href="${link.url}" target="_blank"><i class="fas fa-external-link-alt"></i> 📚 ${link.desc || 'Material de apoio'}</a>
-                    </div>
-                    ` : (isAdmin ? '<div class="link-container" style="color:#999;">ℹ️ Nenhum link adicionado</div>' : '')}
+                    ${link ? `<div class="link-container"><a href="${link.url}" target="_blank"><i class="fas fa-external-link-alt"></i> 📚 ${link.desc || 'Material de apoio'}</a></div>` : (isAdmin ? '<div class="link-container" style="color:#999;">ℹ️ Nenhum link adicionado</div>' : '')}
                 </div>
             `;
         });
@@ -825,41 +600,17 @@
     }
 
     // ==================== EVENTOS ====================
-    function logout() {
-        usuarioAtual = null;
-        tipoUsuario = null;
-        disciplinaAtual = null;
-        localStorage.removeItem('usuario_prf_atual');
-        localStorage.removeItem('tipo_prf_atual');
-        document.getElementById('homeScreen').style.display = 'none';
-        document.getElementById('courseScreen').style.display = 'none';
-        document.getElementById('loginScreen').style.display = 'flex';
-        document.getElementById('emailInput').value = '';
-        document.getElementById('passwordInput').value = '';
-        document.getElementById('loginMsg').innerText = '';
-    }
-
     function configurarEventos() {
-        document.getElementById('doLoginBtn').onclick = async () => {
-            const email = document.getElementById('emailInput').value;
-            const senha = document.getElementById('passwordInput').value;
-            const sucesso = await loginAPI(email, senha);
-            if (!sucesso) {
-                document.getElementById('loginMsg').innerText = "Email ou senha inválidos!";
-            }
+        document.getElementById('doLoginBtn').onclick = () => {
+            login(document.getElementById('emailInput').value, document.getElementById('passwordInput').value);
         };
-        
-        document.getElementById('doRegisterBtn').onclick = async () => {
-            const email = document.getElementById('emailInput').value;
-            const senha = document.getElementById('passwordInput').value;
-            await registrarAPI(email, senha);
+        document.getElementById('doRegisterBtn').onclick = () => {
+            registrar(document.getElementById('emailInput').value, document.getElementById('passwordInput').value);
         };
-        
         document.getElementById('logoutMainBtn').onclick = logout;
         document.getElementById('logoutCourseBtn').onclick = logout;
         document.getElementById('backToHomeBtn').onclick = () => mostrarTelaHome();
         document.getElementById('goHomeBtn').onclick = () => mostrarTelaHome();
-        
         document.getElementById('modalSaveBtn').onclick = salvarLinkModal;
         document.getElementById('modalDeleteBtn').onclick = excluirLinkModal;
         document.getElementById('modalCancelBtn').onclick = fecharModal;
@@ -873,32 +624,16 @@
             };
         });
         
-        window.onclick = (e) => {
-            if (e.target === document.getElementById('linkModal')) fecharModal();
-        };
+        window.onclick = (e) => { if (e.target === document.getElementById('linkModal')) fecharModal(); };
     }
 
     // ==================== INICIALIZAÇÃO ====================
-    async function init() {
-        configurarEventos();
-        
-        const usuarioSalvo = localStorage.getItem('usuario_prf_atual');
-        const tipoSalvo = localStorage.getItem('tipo_prf_atual');
-        
-        if (usuarioSalvo && tipoSalvo) {
-            usuarioAtual = usuarioSalvo;
-            tipoUsuario = tipoSalvo;
-            await carregarDadosCloud();
-            mostrarTelaHome();
-        } else {
-            document.getElementById('loginScreen').style.display = 'flex';
-        }
-    }
+    configurarEventos();
+    document.getElementById('loginScreen').style.display = 'flex';
     
-    window.alternarConteudoCloud = alternarConteudoCloud;
+    // Tornar funções globais para onclick
+    window.alternarConteudo = alternarConteudo;
     window.abrirModalLink = abrirModalLink;
-    
-    init();
 </script>
 </body>
 </html>
