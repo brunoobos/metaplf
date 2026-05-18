@@ -3,10 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Mentoria PRF | Plataforma de Estudos</title>
-    <!-- Google Fonts para um visual mais clean e moderno -->
+    <title>Mentoria PRF | Plataforma de Estudos Completa</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
-    <!-- Font Awesome 6 (ícones) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -22,7 +20,7 @@
             line-height: 1.5;
         }
 
-        /* --- TOP BAR (acessibilidade/idioma - inspirado) --- */
+        /* TOP BAR */
         .top-bar {
             background-color: #002c3f;
             color: #fff;
@@ -40,11 +38,9 @@
             gap: 0.5rem;
             transition: opacity 0.2s;
         }
-        .top-bar a:hover {
-            opacity: 0.8;
-        }
+        .top-bar a:hover { opacity: 0.8; }
 
-        /* --- HEADER / MENU PRINCIPAL --- */
+        /* HEADER */
         .main-header {
             background-color: #fff;
             box-shadow: 0 4px 12px rgba(0,0,0,0.03);
@@ -56,11 +52,7 @@
             gap: 1rem;
             border-bottom: 1px solid #e2e8f0;
         }
-        .logo-area {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
+        .logo-area { display: flex; align-items: center; gap: 0.5rem; cursor: pointer; }
         .logo-icon {
             background: #1e6f5c;
             width: 40px;
@@ -72,31 +64,17 @@
             font-size: 1.6rem;
             color: white;
         }
-        .logo-text h1 {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #1e2a3e;
-            letter-spacing: -0.3px;
-        }
-        .logo-text span {
-            font-size: 0.7rem;
-            color: #4a627a;
-            font-weight: 400;
-        }
-        .nav-menu {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-        }
+        .logo-text h1 { font-size: 1.3rem; font-weight: 700; color: #1e2a3e; }
+        .logo-text span { font-size: 0.7rem; color: #4a627a; }
+        .nav-menu { display: flex; gap: 2rem; align-items: center; flex-wrap: wrap; }
         .nav-menu a {
             text-decoration: none;
             color: #2c3e4e;
             font-weight: 500;
             transition: color 0.2s;
+            cursor: pointer;
         }
-        .nav-menu a:hover {
-            color: #1e6f5c;
-        }
+        .nav-menu a:hover { color: #1e6f5c; }
         .btn-outline-light {
             border: 1px solid #cbd5e1;
             background: transparent;
@@ -106,10 +84,7 @@
             cursor: pointer;
             transition: all 0.2s;
         }
-        .btn-outline-light:hover {
-            background: #f1f5f9;
-            border-color: #94a3b8;
-        }
+        .btn-outline-light:hover { background: #f1f5f9; border-color: #94a3b8; }
         .btn-primary {
             background: #1e6f5c;
             color: white;
@@ -120,54 +95,33 @@
             cursor: pointer;
             transition: background 0.2s;
         }
-        .btn-primary:hover {
-            background: #0f5243;
+        .btn-primary:hover { background: #0f5243; }
+        .btn-logout {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            font-weight: 500;
+            cursor: pointer;
         }
+        .btn-logout:hover { background: #c0392b; }
 
-        /* --- HERO SECTION (diferencial) --- */
+        /* HERO */
         .hero {
             background: linear-gradient(135deg, #eef2f7 0%, #ffffff 100%);
             padding: 3rem 2rem;
             text-align: center;
             border-bottom: 1px solid #e2edf2;
         }
-        .hero h2 {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: #0b3b3f;
-            margin-bottom: 1rem;
-        }
-        .hero p {
-            max-width: 700px;
-            margin: 0 auto 2rem auto;
-            color: #2c4b5a;
-            font-size: 1.1rem;
-        }
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .btn-large {
-            padding: 0.9rem 2rem;
-            font-size: 1rem;
-            font-weight: 600;
-        }
+        .hero h2 { font-size: 2.2rem; font-weight: 700; color: #0b3b3f; margin-bottom: 1rem; }
+        .hero p { max-width: 700px; margin: 0 auto 2rem auto; color: #2c4b5a; font-size: 1.1rem; }
+        .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .btn-large { padding: 0.9rem 2rem; font-size: 1rem; font-weight: 600; }
 
-        /* --- SEÇÃO DE CATEGORIAS / TRILHAS (inspirado nas "trilhas/cursos") */
-        .section-title {
-            text-align: center;
-            margin: 3rem 0 1rem 0;
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: #1f2d3d;
-        }
-        .section-sub {
-            text-align: center;
-            color: #5b6e8c;
-            margin-bottom: 2rem;
-        }
+        /* SEÇÕES */
+        .section-title { text-align: center; margin: 3rem 0 1rem 0; font-size: 1.8rem; font-weight: 600; color: #1f2d3d; }
+        .section-sub { text-align: center; color: #5b6e8c; margin-bottom: 2rem; }
         .cards-container {
             max-width: 1280px;
             margin: 0 auto 3rem auto;
@@ -183,11 +137,9 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.05);
             transition: transform 0.2s, box-shadow 0.2s;
             border: 1px solid #eef2f8;
+            cursor: pointer;
         }
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.1);
-        }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 20px 30px -12px rgba(0,0,0,0.1); }
         .card-img {
             background-color: #d9e6f2;
             height: 140px;
@@ -197,9 +149,7 @@
             font-size: 3rem;
             color: #2b6a5c;
         }
-        .card-content {
-            padding: 1.5rem;
-        }
+        .card-content { padding: 1.5rem; }
         .badge {
             background: #e1f0ea;
             color: #1e6f5c;
@@ -210,15 +160,8 @@
             display: inline-block;
             margin-bottom: 0.8rem;
         }
-        .card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-        }
-        .card p {
-            color: #4a5b6e;
-            margin-bottom: 1.2rem;
-            font-size: 0.9rem;
-        }
+        .card h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
+        .card p { color: #4a5b6e; margin-bottom: 1.2rem; font-size: 0.9rem; }
         .card-footer {
             display: flex;
             justify-content: space-between;
@@ -227,12 +170,9 @@
             padding-top: 1rem;
             margin-top: 0.5rem;
         }
-        .progress-text {
-            font-size: 0.8rem;
-            color: #5c6e82;
-        }
+        .progress-text { font-size: 0.8rem; color: #5c6e82; }
 
-        /* Área do aluno (destaque) */
+        /* ÁREA DO ALUNO */
         .student-area {
             background: #fff;
             border-radius: 40px;
@@ -246,13 +186,8 @@
             gap: 2rem;
             border: 1px solid #e9f0f5;
         }
-        .student-info {
-            flex: 2;
-        }
-        .student-info h4 {
-            font-size: 1.4rem;
-            margin-bottom: 0.5rem;
-        }
+        .student-info { flex: 2; }
+        .student-info h4 { font-size: 1.4rem; margin-bottom: 0.5rem; }
         .login-prompt {
             background: #f8fafc;
             padding: 1rem 1.5rem;
@@ -262,206 +197,715 @@
             align-items: center;
             flex-wrap: wrap;
         }
+        .user-welcome {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: #e8f5e9;
+            padding: 0.8rem 1.5rem;
+            border-radius: 40px;
+        }
+        .user-welcome i { font-size: 1.5rem; color: #1e6f5c; }
+        .progress-mini {
+            background: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            min-width: 150px;
+        }
+        .progress-mini-bar {
+            height: 6px;
+            background: #e0e0e0;
+            border-radius: 3px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+        .progress-mini-fill { height: 100%; background: #1e6f5c; width: 0%; transition: width 0.3s; }
 
-        /* Footer */
-        .footer {
+        /* SISTEMA DE ESTUDOS (APP) */
+        .app-content {
+            display: none;
+            background: #f4f7fb;
+            padding: 2rem;
+        }
+        .progress-summary {
+            background: white;
+            border-radius: 24px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .progress-bar-container {
+            height: 20px;
+            background: #e9ecef;
+            border-radius: 10px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+        .progress-fill-global {
+            height: 100%;
+            background: linear-gradient(90deg, #1e6f5c, #289b81);
+            width: 0%;
+            transition: width 0.5s;
+        }
+        .disciplines-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .discipline-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-left: 4px solid #1e6f5c;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .discipline-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+        .discipline-card h3 { margin-bottom: 0.5rem; color: #1e2a3e; }
+        .discipline-progress { font-size: 0.85rem; color: #6c757d; margin-top: 0.5rem; }
+        .back-home-btn {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 40px;
+            cursor: pointer;
+            margin-bottom: 1.5rem;
+        }
+        .back-home-btn:hover { background: #5a6268; }
+
+        /* CONTEÚDOS DAS DISCIPLINAS */
+        .contents-list {
+            background: white;
+            border-radius: 24px;
+            padding: 2rem;
+            margin-top: 1.5rem;
+        }
+        .content-item {
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        .content-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        .content-checkbox {
+            width: 20px;
+            height: 20px;
+            margin-top: 2px;
+            cursor: pointer;
+        }
+        .content-text { flex: 1; line-height: 1.5; }
+        .content-actions { display: flex; gap: 0.5rem; margin-left: 1rem; }
+        .btn-link { background: #3498db; color: white; border: none; padding: 0.3rem 0.8rem; border-radius: 20px; cursor: pointer; font-size: 0.8rem; }
+        .btn-link:hover { background: #2980b9; }
+        .link-container { margin-top: 0.5rem; padding-left: 2rem; }
+        .link-container a { color: #1e6f5c; text-decoration: none; font-size: 0.85rem; }
+        .link-input { width: 100%; max-width: 400px; padding: 0.5rem; margin-top: 0.5rem; border: 1px solid #ddd; border-radius: 8px; }
+
+        .filters { display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+        .filter-btn {
+            background: #e9ecef;
+            border: none;
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .filter-btn.active { background: #1e6f5c; color: white; }
+
+        footer {
             background: #0c2a36;
             color: #cbdbe2;
             padding: 2rem;
             text-align: center;
             font-size: 0.85rem;
-            margin-top: 2rem;
         }
-
-        /* Responsividade */
-        @media (max-width: 780px) {
-            .main-header {
-                flex-direction: column;
-                text-align: center;
-            }
-            .nav-menu {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 1rem;
-            }
-            .hero h2 {
-                font-size: 1.8rem;
-            }
-            .student-area {
-                flex-direction: column;
-                text-align: center;
-            }
+        @media (max-width: 768px) {
+            .main-header { flex-direction: column; text-align: center; }
+            .nav-menu { justify-content: center; }
+            .hero h2 { font-size: 1.8rem; }
+            .student-area { flex-direction: column; text-align: center; margin: 1rem; }
         }
     </style>
 </head>
 <body>
 
-<!-- BARRA SUPERIOR (acessibilidade e atalhos) -->
+<!-- TOP BAR -->
 <div class="top-bar">
     <a href="#"><i class="fas fa-universal-access"></i> Acessibilidade</a>
     <a href="#"><i class="far fa-question-circle"></i> Ajuda</a>
     <a href="#"><i class="fas fa-map-marker-alt"></i> Português</a>
 </div>
 
-<!-- CABEÇALHO PRINCIPAL -->
+<!-- HEADER -->
 <header class="main-header">
-    <div class="logo-area">
-        <div class="logo-icon">
-            <i class="fas fa-gavel"></i>
-        </div>
+    <div class="logo-area" id="logoHomeBtn">
+        <div class="logo-icon"><i class="fas fa-gavel"></i></div>
         <div class="logo-text">
             <h1>Mentoria PRF</h1>
             <span>Plataforma oficial de estudos</span>
         </div>
     </div>
     <div class="nav-menu">
-        <a href="#">Início</a>
-        <a href="#">Cursos autoformativos</a>
-        <a href="#">Trilhas</a>
-        <a href="#" id="openAreaAlunoBtn"><i class="far fa-user-circle"></i> Área do aluno</a>
-        <!-- Botões simulando login/logout - na integração com backend seriam dinâmicos -->
-        <button class="btn-outline-light" id="showLoginBtn"><i class="fas fa-sign-in-alt"></i> Login</button>
-        <button class="btn-primary" id="showRegisterBtn">Cadastre-se <i class="fas fa-arrow-right"></i></button>
+        <a id="navHome">Início</a>
+        <a id="navDisciplinas">Disciplinas</a>
+        <a id="navProgresso">Meu Progresso</a>
+        <div id="authButtonsHeader">
+            <button class="btn-outline-light" id="headerLoginBtn"><i class="fas fa-sign-in-alt"></i> Login</button>
+            <button class="btn-primary" id="headerRegisterBtn">Cadastre-se</button>
+        </div>
+        <div id="userInfoHeader" style="display: none;">
+            <span id="userNameHeader"></span>
+            <button class="btn-logout" id="logoutBtnHeader">Sair</button>
+        </div>
     </div>
 </header>
 
-<!-- HERO -->
-<section class="hero">
-    <h2>Prepare-se para a PRF com a melhor mentoria</h2>
-    <p>Trilhas personalizadas, conteúdos atualizados conforme o último edital e acompanhamento de evolução.</p>
-    <div class="hero-buttons">
-        <button class="btn-primary btn-large" id="heroExploreBtn"><i class="fas fa-chalkboard-user"></i> Explorar disciplinas</button>
-        <button class="btn-outline-light btn-large" id="heroTrilhaBtn">Montar meu plano <i class="fas fa-arrow-right"></i></button>
-    </div>
-</section>
+<!-- PÁGINA INICIAL (LANDING PAGE) -->
+<div id="landingPage">
+    <section class="hero">
+        <h2>Prepare-se para a PRF com a melhor mentoria</h2>
+        <p>Trilhas personalizadas, conteúdos atualizados conforme o último edital e acompanhamento de evolução.</p>
+        <div class="hero-buttons">
+            <button class="btn-primary btn-large" id="heroExploreBtn"><i class="fas fa-chalkboard-user"></i> Explorar disciplinas</button>
+            <button class="btn-outline-light btn-large" id="heroTrilhaBtn">Montar meu plano <i class="fas fa-arrow-right"></i></button>
+        </div>
+    </section>
 
-<!-- DESTAQUE: MINHA ÁREA / LOGIN STATUS (simulação de componente) -->
-<div class="student-area" id="studentAreaBox">
-    <div class="student-info">
-        <h4><i class="fas fa-graduation-cap"></i> Área do Aluno</h4>
-        <p>Acompanhe seu progresso, continue de onde parou e acesse links exclusivos.</p>
-    </div>
-    <div class="login-prompt" id="authPanel">
-        <!-- será preenchido via js simulando estado -->
-        <i class="fas fa-lock"></i> <span>Faça login para salvar seu progresso</span>
-        <button class="btn-primary" style="background:#326771; padding:0.4rem 1rem;" id="dynamicAuthBtn">Entrar agora</button>
-    </div>
-</div>
-
-<!-- SEÇÃO TRILHAS / CURSOS (inspirado no layout de cards) -->
-<h2 class="section-title">Trilhas de estudo</h2>
-<p class="section-sub">Escolha uma área e comece hoje mesmo sua preparação</p>
-<div class="cards-container" id="trilhasContainer">
-    <!-- Bloco I - Conhecimentos Básicos -->
-    <div class="card" data-trilha="basicos">
-        <div class="card-img"><i class="fas fa-book-open"></i></div>
-        <div class="card-content">
-            <span class="badge">BLOCO I</span>
-            <h3>Conhecimentos Básicos</h3>
-            <p>Português, Raciocínio Lógico, Direito Constitucional, Administrativo, Inglês e Informática.</p>
-            <div class="card-footer">
-                <span class="progress-text"><i class="far fa-circle-check"></i> Progresso integrado</span>
-                <i class="fas fa-chevron-right" style="color:#1e6f5c;"></i>
+    <div class="student-area" id="studentAreaBox">
+        <div class="student-info">
+            <h4><i class="fas fa-graduation-cap"></i> Área do Aluno</h4>
+            <p>Acompanhe seu progresso, continue de onde parou e acesse links exclusivos.</p>
+        </div>
+        <div id="authPanel">
+            <div class="login-prompt">
+                <i class="fas fa-lock"></i> <span>Faça login para salvar seu progresso</span>
+                <button class="btn-primary" style="background:#326771;" id="areaAlunoLoginBtn">Entrar agora</button>
             </div>
         </div>
     </div>
-    <!-- Bloco II - Conhecimentos Específicos -->
-    <div class="card" data-trilha="especificos">
-        <div class="card-img"><i class="fas fa-balance-scale"></i></div>
-        <div class="card-content">
-            <span class="badge">BLOCO II</span>
-            <h3>Conhecimentos Específicos</h3>
-            <p>Direito Penal, Processual Penal, Legislação de Trânsito e Direitos Humanos.</p>
-            <div class="card-footer">
-                <span class="progress-text"><i class="far fa-clock"></i> Alta cobrança</span>
-                <i class="fas fa-chevron-right" style="color:#1e6f5c;"></i>
-            </div>
-        </div>
-    </div>
-    <!-- Legislação de Trânsito + Resoluções -->
-    <div class="card" data-trilha="transito">
-        <div class="card-img"><i class="fas fa-car"></i></div>
-        <div class="card-content">
-            <span class="badge">ESPECÍFICO</span>
-            <h3>Legislação de Trânsito</h3>
-            <p>CTB + 43 resoluções do CONTRAN detalhadas, tópico a tópico. Imprescindível para a PRF.</p>
-            <div class="card-footer">
-                <span class="progress-text"><i class="fas fa-list-ul"></i> 43+ tópicos</span>
-                <i class="fas fa-chevron-right"></i>
-            </div>
-        </div>
-    </div>
-</div>
 
-<!-- SEÇÃO CURSOS AUTOFORMATIVOS (inspirado) -->
-<h2 class="section-title">Cursos autoformativos</h2>
-<p class="section-sub">Estude no seu ritmo, com material direcionado e questões</p>
-<div class="cards-container" id="cursosAutoContainer">
-    <div class="card">
-        <div class="card-img"><i class="fas fa-pen-fancy"></i></div>
-        <div class="card-content">
-            <h3>Direito Penal Estratégico</h3>
-            <p>Princípios, aplicação da lei, tipicidade, ilicitude, culpabilidade e todos os crimes do edital.</p>
-            <div class="card-footer"><span>📌 19 módulos</span><span>✔️ Simulados</span></div>
+    <h2 class="section-title">Trilhas de estudo</h2>
+    <p class="section-sub">Escolha uma área e comece hoje mesmo sua preparação</p>
+    <div class="cards-container">
+        <div class="card" data-trilha="basicos">
+            <div class="card-img"><i class="fas fa-book-open"></i></div>
+            <div class="card-content">
+                <span class="badge">BLOCO I</span>
+                <h3>Conhecimentos Básicos</h3>
+                <p>Português, Raciocínio Lógico, Direito Constitucional, Administrativo, Inglês e Informática.</p>
+                <div class="card-footer"><span class="progress-text"><i class="far fa-circle-check"></i> Progresso integrado</span><i class="fas fa-chevron-right" style="color:#1e6f5c;"></i></div>
+            </div>
+        </div>
+        <div class="card" data-trilha="especificos">
+            <div class="card-img"><i class="fas fa-balance-scale"></i></div>
+            <div class="card-content">
+                <span class="badge">BLOCO II</span>
+                <h3>Conhecimentos Específicos</h3>
+                <p>Direito Penal, Processual Penal, Legislação de Trânsito e Direitos Humanos.</p>
+                <div class="card-footer"><span class="progress-text"><i class="far fa-clock"></i> Alta cobrança</span><i class="fas fa-chevron-right"></i></div>
+            </div>
+        </div>
+        <div class="card" data-trilha="transito">
+            <div class="card-img"><i class="fas fa-car"></i></div>
+            <div class="card-content">
+                <span class="badge">ESPECÍFICO</span>
+                <h3>Legislação de Trânsito</h3>
+                <p>CTB + 43 resoluções do CONTRAN detalhadas, tópico a tópico.</p>
+                <div class="card-footer"><span class="progress-text"><i class="fas fa-list-ul"></i> 43+ tópicos</span><i class="fas fa-chevron-right"></i></div>
+            </div>
         </div>
     </div>
-    <div class="card">
-        <div class="card-img"><i class="fas fa-chart-line"></i></div>
-        <div class="card-content">
-            <h3>Raciocínio Lógico e Estatística</h3>
-            <p>Estruturas lógicas, tabelas verdade, probabilidade, medidas de tendência central.</p>
-            <div class="card-footer"><span>📊 Exercícios</span><span>🎯 Foco Cespe</span></div>
+
+    <h2 class="section-title">Cursos autoformativos</h2>
+    <p class="section-sub">Estude no seu ritmo, com material direcionado e questões</p>
+    <div class="cards-container">
+        <div class="card" data-disciplina="penal">
+            <div class="card-img"><i class="fas fa-pen-fancy"></i></div>
+            <div class="card-content"><h3>Direito Penal Estratégico</h3><p>Princípios, aplicação da lei, tipicidade, ilicitude, culpabilidade e crimes.</p><div class="card-footer"><span>📌 19 módulos</span><span>✔️ Simulados</span></div></div>
         </div>
-    </div>
-    <div class="card">
-        <div class="card-img"><i class="fas fa-handcuffs"></i></div>
-        <div class="card-content">
-            <h3>Lei Seca e Resoluções CONTRAN</h3>
-            <p>Análise individual de cada resolução: 04/1998 até 810/2020. CTB atualizado.</p>
-            <div class="card-footer"><span>🚦 43 Resoluções</span><span>📖 CTB completo</span></div>
+        <div class="card" data-disciplina="raciocinio">
+            <div class="card-img"><i class="fas fa-chart-line"></i></div>
+            <div class="card-content"><h3>Raciocínio Lógico e Estatística</h3><p>Estruturas lógicas, tabelas verdade, probabilidade.</p><div class="card-footer"><span>📊 Exercícios</span><span>🎯 Foco Cespe</span></div></div>
+        </div>
+        <div class="card" data-disciplina="inteligencia">
+            <div class="card-img"><i class="fas fa-handcuffs"></i></div>
+            <div class="card-content"><h3>Legislação de Trânsito</h3><p>Análise individual de cada resolução CONTRAN + CTB.</p><div class="card-footer"><span>🚦 43 Resoluções</span><span>📖 CTB completo</span></div></div>
         </div>
     </div>
 </div>
 
-<!-- RODAPÉ -->
-<footer class="footer">
+<!-- SISTEMA DE ESTUDOS (APP) -->
+<div id="studyApp" class="app-content">
+    <button class="back-home-btn" id="backToHomeBtn"><i class="fas fa-arrow-left"></i> Voltar para página inicial</button>
+    
+    <div class="progress-summary">
+        <h3>Meu Progresso - <span id="currentUserStudy"></span></h3>
+        <div class="progress-bar-container"><div class="progress-fill-global" id="globalProgressFill"></div></div>
+        <p id="progressDetails">0% concluído</p>
+        <div class="data-controls" style="display: flex; gap: 1rem; margin-top: 1rem;">
+            <button class="btn-outline-light" id="exportDataBtn">📤 Exportar</button>
+            <button class="btn-outline-light" id="importDataBtn">📥 Importar</button>
+        </div>
+    </div>
+
+    <div id="disciplinesView">
+        <h2>Disciplinas do Edital PRF 2021</h2>
+        <div class="disciplines-grid" id="disciplinesGrid"></div>
+    </div>
+
+    <div id="contentsView" style="display: none;">
+        <h2 id="currentDisciplineTitle"></h2>
+        <div class="filters" id="filterButtons">
+            <button class="filter-btn active" data-filter="all">Todos</button>
+            <button class="filter-btn" data-filter="pending">Pendentes</button>
+            <button class="filter-btn" data-filter="completed">Concluídos</button>
+        </div>
+        <div id="contentsList" class="contents-list"></div>
+    </div>
+</div>
+
+<footer>
     <p><i class="far fa-copyright"></i> Mentoria PRF - Plataforma de apoio ao concurso público | Material atualizado conforme edital PRF 2021</p>
     <p style="margin-top: 0.5rem;">Acessibilidade | Termos de uso | Política de privacidade</p>
 </footer>
 
-<!-- Script simples para simular interação e redirecionamento (apenas demonstrativo) -->
 <script>
-    // Obter elementos
-    const loginBtn = document.getElementById('showLoginBtn');
-    const registerBtn = document.getElementById('showRegisterBtn');
-    const heroExplore = document.getElementById('heroExploreBtn');
-    const dynamicAuth = document.getElementById('dynamicAuthBtn');
-    const openArea = document.getElementById('openAreaAlunoBtn');
-    const heroTrilha = document.getElementById('heroTrilhaBtn');
+    // ==================== CONTEÚDOS COMPLETOS (conforme edital PRF 2021) ====================
+    const disciplinesData = {
+        portugues: { name: "LÍNGUA PORTUGUESA", category: "basicos", contents: [
+            "1. Compreensão e interpretação de textos de gêneros variados.",
+            "2. Reconhecimento de tipos e gêneros textuais.",
+            "3. Domínio da ortografia oficial.",
+            "4. Domínio dos mecanismos de coesão textual: emprego de elementos de referenciação, substituição e repetição, de conectores e outros elementos de sequenciação textual; emprego de tempos e modos verbais.",
+            "5. Domínio da estrutura morfossintática do período: emprego das classes de palavras; relações de coordenação e subordinação; emprego dos sinais de pontuação; concordância verbal e nominal; regência verbal e nominal; crase; colocação pronominal.",
+            "6. Reescrita de frases e parágrafos: significação das palavras; substituição de palavras ou trechos; reorganização da estrutura de orações e períodos."
+        ]},
+        ingles: { name: "LÍNGUA INGLESA", category: "basicos", contents: [
+            "1. Compreensão de textos variados: domínio do vocabulário e da estrutura da língua.",
+            "2. Identificação de ideias principais e secundárias; ideias explícitas e implícitas.",
+            "3. Itens gramaticais relevantes para a compreensão de conteúdos semânticos.",
+            "4. Conhecimento e uso da linguagem em formas contemporâneas."
+        ]},
+        raciocinio: { name: "RACIOCÍNIO LÓGICO-MATEMÁTICO", category: "basicos", contents: [
+            "1. Estruturas lógicas.",
+            "2. Lógica de argumentação: analogias, inferências, deduções e conclusões.",
+            "3. Lógica sentencial (proposicional): proposições simples e compostas; tabelas-verdade; equivalências; leis de Morgan; diagramas lógicos.",
+            "4. Lógica de primeira ordem.",
+            "5. Princípios de contagem e probabilidade.",
+            "6. Operações com conjuntos.",
+            "7. Raciocínio lógico envolvendo problemas aritméticos, geométricos e matriciais.",
+            "8. Estatística e probabilidade básicas: medidas de tendência central, dispersão, amostragem."
+        ]},
+        constitucional: { name: "DIREITO CONSTITUCIONAL", category: "basicos", contents: [
+            "1. Princípios fundamentais da CF/88.",
+            "2. Direitos e garantias fundamentais: individuais, coletivos, sociais, nacionalidade, direitos políticos.",
+            "3. Organização do Estado: União, estados, municípios, DF.",
+            "4. Administração Pública: disposições gerais, servidores públicos.",
+            "5. Poder Legislativo, Executivo e Judiciário.",
+            "6. Funções essenciais à justiça.",
+            "7. Controle de constitucionalidade."
+        ]},
+        administrativo: { name: "DIREITO ADMINISTRATIVO", category: "basicos", contents: [
+            "1. Estado, governo e administração pública: conceitos e princípios.",
+            "2. Organização administrativa: direta e indireta; autarquias, fundações, empresas públicas.",
+            "3. Ato administrativo: conceito, requisitos, atributos, invalidação.",
+            "4. Poderes da administração: vinculado, discricionário, hierárquico, disciplinar, regulamentar, de polícia.",
+            "5. Serviços públicos: conceito, classificação, delegação.",
+            "6. Controle da administração pública.",
+            "7. Agentes públicos: Lei 8.112/90.",
+            "8. Lei de licitações (14.133/2021).",
+            "9. Improbidade administrativa (Lei 8.429/92).",
+            "10. Lei de acesso à informação (12.527/11)."
+        ]},
+        penal: { name: "DIREITO PENAL", category: "especificos", contents: [
+            "1. Princípios básicos do direito penal.",
+            "2. Aplicação da lei penal no tempo: tempo do crime, conflito de leis.",
+            "3. Aplicação da lei penal no espaço: territorialidade, extraterritorialidade.",
+            "4. Tipicidade: crime doloso e culposo.",
+            "5. Erro de tipo.",
+            "6. Crime consumado e tentado.",
+            "7. Crime impossível.",
+            "8. Punibilidade e causas de extinção.",
+            "9. Ilicitude: causas de exclusão, excesso punível.",
+            "10. Culpabilidade: causas de exclusão, imputabilidade, erro de proibição.",
+            "11. Crimes contra a pessoa.",
+            "12. Crimes contra o patrimônio.",
+            "13. Crimes contra a dignidade sexual.",
+            "14. Crimes contra a incolumidade pública.",
+            "15. Crimes contra a fé pública.",
+            "16. Crimes contra a Administração Pública."
+        ]},
+        processual_penal: { name: "DIREITO PROCESSUAL PENAL", category: "especificos", contents: [
+            "1. Disposições constitucionais aplicáveis.",
+            "2. Inquérito policial: conceito, finalidade, procedimento, prazos.",
+            "3. Ação penal: princípios, espécies, condições.",
+            "4. Jurisdição e competência.",
+            "5. Prova: meios de prova (exame de corpo de delito, documento, testemunha, interrogatório).",
+            "6. Prisão e liberdade provisória.",
+            "7. Processo comum: ordinário, sumário, sumaríssimo.",
+            "8. Tribunal do Júri."
+        ]},
+        direitos_humanos: { name: "DIREITOS HUMANOS", category: "especificos", contents: [
+            "1. Conceito, fundamento e características.",
+            "2. Evolução histórica e gerações de direitos.",
+            "3. Declaração Universal dos Direitos Humanos (1948).",
+            "4. Sistema global de proteção.",
+            "5. Sistema interamericano: Comissão e Corte IDH, Pacto de São José.",
+            "6. Direitos humanos na CF/88."
+        ]},
+        inteligencia: { name: "LEGISLAÇÃO DE TRÂNSITO", category: "especificos", contents: [
+            "1. CTB - Lei 9.503/97: objetivos, conceitos, definições.",
+            "2. Sistema Nacional de Trânsito: competências e atribuições.",
+            "3. Normas gerais de circulação e conduta.",
+            "4. Sinalização de trânsito.",
+            "5. Infrações: tipificação, penalidades, medidas administrativas.",
+            "6. Processo administrativo de imposição de penalidades.",
+            "7. Crimes de trânsito (arts. 302 a 312-A).",
+            "8. Direção defensiva e primeiros socorros.",
+            "9. Resolução CONTRAN 04/1998", "10. Resolução 14/1998", "11. Resolução 24/1998", "12. Resolução 36/1998",
+            "13. Resolução 92/1999", "14. Resolução 110/2000", "15. Resolução 160/2004", "16. Resolução 210/2006",
+            "17. Resolução 211/2006", "18. Resolução 216/2006", "19. Resolução 227/2007", "20. Resolução 253/2007",
+            "21. Resolução 254/2007", "22. Resolução 290/2008", "23. Resolução 349/2010", "24. Resolução 360/2010",
+            "25. Resolução 432/2013", "26. Resolução 441/2013", "27. Resolução 471/2013", "28. Resolução 508/2014",
+            "29. Resolução 520/2015", "30. Resolução 525/2015", "31. Resolução 552/2015", "32. Resolução 561/2015",
+            "33. Resolução 667/2017", "34. Resolução 735/2018", "35. Resolução 740/2018", "36. Resolução 780/2019",
+            "37. Resolução 789/2020 - Anexo I", "38. Resolução 798/2020", "39. Resolução 803/2020", "40. Resolução 806/2020",
+            "41. Resolução 809/2020", "42. Resolução 810/2020", "43. Resolução 810/2020 (complementar)"
+        ]},
+        informatica: { name: "INFORMÁTICA", category: "basicos", contents: [
+            "1. Noções de sistema operacional (Windows, Linux).",
+            "2. Edição de textos, planilhas, apresentações (Office, LibreOffice).",
+            "3. Redes de computadores: conceitos básicos, internet, intranet.",
+            "4. Programas de navegação (Edge, Firefox, Chrome).",
+            "5. Busca e pesquisa na Web.",
+            "6. Segurança da informação: vírus, firewall, criptografia, backup.",
+            "7. Armazenamento em nuvem.",
+            "8. Computação em nuvem: SaaS, PaaS, IaaS.",
+            "9. Ferramentas de colaboração.",
+            "10. Noções de banco de dados."
+        ]}
+    };
 
-    // Função de alerta/modal simulando integração futura com sistema de login completo
-    function redirectToFullApp() {
-        alert("Esta é a página inicial inspirada no design. Integre com o sistema de login e plano de estudos completo (HTML/JS já existe). Clique em OK para visualizar o fluxo completo.");
-        // Aqui você pode redirecionar para a página principal do sistema de estudos que já possui login e os conteúdos.
-        // window.location.href = "estudos.html";
+    // Estado
+    let currentUser = null;
+    let progressData = {};
+    let linkData = {};
+    let currentDiscipline = null;
+    let currentFilter = "all";
+    let isStudyMode = false;
+
+    // Funções de usuário (localStorage)
+    function getUsers() { return JSON.parse(localStorage.getItem('mentoria_users') || '{}'); }
+    function saveUsers(users) { localStorage.setItem('mentoria_users', JSON.stringify(users)); }
+    
+    function login(email, password) {
+        const users = getUsers();
+        if (users[email] && users[email].password === password) {
+            currentUser = email;
+            localStorage.setItem('mentoria_current_user', email);
+            loadUserData();
+            updateUIForLoggedUser();
+            showStudyMode();
+            return true;
+        }
+        alert("Email ou senha inválidos!");
+        return false;
     }
-
-    // Ações dos botões - todas levam à demonstração do ecossistema
-    if(loginBtn) loginBtn.addEventListener('click', redirectToFullApp);
-    if(registerBtn) registerBtn.addEventListener('click', redirectToFullApp);
-    if(heroExplore) heroExplore.addEventListener('click', redirectToFullApp);
-    if(heroTrilha) heroTrilha.addEventListener('click', redirectToFullApp);
-    if(dynamicAuth) dynamicAuth.addEventListener('click', redirectToFullApp);
-    if(openArea) openArea.addEventListener('click', redirectToFullApp);
-
-    // Cards também podem simular navegação
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        card.style.cursor = 'pointer';
-        card.addEventListener('click', () => {
-            redirectToFullApp();
+    
+    function register(email, password) {
+        if (!email || !password) { alert("Preencha email e senha!"); return false; }
+        const users = getUsers();
+        if (users[email]) { alert("Email já cadastrado!"); return false; }
+        users[email] = { password, createdAt: new Date().toISOString() };
+        saveUsers(users);
+        alert("Conta criada com sucesso! Faça login.");
+        return true;
+    }
+    
+    function logout() {
+        currentUser = null;
+        localStorage.removeItem('mentoria_current_user');
+        progressData = {};
+        linkData = {};
+        showLandingPage();
+        updateUIForLoggedOut();
+    }
+    
+    function loadUserData() {
+        const savedProgress = localStorage.getItem(`mentoria_progress_${currentUser}`);
+        progressData = savedProgress ? JSON.parse(savedProgress) : {};
+        const savedLinks = localStorage.getItem(`mentoria_links_${currentUser}`);
+        linkData = savedLinks ? JSON.parse(savedLinks) : {};
+    }
+    
+    function saveProgress() {
+        if (currentUser) {
+            localStorage.setItem(`mentoria_progress_${currentUser}`, JSON.stringify(progressData));
+            localStorage.setItem(`mentoria_links_${currentUser}`, JSON.stringify(linkData));
+        }
+    }
+    
+    // Progresso
+    function getDisciplineProgress(disciplineId) {
+        const contents = disciplinesData[disciplineId]?.contents || [];
+        let completed = 0;
+        for (let i = 0; i < contents.length; i++) {
+            if (progressData[disciplineId]?.[i]) completed++;
+        }
+        return { completed, total: contents.length, percent: contents.length ? (completed/contents.length)*100 : 0 };
+    }
+    
+    function getOverallProgress() {
+        let totalComp = 0, totalItens = 0;
+        Object.keys(disciplinesData).forEach(d => {
+            const p = getDisciplineProgress(d);
+            totalComp += p.completed;
+            totalItens += p.total;
         });
+        return { completed: totalComp, total: totalItens, percent: totalItens ? (totalComp/totalItens)*100 : 0 };
+    }
+    
+    function toggleContent(discipline, index) {
+        if (!progressData[discipline]) progressData[discipline] = {};
+        progressData[discipline][index] = !progressData[discipline][index];
+        saveProgress();
+        if (currentDiscipline === discipline) renderContents();
+        updateGlobalProgressDisplay();
+        updateDisciplinesGrid();
+    }
+    
+    function saveLink(discipline, index, url) {
+        const key = `${discipline}_${index}`;
+        if (url) linkData[key] = url;
+        else delete linkData[key];
+        saveProgress();
+        renderContents();
+    }
+    
+    // UI Control
+    function showLandingPage() {
+        document.getElementById('landingPage').style.display = 'block';
+        document.getElementById('studyApp').style.display = 'none';
+        isStudyMode = false;
+        currentDiscipline = null;
+    }
+    
+    function showStudyMode() {
+        document.getElementById('landingPage').style.display = 'none';
+        document.getElementById('studyApp').style.display = 'block';
+        isStudyMode = true;
+        updateGlobalProgressDisplay();
+        updateDisciplinesGrid();
+        if (currentDiscipline) renderContents();
+        else document.getElementById('disciplinesView').style.display = 'block';
+    }
+    
+    function updateUIForLoggedUser() {
+        const name = currentUser.split('@')[0];
+        document.getElementById('userNameHeader').textContent = name;
+        document.getElementById('userInfoHeader').style.display = 'flex';
+        document.getElementById('authButtonsHeader').style.display = 'none';
+        document.getElementById('currentUserStudy').textContent = name;
+        
+        const authPanel = document.getElementById('authPanel');
+        const overall = getOverallProgress();
+        authPanel.innerHTML = `<div class="user-welcome">
+            <i class="fas fa-user-circle"></i>
+            <div><strong>${name}</strong><br>${Math.round(overall.percent)}% completo</div>
+            <button class="btn-outline-light" id="studyNowBtn">Continuar estudos →</button>
+        </div>`;
+        document.getElementById('studyNowBtn')?.addEventListener('click', () => showStudyMode());
+    }
+    
+    function updateUIForLoggedOut() {
+        document.getElementById('userInfoHeader').style.display = 'none';
+        document.getElementById('authButtonsHeader').style.display = 'flex';
+        document.getElementById('authPanel').innerHTML = `<div class="login-prompt">
+            <i class="fas fa-lock"></i> <span>Faça login para salvar seu progresso</span>
+            <button class="btn-primary" style="background:#326771;" id="areaAlunoLoginBtn">Entrar agora</button>
+        </div>`;
+        document.getElementById('areaAlunoLoginBtn')?.addEventListener('click', () => {
+            const email = prompt("Digite seu email:");
+            const pwd = prompt("Digite sua senha:");
+            if (email && pwd) login(email, pwd);
+        });
+    }
+    
+    function updateGlobalProgressDisplay() {
+        const overall = getOverallProgress();
+        document.getElementById('globalProgressFill').style.width = `${overall.percent}%`;
+        document.getElementById('progressDetails').textContent = `${Math.round(overall.percent)}% concluído (${overall.completed}/${overall.total} itens)`;
+    }
+    
+    function updateDisciplinesGrid() {
+        const grid = document.getElementById('disciplinesGrid');
+        if (!grid) return;
+        grid.innerHTML = '';
+        Object.entries(disciplinesData).forEach(([id, data]) => {
+            const prog = getDisciplineProgress(id);
+            const card = document.createElement('div');
+            card.className = 'discipline-card';
+            card.innerHTML = `
+                <h3>${data.name}</h3>
+                <div class="discipline-progress">${prog.completed}/${prog.total} tópicos (${Math.round(prog.percent)}%)</div>
+                <div class="progress-bar-container" style="height:6px; margin-top:8px;"><div class="progress-fill-global" style="width:${prog.percent}%; background:#1e6f5c;"></div></div>
+            `;
+            card.onclick = () => selectDiscipline(id);
+            grid.appendChild(card);
+        });
+    }
+    
+    function selectDiscipline(disciplineId) {
+        currentDiscipline = disciplineId;
+        currentFilter = "all";
+        document.getElementById('disciplinesView').style.display = 'none';
+        document.getElementById('contentsView').style.display = 'block';
+        document.getElementById('currentDisciplineTitle').textContent = disciplinesData[disciplineId].name;
+        renderContents();
+    }
+    
+    function renderContents() {
+        const data = disciplinesData[currentDiscipline];
+        if (!data) return;
+        const contents = data.contents;
+        let html = '';
+        contents.forEach((text, idx) => {
+            const isCompleted = progressData[currentDiscipline]?.[idx] || false;
+            const shouldShow = currentFilter === 'all' || (currentFilter === 'completed' && isCompleted) || (currentFilter === 'pending' && !isCompleted);
+            if (!shouldShow) return;
+            const linkKey = `${currentDiscipline}_${idx}`;
+            const hasLink = linkData[linkKey];
+            html += `
+                <div class="content-item">
+                    <div class="content-header">
+                        <input type="checkbox" class="content-checkbox" ${isCompleted ? 'checked' : ''} onchange="toggleContent('${currentDiscipline}', ${idx})">
+                        <div class="content-text">${text}</div>
+                        <div class="content-actions">
+                            <button class="btn-link" onclick="showLinkInput('${currentDiscipline}', ${idx})"><i class="fas fa-link"></i> Link</button>
+                        </div>
+                    </div>
+                    <div id="linkContainer_${currentDiscipline}_${idx}" class="link-container">
+                        ${hasLink ? `<a href="${linkData[linkKey]}" target="_blank"><i class="fas fa-external-link-alt"></i> Material de apoio</a> <button class="btn-link" onclick="removeLinkAndRefresh('${currentDiscipline}', ${idx})">Remover</button>` : ''}
+                    </div>
+                </div>
+            `;
+        });
+        if (html === '') html = '<p style="text-align:center; padding:2rem;">Nenhum conteúdo com este filtro.</p>';
+        document.getElementById('contentsList').innerHTML = html;
+    }
+    
+    window.showLinkInput = function(discipline, idx) {
+        const container = document.getElementById(`linkContainer_${discipline}_${idx}`);
+        const currentLink = linkData[`${discipline}_${idx}`] || '';
+        container.innerHTML = `<input type="url" id="linkInput_${discipline}_${idx}" class="link-input" placeholder="https://..." value="${currentLink}">
+            <div style="margin-top:0.5rem;">
+                <button class="btn-link" onclick="saveLinkAndRefresh('${discipline}', ${idx})">Salvar</button>
+                <button class="btn-link" onclick="cancelLink('${discipline}', ${idx})">Cancelar</button>
+            </div>`;
+    };
+    
+    window.saveLinkAndRefresh = function(discipline, idx) {
+        const input = document.getElementById(`linkInput_${discipline}_${idx}`);
+        if (input) saveLink(discipline, idx, input.value);
+    };
+    
+    window.removeLinkAndRefresh = function(discipline, idx) {
+        saveLink(discipline, idx, null);
+    };
+    
+    window.cancelLink = function(discipline, idx) {
+        renderContents();
+    };
+    
+    function setupFilters() {
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentFilter = btn.dataset.filter;
+                renderContents();
+            });
+        });
+    }
+    
+    function exportData() {
+        const data = { progressData, linkData, exportDate: new Date().toISOString() };
+        const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `mentoria_backup_${new Date().toISOString().split('T')[0]}.json`;
+        a.click();
+        URL.revokeObjectURL(url);
+    }
+    
+    function importData() {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = 'application/json';
+        input.onchange = e => {
+            const file = e.target.files[0];
+            const reader = new FileReader();
+            reader.onload = ev => {
+                try {
+                    const data = JSON.parse(ev.target.result);
+                    if (data.progressData) progressData = data.progressData;
+                    if (data.linkData) linkData = data.linkData;
+                    saveProgress();
+                    updateGlobalProgressDisplay();
+                    updateDisciplinesGrid();
+                    if (currentDiscipline) renderContents();
+                    alert("Dados importados com sucesso!");
+                } catch(err) { alert("Erro ao importar"); }
+            };
+            reader.readAsText(file);
+        };
+        input.click();
+    }
+    
+    // Event Listeners
+    document.getElementById('logoHomeBtn')?.addEventListener('click', showLandingPage);
+    document.getElementById('navHome')?.addEventListener('click', showLandingPage);
+    document.getElementById('navDisciplinas')?.addEventListener('click', () => { if(isStudyMode) showStudyMode(); else showLandingPage(); });
+    document.getElementById('navProgresso')?.addEventListener('click', () => { if(currentUser) showStudyMode(); else alert("Faça login para ver seu progresso"); });
+    document.getElementById('backToHomeBtn')?.addEventListener('click', showLandingPage);
+    document.getElementById('exportDataBtn')?.addEventListener('click', exportData);
+    document.getElementById('importDataBtn')?.addEventListener('click', importData);
+    document.getElementById('headerLoginBtn')?.addEventListener('click', () => { const e=prompt("Email:"), p=prompt("Senha:"); if(e&&p) login(e,p); });
+    document.getElementById('headerRegisterBtn')?.addEventListener('click', () => { const e=prompt("Email:"), p=prompt("Senha:"); if(e&&p) register(e,p); });
+    document.getElementById('logoutBtnHeader')?.addEventListener('click', logout);
+    document.getElementById('heroExploreBtn')?.addEventListener('click', () => { if(currentUser) showStudyMode(); else alert("Faça login para acessar as disciplinas"); });
+    document.getElementById('heroTrilhaBtn')?.addEventListener('click', () => { if(currentUser) showStudyMode(); else alert("Faça login para montar seu plano"); });
+    
+    document.querySelectorAll('.card[data-disciplina]').forEach(card => {
+        card.addEventListener('click', () => { if(currentUser) { selectDiscipline(card.dataset.disciplina); showStudyMode(); } else alert("Faça login para acessar"); });
     });
+    document.querySelectorAll('.card[data-trilha]').forEach(card => {
+        card.addEventListener('click', () => { if(currentUser) showStudyMode(); else alert("Faça login para acessar as trilhas"); });
+    });
+    
+    // Inicialização
+    const savedUser = localStorage.getItem('mentoria_current_user');
+    if (savedUser) {
+        const users = getUsers();
+        if (users[savedUser]) {
+            currentUser = savedUser;
+            loadUserData();
+            updateUIForLoggedUser();
+        }
+    } else {
+        updateUIForLoggedOut();
+    }
+    showLandingPage();
+    setupFilters();
+    window.toggleContent = toggleContent;
 </script>
 </body>
 </html>
