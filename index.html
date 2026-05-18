@@ -2,8 +2,8 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mentoria PRF | Plataforma de Estudos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Mentoria PRF | Plataforma Cloud</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -12,14 +12,11 @@
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: 'Inter', sans-serif;
             background: #f0f4f8;
             color: #1f2d3d;
         }
-
-        /* Login */
         .login-overlay {
             position: fixed;
             top: 0;
@@ -32,7 +29,6 @@
             justify-content: center;
             z-index: 1000;
         }
-
         .login-card {
             background: white;
             border-radius: 32px;
@@ -41,18 +37,15 @@
             width: 90%;
             text-align: center;
         }
-
         .login-card .logo-icon {
             font-size: 3rem;
             color: #0056a7;
             margin-bottom: 1rem;
         }
-
         .login-card h2 {
             color: #0056a7;
             margin-bottom: 0.5rem;
         }
-
         .login-card input {
             width: 100%;
             padding: 0.8rem;
@@ -61,7 +54,6 @@
             border-radius: 12px;
             font-size: 1rem;
         }
-
         .login-card button {
             width: 100%;
             padding: 0.8rem;
@@ -74,19 +66,15 @@
             cursor: pointer;
             font-weight: 600;
         }
-
         .login-card .register-btn {
             background: #eef2f6;
             color: #0056a7;
         }
-
         .error-msg {
             color: #e74c3c;
             font-size: 0.8rem;
             margin-top: 0.5rem;
         }
-
-        /* Header */
         .main-header {
             background: white;
             padding: 1rem 2rem;
@@ -96,14 +84,12 @@
             flex-wrap: wrap;
             border-bottom: 1px solid #e2e8f0;
         }
-
         .logo-area {
             display: flex;
             align-items: center;
             gap: 0.8rem;
             cursor: pointer;
         }
-
         .logo-icon {
             background: #0056a7;
             width: 40px;
@@ -115,12 +101,10 @@
             font-size: 1.4rem;
             color: white;
         }
-
         .logo-text h1 {
             font-size: 1.3rem;
             color: #0056a7;
         }
-
         .user-info {
             display: flex;
             align-items: center;
@@ -129,24 +113,20 @@
             padding: 0.5rem 1rem;
             border-radius: 40px;
         }
-
         .role-badge {
             padding: 0.2rem 0.8rem;
             border-radius: 20px;
             font-size: 0.7rem;
             font-weight: 600;
         }
-
         .role-admin {
             background: #e74c3c;
             color: white;
         }
-
         .role-student {
             background: #27ae60;
             color: white;
         }
-
         .logout-btn {
             background: #e74c3c;
             color: white;
@@ -155,20 +135,15 @@
             border-radius: 40px;
             cursor: pointer;
         }
-
-        /* Hero */
         .hero {
             background: linear-gradient(135deg, #e8f0fe, #ffffff);
             padding: 3rem 2rem;
             text-align: center;
         }
-
         .hero h1 {
             font-size: 2rem;
             color: #0056a7;
         }
-
-        /* Admin Panel */
         .admin-panel {
             background: white;
             margin: 2rem;
@@ -176,14 +151,12 @@
             border-radius: 24px;
             display: none;
         }
-
         .admin-stats {
             display: flex;
             gap: 1rem;
             justify-content: center;
             margin-top: 1rem;
         }
-
         .stat-card {
             background: #e8f0fe;
             padding: 1rem;
@@ -191,14 +164,11 @@
             text-align: center;
             min-width: 150px;
         }
-
-        /* Disciplinas Grid */
         .section-title {
             text-align: center;
             margin: 2rem 0 1rem;
             font-size: 1.5rem;
         }
-
         .disciplines-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -207,7 +177,6 @@
             margin: 0 auto 2rem;
             padding: 0 2rem;
         }
-
         .discipline-card {
             background: white;
             border-radius: 20px;
@@ -217,18 +186,15 @@
             transition: all 0.3s;
             border: 1px solid #eef2f8;
         }
-
         .discipline-card:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
-
         .discipline-icon {
             font-size: 2.5rem;
             color: #0056a7;
             margin-bottom: 1rem;
         }
-
         .progress-bar {
             height: 6px;
             background: #e2e8f0;
@@ -236,27 +202,22 @@
             margin: 0.8rem 0;
             overflow: hidden;
         }
-
         .progress-fill {
             height: 100%;
             background: #0056a7;
             width: 0%;
         }
-
-        /* Course Container */
         .course-container {
             max-width: 900px;
             margin: 0 auto;
             padding: 2rem;
         }
-
         .course-header {
             background: white;
             border-radius: 24px;
             padding: 1.5rem;
             margin-bottom: 1.5rem;
         }
-
         .back-btn {
             background: #eef2f6;
             color: #0056a7;
@@ -266,7 +227,6 @@
             cursor: pointer;
             margin-bottom: 1rem;
         }
-
         .course-title {
             font-size: 1.5rem;
             color: #0056a7;
@@ -275,14 +235,12 @@
             gap: 0.5rem;
             margin: 1rem 0;
         }
-
         .filters {
             display: flex;
             gap: 0.5rem;
             justify-content: center;
             margin-bottom: 1.5rem;
         }
-
         .filter-btn {
             background: #f0f4f8;
             border: none;
@@ -290,45 +248,38 @@
             border-radius: 40px;
             cursor: pointer;
         }
-
         .filter-btn.active {
             background: #0056a7;
             color: white;
         }
-
         .contents-list {
             background: white;
             border-radius: 24px;
             padding: 1rem;
         }
-
         .content-item {
             padding: 1rem;
             border-bottom: 1px solid #eef2f8;
         }
-
         .content-item.completed {
             background: #f0fdf4;
             border-left: 4px solid #0056a7;
         }
-
         .content-header {
             display: flex;
             align-items: flex-start;
             gap: 0.8rem;
+            flex-wrap: wrap;
         }
-
         .content-checkbox {
             width: 20px;
             height: 20px;
             margin-top: 2px;
             cursor: pointer;
         }
-
         .content-text {
             flex: 1;
         }
-
         .link-btn {
             background: #3498db;
             color: white;
@@ -338,18 +289,15 @@
             cursor: pointer;
             font-size: 0.7rem;
         }
-
         .link-container {
             margin-top: 0.5rem;
             padding-left: 2rem;
         }
-
         .link-container a {
             color: #0056a7;
             text-decoration: none;
             font-size: 0.85rem;
         }
-
         .modal {
             display: none;
             position: fixed;
@@ -362,7 +310,6 @@
             justify-content: center;
             z-index: 1001;
         }
-
         .modal-content {
             background: white;
             border-radius: 24px;
@@ -370,7 +317,6 @@
             max-width: 450px;
             width: 90%;
         }
-
         .modal-content input, .modal-content textarea {
             width: 100%;
             padding: 0.7rem;
@@ -378,13 +324,11 @@
             border: 1px solid #ddd;
             border-radius: 12px;
         }
-
         .modal-buttons {
             display: flex;
             gap: 0.5rem;
             margin-top: 1rem;
         }
-
         .modal-buttons button {
             flex: 1;
             padding: 0.5rem;
@@ -392,7 +336,6 @@
             cursor: pointer;
             border: none;
         }
-
         .footer {
             background: #1a2a3a;
             color: white;
@@ -400,7 +343,6 @@
             padding: 1.5rem;
             margin-top: 2rem;
         }
-
         @media (max-width: 768px) {
             .main-header {
                 flex-direction: column;
@@ -456,7 +398,6 @@
         <p>Conteúdo atualizado conforme o edital 2021</p>
     </section>
 
-    <!-- Painel Admin -->
     <div id="adminPanel" class="admin-panel">
         <h3 style="color:#0056a7;"><i class="fas fa-shield-alt"></i> Painel do Administrador</h3>
         <div class="admin-stats">
@@ -490,7 +431,7 @@
                 <i id="courseIcon" class="fas fa-book"></i>
                 <span id="courseTitle"></span>
             </div>
-            <div style="display: flex; justify-content: space-between; margin-top: 0.5rem;">
+            <div style="display: flex; justify-content: space-between; margin-top: 0.5rem; flex-wrap: wrap;">
                 <span><i class="fas fa-user"></i> <span id="courseUserName"></span> <span id="courseRoleBadge" class="role-badge"></span></span>
                 <span id="courseProgressPercent">0%</span>
             </div>
@@ -526,7 +467,15 @@
 </div>
 
 <script>
-    // ==================== DADOS ====================
+    // ==================== CONFIGURAÇÃO DAS URLs DA API ====================
+    // URLs fornecidas por você - a primeira para dados, a segunda para execução
+    const API_URL = "https://script.google.com/macros/s/AKfycbzxODxFknWHWUC9fsliUOMUbgJE8_ndVIz6lIBkKA88ftTcHzNL6TJRiB2neDTQrIyScw/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby8BYH9aUt_pe7jx6b7GzF_Rp4UGFPzf8TxPBPEJzVx_PPwqGaNSux5ZB2rmk5vuYk3Bg/exec";
+    
+    // Usar a primeira URL como principal
+    const API_ENDPOINT = API_URL;
+    
+    // ==================== DADOS DAS DISCIPLINAS ====================
     const DISCIPLINAS = {
         portugues: { nome: "LÍNGUA PORTUGUESA", icone: "fas fa-language",
             conteudos: ["Compreensão e interpretação de textos", "Tipos e gêneros textuais", "Ortografia oficial", "Coesão textual", "Estrutura morfossintática", "Reescrita de frases"] },
@@ -547,89 +496,116 @@
     let filtroAtual = "all";
     let progresso = {};
     let linksGlobais = {};
+    let linkEditando = null;
 
-    // ==================== FUNÇÕES DE USUÁRIO ====================
-    function obterUsuarios() {
-        const dados = localStorage.getItem('usuarios_prf');
-        if (dados) return JSON.parse(dados);
-        const admin = { "admin@mentoria.com": { senha: "admin123", tipo: "admin", nome: "Administrador" } };
-        localStorage.setItem('usuarios_prf', JSON.stringify(admin));
-        return admin;
+    // ==================== FUNÇÕES DE API ====================
+    async function chamarAPI(params) {
+        const url = new URL(API_ENDPOINT);
+        Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+        
+        try {
+            const resposta = await fetch(url.toString(), {
+                method: 'GET',
+                mode: 'cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+            const texto = await resposta.text();
+            try {
+                return JSON.parse(texto);
+            } catch(e) {
+                console.error("Resposta não é JSON:", texto);
+                return { sucesso: false, erro: "Resposta inválida do servidor" };
+            }
+        } catch (erro) {
+            console.error("Erro na API:", erro);
+            return { sucesso: false, erro: "Falha na conexão com o servidor" };
+        }
     }
 
-    function salvarUsuarios(usuarios) {
-        localStorage.setItem('usuarios_prf', JSON.stringify(usuarios));
-    }
-
-    function login(email, senha) {
-        const usuarios = obterUsuarios();
-        if (usuarios[email] && usuarios[email].senha === senha) {
+    async function loginAPI(email, senha) {
+        const resultado = await chamarAPI({ acao: 'login', email, senha });
+        if (resultado && resultado.sucesso) {
             usuarioAtual = email;
-            tipoUsuario = usuarios[email].tipo;
+            tipoUsuario = resultado.tipo;
             localStorage.setItem('usuario_prf_atual', email);
             localStorage.setItem('tipo_prf_atual', tipoUsuario);
-            carregarDados();
+            await carregarDadosCloud();
             mostrarTelaHome();
             return true;
         }
-        document.getElementById('loginMsg').innerText = "Email ou senha inválidos!";
         return false;
     }
 
-    function registrar(email, senha) {
-        if (!email || !senha) {
-            document.getElementById('loginMsg').innerText = "Preencha todos os campos!";
-            return false;
+    async function registrarAPI(email, senha) {
+        const nome = email.split('@')[0];
+        const resultado = await chamarAPI({ acao: 'registrar', email, senha, nome });
+        if (resultado && resultado.sucesso) {
+            document.getElementById('loginMsg').innerText = "Conta criada! Faça login.";
+            return true;
         }
-        const usuarios = obterUsuarios();
-        if (usuarios[email]) {
-            document.getElementById('loginMsg').innerText = "Email já cadastrado!";
-            return false;
+        document.getElementById('loginMsg').innerText = resultado?.erro || "Erro ao criar conta";
+        return false;
+    }
+
+    async function carregarProgressoCloud() {
+        const resultado = await chamarAPI({ acao: 'carregar_progresso', email: usuarioAtual });
+        return resultado || {};
+    }
+
+    async function salvarProgressoCloud(disciplina, indice, concluido) {
+        await chamarAPI({ 
+            acao: 'salvar_progresso', 
+            email: usuarioAtual, 
+            disciplina, 
+            indice, 
+            concluido: concluido ? 'true' : 'false' 
+        });
+    }
+
+    async function carregarLinksCloud() {
+        const resultado = await chamarAPI({ acao: 'carregar_links' });
+        return resultado || {};
+    }
+
+    async function salvarLinkCloud(disciplina, indice, url, desc) {
+        await chamarAPI({ 
+            acao: 'salvar_link', 
+            disciplina, 
+            indice, 
+            url: url || '', 
+            desc: desc || '', 
+            admin: usuarioAtual 
+        });
+    }
+
+    async function carregarDadosCloud() {
+        try {
+            // Carregar progresso
+            const progressoCloud = await carregarProgressoCloud();
+            progresso = progressoCloud || {};
+            
+            // Carregar links globais
+            const linksCloud = await carregarLinksCloud();
+            linksGlobais = linksCloud || {};
+            
+            // Se não houver links, adicionar links padrão
+            if (Object.keys(linksGlobais).length === 0) {
+                const linksPadrao = {
+                    "penal_0": { url: "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm", desc: "Código Penal Completo" },
+                    "transito_0": { url: "https://www.planalto.gov.br/ccivil_03/leis/l9503.htm", desc: "Código de Trânsito Brasileiro" },
+                    "constitucional_0": { url: "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm", desc: "Constituição Federal" }
+                };
+                for (const [chave, link] of Object.entries(linksPadrao)) {
+                    const [disciplina, indice] = chave.split('_');
+                    await salvarLinkCloud(disciplina, parseInt(indice), link.url, link.desc);
+                    linksGlobais[chave] = link;
+                }
+            }
+        } catch (erro) {
+            console.error("Erro ao carregar dados:", erro);
         }
-        usuarios[email] = { senha: senha, tipo: "aluno", nome: email.split('@')[0] };
-        salvarUsuarios(usuarios);
-        document.getElementById('loginMsg').innerText = "Conta criada! Faça login.";
-        return true;
-    }
-
-    function logout() {
-        usuarioAtual = null;
-        tipoUsuario = null;
-        disciplinaAtual = null;
-        localStorage.removeItem('usuario_prf_atual');
-        localStorage.removeItem('tipo_prf_atual');
-        document.getElementById('homeScreen').style.display = 'none';
-        document.getElementById('courseScreen').style.display = 'none';
-        document.getElementById('loginScreen').style.display = 'flex';
-    }
-
-    function carregarDados() {
-        // Progresso
-        const progSalvo = localStorage.getItem(`progresso_${usuarioAtual}`);
-        progresso = progSalvo ? JSON.parse(progSalvo) : {};
-        
-        // Links globais
-        const linksSalvos = localStorage.getItem('links_globais_prf');
-        if (linksSalvos) {
-            linksGlobais = JSON.parse(linksSalvos);
-        } else {
-            linksGlobais = {
-                "penal_0": { url: "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm", desc: "Código Penal" },
-                "transito_0": { url: "https://www.planalto.gov.br/ccivil_03/leis/l9503.htm", desc: "Código de Trânsito" },
-                "constitucional_0": { url: "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm", desc: "Constituição Federal" }
-            };
-            localStorage.setItem('links_globais_prf', JSON.stringify(linksGlobais));
-        }
-    }
-
-    function salvarProgresso() {
-        localStorage.setItem(`progresso_${usuarioAtual}`, JSON.stringify(progresso));
-    }
-
-    function salvarLinksGlobais() {
-        localStorage.setItem('links_globais_prf', JSON.stringify(linksGlobais));
-        if (disciplinaAtual) renderizarConteudos();
-        if (tipoUsuario === 'admin') atualizarStatsAdmin();
     }
 
     // ==================== PROGRESSO ====================
@@ -643,10 +619,12 @@
         return { concluidos, total, percentual: total ? (concluidos / total) * 100 : 0 };
     }
 
-    function alternarConteudo(disciplinaId, indice) {
+    async function alternarConteudoCloud(disciplinaId, indice) {
         if (!progresso[disciplinaId]) progresso[disciplinaId] = {};
-        progresso[disciplinaId][indice] = !progresso[disciplinaId][indice];
-        salvarProgresso();
+        const novoEstado = !progresso[disciplinaId][indice];
+        progresso[disciplinaId][indice] = novoEstado;
+        
+        await salvarProgressoCloud(disciplinaId, indice, novoEstado);
         
         if (disciplinaAtual === disciplinaId) {
             atualizarProgressoCurso();
@@ -656,8 +634,6 @@
     }
 
     // ==================== LINKS ====================
-    let linkEditando = null;
-
     function abrirModalLink(disciplinaId, indice) {
         if (tipoUsuario !== 'admin') return;
         
@@ -677,30 +653,35 @@
         document.getElementById('linkModal').style.display = 'flex';
     }
 
-    function salvarLink() {
+    async function salvarLinkModal() {
         if (!linkEditando) return;
         const { disciplinaId, indice } = linkEditando;
-        const chave = `${disciplinaId}_${indice}`;
         const url = document.getElementById('modalUrl').value;
         const desc = document.getElementById('modalDesc').value;
+        const chave = `${disciplinaId}_${indice}`;
         
         if (url) {
             linksGlobais[chave] = { url, desc };
+            await salvarLinkCloud(disciplinaId, indice, url, desc);
         } else {
             delete linksGlobais[chave];
+            await salvarLinkCloud(disciplinaId, indice, '', '');
         }
         
-        salvarLinksGlobais();
         fecharModal();
+        if (disciplinaAtual === disciplinaId) renderizarConteudos();
+        if (tipoUsuario === 'admin') atualizarStatsAdmin();
     }
 
-    function excluirLink() {
+    async function excluirLinkModal() {
         if (!linkEditando) return;
         const { disciplinaId, indice } = linkEditando;
         const chave = `${disciplinaId}_${indice}`;
         delete linksGlobais[chave];
-        salvarLinksGlobais();
+        await salvarLinkCloud(disciplinaId, indice, '', '');
         fecharModal();
+        if (disciplinaAtual === disciplinaId) renderizarConteudos();
+        if (tipoUsuario === 'admin') atualizarStatsAdmin();
     }
 
     function fecharModal() {
@@ -709,13 +690,13 @@
     }
 
     // ==================== ADMIN ====================
-    function atualizarStatsAdmin() {
+    async function atualizarStatsAdmin() {
         if (tipoUsuario !== 'admin') return;
         const totalLinks = Object.keys(linksGlobais).length;
         document.getElementById('totalLinks').innerText = totalLinks;
         
-        const usuarios = obterUsuarios();
-        const totalAlunos = Object.keys(usuarios).filter(email => usuarios[email].tipo === 'aluno').length;
+        const resultado = await chamarAPI({ acao: 'contar_alunos' });
+        const totalAlunos = resultado?.total || 0;
         document.getElementById('totalStudents').innerText = totalAlunos;
     }
 
@@ -726,9 +707,8 @@
         document.getElementById('courseScreen').style.display = 'none';
         disciplinaAtual = null;
         
-        const usuarios = obterUsuarios();
-        const dados = usuarios[usuarioAtual];
-        document.getElementById('userNameDisplay').innerText = dados.nome;
+        const nomeExibicao = usuarioAtual ? usuarioAtual.split('@')[0] : 'Usuário';
+        document.getElementById('userNameDisplay').innerText = nomeExibicao;
         
         const roleSpan = document.getElementById('roleDisplay');
         if (tipoUsuario === 'admin') {
@@ -775,8 +755,8 @@
         document.getElementById('courseTitle').innerText = dados.nome;
         document.getElementById('courseIcon').className = dados.icone;
         
-        const usuarios = obterUsuarios();
-        document.getElementById('courseUserName').innerText = usuarios[usuarioAtual].nome;
+        const nomeExibicao = usuarioAtual ? usuarioAtual.split('@')[0] : 'Usuário';
+        document.getElementById('courseUserName').innerText = nomeExibicao;
         
         const roleSpanCurso = document.getElementById('courseRoleBadge');
         if (tipoUsuario === 'admin') {
@@ -823,7 +803,7 @@
                 <div class="content-item ${concluido ? 'completed' : ''}">
                     <div class="content-header">
                         <input type="checkbox" class="content-checkbox" ${concluido ? 'checked' : ''} 
-                               onclick="alternarConteudo('${disciplinaAtual}', ${idx})">
+                               onclick="alternarConteudoCloud('${disciplinaAtual}', ${idx})">
                         <div class="content-text"><strong>Tópico ${idx+1}</strong><br>${texto}</div>
                         ${isAdmin ? `
                         <button class="link-btn" onclick="abrirModalLink('${disciplinaAtual}', ${idx})">
@@ -845,27 +825,45 @@
     }
 
     // ==================== EVENTOS ====================
+    function logout() {
+        usuarioAtual = null;
+        tipoUsuario = null;
+        disciplinaAtual = null;
+        localStorage.removeItem('usuario_prf_atual');
+        localStorage.removeItem('tipo_prf_atual');
+        document.getElementById('homeScreen').style.display = 'none';
+        document.getElementById('courseScreen').style.display = 'none';
+        document.getElementById('loginScreen').style.display = 'flex';
+        document.getElementById('emailInput').value = '';
+        document.getElementById('passwordInput').value = '';
+        document.getElementById('loginMsg').innerText = '';
+    }
+
     function configurarEventos() {
-        // Login
-        document.getElementById('doLoginBtn').onclick = () => {
-            login(document.getElementById('emailInput').value, document.getElementById('passwordInput').value);
-        };
-        document.getElementById('doRegisterBtn').onclick = () => {
-            registrar(document.getElementById('emailInput').value, document.getElementById('passwordInput').value);
+        document.getElementById('doLoginBtn').onclick = async () => {
+            const email = document.getElementById('emailInput').value;
+            const senha = document.getElementById('passwordInput').value;
+            const sucesso = await loginAPI(email, senha);
+            if (!sucesso) {
+                document.getElementById('loginMsg').innerText = "Email ou senha inválidos!";
+            }
         };
         
-        // Home
+        document.getElementById('doRegisterBtn').onclick = async () => {
+            const email = document.getElementById('emailInput').value;
+            const senha = document.getElementById('passwordInput').value;
+            await registrarAPI(email, senha);
+        };
+        
         document.getElementById('logoutMainBtn').onclick = logout;
         document.getElementById('logoutCourseBtn').onclick = logout;
         document.getElementById('backToHomeBtn').onclick = () => mostrarTelaHome();
         document.getElementById('goHomeBtn').onclick = () => mostrarTelaHome();
         
-        // Modal
-        document.getElementById('modalSaveBtn').onclick = salvarLink;
-        document.getElementById('modalDeleteBtn').onclick = excluirLink;
+        document.getElementById('modalSaveBtn').onclick = salvarLinkModal;
+        document.getElementById('modalDeleteBtn').onclick = excluirLinkModal;
         document.getElementById('modalCancelBtn').onclick = fecharModal;
         
-        // Filtros
         document.querySelectorAll('#courseScreen .filter-btn').forEach(btn => {
             btn.onclick = () => {
                 document.querySelectorAll('#courseScreen .filter-btn').forEach(b => b.classList.remove('active'));
@@ -875,14 +873,13 @@
             };
         });
         
-        // Fechar modal ao clicar fora
         window.onclick = (e) => {
             if (e.target === document.getElementById('linkModal')) fecharModal();
         };
     }
 
     // ==================== INICIALIZAÇÃO ====================
-    function init() {
+    async function init() {
         configurarEventos();
         
         const usuarioSalvo = localStorage.getItem('usuario_prf_atual');
@@ -891,15 +888,14 @@
         if (usuarioSalvo && tipoSalvo) {
             usuarioAtual = usuarioSalvo;
             tipoUsuario = tipoSalvo;
-            carregarDados();
+            await carregarDadosCloud();
             mostrarTelaHome();
         } else {
             document.getElementById('loginScreen').style.display = 'flex';
         }
     }
     
-    // Tornar funções globais para onclick
-    window.alternarConteudo = alternarConteudo;
+    window.alternarConteudoCloud = alternarConteudoCloud;
     window.abrirModalLink = abrirModalLink;
     
     init();
