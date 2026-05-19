@@ -1,121 +1,136 @@
+Aqui está o código completo e atualizado, com os cards específicos para **PRF**, **Polícia Judicial** e **Base**, conforme você solicitou.
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mentoria | Plataforma de Estudos</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Mentoria | Escolha seu concurso - PRF, Polícia Judicial, Base</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: #f0f4f8; color: #1f2d3d; }
+        body { font-family: 'Inter', sans-serif; background: #f0f4f8; color: #1e293b; }
         
-        /* Login */
+        /* Login Overlay */
         .login-overlay {
             position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.7); display: flex;
-            align-items: center; justify-content: center; z-index: 1000;
+            background: linear-gradient(135deg, #0f172a, #1e3a8a);
+            display: flex; align-items: center; justify-content: center; z-index: 1000;
         }
         .login-card {
-            background: white; border-radius: 32px; padding: 2.5rem;
-            max-width: 400px; width: 90%; text-align: center;
+            background: white; border-radius: 40px; padding: 2.5rem;
+            max-width: 420px; width: 90%; text-align: center;
+            box-shadow: 0 25px 40px rgba(0,0,0,0.2);
         }
-        .login-card .logo-icon { font-size: 3rem; color: #0056a7; margin-bottom: 1rem; }
-        .login-card h2 { color: #0056a7; margin-bottom: 0.5rem; }
+        .login-card .logo-icon { font-size: 3.5rem; color: #1e3a8a; margin-bottom: 1rem; }
+        .login-card h2 { color: #1e3a8a; margin-bottom: 0.5rem; font-weight: 700; }
         .login-card input {
-            width: 100%; padding: 0.8rem; margin: 0.5rem 0;
-            border: 2px solid #e2e8f0; border-radius: 12px; font-size: 1rem;
+            width: 100%; padding: 0.9rem; margin: 0.6rem 0;
+            border: 2px solid #e2e8f0; border-radius: 20px; font-size: 1rem;
+            transition: 0.2s;
         }
+        .login-card input:focus { outline: none; border-color: #1e3a8a; }
         .login-card button {
-            width: 100%; padding: 0.8rem; margin-top: 0.5rem;
-            background: #0056a7; color: white; border: none;
-            border-radius: 40px; font-size: 1rem; cursor: pointer; font-weight: 600;
+            width: 100%; padding: 0.9rem; margin-top: 0.6rem;
+            background: #1e3a8a; color: white; border: none;
+            border-radius: 40px; font-size: 1rem; cursor: pointer; font-weight: 700;
+            transition: 0.2s;
         }
-        .login-card .register-btn { background: #eef2f6; color: #0056a7; }
-        .error-msg { color: #e74c3c; font-size: 0.8rem; margin-top: 0.5rem; }
+        .login-card button:hover { background: #2563eb; }
+        .login-card .register-btn { background: #eef2ff; color: #1e3a8a; border: 1px solid #cbd5e1; }
+        .error-msg { color: #dc2626; font-size: 0.8rem; margin-top: 0.5rem; }
         
-        /* Header */
+        /* Header Principal */
         .main-header {
             background: white; padding: 1rem 2rem;
             display: flex; justify-content: space-between; align-items: center;
-            flex-wrap: wrap; border-bottom: 1px solid #e2e8f0;
+            flex-wrap: wrap; border-bottom: 2px solid #e2e8f0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
         }
         .logo-area { display: flex; align-items: center; gap: 0.8rem; cursor: pointer; }
-        .logo-icon { background: #0056a7; width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; color: white; }
-        .logo-text h1 { font-size: 1.3rem; color: #0056a7; }
+        .logo-icon { background: #1e3a8a; width: 45px; height: 45px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; color: white; }
+        .logo-text h1 { font-size: 1.5rem; color: #1e3a8a; font-weight: 800; }
         .user-info {
             display: flex; align-items: center; gap: 1rem;
-            background: #f0f4f8; padding: 0.5rem 1rem; border-radius: 40px;
+            background: #f1f5f9; padding: 0.5rem 1.2rem; border-radius: 60px;
         }
-        .role-badge { padding: 0.2rem 0.8rem; border-radius: 20px; font-size: 0.7rem; font-weight: 600; }
-        .role-admin { background: #e74c3c; color: white; }
-        .role-student { background: #27ae60; color: white; }
-        .logout-btn { background: #e74c3c; color: white; border: none; padding: 0.3rem 1rem; border-radius: 40px; cursor: pointer; }
+        .role-badge { padding: 0.25rem 1rem; border-radius: 30px; font-size: 0.7rem; font-weight: 700; }
+        .role-admin { background: #dc2626; color: white; }
+        .role-student { background: #059669; color: white; }
+        .logout-btn { background: #ef4444; color: white; border: none; padding: 0.3rem 1.2rem; border-radius: 40px; cursor: pointer; font-weight: 600; }
         
-        /* Hero */
-        .hero { background: linear-gradient(135deg, #e8f0fe, #ffffff); padding: 3rem 2rem; text-align: center; }
-        .hero h1 { font-size: 2rem; color: #0056a7; }
+        /* Hero Section */
+        .hero { background: linear-gradient(120deg, #eef2ff, #ffffff); padding: 2.5rem 2rem; text-align: center; }
+        .hero h1 { font-size: 2.2rem; color: #0f172a; }
+        .hero p { color: #334155; margin-top: 0.5rem; }
         
         /* Admin Panel */
-        .admin-panel { background: white; margin: 2rem; padding: 1.5rem; border-radius: 24px; display: none; }
-        .admin-stats { display: flex; gap: 1rem; justify-content: center; margin-top: 1rem; }
-        .stat-card { background: #e8f0fe; padding: 1rem; border-radius: 16px; text-align: center; min-width: 150px; }
+        .admin-panel { background: white; margin: 2rem; padding: 1.5rem; border-radius: 32px; display: none; box-shadow: 0 8px 20px rgba(0,0,0,0.05); }
+        .admin-stats { display: flex; gap: 1.5rem; justify-content: center; margin-top: 1rem; flex-wrap: wrap; }
+        .stat-card { background: #eef2ff; padding: 1.2rem; border-radius: 24px; text-align: center; min-width: 160px; }
+        .stat-card i { font-size: 2rem; color: #1e3a8a; }
         
-        /* Disciplinas */
-        .section-title { text-align: center; margin: 2rem 0 1rem; font-size: 1.5rem; }
+        /* Cards de Concurso (PRF, Polícia Judicial, Base) */
+        .section-title { text-align: center; margin: 2.5rem 0 1.5rem; font-size: 1.8rem; font-weight: 700; color: #0f172a; }
         .disciplines-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem; max-width: 1200px; margin: 0 auto 2rem; padding: 0 2rem;
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem; max-width: 1300px; margin: 0 auto 2rem; padding: 0 2rem;
         }
         .discipline-card {
-            background: white; border-radius: 20px; padding: 1.5rem;
-            text-align: center; cursor: pointer; transition: all 0.3s;
-            border: 1px solid #eef2f8;
+            background: white; border-radius: 32px; padding: 1.8rem;
+            text-align: center; cursor: pointer; transition: all 0.3s ease;
+            border: 1px solid #eef2ff; box-shadow: 0 8px 20px rgba(0,0,0,0.03);
         }
-        .discipline-card:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-        .discipline-icon { font-size: 2.5rem; color: #0056a7; margin-bottom: 1rem; }
-        .progress-bar { height: 6px; background: #e2e8f0; border-radius: 3px; margin: 0.8rem 0; overflow: hidden; }
-        .progress-fill { height: 100%; background: #0056a7; width: 0%; }
+        .discipline-card:hover { transform: translateY(-6px); box-shadow: 0 20px 30px -10px rgba(0,0,0,0.15); border-color: #cbd5e1; }
+        .discipline-icon { font-size: 3rem; color: #1e3a8a; margin-bottom: 1rem; }
+        .discipline-card h3 { font-size: 1.4rem; margin-bottom: 0.8rem; color: #0f172a; }
+        .progress-bar { height: 8px; background: #e2e8f0; border-radius: 10px; margin: 1rem 0; overflow: hidden; }
+        .progress-fill { height: 100%; background: #1e3a8a; width: 0%; border-radius: 10px; }
+        .badge-concurso { background: #dbeafe; color: #1e40af; padding: 0.2rem 0.8rem; border-radius: 40px; font-size: 0.7rem; font-weight: 600; display: inline-block; margin-top: 0.5rem; }
         
-        /* Curso */
-        .course-container { max-width: 900px; margin: 0 auto; padding: 2rem; }
-        .course-header { background: white; border-radius: 24px; padding: 1.5rem; margin-bottom: 1.5rem; }
-        .back-btn { background: #eef2f6; color: #0056a7; border: none; padding: 0.5rem 1rem; border-radius: 40px; cursor: pointer; margin-bottom: 1rem; }
-        .course-title { font-size: 1.5rem; color: #0056a7; display: flex; align-items: center; gap: 0.5rem; margin: 1rem 0; }
-        .filters { display: flex; gap: 0.5rem; justify-content: center; margin-bottom: 1.5rem; }
-        .filter-btn { background: #f0f4f8; border: none; padding: 0.4rem 1.2rem; border-radius: 40px; cursor: pointer; }
-        .filter-btn.active { background: #0056a7; color: white; }
-        .contents-list { background: white; border-radius: 24px; padding: 1rem; }
-        .content-item { padding: 1rem; border-bottom: 1px solid #eef2f8; }
-        .content-item.completed { background: #f0fdf4; border-left: 4px solid #0056a7; }
-        .content-header { display: flex; align-items: flex-start; gap: 0.8rem; flex-wrap: wrap; }
-        .content-checkbox { width: 20px; height: 20px; margin-top: 2px; cursor: pointer; }
-        .content-text { flex: 1; }
-        .link-btn { background: #3498db; color: white; border: none; padding: 0.2rem 0.8rem; border-radius: 20px; cursor: pointer; font-size: 0.7rem; }
-        .link-container { margin-top: 0.5rem; padding-left: 2rem; }
-        .link-container a { color: #0056a7; text-decoration: none; font-size: 0.85rem; }
+        /* Curso (acompanhamento das matérias) */
+        .course-container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
+        .course-header {
+            background: white; border-radius: 32px; padding: 1.8rem;
+            margin-bottom: 1.8rem; box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .back-btn { background: #f1f5f9; color: #1e3a8a; border: none; padding: 0.6rem 1.2rem; border-radius: 40px; cursor: pointer; font-weight: 600; margin-bottom: 1rem; }
+        .course-title { font-size: 1.6rem; color: #0f172a; display: flex; align-items: center; gap: 0.8rem; margin: 0.5rem 0; font-weight: 700; }
+        .filters { display: flex; gap: 0.8rem; justify-content: center; margin-bottom: 1.5rem; flex-wrap: wrap; }
+        .filter-btn { background: #f1f5f9; border: none; padding: 0.5rem 1.5rem; border-radius: 40px; cursor: pointer; font-weight: 500; transition: 0.2s; }
+        .filter-btn.active { background: #1e3a8a; color: white; }
+        .contents-list { background: white; border-radius: 28px; padding: 0.5rem; overflow: hidden; }
+        .content-item { padding: 1.2rem; border-bottom: 1px solid #eef2ff; transition: 0.1s; }
+        .content-item.completed { background: #f0fdf4; border-left: 5px solid #059669; }
+        .content-header { display: flex; align-items: flex-start; gap: 1rem; flex-wrap: wrap; }
+        .content-checkbox { width: 22px; height: 22px; margin-top: 3px; cursor: pointer; accent-color: #1e3a8a; }
+        .content-text { flex: 1; font-weight: 500; }
+        .link-btn { background: #2563eb; color: white; border: none; padding: 0.3rem 1rem; border-radius: 30px; cursor: pointer; font-size: 0.7rem; font-weight: 600; }
+        .link-container { margin-top: 0.6rem; padding-left: 2.2rem; }
+        .link-container a { color: #1e3a8a; text-decoration: none; font-size: 0.85rem; font-weight: 500; border-bottom: 1px dashed; }
         
         /* Modal */
         .modal {
             display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.5); align-items: center; justify-content: center; z-index: 1001;
+            background: rgba(0,0,0,0.6); align-items: center; justify-content: center; z-index: 1100;
         }
         .modal-content {
-            background: white; border-radius: 24px; padding: 1.5rem;
-            max-width: 450px; width: 90%;
+            background: white; border-radius: 32px; padding: 1.8rem;
+            max-width: 480px; width: 90%;
         }
         .modal-content input, .modal-content textarea {
-            width: 100%; padding: 0.7rem; margin: 0.5rem 0;
-            border: 1px solid #ddd; border-radius: 12px;
+            width: 100%; padding: 0.8rem; margin: 0.6rem 0;
+            border: 1px solid #cbd5e1; border-radius: 20px;
         }
-        .modal-buttons { display: flex; gap: 0.5rem; margin-top: 1rem; }
-        .modal-buttons button { flex: 1; padding: 0.5rem; border-radius: 40px; cursor: pointer; border: none; }
+        .modal-buttons { display: flex; gap: 0.8rem; margin-top: 1.2rem; }
+        .modal-buttons button { flex: 1; padding: 0.7rem; border-radius: 40px; cursor: pointer; border: none; font-weight: 600; }
         
-        .footer { background: #1a2a3a; color: white; text-align: center; padding: 1.5rem; margin-top: 2rem; }
+        .footer { background: #0f172a; color: #cbd5e1; text-align: center; padding: 1.8rem; margin-top: 2rem; }
         
-        @media (max-width: 768px) {
+        @media (max-width: 680px) {
             .main-header { flex-direction: column; gap: 1rem; }
-            .disciplines-grid { padding: 0 1rem; }
+            .disciplines-grid { padding: 0 1rem; gap: 1.2rem; }
             .course-container { padding: 1rem; }
         }
     </style>
@@ -126,20 +141,18 @@
 <div id="loginScreen" class="login-overlay">
     <div class="login-card">
         <div class="logo-icon"><i class="fas fa-gavel"></i></div>
-        <h2>Mentoria </h2>
-        <p>O simples que aprova!</p>
-        <input type="email" id="emailInput" placeholder="Email">
+        <h2>Mentoria</h2>
+        <p style="margin-bottom: 1rem;">Seu foco, nossa mentoria</p>
+        <input type="email" id="emailInput" placeholder="seu@email.com">
         <input type="password" id="passwordInput" placeholder="Senha">
         <button id="doLoginBtn">Entrar</button>
         <button id="doRegisterBtn" class="register-btn">Criar nova conta</button>
         <div id="loginMsg" class="error-msg"></div>
-        <div style="margin-top: 1rem; font-size: 0.7rem; color: #666;">
-           
-        </div>
+        <div style="margin-top: 1rem; font-size: 0.7rem; color: #475569;">Demo: admin@mentoria.com / admin123</div>
     </div>
 </div>
 
-<!-- TELA PRINCIPAL -->
+<!-- TELA PRINCIPAL (HOME) -->
 <div id="homeScreen" style="display: none;">
     <header class="main-header">
         <div class="logo-area" id="goHomeBtn">
@@ -155,149 +168,118 @@
     </header>
 
     <section class="hero">
-        <h1>Prepare-se!</h1>
-        <p>Conteúdo atualizado</p>
+        <h1>🎯 Escolha seu concurso</h1>
+        <p>PRF • Polícia Judicial • Base (carreiras iniciais)</p>
     </section>
 
     <div id="adminPanel" class="admin-panel">
-        <h3 style="color:#0056a7;"><i class="fas fa-shield-alt"></i> Painel do Administrador</h3>
+        <h3 style="color:#1e3a8a;"><i class="fas fa-shield-alt"></i> Painel do Admin</h3>
         <div class="admin-stats">
-            <div class="stat-card"><i class="fas fa-link" style="font-size: 1.5rem;"></i><h3 id="totalLinks">0</h3><p>Links</p></div>
-            <div class="stat-card"><i class="fas fa-users" style="font-size: 1.5rem;"></i><h3 id="totalStudents">0</h3><p>Alunos</p></div>
+            <div class="stat-card"><i class="fas fa-link"></i><h3 id="totalLinks">0</h3><p>Links de estudo</p></div>
+            <div class="stat-card"><i class="fas fa-users"></i><h3 id="totalStudents">0</h3><p>Alunos ativos</p></div>
         </div>
     </div>
 
-    <h2 class="section-title">Disciplinas</h2>
+    <h2 class="section-title">🚀 Concursos disponíveis</h2>
     <div id="disciplinesGrid" class="disciplines-grid"></div>
 
-    <footer class="footer"><p>Mentoria - Plataforma de estudos</p></footer>
+    <footer class="footer"><p>© Mentoria - Acompanhamento inteligente para sua aprovação</p></footer>
 </div>
 
-<!-- TELA DO CURSO -->
+<!-- TELA DE ACOMPANHAMENTO DO CURSO (MATÉRIAS DETALHADAS) -->
 <div id="courseScreen" style="display: none;">
     <div class="course-container">
         <div class="course-header">
-            <button id="backToHomeBtn" class="back-btn"><i class="fas fa-arrow-left"></i> Voltar</button>
-            <div class="course-title"><i id="courseIcon" class="fas fa-book"></i><span id="courseTitle"></span></div>
-            <div style="display: flex; justify-content: space-between; margin-top: 0.5rem; flex-wrap: wrap;">
+            <button id="backToHomeBtn" class="back-btn"><i class="fas fa-arrow-left"></i> Voltar para concursos</button>
+            <div class="course-title"><i id="courseIcon" class="fas fa-landmark"></i><span id="courseTitle"></span></div>
+            <div style="display: flex; justify-content: space-between; margin-top: 0.8rem; flex-wrap: wrap;">
                 <span><i class="fas fa-user"></i> <span id="courseUserName"></span> <span id="courseRoleBadge" class="role-badge"></span></span>
-                <span id="courseProgressPercent">0%</span>
+                <span><i class="fas fa-chart-line"></i> Progresso: <span id="courseProgressPercent">0%</span></span>
             </div>
-            <div class="progress-bar" style="margin-top: 0.5rem;"><div id="courseProgressFill" class="progress-fill" style="width: 0%;"></div></div>
+            <div class="progress-bar" style="margin-top: 0.8rem;"><div id="courseProgressFill" class="progress-fill" style="width: 0%;"></div></div>
         </div>
 
         <div class="filters">
-            <button class="filter-btn active" data-filter="all">Todos</button>
-            <button class="filter-btn" data-filter="pending">Pendentes</button>
-            <button class="filter-btn" data-filter="completed">Concluídos</button>
+            <button class="filter-btn active" data-filter="all">📚 Todos</button>
+            <button class="filter-btn" data-filter="pending">⏳ Pendentes</button>
+            <button class="filter-btn" data-filter="completed">✅ Concluídos</button>
         </div>
 
         <div id="contentsContainer" class="contents-list"></div>
 
-        <button id="logoutCourseBtn" class="logout-btn" style="position: fixed; bottom: 1rem; right: 1rem;">Sair</button>
+        <button id="logoutCourseBtn" class="logout-btn" style="position: fixed; bottom: 1.5rem; right: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">Sair</button>
     </div>
 </div>
 
-<!-- MODAL -->
+<!-- MODAL PARA GERENCIAR LINKS (ADMIN) -->
 <div id="linkModal" class="modal">
     <div class="modal-content">
-        <h3 style="color:#0056a7;"><i class="fas fa-link"></i> Gerenciar Link</h3>
-        <input type="url" id="modalUrl" placeholder="URL do material">
-        <textarea id="modalDesc" rows="2" placeholder="Descrição (opcional)"></textarea>
+        <h3 style="color:#1e3a8a;"><i class="fas fa-link"></i> Gerenciar material de apoio</h3>
+        <input type="url" id="modalUrl" placeholder="URL do material (ex: PDF, vídeo)">
+        <textarea id="modalDesc" rows="2" placeholder="Descrição do conteúdo (opcional)"></textarea>
         <div class="modal-buttons">
-            <button id="modalSaveBtn" style="background:#0056a7; color:white;">Salvar</button>
-            <button id="modalDeleteBtn" style="background:#e74c3c; color:white; display:none;">Excluir</button>
-            <button id="modalCancelBtn" style="background:#eef2f6;">Cancelar</button>
+            <button id="modalSaveBtn" style="background:#1e3a8a; color:white;">Salvar link</button>
+            <button id="modalDeleteBtn" style="background:#dc2626; color:white; display:none;">Excluir</button>
+            <button id="modalCancelBtn" style="background:#eef2ff;">Cancelar</button>
         </div>
     </div>
 </div>
 
 <script>
-    // ==================== DADOS DAS DISCIPLINAS ====================
-    const DISCIPLINAS = {
-        portugues: { nome: "LÍNGUA PORTUGUESA", icone: "fas fa-language",
+    // ==================== CARD DE CONCURSOS (PRF, POLÍCIA JUDICIAL, BASE) ====================
+    // Cada concurso possui suas disciplinas / tópicos específicos
+    const CONCURSOS = {
+        prf: {
+            nome: "🚔 PRF - Polícia Rodoviária Federal",
+            icone: "fas fa-car-side",
+            badge: "Concurso Nacional",
             conteudos: [
-                "1. Compreensão e interpretação de textos",
-                "2. Tipos e gêneros textuais", 
-                "3. Ortografia oficial",
-                "4. Coesão textual",
-                "5. Estrutura morfossintática do período",
-                "6. Reescrita de frases e parágrafos"
-            ] 
+                "LÍNGUA PORTUGUESA: Compreensão textual, gramática aplicada à PRF",
+                "RACIOCÍNIO LÓGICO: Estruturas lógicas, problemas aritméticos",
+                "DIREITO CONSTITUCIONAL: Direitos e garantias, princípios fundamentais",
+                "DIREITO ADMINISTRATIVO: Administração pública, licitações, servidores",
+                "LEGISLAÇÃO DE TRÂNSITO: CTB completo, infrações, penalidades",
+                "FÍSICA APLICADA: Cinemática, dinâmica para trânsito",
+                "DIREITO PENAL: Crimes contra a vida, patrimônio e trânsito",
+                "INFORMÁTICA: Segurança, ferramentas para fiscalização"
+            ]
         },
-        raciocinio: { nome: "RACIOCÍNIO LÓGICO", icone: "fas fa-chart-line",
+        policia_judicial: {
+            nome: "⚖️ Polícia Judicial",
+            icone: "fas fa-gavel",
+            badge: "Carreira Jurídica",
             conteudos: [
-                "1. Estruturas lógicas",
-                "2. Lógica de argumentação", 
-                "3. Lógica sentencial (proposicional)",
-                "4. Lógica de primeira ordem",
-                "5. Princípios de contagem e probabilidade",
-                "6. Operações com conjuntos",
-                "7. Raciocínio lógico com problemas aritméticos",
-                "8. Estatística e probabilidade básicas"
-            ] 
+                "PORTUGUÊS JURÍDICO: Redação oficial, coesão e clareza",
+                "MATEMÁTICA E ESTATÍSTICA: Probabilidade, estatística descritiva",
+                "DIREITO CONSTITUCIONAL: Poder Judiciário, controle de constitucionalidade",
+                "DIREITO ADMINISTRATIVO: Agentes públicos, processo administrativo",
+                "DIREITO PROCESSUAL PENAL: Inquérito policial, jurisdição",
+                "LEGISLAÇÃO ESPECIAL: Lei de Organização Judiciária, estatuto da magistratura",
+                "ÉTICA E DISCIPLINA: Código de ética do Poder Judiciário",
+                "NOÇÕES DE DIREITO CIVIL: Pessoas, bens, contratos"
+            ]
         },
-        constitucional: { nome: "DIREITO CONSTITUCIONAL", icone: "fas fa-balance-scale",
+        base: {
+            nome: "📚 Base - Carreiras Iniciais",
+            icone: "fas fa-book-open",
+            badge: "Fundamental",
             conteudos: [
-                "1. Princípios fundamentais da CF/88",
-                "2. Direitos e garantias fundamentais", 
-                "3. Organização do Estado",
-                "4. Administração Pública",
-                "5. Poder Legislativo, Executivo e Judiciário",
-                "6. Funções essenciais à justiça",
-                "7. Controle de constitucionalidade"
-            ] 
-        },
-        penal: { nome: "DIREITO PENAL", icone: "fas fa-gavel",
-            conteudos: [
-                "1. Princípios básicos do direito penal",
-                "2. Aplicação da lei penal no tempo", 
-                "3. Aplicação da lei penal no espaço",
-                "4. Tipicidade (crime doloso e culposo)",
-                "5. Erro de tipo",
-                "6. Crime consumado e tentado",
-                "7. Ilicitude e causas de exclusão",
-                "8. Culpabilidade e causas de exclusão",
-                "9. Crimes contra a pessoa",
-                "10. Crimes contra o patrimônio",
-                "11. Crimes contra a Administração Pública"
-            ] 
-        },
-        transito: { nome: "LEGISLAÇÃO DE TRÂNSITO", icone: "fas fa-car",
-            conteudos: [
-                "1. CTB - Lei 9.503/97: objetivos e conceitos",
-                "2. Sistema Nacional de Trânsito",
-                "3. Normas gerais de circulação e conduta",
-                "4. Sinalização de trânsito",
-                "5. Infrações: tipificação e penalidades",
-                "6. Processo administrativo de imposição de penalidades",
-                "7. Crimes de trânsito (arts. 302 a 312-A)",
-                "8. Direção defensiva e primeiros socorros",
-                "9. Resolução CONTRAN 04/1998 - Sinalização",
-                "10. Resolução CONTRAN 14/1998 - Processo administrativo",
-                "11. Resolução CONTRAN 24/1998 - Medidas administrativas",
-                "12. Resolução CONTRAN 36/1998 - Exames de aptidão",
-                "13. Resolução CONTRAN 210/2006 - Identificação de veículos",
-                "14. Resolução CONTRAN 253/2007 - Inspeção veicular",
-                "15. Resolução CONTRAN 432/2013 - Notificação eletrônica",
-                "16. Resolução CONTRAN 471/2013 - Aplicação de multas",
-                "17. Resolução CONTRAN 667/2017 - Fiscalização",
-                "18. Resolução CONTRAN 780/2019 - Atualizações do CTB",
-                "19. Resolução CONTRAN 789/2020 - Fiscalização",
-                "20. Resolução CONTRAN 803/2020 - Pontuação da CNH"
-            ] 
+                "PORTUGUÊS: Interpretação textual, ortografia, morfossintaxe",
+                "MATEMÁTICA BÁSICA: Aritmética, frações, regra de três, porcentagem",
+                "DIREITO CONSTITUCIONAL: Princípios fundamentais, direitos e deveres",
+                "DIREITO ADMINISTRATIVO: Atos administrativos, poderes da administração",
+                "LEGISLAÇÃO: Noções de direito penal e processo penal essenciais",
+                "RACIOCÍNIO LÓGICO: Sequências lógicas, proposições, diagramas",
+                "ATUALIDADES: Política e economia para concursos",
+                "INFORMÁTICA BÁSICA: Windows, internet, pacote office"
+            ]
         }
     };
 
-    // ==================== GERENCIAMENTO DE DADOS (localStorage) ====================
-    // Isso simula a "nuvem" - mas os dados ficam salvos no navegador
-    // Para usar nuvem real, seria necessário um backend
-    
+    // ==================== GERENCIAMENTO DE BANCO LOCAL ====================
     function getUsers() {
-        const users = localStorage.getItem('mentoria_usuarios');
+        const users = localStorage.getItem('mentoria_usuarios_v2');
         if (users) return JSON.parse(users);
-        
-        // Usuário admin padrão
         const defaultUsers = {
             "admin@mentoria.com": {
                 senha: "admin123",
@@ -306,62 +288,57 @@
                 criado: new Date().toISOString()
             }
         };
-        localStorage.setItem('mentoria_usuarios', JSON.stringify(defaultUsers));
+        localStorage.setItem('mentoria_usuarios_v2', JSON.stringify(defaultUsers));
         return defaultUsers;
     }
     
     function saveUsers(users) {
-        localStorage.setItem('mentoria_usuarios', JSON.stringify(users));
+        localStorage.setItem('mentoria_usuarios_v2', JSON.stringify(users));
     }
     
     function getProgresso(email) {
-        const progress = localStorage.getItem(`mentoria_progresso_${email}`);
+        const progress = localStorage.getItem(`mentoria_progresso_concurso_${email}`);
         return progress ? JSON.parse(progress) : {};
     }
     
     function saveProgresso(email, progresso) {
-        localStorage.setItem(`mentoria_progresso_${email}`, JSON.stringify(progresso));
+        localStorage.setItem(`mentoria_progresso_concurso_${email}`, JSON.stringify(progresso));
     }
     
     function getLinksGlobais() {
-        const links = localStorage.getItem('mentoria_links_globais');
+        const links = localStorage.getItem('mentoria_links_concurso');
         if (links) return JSON.parse(links);
-        
-        // Links padrão
         const defaultLinks = {
-            "penal_0": { url: "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm", desc: "Código Penal Completo" },
-            "transito_0": { url: "https://www.planalto.gov.br/ccivil_03/leis/l9503.htm", desc: "Código de Trânsito Brasileiro - Lei 9.503/97" },
-            "constitucional_0": { url: "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm", desc: "Constituição Federal de 1988" },
-            "raciocinio_0": { url: "https://www.todamateria.com.br/raciocinio-logico/", desc: "Material de apoio - Raciocínio Lógico" },
-            "portugues_0": { url: "https://www.concursosnobrasil.com.br/portugues/", desc: "Gramática para concursos" }
+            "prf_0": { url: "https://www.gov.br/prf/pt-br/acesso-a-informacao/legislacao", desc: "Legislação PRF - Portarias e CTB" },
+            "prf_4": { url: "https://www.planalto.gov.br/ccivil_03/leis/l9503.htm", desc: "Código de Trânsito Brasileiro completo" },
+            "policia_judicial_2": { url: "https://www.stf.jus.br/arquivo/cms/legislacaoConstituicao/anexo/CF.pdf", desc: "Constituição Federal" },
+            "base_0": { url: "https://www.gramaticaonline.com.br/", desc: "Gramática essencial para concursos" }
         };
-        localStorage.setItem('mentoria_links_globais', JSON.stringify(defaultLinks));
+        localStorage.setItem('mentoria_links_concurso', JSON.stringify(defaultLinks));
         return defaultLinks;
     }
     
     function saveLinksGlobais(links) {
-        localStorage.setItem('mentoria_links_globais', JSON.stringify(links));
+        localStorage.setItem('mentoria_links_concurso', JSON.stringify(links));
     }
     
     function contarAlunos() {
         const users = getUsers();
         let total = 0;
-        for (const email in users) {
-            if (users[email].tipo === 'aluno') total++;
-        }
+        for (const email in users) if (users[email].tipo === 'aluno') total++;
         return total;
     }
 
     // ==================== ESTADO GLOBAL ====================
     let usuarioAtual = null;
     let tipoUsuario = null;
-    let disciplinaAtual = null;
+    let concursoAtual = null;      // 'prf', 'policia_judicial', 'base'
     let filtroAtual = "all";
-    let progresso = {};
+    let progresso = {};             // estrutura: { concursoId: { indice: true/false } }
     let linksGlobais = {};
     let linkEditando = null;
 
-    // ==================== FUNÇÕES DE AUTENTICAÇÃO ====================
+    // ==================== AUTENTICAÇÃO ====================
     function login(email, senha) {
         const users = getUsers();
         if (users[email] && users[email].senha === senha) {
@@ -372,22 +349,20 @@
             mostrarTelaHome();
             return true;
         }
-        document.getElementById('loginMsg').innerHTML = '<span style="color:#e74c3c;">❌ Email ou senha inválidos!</span>';
+        document.getElementById('loginMsg').innerHTML = '<span style="color:#dc2626;">❌ Email ou senha inválidos!</span>';
         return false;
     }
     
     function registrar(email, senha) {
         if (!email || !senha) {
-            document.getElementById('loginMsg').innerHTML = '<span style="color:#e74c3c;">❌ Preencha todos os campos!</span>';
+            document.getElementById('loginMsg').innerHTML = '<span style="color:#dc2626;">❌ Preencha todos os campos!</span>';
             return false;
         }
-        
         const users = getUsers();
         if (users[email]) {
-            document.getElementById('loginMsg').innerHTML = '<span style="color:#e74c3c;">❌ Email já cadastrado!</span>';
+            document.getElementById('loginMsg').innerHTML = '<span style="color:#dc2626;">❌ Email já cadastrado!</span>';
             return false;
         }
-        
         users[email] = {
             senha: senha,
             tipo: "aluno",
@@ -395,14 +370,14 @@
             criado: new Date().toISOString()
         };
         saveUsers(users);
-        document.getElementById('loginMsg').innerHTML = '<span style="color:#27ae60;">✅ Conta criada com sucesso! Faça login.</span>';
+        document.getElementById('loginMsg').innerHTML = '<span style="color:#059669;">✅ Conta criada! Faça login.</span>';
         return true;
     }
     
     function logout() {
         usuarioAtual = null;
         tipoUsuario = null;
-        disciplinaAtual = null;
+        concursoAtual = null;
         document.getElementById('homeScreen').style.display = 'none';
         document.getElementById('courseScreen').style.display = 'none';
         document.getElementById('loginScreen').style.display = 'flex';
@@ -412,35 +387,34 @@
     }
 
     // ==================== PROGRESSO ====================
-    function obterProgressoDisciplina(disciplinaId) {
-        const conteudos = DISCIPLINAS[disciplinaId]?.conteudos || [];
+    function obterProgressoConcurso(concursoId) {
+        const conteudos = CONCURSOS[concursoId]?.conteudos || [];
         let concluidos = 0;
         for (let i = 0; i < conteudos.length; i++) {
-            if (progresso[disciplinaId]?.[i]) concluidos++;
+            if (progresso[concursoId]?.[i]) concluidos++;
         }
         const total = conteudos.length;
         return { concluidos, total, percentual: total ? (concluidos / total) * 100 : 0 };
     }
     
-    function alternarConteudo(disciplinaId, indice) {
-        if (!progresso[disciplinaId]) progresso[disciplinaId] = {};
-        progresso[disciplinaId][indice] = !progresso[disciplinaId][indice];
+    function alternarConteudo(concursoId, indice) {
+        if (!progresso[concursoId]) progresso[concursoId] = {};
+        progresso[concursoId][indice] = !progresso[concursoId][indice];
         saveProgresso(usuarioAtual, progresso);
         
-        if (disciplinaAtual === disciplinaId) {
+        if (concursoAtual === concursoId) {
             atualizarProgressoCurso();
             renderizarConteudos();
         }
-        renderizarGradeDisciplinas();
+        renderizarGradeConcursos();  // atualiza cards da home
     }
 
-    // ==================== LINKS ====================
-    function abrirModalLink(disciplinaId, indice) {
+    // ==================== LINKS (ADMIN) ====================
+    function abrirModalLink(concursoId, indice) {
         if (tipoUsuario !== 'admin') return;
-        linkEditando = { disciplinaId, indice };
-        const chave = `${disciplinaId}_${indice}`;
+        linkEditando = { concursoId, indice };
+        const chave = `${concursoId}_${indice}`;
         const link = linksGlobais[chave];
-        
         document.getElementById('modalUrl').value = link?.url || '';
         document.getElementById('modalDesc').value = link?.desc || '';
         document.getElementById('modalDeleteBtn').style.display = link ? 'block' : 'none';
@@ -449,30 +423,25 @@
     
     function salvarLinkModal() {
         if (!linkEditando) return;
-        const { disciplinaId, indice } = linkEditando;
+        const { concursoId, indice } = linkEditando;
         const url = document.getElementById('modalUrl').value;
         const desc = document.getElementById('modalDesc').value;
-        const chave = `${disciplinaId}_${indice}`;
-        
-        if (url) {
-            linksGlobais[chave] = { url, desc };
-        } else {
-            delete linksGlobais[chave];
-        }
-        
+        const chave = `${concursoId}_${indice}`;
+        if (url) linksGlobais[chave] = { url, desc };
+        else delete linksGlobais[chave];
         saveLinksGlobais(linksGlobais);
         fecharModal();
-        if (disciplinaAtual === disciplinaId) renderizarConteudos();
+        if (concursoAtual === concursoId) renderizarConteudos();
         if (tipoUsuario === 'admin') atualizarStatsAdmin();
     }
     
     function excluirLinkModal() {
         if (!linkEditando) return;
-        const { disciplinaId, indice } = linkEditando;
-        delete linksGlobais[`${disciplinaId}_${indice}`];
+        const { concursoId, indice } = linkEditando;
+        delete linksGlobais[`${concursoId}_${indice}`];
         saveLinksGlobais(linksGlobais);
         fecharModal();
-        if (disciplinaAtual === disciplinaId) renderizarConteudos();
+        if (concursoAtual === concursoId) renderizarConteudos();
         if (tipoUsuario === 'admin') atualizarStatsAdmin();
     }
     
@@ -488,15 +457,96 @@
         document.getElementById('totalStudents').innerText = contarAlunos();
     }
 
-    // ==================== RENDERIZAÇÃO ====================
+    // ==================== RENDERIZAÇÃO HOME (CARDS CONCURSOS) ====================
+    function renderizarGradeConcursos() {
+        const grid = document.getElementById('disciplinesGrid');
+        grid.innerHTML = '';
+        for (const [id, dados] of Object.entries(CONCURSOS)) {
+            const prog = obterProgressoConcurso(id);
+            const card = document.createElement('div');
+            card.className = 'discipline-card';
+            card.innerHTML = `
+                <div class="discipline-icon"><i class="${dados.icone}"></i></div>
+                <h3>${dados.nome}</h3>
+                <div class="badge-concurso">${dados.badge}</div>
+                <div class="progress-bar"><div class="progress-fill" style="width: ${prog.percentual}%;"></div></div>
+                <div style="font-size: 0.85rem; margin-top: 0.2rem;">📌 ${prog.concluidos}/${prog.total} matérias estudadas</div>
+                <button class="filter-btn" style="margin-top: 1rem; background: #1e3a8a; color: white; padding: 0.5rem 1.8rem;">Acessar plano</button>
+            `;
+            card.querySelector('button').onclick = () => abrirCurso(id);
+            grid.appendChild(card);
+        }
+    }
+    
+    function abrirCurso(concursoId) {
+        concursoAtual = concursoId;
+        filtroAtual = "all";
+        document.getElementById('homeScreen').style.display = 'none';
+        document.getElementById('courseScreen').style.display = 'block';
+        
+        const dados = CONCURSOS[concursoId];
+        document.getElementById('courseTitle').innerHTML = dados.nome;
+        document.getElementById('courseIcon').className = dados.icone;
+        document.getElementById('courseUserName').innerHTML = usuarioAtual.split('@')[0];
+        const roleSpanCurso = document.getElementById('courseRoleBadge');
+        if (tipoUsuario === 'admin') {
+            roleSpanCurso.innerText = 'Administrador';
+            roleSpanCurso.className = 'role-badge role-admin';
+        } else {
+            roleSpanCurso.innerText = 'Aluno';
+            roleSpanCurso.className = 'role-badge role-student';
+        }
+        atualizarProgressoCurso();
+        renderizarConteudos();
+        // reset active filter
+        document.querySelectorAll('#courseScreen .filter-btn').forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.dataset.filter === 'all') btn.classList.add('active');
+        });
+    }
+    
+    function atualizarProgressoCurso() {
+        if (!concursoAtual) return;
+        const prog = obterProgressoConcurso(concursoAtual);
+        document.getElementById('courseProgressFill').style.width = `${prog.percentual}%`;
+        document.getElementById('courseProgressPercent').innerText = `${Math.round(prog.percentual)}%`;
+    }
+    
+    function renderizarConteudos() {
+        if (!concursoAtual) return;
+        const dados = CONCURSOS[concursoAtual];
+        const container = document.getElementById('contentsContainer');
+        let html = '';
+        dados.conteudos.forEach((texto, idx) => {
+            const concluido = progresso[concursoAtual]?.[idx] || false;
+            const exibir = filtroAtual === 'all' || 
+                          (filtroAtual === 'completed' && concluido) || 
+                          (filtroAtual === 'pending' && !concluido);
+            if (!exibir) return;
+            const link = linksGlobais[`${concursoAtual}_${idx}`];
+            const isAdmin = tipoUsuario === 'admin';
+            html += `
+                <div class="content-item ${concluido ? 'completed' : ''}">
+                    <div class="content-header">
+                        <input type="checkbox" class="content-checkbox" ${concluido ? 'checked' : ''} 
+                               onclick="alternarConteudo('${concursoAtual}', ${idx})">
+                        <div class="content-text"><strong>📖 Matéria ${idx+1}</strong><br>${texto}</div>
+                        ${isAdmin ? `<button class="link-btn" onclick="abrirModalLink('${concursoAtual}', ${idx})"><i class="fas fa-edit"></i> ${link ? 'Editar' : '+ Link'}</button>` : ''}
+                    </div>
+                    ${link ? `<div class="link-container"><a href="${link.url}" target="_blank"><i class="fas fa-external-link-alt"></i> 🔗 ${link.desc || 'Material de apoio'}</a></div>` : (isAdmin ? '<div class="link-container" style="color:#94a3b8;">➕ Adicione um link clicando no botão acima</div>' : '')}
+                </div>
+            `;
+        });
+        if (!html) html = '<div style="text-align:center;padding:2rem;">Nenhum conteúdo com esse filtro</div>';
+        container.innerHTML = html;
+    }
+
     function mostrarTelaHome() {
         document.getElementById('loginScreen').style.display = 'none';
         document.getElementById('homeScreen').style.display = 'block';
         document.getElementById('courseScreen').style.display = 'none';
-        disciplinaAtual = null;
-        
+        concursoAtual = null;
         document.getElementById('userNameDisplay').innerText = usuarioAtual.split('@')[0];
-        
         const roleSpan = document.getElementById('roleDisplay');
         if (tipoUsuario === 'admin') {
             roleSpan.innerText = 'Administrador';
@@ -508,105 +558,13 @@
             roleSpan.className = 'role-badge role-student';
             document.getElementById('adminPanel').style.display = 'none';
         }
-        
-        renderizarGradeDisciplinas();
-    }
-    
-    function renderizarGradeDisciplinas() {
-        const grid = document.getElementById('disciplinesGrid');
-        grid.innerHTML = '';
-        
-        for (const [id, dados] of Object.entries(DISCIPLINAS)) {
-            const prog = obterProgressoDisciplina(id);
-            const card = document.createElement('div');
-            card.className = 'discipline-card';
-            card.innerHTML = `
-                <div class="discipline-icon"><i class="${dados.icone}"></i></div>
-                <h3>${dados.nome}</h3>
-                <div class="progress-bar"><div class="progress-fill" style="width: ${prog.percentual}%;"></div></div>
-                <div style="font-size: 0.8rem;">${prog.concluidos}/${prog.total} tópicos</div>
-                <button class="filter-btn" style="margin-top: 1rem; background: #0056a7; color: white;">Acessar</button>
-            `;
-            card.querySelector('button').onclick = () => abrirCurso(id);
-            grid.appendChild(card);
-        }
-    }
-    
-    function abrirCurso(disciplinaId) {
-        disciplinaAtual = disciplinaId;
-        filtroAtual = "all";
-        document.getElementById('homeScreen').style.display = 'none';
-        document.getElementById('courseScreen').style.display = 'block';
-        
-        const dados = DISCIPLINAS[disciplinaId];
-        document.getElementById('courseTitle').innerText = dados.nome;
-        document.getElementById('courseIcon').className = dados.icone;
-        document.getElementById('courseUserName').innerText = usuarioAtual.split('@')[0];
-        
-        const roleSpanCurso = document.getElementById('courseRoleBadge');
-        if (tipoUsuario === 'admin') {
-            roleSpanCurso.innerText = 'Administrador';
-            roleSpanCurso.className = 'role-badge role-admin';
-        } else {
-            roleSpanCurso.innerText = 'Aluno';
-            roleSpanCurso.className = 'role-badge role-student';
-        }
-        
-        atualizarProgressoCurso();
-        renderizarConteudos();
-        
-        document.querySelectorAll('#courseScreen .filter-btn').forEach(btn => {
-            btn.classList.remove('active');
-            if (btn.dataset.filter === 'all') btn.classList.add('active');
-        });
-    }
-    
-    function atualizarProgressoCurso() {
-        const prog = obterProgressoDisciplina(disciplinaAtual);
-        document.getElementById('courseProgressFill').style.width = `${prog.percentual}%`;
-        document.getElementById('courseProgressPercent').innerText = `${Math.round(prog.percentual)}%`;
-    }
-    
-    function renderizarConteudos() {
-        const dados = DISCIPLINAS[disciplinaAtual];
-        const container = document.getElementById('contentsContainer');
-        let html = '';
-        
-        dados.conteudos.forEach((texto, idx) => {
-            const concluido = progresso[disciplinaAtual]?.[idx] || false;
-            const exibir = filtroAtual === 'all' || 
-                          (filtroAtual === 'completed' && concluido) || 
-                          (filtroAtual === 'pending' && !concluido);
-            if (!exibir) return;
-            
-            const link = linksGlobais[`${disciplinaAtual}_${idx}`];
-            const isAdmin = tipoUsuario === 'admin';
-            
-            html += `
-                <div class="content-item ${concluido ? 'completed' : ''}">
-                    <div class="content-header">
-                        <input type="checkbox" class="content-checkbox" ${concluido ? 'checked' : ''} 
-                               onclick="alternarConteudo('${disciplinaAtual}', ${idx})">
-                        <div class="content-text"><strong>Tópico ${idx+1}</strong><br>${texto}</div>
-                        ${isAdmin ? `<button class="link-btn" onclick="abrirModalLink('${disciplinaAtual}', ${idx})"><i class="fas fa-edit"></i> ${link ? 'Editar' : 'Adicionar'} link</button>` : ''}
-                    </div>
-                    ${link ? `<div class="link-container"><a href="${link.url}" target="_blank"><i class="fas fa-external-link-alt"></i> 📚 ${link.desc || 'Material de apoio'}</a></div>` : (isAdmin ? '<div class="link-container" style="color:#999;">ℹ️ Nenhum link adicionado</div>' : '')}
-                </div>
-            `;
-        });
-        
-        if (!html) html = '<div style="text-align:center;padding:2rem;">Nenhum conteúdo encontrado</div>';
-        container.innerHTML = html;
+        renderizarGradeConcursos();
     }
 
     // ==================== EVENTOS ====================
     function configurarEventos() {
-        document.getElementById('doLoginBtn').onclick = () => {
-            login(document.getElementById('emailInput').value, document.getElementById('passwordInput').value);
-        };
-        document.getElementById('doRegisterBtn').onclick = () => {
-            registrar(document.getElementById('emailInput').value, document.getElementById('passwordInput').value);
-        };
+        document.getElementById('doLoginBtn').onclick = () => login(document.getElementById('emailInput').value, document.getElementById('passwordInput').value);
+        document.getElementById('doRegisterBtn').onclick = () => registrar(document.getElementById('emailInput').value, document.getElementById('passwordInput').value);
         document.getElementById('logoutMainBtn').onclick = logout;
         document.getElementById('logoutCourseBtn').onclick = logout;
         document.getElementById('backToHomeBtn').onclick = () => mostrarTelaHome();
@@ -623,17 +581,16 @@
                 renderizarConteudos();
             };
         });
-        
         window.onclick = (e) => { if (e.target === document.getElementById('linkModal')) fecharModal(); };
     }
 
-    // ==================== INICIALIZAÇÃO ====================
-    configurarEventos();
-    document.getElementById('loginScreen').style.display = 'flex';
-    
-    // Tornar funções globais para onclick
+    // EXPOR FUNÇÕES GLOBAIS PARA ONCLICK
     window.alternarConteudo = alternarConteudo;
     window.abrirModalLink = abrirModalLink;
+    
+    configurarEventos();
+    document.getElementById('loginScreen').style.display = 'flex';
 </script>
 </body>
 </html>
+```
