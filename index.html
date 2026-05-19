@@ -1,136 +1,478 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head> 
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Mentoria | Escolha seu concurso - PRF, Polícia Judicial, Base</title>
+    <title>Meta PRF - Preparação para Concurso da PRF</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: #f0f4f8; color: #1e293b; }
-        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f0f4f8;
+            color: #1e293b;
+        }
+
         /* Login Overlay */
         .login-overlay {
-            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             background: linear-gradient(135deg, #0f172a, #1e3a8a);
-            display: flex; align-items: center; justify-content: center; z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
         }
+
         .login-card {
-            background: white; border-radius: 40px; padding: 2.5rem;
-            max-width: 420px; width: 90%; text-align: center;
+            background: white;
+            border-radius: 40px;
+            padding: 2.5rem;
+            max-width: 420px;
+            width: 90%;
+            text-align: center;
             box-shadow: 0 25px 40px rgba(0,0,0,0.2);
         }
-        .login-card .logo-icon { font-size: 3.5rem; color: #1e3a8a; margin-bottom: 1rem; }
-        .login-card h2 { color: #1e3a8a; margin-bottom: 0.5rem; font-weight: 700; }
+
+        .login-card .logo-icon {
+            font-size: 3.5rem;
+            color: #1e3a8a;
+            margin-bottom: 1rem;
+        }
+
+        .login-card h2 {
+            color: #1e3a8a;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
         .login-card input {
-            width: 100%; padding: 0.9rem; margin: 0.6rem 0;
-            border: 2px solid #e2e8f0; border-radius: 20px; font-size: 1rem;
+            width: 100%;
+            padding: 0.9rem;
+            margin: 0.6rem 0;
+            border: 2px solid #e2e8f0;
+            border-radius: 20px;
+            font-size: 1rem;
             transition: 0.2s;
         }
-        .login-card input:focus { outline: none; border-color: #1e3a8a; }
+
+        .login-card input:focus {
+            outline: none;
+            border-color: #1e3a8a;
+        }
+
         .login-card button {
-            width: 100%; padding: 0.9rem; margin-top: 0.6rem;
-            background: #1e3a8a; color: white; border: none;
-            border-radius: 40px; font-size: 1rem; cursor: pointer; font-weight: 700;
+            width: 100%;
+            padding: 0.9rem;
+            margin-top: 0.6rem;
+            background: #1e3a8a;
+            color: white;
+            border: none;
+            border-radius: 40px;
+            font-size: 1rem;
+            cursor: pointer;
+            font-weight: 700;
             transition: 0.2s;
         }
-        .login-card button:hover { background: #2563eb; }
-        .login-card .register-btn { background: #eef2ff; color: #1e3a8a; border: 1px solid #cbd5e1; }
-        .error-msg { color: #dc2626; font-size: 0.8rem; margin-top: 0.5rem; }
-        
+
+        .login-card button:hover {
+            background: #2563eb;
+        }
+
+        .login-card .register-btn {
+            background: #eef2ff;
+            color: #1e3a8a;
+            border: 1px solid #cbd5e1;
+        }
+
+        .error-msg {
+            color: #dc2626;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
         /* Header Principal */
         .main-header {
-            background: white; padding: 1rem 2rem;
-            display: flex; justify-content: space-between; align-items: center;
-            flex-wrap: wrap; border-bottom: 2px solid #e2e8f0;
+            background: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            border-bottom: 2px solid #e2e8f0;
             box-shadow: 0 2px 10px rgba(0,0,0,0.02);
         }
-        .logo-area { display: flex; align-items: center; gap: 0.8rem; cursor: pointer; }
-        .logo-icon { background: #1e3a8a; width: 45px; height: 45px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; color: white; }
-        .logo-text h1 { font-size: 1.5rem; color: #1e3a8a; font-weight: 800; }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            cursor: pointer;
+        }
+
+        .logo-icon {
+            background: #1e3a8a;
+            width: 45px;
+            height: 45px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            color: white;
+        }
+
+        .logo-text h1 {
+            font-size: 1.5rem;
+            color: #1e3a8a;
+            font-weight: 800;
+        }
+
         .user-info {
-            display: flex; align-items: center; gap: 1rem;
-            background: #f1f5f9; padding: 0.5rem 1.2rem; border-radius: 60px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: #f1f5f9;
+            padding: 0.5rem 1.2rem;
+            border-radius: 60px;
         }
-        .role-badge { padding: 0.25rem 1rem; border-radius: 30px; font-size: 0.7rem; font-weight: 700; }
-        .role-admin { background: #dc2626; color: white; }
-        .role-student { background: #059669; color: white; }
-        .logout-btn { background: #ef4444; color: white; border: none; padding: 0.3rem 1.2rem; border-radius: 40px; cursor: pointer; font-weight: 600; }
-        
+
+        .role-badge {
+            padding: 0.25rem 1rem;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        .role-admin {
+            background: #dc2626;
+            color: white;
+        }
+
+        .role-student {
+            background: #059669;
+            color: white;
+        }
+
+        .logout-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
         /* Hero Section */
-        .hero { background: linear-gradient(120deg, #eef2ff, #ffffff); padding: 2.5rem 2rem; text-align: center; }
-        .hero h1 { font-size: 2.2rem; color: #0f172a; }
-        .hero p { color: #334155; margin-top: 0.5rem; }
-        
-        /* Admin Panel */
-        .admin-panel { background: white; margin: 2rem; padding: 1.5rem; border-radius: 32px; display: none; box-shadow: 0 8px 20px rgba(0,0,0,0.05); }
-        .admin-stats { display: flex; gap: 1.5rem; justify-content: center; margin-top: 1rem; flex-wrap: wrap; }
-        .stat-card { background: #eef2ff; padding: 1.2rem; border-radius: 24px; text-align: center; min-width: 160px; }
-        .stat-card i { font-size: 2rem; color: #1e3a8a; }
-        
-        /* Cards de Concurso (PRF, Polícia Judicial, Base) */
-        .section-title { text-align: center; margin: 2.5rem 0 1.5rem; font-size: 1.8rem; font-weight: 700; color: #0f172a; }
+        .hero {
+            background: linear-gradient(120deg, #eef2ff, #ffffff);
+            padding: 2.5rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            color: #0f172a;
+        }
+
+        .hero p {
+            color: #334155;
+            margin-top: 0.5rem;
+        }
+
+        /* Progresso Geral */
+        .global-progress {
+            background: white;
+            margin: 2rem;
+            padding: 1.5rem;
+            border-radius: 32px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .global-progress h3 {
+            color: #1e3a8a;
+            margin-bottom: 1rem;
+        }
+
+        .progress-bar-large {
+            height: 12px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .progress-fill-large {
+            height: 100%;
+            background: #1e3a8a;
+            width: 0%;
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        /* Cards de Disciplinas */
+        .section-title {
+            text-align: center;
+            margin: 2.5rem 0 1.5rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
         .disciplines-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 2rem; max-width: 1300px; margin: 0 auto 2rem; padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1300px;
+            margin: 0 auto 2rem;
+            padding: 0 2rem;
         }
+
         .discipline-card {
-            background: white; border-radius: 32px; padding: 1.8rem;
-            text-align: center; cursor: pointer; transition: all 0.3s ease;
-            border: 1px solid #eef2ff; box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+            background: white;
+            border-radius: 32px;
+            padding: 1.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid #eef2ff;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.03);
         }
-        .discipline-card:hover { transform: translateY(-6px); box-shadow: 0 20px 30px -10px rgba(0,0,0,0.15); border-color: #cbd5e1; }
-        .discipline-icon { font-size: 3rem; color: #1e3a8a; margin-bottom: 1rem; }
-        .discipline-card h3 { font-size: 1.4rem; margin-bottom: 0.8rem; color: #0f172a; }
-        .progress-bar { height: 8px; background: #e2e8f0; border-radius: 10px; margin: 1rem 0; overflow: hidden; }
-        .progress-fill { height: 100%; background: #1e3a8a; width: 0%; border-radius: 10px; }
-        .badge-concurso { background: #dbeafe; color: #1e40af; padding: 0.2rem 0.8rem; border-radius: 40px; font-size: 0.7rem; font-weight: 600; display: inline-block; margin-top: 0.5rem; }
-        
+
+        .discipline-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 30px -10px rgba(0,0,0,0.15);
+            border-color: #cbd5e1;
+        }
+
+        .discipline-icon {
+            font-size: 3rem;
+            color: #1e3a8a;
+            margin-bottom: 1rem;
+        }
+
+        .discipline-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            color: #0f172a;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #1e3a8a;
+            width: 0%;
+            border-radius: 10px;
+        }
+
         /* Curso (acompanhamento das matérias) */
-        .course-container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
-        .course-header {
-            background: white; border-radius: 32px; padding: 1.8rem;
-            margin-bottom: 1.8rem; box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        .course-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
         }
-        .back-btn { background: #f1f5f9; color: #1e3a8a; border: none; padding: 0.6rem 1.2rem; border-radius: 40px; cursor: pointer; font-weight: 600; margin-bottom: 1rem; }
-        .course-title { font-size: 1.6rem; color: #0f172a; display: flex; align-items: center; gap: 0.8rem; margin: 0.5rem 0; font-weight: 700; }
-        .filters { display: flex; gap: 0.8rem; justify-content: center; margin-bottom: 1.5rem; flex-wrap: wrap; }
-        .filter-btn { background: #f1f5f9; border: none; padding: 0.5rem 1.5rem; border-radius: 40px; cursor: pointer; font-weight: 500; transition: 0.2s; }
-        .filter-btn.active { background: #1e3a8a; color: white; }
-        .contents-list { background: white; border-radius: 28px; padding: 0.5rem; overflow: hidden; }
-        .content-item { padding: 1.2rem; border-bottom: 1px solid #eef2ff; transition: 0.1s; }
-        .content-item.completed { background: #f0fdf4; border-left: 5px solid #059669; }
-        .content-header { display: flex; align-items: flex-start; gap: 1rem; flex-wrap: wrap; }
-        .content-checkbox { width: 22px; height: 22px; margin-top: 3px; cursor: pointer; accent-color: #1e3a8a; }
-        .content-text { flex: 1; font-weight: 500; }
-        .link-btn { background: #2563eb; color: white; border: none; padding: 0.3rem 1rem; border-radius: 30px; cursor: pointer; font-size: 0.7rem; font-weight: 600; }
-        .link-container { margin-top: 0.6rem; padding-left: 2.2rem; }
-        .link-container a { color: #1e3a8a; text-decoration: none; font-size: 0.85rem; font-weight: 500; border-bottom: 1px dashed; }
-        
+
+        .course-header {
+            background: white;
+            border-radius: 32px;
+            padding: 1.8rem;
+            margin-bottom: 1.8rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .back-btn {
+            background: #f1f5f9;
+            color: #1e3a8a;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .course-title {
+            font-size: 1.6rem;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin: 0.5rem 0;
+            font-weight: 700;
+        }
+
+        .filters {
+            display: flex;
+            gap: 0.8rem;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: #f1f5f9;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+
+        .filter-btn.active {
+            background: #1e3a8a;
+            color: white;
+        }
+
+        .contents-list {
+            background: white;
+            border-radius: 28px;
+            padding: 0.5rem;
+            overflow: hidden;
+        }
+
+        .content-item {
+            padding: 1.2rem;
+            border-bottom: 1px solid #eef2ff;
+            transition: 0.1s;
+        }
+
+        .content-item.completed {
+            background: #f0fdf4;
+            border-left: 5px solid #059669;
+        }
+
+        .content-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .content-checkbox {
+            width: 22px;
+            height: 22px;
+            margin-top: 3px;
+            cursor: pointer;
+            accent-color: #1e3a8a;
+        }
+
+        .content-text {
+            flex: 1;
+            font-weight: 500;
+        }
+
+        .content-text strong {
+            color: #1e3a8a;
+        }
+
+        .link-btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .link-container {
+            margin-top: 0.6rem;
+            padding-left: 2.2rem;
+        }
+
+        .link-container a {
+            color: #1e3a8a;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border-bottom: 1px dashed;
+        }
+
         /* Modal */
         .modal {
-            display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.6); align-items: center; justify-content: center; z-index: 1100;
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.6);
+            align-items: center;
+            justify-content: center;
+            z-index: 1100;
         }
+
         .modal-content {
-            background: white; border-radius: 32px; padding: 1.8rem;
-            max-width: 480px; width: 90%;
+            background: white;
+            border-radius: 32px;
+            padding: 1.8rem;
+            max-width: 480px;
+            width: 90%;
         }
-        .modal-content input, .modal-content textarea {
-            width: 100%; padding: 0.8rem; margin: 0.6rem 0;
-            border: 1px solid #cbd5e1; border-radius: 20px;
+
+        .modal-content input,
+        .modal-content textarea {
+            width: 100%;
+            padding: 0.8rem;
+            margin: 0.6rem 0;
+            border: 1px solid #cbd5e1;
+            border-radius: 20px;
         }
-        .modal-buttons { display: flex; gap: 0.8rem; margin-top: 1.2rem; }
-        .modal-buttons button { flex: 1; padding: 0.7rem; border-radius: 40px; cursor: pointer; border: none; font-weight: 600; }
-        
-        .footer { background: #0f172a; color: #cbd5e1; text-align: center; padding: 1.8rem; margin-top: 2rem; }
-        
+
+        .modal-buttons {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 1.2rem;
+        }
+
+        .modal-buttons button {
+            flex: 1;
+            padding: 0.7rem;
+            border-radius: 40px;
+            cursor: pointer;
+            border: none;
+            font-weight: 600;
+        }
+
+        .footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 1.8rem;
+            margin-top: 2rem;
+        }
+
         @media (max-width: 680px) {
-            .main-header { flex-direction: column; gap: 1rem; }
-            .disciplines-grid { padding: 0 1rem; gap: 1.2rem; }
-            .course-container { padding: 1rem; }
+            .main-header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .disciplines-grid {
+                padding: 0 1rem;
+                gap: 1.2rem;
+            }
+            .course-container {
+                padding: 1rem;
+            }
         }
     </style>
 </head>
@@ -139,9 +481,9 @@
 <!-- TELA DE LOGIN -->
 <div id="loginScreen" class="login-overlay">
     <div class="login-card">
-        <div class="logo-icon"><i class="fas fa-gavel"></i></div>
-        <h2>Mentoria</h2>
-        <p style="margin-bottom: 1rem;">Seu foco, nossa mentoria</p>
+        <div class="logo-icon"><i class="fas fa-car-side"></i></div>
+        <h2>Meta PRF</h2>
+        <p style="margin-bottom: 1rem;">Sua preparação para a Polícia Rodoviária Federal</p>
         <input type="email" id="emailInput" placeholder="seu@email.com">
         <input type="password" id="passwordInput" placeholder="Senha">
         <button id="doLoginBtn">Entrar</button>
@@ -155,8 +497,8 @@
 <div id="homeScreen" style="display: none;">
     <header class="main-header">
         <div class="logo-area" id="goHomeBtn">
-            <div class="logo-icon"><i class="fas fa-gavel"></i></div>
-            <div class="logo-text"><h1>Mentoria</h1></div>
+            <div class="logo-icon"><i class="fas fa-car-side"></i></div>
+            <div class="logo-text"><h1>Meta PRF</h1></div>
         </div>
         <div class="user-info">
             <i class="fas fa-user-circle"></i>
@@ -167,35 +509,42 @@
     </header>
 
     <section class="hero">
-        <h1>🎯 Escolha seu concurso</h1>
-        <p>PRF • Polícia Judicial • Base (carreiras iniciais)</p>
+        <h1>🚔 Preparação para a PRF</h1>
+        <p>Baseado no último edital do concurso da Polícia Rodoviária Federal</p>
     </section>
 
-    <div id="adminPanel" class="admin-panel">
-        <h3 style="color:#1e3a8a;"><i class="fas fa-shield-alt"></i> Painel do Admin</h3>
-        <div class="admin-stats">
-            <div class="stat-card"><i class="fas fa-link"></i><h3 id="totalLinks">0</h3><p>Links de estudo</p></div>
-            <div class="stat-card"><i class="fas fa-users"></i><h3 id="totalStudents">0</h3><p>Alunos ativos</p></div>
+    <div class="global-progress">
+        <h3><i class="fas fa-chart-line"></i> Meu Progresso Geral</h3>
+        <div class="progress-bar-large">
+            <div id="globalProgressFill" class="progress-fill-large" style="width: 0%;"></div>
         </div>
+        <span id="globalProgressText">0% concluído</span>
     </div>
 
-    <h2 class="section-title">🚀 Concursos disponíveis</h2>
+    <h2 class="section-title">📚 Disciplinas do Concurso PRF</h2>
     <div id="disciplinesGrid" class="disciplines-grid"></div>
 
-    <footer class="footer"><p>© Mentoria - Acompanhamento inteligente para sua aprovação</p></footer>
+    <footer class="footer">
+        <p>© Meta PRF - Preparação inteligente para sua aprovação na PRF</p>
+    </footer>
 </div>
 
 <!-- TELA DE ACOMPANHAMENTO DO CURSO (MATÉRIAS DETALHADAS) -->
 <div id="courseScreen" style="display: none;">
     <div class="course-container">
         <div class="course-header">
-            <button id="backToHomeBtn" class="back-btn"><i class="fas fa-arrow-left"></i> Voltar para concursos</button>
-            <div class="course-title"><i id="courseIcon" class="fas fa-landmark"></i><span id="courseTitle"></span></div>
+            <button id="backToHomeBtn" class="back-btn"><i class="fas fa-arrow-left"></i> Voltar para disciplinas</button>
+            <div class="course-title">
+                <i id="courseIcon" class="fas fa-book"></i>
+                <span id="courseTitle"></span>
+            </div>
             <div style="display: flex; justify-content: space-between; margin-top: 0.8rem; flex-wrap: wrap;">
                 <span><i class="fas fa-user"></i> <span id="courseUserName"></span> <span id="courseRoleBadge" class="role-badge"></span></span>
                 <span><i class="fas fa-chart-line"></i> Progresso: <span id="courseProgressPercent">0%</span></span>
             </div>
-            <div class="progress-bar" style="margin-top: 0.8rem;"><div id="courseProgressFill" class="progress-fill" style="width: 0%;"></div></div>
+            <div class="progress-bar" style="margin-top: 0.8rem;">
+                <div id="courseProgressFill" class="progress-fill" style="width: 0%;"></div>
+            </div>
         </div>
 
         <div class="filters">
@@ -205,8 +554,6 @@
         </div>
 
         <div id="contentsContainer" class="contents-list"></div>
-
-        <button id="logoutCourseBtn" class="logout-btn" style="position: fixed; bottom: 1.5rem; right: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">Sair</button>
     </div>
 </div>
 
@@ -225,59 +572,163 @@
 </div>
 
 <script>
-    // ==================== CARD DE CONCURSOS (PRF, POLÍCIA JUDICIAL, BASE) ====================
-    // Cada concurso possui suas disciplinas / tópicos específicos
-    const CONCURSOS = {
-        prf: {
-            nome: "🚔 PRF - Polícia Rodoviária Federal",
-            icone: "fas fa-car-side",
-            badge: "Concurso Nacional",
+    // ==================== DISCIPLINAS BASEADAS NO ÚLTIMO EDITAL DA PRF ====================
+    const DISCIPLINAS_PRF = {
+        portugues: {
+            nome: "📖 LÍNGUA PORTUGUESA",
+            icone: "fas fa-language",
             conteudos: [
-                "LÍNGUA PORTUGUESA: Compreensão textual, gramática aplicada à PRF",
-                "RACIOCÍNIO LÓGICO: Estruturas lógicas, problemas aritméticos",
-                "DIREITO CONSTITUCIONAL: Direitos e garantias, princípios fundamentais",
-                "DIREITO ADMINISTRATIVO: Administração pública, licitações, servidores",
-                "LEGISLAÇÃO DE TRÂNSITO: CTB completo, infrações, penalidades",
-                "FÍSICA APLICADA: Cinemática, dinâmica para trânsito",
-                "DIREITO PENAL: Crimes contra a vida, patrimônio e trânsito",
-                "INFORMÁTICA: Segurança, ferramentas para fiscalização"
+                "Compreensão e interpretação de textos",
+                "Tipologia textual e gêneros textuais",
+                "Figuras de linguagem e funções da linguagem",
+                "Estruturação do texto e dos parágrafos",
+                "Ortografia oficial e acentuação gráfica",
+                "Morfologia: classes de palavras",
+                "Sintaxe: termos da oração e períodos",
+                "Concordância nominal e verbal",
+                "Regência nominal e verbal",
+                "Colocação pronominal",
+                "Pontuação e crase",
+                "Redação oficial e correspondência oficial"
             ]
         },
-        policia_judicial: {
-            nome: "⚖️ Polícia Judicial",
+        raciocinio_logico: {
+            nome: "🧠 RACIOCÍNIO LÓGICO",
+            icone: "fas fa-brain",
+            conteudos: [
+                "Estruturas lógicas e proposições",
+                "Tabelas-verdade e conectivos lógicos",
+                "Equivalência e implicação lógica",
+                "Diagramas lógicos e conjuntos",
+                "Raciocínio sequencial e padrões",
+                "Problemas de contagem e probabilidade",
+                "Raciocínio matemático e aritmético",
+                "Geometria básica e trigonometria",
+                "Análise combinatória simples",
+                "Matrizes e determinantes",
+                "Sistemas lineares e equações"
+            ]
+        },
+        direito_constitucional: {
+            nome: "⚖️ DIREITO CONSTITUCIONAL",
             icone: "fas fa-gavel",
-            badge: "Carreira Jurídica",
             conteudos: [
-                "PORTUGUÊS JURÍDICO: Redação oficial, coesão e clareza",
-                "MATEMÁTICA E ESTATÍSTICA: Probabilidade, estatística descritiva",
-                "DIREITO CONSTITUCIONAL: Poder Judiciário, controle de constitucionalidade",
-                "DIREITO ADMINISTRATIVO: Agentes públicos, processo administrativo",
-                "DIREITO PROCESSUAL PENAL: Inquérito policial, jurisdição",
-                "LEGISLAÇÃO ESPECIAL: Lei de Organização Judiciária, estatuto da magistratura",
-                "ÉTICA E DISCIPLINA: Código de ética do Poder Judiciário",
-                "NOÇÕES DE DIREITO CIVIL: Pessoas, bens, contratos"
+                "Constituição Federal: princípios fundamentais",
+                "Direitos e garantias fundamentais",
+                "Direitos sociais e nacionalidade",
+                "Organização do Estado e dos Poderes",
+                "Poder Legislativo, Executivo e Judiciário",
+                "Funções essenciais à justiça",
+                "Defesa do Estado e das instituições democráticas",
+                "Controle de constitucionalidade",
+                "Processo legislativo",
+                "Tribunal de Contas da União",
+                "Ordem social e meio ambiente"
             ]
         },
-        base: {
-            nome: "📚 Base - Carreiras Iniciais",
-            icone: "fas fa-book-open",
-            badge: "Fundamental",
+        direito_administrativo: {
+            nome: "📋 DIREITO ADMINISTRATIVO",
+            icone: "fas fa-building",
             conteudos: [
-                "PORTUGUÊS: Interpretação textual, ortografia, morfossintaxe",
-                "MATEMÁTICA BÁSICA: Aritmética, frações, regra de três, porcentagem",
-                "DIREITO CONSTITUCIONAL: Princípios fundamentais, direitos e deveres",
-                "DIREITO ADMINISTRATIVO: Atos administrativos, poderes da administração",
-                "LEGISLAÇÃO: Noções de direito penal e processo penal essenciais",
-                "RACIOCÍNIO LÓGICO: Sequências lógicas, proposições, diagramas",
-                "ATUALIDADES: Política e economia para concursos",
-                "INFORMÁTICA BÁSICA: Windows, internet, pacote office"
+                "Administração pública: princípios e organização",
+                "Agentes públicos e carreiras",
+                "Atos administrativos: conceito, requisitos e atributos",
+                "Poderes da administração pública",
+                "Licitações e contratos administrativos (Lei 14.133/2021)",
+                "Serviços públicos e concessões",
+                "Controle e responsabilização da administração",
+                "Processo administrativo",
+                "Bens públicos e imprescritibilidade",
+                "Lei de improbidade administrativa",
+                "Parcerias público-privadas"
+            ]
+        },
+        direito_penal: {
+            nome: "🔒 DIREITO PENAL",
+            icone: "fas fa-balance-scale",
+            conteudos: [
+                "Princípios do direito penal",
+                "Teoria da lei penal",
+                "Teoria do crime: conceito, tipicidade, ilicitude, culpabilidade",
+                "Concurso de pessoas",
+                "Penalidades e medidas de segurança",
+                "Crimes contra a vida, patrimônio e dignidade sexual",
+                "Crimes contra a administração pública",
+                "Lei de drogas (Lei 11.343/2006)",
+                "Lei de crimes hediondos",
+                "Crimes de trânsito (Lei 9.503/97)",
+                "Execução penal e suspensão condicional"
+            ]
+        },
+        direito_processual_penal: {
+            nome: "⚙️ DIREITO PROCESSUAL PENAL",
+            icone: "fas fa-file-alt",
+            conteudos: [
+                "Inquérito policial e procedimentos",
+                "Ação penal: conceito, espécies e condições",
+                "Jurisdição e competência",
+                "Provas no processo penal",
+                "Prisões cautelares e liberdade provisória",
+                "Processo em espécie: comum, especial e sumário",
+                "Sentença penal e recursos",
+                "Nulidades no processo penal",
+                "Execução penal e incidentes",
+                "Tribunal do Júri",
+                "Lei de abuso de autoridade"
+            ]
+        },
+        legislacao_transito: {
+            nome: "🚗 LEGISLAÇÃO DE TRÂNSITO",
+            icone: "fas fa-car",
+            conteudos: [
+                "Código de Trânsito Brasileiro (CTB)",
+                "Sistema Nacional de Trânsito",
+                "Normas de circulação e conduta",
+                "Sinalização de trânsito",
+                "Licenciamento e documentação",
+                "Infrações e penalidades",
+                "Medidas administrativas e recursos",
+                "Acidentes de trânsito: procedimentos",
+                "Primeiros socorros no trânsito",
+                "Direção defensiva e segurança",
+                "Legislação complementar: Resoluções CONTRAN"
+            ]
+        },
+        informatica: {
+            nome: "💻 INFORMÁTICA",
+            icone: "fas fa-laptop-code",
+            conteudos: [
+                "Conceitos básicos de hardware e software",
+                "Sistemas operacionais (Windows, Linux)",
+                "Pacote Office: Word, Excel, PowerPoint",
+                "Internet e navegadores",
+                "Redes de computadores básica",
+                "Segurança da informação",
+                "Ferramentas de fiscalização eletrônica",
+                "Banco de dados e sistemas corporativos",
+                "Cloud computing e armazenamento",
+                "Lei de acesso à informação"
+            ]
+        },
+        estatistica: {
+            nome: "📊 ESTATÍSTICA",
+            icone: "fas fa-chart-bar",
+            conteudos: [
+                "Estatística descritiva: média, mediana, moda",
+                "Medidas de dispersão: variância, desvio padrão",
+                "Probabilidade e distribuições",
+                "Amostragem e inferência estatística",
+                "Correlação e regressão linear",
+                "Análise de dados para fiscalização",
+                "Indicadores de trânsito",
+                "Interpretação de gráficos e tabelas"
             ]
         }
     };
 
     // ==================== GERENCIAMENTO DE BANCO LOCAL ====================
     function getUsers() {
-        const users = localStorage.getItem('mentoria_usuarios_v2');
+        const users = localStorage.getItem('meta_prf_usuarios');
         if (users) return JSON.parse(users);
         const defaultUsers = {
             "admin@mentoria.com": {
@@ -287,38 +738,33 @@
                 criado: new Date().toISOString()
             }
         };
-        localStorage.setItem('mentoria_usuarios_v2', JSON.stringify(defaultUsers));
+        localStorage.setItem('meta_prf_usuarios', JSON.stringify(defaultUsers));
         return defaultUsers;
     }
     
     function saveUsers(users) {
-        localStorage.setItem('mentoria_usuarios_v2', JSON.stringify(users));
+        localStorage.setItem('meta_prf_usuarios', JSON.stringify(users));
     }
     
     function getProgresso(email) {
-        const progress = localStorage.getItem(`mentoria_progresso_concurso_${email}`);
+        const progress = localStorage.getItem(`meta_prf_progresso_${email}`);
         return progress ? JSON.parse(progress) : {};
     }
     
     function saveProgresso(email, progresso) {
-        localStorage.setItem(`mentoria_progresso_concurso_${email}`, JSON.stringify(progresso));
+        localStorage.setItem(`meta_prf_progresso_${email}`, JSON.stringify(progresso));
     }
     
     function getLinksGlobais() {
-        const links = localStorage.getItem('mentoria_links_concurso');
+        const links = localStorage.getItem('meta_prf_links');
         if (links) return JSON.parse(links);
-        const defaultLinks = {
-            "prf_0": { url: "https://www.gov.br/prf/pt-br/acesso-a-informacao/legislacao", desc: "Legislação PRF - Portarias e CTB" },
-            "prf_4": { url: "https://www.planalto.gov.br/ccivil_03/leis/l9503.htm", desc: "Código de Trânsito Brasileiro completo" },
-            "policia_judicial_2": { url: "https://www.stf.jus.br/arquivo/cms/legislacaoConstituicao/anexo/CF.pdf", desc: "Constituição Federal" },
-            "base_0": { url: "https://www.gramaticaonline.com.br/", desc: "Gramática essencial para concursos" }
-        };
-        localStorage.setItem('mentoria_links_concurso', JSON.stringify(defaultLinks));
+        const defaultLinks = {};
+        localStorage.setItem('meta_prf_links', JSON.stringify(defaultLinks));
         return defaultLinks;
     }
     
     function saveLinksGlobais(links) {
-        localStorage.setItem('mentoria_links_concurso', JSON.stringify(links));
+        localStorage.setItem('meta_prf_links', JSON.stringify(links));
     }
     
     function contarAlunos() {
@@ -331,9 +777,9 @@
     // ==================== ESTADO GLOBAL ====================
     let usuarioAtual = null;
     let tipoUsuario = null;
-    let concursoAtual = null;      // 'prf', 'policia_judicial', 'base'
+    let disciplinaAtual = null;
     let filtroAtual = "all";
-    let progresso = {};             // estrutura: { concursoId: { indice: true/false } }
+    let progresso = {};
     let linksGlobais = {};
     let linkEditando = null;
 
@@ -376,7 +822,7 @@
     function logout() {
         usuarioAtual = null;
         tipoUsuario = null;
-        concursoAtual = null;
+        disciplinaAtual = null;
         document.getElementById('homeScreen').style.display = 'none';
         document.getElementById('courseScreen').style.display = 'none';
         document.getElementById('loginScreen').style.display = 'flex';
@@ -386,33 +832,51 @@
     }
 
     // ==================== PROGRESSO ====================
-    function obterProgressoConcurso(concursoId) {
-        const conteudos = CONCURSOS[concursoId]?.conteudos || [];
+    function obterProgressoDisciplina(disciplinaId) {
+        const conteudos = DISCIPLINAS_PRF[disciplinaId]?.conteudos || [];
         let concluidos = 0;
         for (let i = 0; i < conteudos.length; i++) {
-            if (progresso[concursoId]?.[i]) concluidos++;
+            if (progresso[disciplinaId]?.[i]) concluidos++;
         }
         const total = conteudos.length;
         return { concluidos, total, percentual: total ? (concluidos / total) * 100 : 0 };
     }
     
-    function alternarConteudo(concursoId, indice) {
-        if (!progresso[concursoId]) progresso[concursoId] = {};
-        progresso[concursoId][indice] = !progresso[concursoId][indice];
+    function obterProgressoGeral() {
+        let totalConcluidos = 0;
+        let totalItens = 0;
+        
+        for (const disciplinaId in DISCIPLINAS_PRF) {
+            const prog = obterProgressoDisciplina(disciplinaId);
+            totalConcluidos += prog.concluidos;
+            totalItens += prog.total;
+        }
+        
+        return {
+            concluidos: totalConcluidos,
+            total: totalItens,
+            percentual: totalItens ? (totalConcluidos / totalItens) * 100 : 0
+        };
+    }
+    
+    function alternarConteudo(disciplinaId, indice) {
+        if (!progresso[disciplinaId]) progresso[disciplinaId] = {};
+        progresso[disciplinaId][indice] = !progresso[disciplinaId][indice];
         saveProgresso(usuarioAtual, progresso);
         
-        if (concursoAtual === concursoId) {
+        if (disciplinaAtual === disciplinaId) {
             atualizarProgressoCurso();
             renderizarConteudos();
         }
-        renderizarGradeConcursos();  // atualiza cards da home
+        renderizarGradeDisciplinas();
+        atualizarProgressoGeralUI();
     }
 
     // ==================== LINKS (ADMIN) ====================
-    function abrirModalLink(concursoId, indice) {
+    function abrirModalLink(disciplinaId, indice) {
         if (tipoUsuario !== 'admin') return;
-        linkEditando = { concursoId, indice };
-        const chave = `${concursoId}_${indice}`;
+        linkEditando = { disciplinaId, indice };
+        const chave = `${disciplinaId}_${indice}`;
         const link = linksGlobais[chave];
         document.getElementById('modalUrl').value = link?.url || '';
         document.getElementById('modalDesc').value = link?.desc || '';
@@ -422,26 +886,24 @@
     
     function salvarLinkModal() {
         if (!linkEditando) return;
-        const { concursoId, indice } = linkEditando;
+        const { disciplinaId, indice } = linkEditando;
         const url = document.getElementById('modalUrl').value;
         const desc = document.getElementById('modalDesc').value;
-        const chave = `${concursoId}_${indice}`;
+        const chave = `${disciplinaId}_${indice}`;
         if (url) linksGlobais[chave] = { url, desc };
         else delete linksGlobais[chave];
         saveLinksGlobais(linksGlobais);
         fecharModal();
-        if (concursoAtual === concursoId) renderizarConteudos();
-        if (tipoUsuario === 'admin') atualizarStatsAdmin();
+        if (disciplinaAtual === disciplinaId) renderizarConteudos();
     }
     
     function excluirLinkModal() {
         if (!linkEditando) return;
-        const { concursoId, indice } = linkEditando;
-        delete linksGlobais[`${concursoId}_${indice}`];
+        const { disciplinaId, indice } = linkEditando;
+        delete linksGlobais[`${disciplinaId}_${indice}`];
         saveLinksGlobais(linksGlobais);
         fecharModal();
-        if (concursoAtual === concursoId) renderizarConteudos();
-        if (tipoUsuario === 'admin') atualizarStatsAdmin();
+        if (disciplinaAtual === disciplinaId) renderizarConteudos();
     }
     
     function fecharModal() {
@@ -449,44 +911,44 @@
         linkEditando = null;
     }
 
-    // ==================== ADMIN ====================
-    function atualizarStatsAdmin() {
-        if (tipoUsuario !== 'admin') return;
-        document.getElementById('totalLinks').innerText = Object.keys(linksGlobais).length;
-        document.getElementById('totalStudents').innerText = contarAlunos();
-    }
-
-    // ==================== RENDERIZAÇÃO HOME (CARDS CONCURSOS) ====================
-    function renderizarGradeConcursos() {
+    // ==================== RENDERIZAÇÃO HOME ====================
+    function renderizarGradeDisciplinas() {
         const grid = document.getElementById('disciplinesGrid');
         grid.innerHTML = '';
-        for (const [id, dados] of Object.entries(CONCURSOS)) {
-            const prog = obterProgressoConcurso(id);
+        
+        for (const [id, dados] of Object.entries(DISCIPLINAS_PRF)) {
+            const prog = obterProgressoDisciplina(id);
             const card = document.createElement('div');
             card.className = 'discipline-card';
             card.innerHTML = `
                 <div class="discipline-icon"><i class="${dados.icone}"></i></div>
                 <h3>${dados.nome}</h3>
-                <div class="badge-concurso">${dados.badge}</div>
                 <div class="progress-bar"><div class="progress-fill" style="width: ${prog.percentual}%;"></div></div>
-                <div style="font-size: 0.85rem; margin-top: 0.2rem;">📌 ${prog.concluidos}/${prog.total} matérias estudadas</div>
-                <button class="filter-btn" style="margin-top: 1rem; background: #1e3a8a; color: white; padding: 0.5rem 1.8rem;">Acessar plano</button>
+                <div style="font-size: 0.85rem; margin-top: 0.2rem;">📌 ${prog.concluidos}/${prog.total} tópicos estudados</div>
+                <button class="filter-btn" style="margin-top: 1rem; background: #1e3a8a; color: white; padding: 0.5rem 1.8rem;">Acessar conteúdo</button>
             `;
-            card.querySelector('button').onclick = () => abrirCurso(id);
+            card.querySelector('button').onclick = () => abrirDisciplina(id);
             grid.appendChild(card);
         }
     }
     
-    function abrirCurso(concursoId) {
-        concursoAtual = concursoId;
+    function atualizarProgressoGeralUI() {
+        const geral = obterProgressoGeral();
+        document.getElementById('globalProgressFill').style.width = `${geral.percentual}%`;
+        document.getElementById('globalProgressText').innerHTML = `${Math.round(geral.percentual)}% concluído (${geral.concluidos}/${geral.total} itens)`;
+    }
+    
+    function abrirDisciplina(disciplinaId) {
+        disciplinaAtual = disciplinaId;
         filtroAtual = "all";
         document.getElementById('homeScreen').style.display = 'none';
         document.getElementById('courseScreen').style.display = 'block';
         
-        const dados = CONCURSOS[concursoId];
+        const dados = DISCIPLINAS_PRF[disciplinaId];
         document.getElementById('courseTitle').innerHTML = dados.nome;
         document.getElementById('courseIcon').className = dados.icone;
         document.getElementById('courseUserName').innerHTML = usuarioAtual.split('@')[0];
+        
         const roleSpanCurso = document.getElementById('courseRoleBadge');
         if (tipoUsuario === 'admin') {
             roleSpanCurso.innerText = 'Administrador';
@@ -495,9 +957,11 @@
             roleSpanCurso.innerText = 'Aluno';
             roleSpanCurso.className = 'role-badge role-student';
         }
+        
         atualizarProgressoCurso();
         renderizarConteudos();
-        // reset active filter
+        
+        // Reset active filter
         document.querySelectorAll('#courseScreen .filter-btn').forEach(btn => {
             btn.classList.remove('active');
             if (btn.dataset.filter === 'all') btn.classList.add('active');
@@ -505,37 +969,43 @@
     }
     
     function atualizarProgressoCurso() {
-        if (!concursoAtual) return;
-        const prog = obterProgressoConcurso(concursoAtual);
+        if (!disciplinaAtual) return;
+        const prog = obterProgressoDisciplina(disciplinaAtual);
         document.getElementById('courseProgressFill').style.width = `${prog.percentual}%`;
         document.getElementById('courseProgressPercent').innerText = `${Math.round(prog.percentual)}%`;
     }
     
     function renderizarConteudos() {
-        if (!concursoAtual) return;
-        const dados = CONCURSOS[concursoAtual];
+        if (!disciplinaAtual) return;
+        const dados = DISCIPLINAS_PRF[disciplinaAtual];
         const container = document.getElementById('contentsContainer');
         let html = '';
+        
         dados.conteudos.forEach((texto, idx) => {
-            const concluido = progresso[concursoAtual]?.[idx] || false;
+            const concluido = progresso[disciplinaAtual]?.[idx] || false;
             const exibir = filtroAtual === 'all' || 
                           (filtroAtual === 'completed' && concluido) || 
                           (filtroAtual === 'pending' && !concluido);
             if (!exibir) return;
-            const link = linksGlobais[`${concursoAtual}_${idx}`];
+            
+            const link = linksGlobais[`${disciplinaAtual}_${idx}`];
             const isAdmin = tipoUsuario === 'admin';
+            
             html += `
                 <div class="content-item ${concluido ? 'completed' : ''}">
                     <div class="content-header">
                         <input type="checkbox" class="content-checkbox" ${concluido ? 'checked' : ''} 
-                               onclick="alternarConteudo('${concursoAtual}', ${idx})">
-                        <div class="content-text"><strong>📖 Matéria ${idx+1}</strong><br>${texto}</div>
-                        ${isAdmin ? `<button class="link-btn" onclick="abrirModalLink('${concursoAtual}', ${idx})"><i class="fas fa-edit"></i> ${link ? 'Editar' : '+ Link'}</button>` : ''}
+                               onclick="alternarConteudo('${disciplinaAtual}', ${idx})">
+                        <div class="content-text">
+                            <strong>Tópico ${idx+1}</strong><br>${texto}
+                        </div>
+                        ${isAdmin ? `<button class="link-btn" onclick="abrirModalLink('${disciplinaAtual}', ${idx})"><i class="fas fa-edit"></i> ${link ? 'Editar' : '+ Link'}</button>` : ''}
                     </div>
                     ${link ? `<div class="link-container"><a href="${link.url}" target="_blank"><i class="fas fa-external-link-alt"></i> 🔗 ${link.desc || 'Material de apoio'}</a></div>` : (isAdmin ? '<div class="link-container" style="color:#94a3b8;">➕ Adicione um link clicando no botão acima</div>' : '')}
                 </div>
             `;
         });
+        
         if (!html) html = '<div style="text-align:center;padding:2rem;">Nenhum conteúdo com esse filtro</div>';
         container.innerHTML = html;
     }
@@ -544,20 +1014,21 @@
         document.getElementById('loginScreen').style.display = 'none';
         document.getElementById('homeScreen').style.display = 'block';
         document.getElementById('courseScreen').style.display = 'none';
-        concursoAtual = null;
+        disciplinaAtual = null;
+        
         document.getElementById('userNameDisplay').innerText = usuarioAtual.split('@')[0];
         const roleSpan = document.getElementById('roleDisplay');
+        
         if (tipoUsuario === 'admin') {
             roleSpan.innerText = 'Administrador';
             roleSpan.className = 'role-badge role-admin';
-            document.getElementById('adminPanel').style.display = 'block';
-            atualizarStatsAdmin();
         } else {
             roleSpan.innerText = 'Aluno';
             roleSpan.className = 'role-badge role-student';
-            document.getElementById('adminPanel').style.display = 'none';
         }
-        renderizarGradeConcursos();
+        
+        renderizarGradeDisciplinas();
+        atualizarProgressoGeralUI();
     }
 
     // ==================== EVENTOS ====================
@@ -565,7 +1036,6 @@
         document.getElementById('doLoginBtn').onclick = () => login(document.getElementById('emailInput').value, document.getElementById('passwordInput').value);
         document.getElementById('doRegisterBtn').onclick = () => registrar(document.getElementById('emailInput').value, document.getElementById('passwordInput').value);
         document.getElementById('logoutMainBtn').onclick = logout;
-        document.getElementById('logoutCourseBtn').onclick = logout;
         document.getElementById('backToHomeBtn').onclick = () => mostrarTelaHome();
         document.getElementById('goHomeBtn').onclick = () => mostrarTelaHome();
         document.getElementById('modalSaveBtn').onclick = salvarLinkModal;
@@ -580,6 +1050,7 @@
                 renderizarConteudos();
             };
         });
+        
         window.onclick = (e) => { if (e.target === document.getElementById('linkModal')) fecharModal(); };
     }
 
@@ -592,4 +1063,3 @@
 </script>
 </body>
 </html>
-```
