@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Meta PRF - Preparação para Concurso da PRF</title>
+    <title>Meta PMES - Preparação para Soldado PMES 2026</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -15,18 +15,18 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: #f0f4f8;
+            background: #fefce8;
             color: #1e293b;
         }
 
-        /* Login Overlay */
+        /* Cores institucionais PMES: azul marinho e dourado/amarelo */
         .login-overlay {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, #0f172a, #1e3a8a);
+            background: linear-gradient(135deg, #0c2e4e, #1e4a76);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -40,19 +40,20 @@
             max-width: 420px;
             width: 90%;
             text-align: center;
-            box-shadow: 0 25px 40px rgba(0,0,0,0.2);
+            box-shadow: 0 25px 40px rgba(0,0,0,0.25);
+            border-top: 6px solid #f5b042;
         }
 
         .login-card .logo-icon {
             font-size: 3.5rem;
-            color: #1e3a8a;
+            color: #1e4a76;
             margin-bottom: 1rem;
         }
 
         .login-card h2 {
-            color: #1e3a8a;
+            color: #0c2e4e;
             margin-bottom: 0.5rem;
-            font-weight: 700;
+            font-weight: 800;
         }
 
         .login-card input {
@@ -67,14 +68,14 @@
 
         .login-card input:focus {
             outline: none;
-            border-color: #1e3a8a;
+            border-color: #f5b042;
         }
 
         .login-card button {
             width: 100%;
             padding: 0.9rem;
             margin-top: 0.6rem;
-            background: #1e3a8a;
+            background: #0c2e4e;
             color: white;
             border: none;
             border-radius: 40px;
@@ -85,12 +86,13 @@
         }
 
         .login-card button:hover {
-            background: #2563eb;
+            background: #f5b042;
+            color: #0c2e4e;
         }
 
         .login-card .register-btn {
             background: #eef2ff;
-            color: #1e3a8a;
+            color: #0c2e4e;
             border: 1px solid #cbd5e1;
         }
 
@@ -108,8 +110,8 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            border-bottom: 2px solid #e2e8f0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+            border-bottom: 3px solid #f5b042;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
         }
 
         .logo-area {
@@ -120,7 +122,7 @@
         }
 
         .logo-icon {
-            background: #1e3a8a;
+            background: #0c2e4e;
             width: 45px;
             height: 45px;
             border-radius: 16px;
@@ -133,8 +135,14 @@
 
         .logo-text h1 {
             font-size: 1.5rem;
-            color: #1e3a8a;
+            color: #0c2e4e;
             font-weight: 800;
+        }
+
+        .logo-text span {
+            font-size: 0.75rem;
+            color: #f5b042;
+            font-weight: 600;
         }
 
         .user-info {
@@ -159,7 +167,7 @@
         }
 
         .role-student {
-            background: #059669;
+            background: #0c2e4e;
             color: white;
         }
 
@@ -175,14 +183,15 @@
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(120deg, #eef2ff, #ffffff);
-            padding: 2.5rem 2rem;
+            background: linear-gradient(120deg, #e6f0fa, #ffffff);
+            padding: 2rem 2rem;
             text-align: center;
+            border-bottom: 1px solid #f5b04230;
         }
 
         .hero h1 {
-            font-size: 2.2rem;
-            color: #0f172a;
+            font-size: 2rem;
+            color: #0c2e4e;
         }
 
         .hero p {
@@ -198,10 +207,11 @@
             border-radius: 32px;
             box-shadow: 0 8px 20px rgba(0,0,0,0.05);
             text-align: center;
+            border-left: 8px solid #f5b042;
         }
 
         .global-progress h3 {
-            color: #1e3a8a;
+            color: #0c2e4e;
             margin-bottom: 1rem;
         }
 
@@ -215,7 +225,7 @@
 
         .progress-fill-large {
             height: 100%;
-            background: #1e3a8a;
+            background: #f5b042;
             width: 0%;
             border-radius: 10px;
             transition: width 0.3s ease;
@@ -224,10 +234,10 @@
         /* Cards de Disciplinas */
         .section-title {
             text-align: center;
-            margin: 2.5rem 0 1.5rem;
+            margin: 2rem 0 1.5rem;
             font-size: 1.8rem;
             font-weight: 700;
-            color: #0f172a;
+            color: #0c2e4e;
         }
 
         .disciplines-grid {
@@ -245,26 +255,26 @@
             padding: 1.8rem;
             cursor: pointer;
             transition: all 0.3s ease;
-            border: 1px solid #eef2ff;
+            border: 1px solid #fef3c7;
             box-shadow: 0 8px 20px rgba(0,0,0,0.03);
         }
 
         .discipline-card:hover {
             transform: translateY(-6px);
             box-shadow: 0 20px 30px -10px rgba(0,0,0,0.15);
-            border-color: #cbd5e1;
+            border-color: #f5b042;
         }
 
         .discipline-icon {
             font-size: 3rem;
-            color: #1e3a8a;
+            color: #1e4a76;
             margin-bottom: 1rem;
         }
 
         .discipline-card h3 {
             font-size: 1.4rem;
             margin-bottom: 0.8rem;
-            color: #0f172a;
+            color: #0c2e4e;
         }
 
         .progress-bar {
@@ -277,7 +287,7 @@
 
         .progress-fill {
             height: 100%;
-            background: #1e3a8a;
+            background: #f5b042;
             width: 0%;
             border-radius: 10px;
         }
@@ -295,11 +305,12 @@
             padding: 1.8rem;
             margin-bottom: 1.8rem;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border-top: 5px solid #f5b042;
         }
 
         .back-btn {
             background: #f1f5f9;
-            color: #1e3a8a;
+            color: #0c2e4e;
             border: none;
             padding: 0.6rem 1.2rem;
             border-radius: 40px;
@@ -310,7 +321,7 @@
 
         .course-title {
             font-size: 1.6rem;
-            color: #0f172a;
+            color: #0c2e4e;
             display: flex;
             align-items: center;
             gap: 0.8rem;
@@ -337,7 +348,7 @@
         }
 
         .filter-btn.active {
-            background: #1e3a8a;
+            background: #0c2e4e;
             color: white;
         }
 
@@ -355,8 +366,8 @@
         }
 
         .content-item.completed {
-            background: #f0fdf4;
-            border-left: 5px solid #059669;
+            background: #fef9e6;
+            border-left: 5px solid #f5b042;
         }
 
         .content-header {
@@ -371,7 +382,7 @@
             height: 22px;
             margin-top: 3px;
             cursor: pointer;
-            accent-color: #1e3a8a;
+            accent-color: #f5b042;
         }
 
         .content-text {
@@ -380,18 +391,18 @@
         }
 
         .content-text strong {
-            color: #1e3a8a;
+            color: #0c2e4e;
         }
 
         .link-btn {
-            background: #2563eb;
-            color: white;
+            background: #f5b042;
+            color: #0c2e4e;
             border: none;
             padding: 0.3rem 1rem;
             border-radius: 30px;
             cursor: pointer;
             font-size: 0.7rem;
-            font-weight: 600;
+            font-weight: 700;
         }
 
         .link-container {
@@ -400,11 +411,11 @@
         }
 
         .link-container a {
-            color: #1e3a8a;
+            color: #1e4a76;
             text-decoration: none;
             font-size: 0.85rem;
             font-weight: 500;
-            border-bottom: 1px dashed;
+            border-bottom: 1px dashed #f5b042;
         }
 
         /* Modal */
@@ -454,8 +465,8 @@
         }
 
         .footer {
-            background: #0f172a;
-            color: #cbd5e1;
+            background: #0c2e4e;
+            color: #fef9e6;
             text-align: center;
             padding: 1.8rem;
             margin-top: 2rem;
@@ -481,9 +492,9 @@
 <!-- TELA DE LOGIN -->
 <div id="loginScreen" class="login-overlay">
     <div class="login-card">
-        <div class="logo-icon"><i class="fas fa-car-side"></i></div>
-        <h2>Meta PRF</h2>
-        <p style="margin-bottom: 1rem;">Sua preparação para a Polícia Rodoviária Federal</p>
+        <div class="logo-icon"><i class="fas fa-shield-alt"></i></div>
+        <h2>Meta PMES</h2>
+        <p style="margin-bottom: 1rem;">Preparação para Soldado da Polícia Militar do ES 2026</p>
         <input type="email" id="emailInput" placeholder="seu@email.com">
         <input type="password" id="passwordInput" placeholder="Senha">
         <button id="doLoginBtn">Entrar</button>
@@ -497,11 +508,11 @@
 <div id="homeScreen" style="display: none;">
     <header class="main-header">
         <div class="logo-area" id="goHomeBtn">
-            <div class="logo-icon"><i class="fas fa-car-side"></i></div>
-            <div class="logo-text"><h1>Meta PRF</h1></div>
+            <div class="logo-icon"><i class="fas fa-shield-alt"></i></div>
+            <div class="logo-text"><h1>Meta PMES <span>Soldado ES 2026</span></h1></div>
         </div>
         <div class="user-info">
-            <i class="fas fa-user-circle"></i>
+            <i class="fas fa-user-graduate"></i>
             <span id="userNameDisplay"></span>
             <span id="roleDisplay" class="role-badge"></span>
             <button id="logoutMainBtn" class="logout-btn">Sair</button>
@@ -509,23 +520,23 @@
     </header>
 
     <section class="hero">
-        <h1>🚔 Preparação para a PRF</h1>
-        <p>Baseado no último edital do concurso da Polícia Rodoviária Federal</p>
+        <h1>👮‍♂️ Polícia Militar do Espírito Santo</h1>
+        <p>Baseado no último edital (Edital PMES nº 001/2022) — Preparação para o concurso de Soldado PMES 2026</p>
     </section>
 
     <div class="global-progress">
-        <h3><i class="fas fa-chart-line"></i> Meu Progresso Geral</h3>
+        <h3><i class="fas fa-chart-line"></i> Progresso rumo à farda</h3>
         <div class="progress-bar-large">
             <div id="globalProgressFill" class="progress-fill-large" style="width: 0%;"></div>
         </div>
         <span id="globalProgressText">0% concluído</span>
     </div>
 
-    <h2 class="section-title">📚 Disciplinas do Concurso PRF</h2>
+    <h2 class="section-title">📖 Disciplinas do Edital PMES 2026</h2>
     <div id="disciplinesGrid" class="disciplines-grid"></div>
 
     <footer class="footer">
-        <p>© Meta PRF - Preparação inteligente para sua aprovação na PRF</p>
+        <p>© Meta PMES - Sua aprovação na PMES começa aqui | Soldado 2026</p>
     </footer>
 </div>
 
@@ -560,11 +571,11 @@
 <!-- MODAL PARA GERENCIAR LINKS (ADMIN) -->
 <div id="linkModal" class="modal">
     <div class="modal-content">
-        <h3 style="color:#1e3a8a;"><i class="fas fa-link"></i> Gerenciar material de apoio</h3>
-        <input type="url" id="modalUrl" placeholder="URL do material (ex: PDF, vídeo)">
+        <h3 style="color:#0c2e4e;"><i class="fas fa-link"></i> Gerenciar material de apoio</h3>
+        <input type="url" id="modalUrl" placeholder="URL do material (PDF, vídeo, legislação)">
         <textarea id="modalDesc" rows="2" placeholder="Descrição do conteúdo (opcional)"></textarea>
         <div class="modal-buttons">
-            <button id="modalSaveBtn" style="background:#1e3a8a; color:white;">Salvar link</button>
+            <button id="modalSaveBtn" style="background:#0c2e4e; color:white;">Salvar link</button>
             <button id="modalDeleteBtn" style="background:#dc2626; color:white; display:none;">Excluir</button>
             <button id="modalCancelBtn" style="background:#eef2ff;">Cancelar</button>
         </div>
@@ -572,209 +583,185 @@
 </div>
 
 <script>
-    // ==================== DISCIPLINAS BASEADAS NO ÚLTIMO EDITAL DA PRF ====================
-    const DISCIPLINAS_PRF = {
+    // DISCIPLINAS BASEADAS NO ÚLTIMO EDITAL PMES (SOLDADO) - Edital 001/2022 e atualizações comuns
+    const DISCIPLINAS_PMES = {
         portugues: {
             nome: "📖 LÍNGUA PORTUGUESA",
             icone: "fas fa-language",
             conteudos: [
                 "Compreensão e interpretação de textos",
-                "Tipologia textual e gêneros textuais",
-                "Figuras de linguagem e funções da linguagem",
-                "Estruturação do texto e dos parágrafos",
+                "Tipologia textual e gêneros textuais (oficial, narrativo, descritivo)",
                 "Ortografia oficial e acentuação gráfica",
-                "Morfologia: classes de palavras",
-                "Sintaxe: termos da oração e períodos",
+                "Morfologia: classes de palavras (ênfase em verbos e conectivos)",
+                "Sintaxe: termos da oração, análise sintática",
                 "Concordância nominal e verbal",
                 "Regência nominal e verbal",
-                "Colocação pronominal",
-                "Pontuação e crase",
-                "Redação oficial e correspondência oficial"
+                "Colocação pronominal e crase",
+                "Pontuação e seu efeito de sentido",
+                "Redação oficial: padrão e correspondência policial militar",
+                "Figuras de linguagem e semântica"
             ]
         },
-        raciocinio_logico: {
-            nome: "🧠 RACIOCÍNIO LÓGICO",
-            icone: "fas fa-brain",
+        matematica: {
+            nome: "🧮 MATEMÁTICA",
+            icone: "fas fa-calculator",
             conteudos: [
-                "Estruturas lógicas e proposições",
-                "Tabelas-verdade e conectivos lógicos",
-                "Equivalência e implicação lógica",
-                "Diagramas lógicos e conjuntos",
-                "Raciocínio sequencial e padrões",
-                "Problemas de contagem e probabilidade",
-                "Raciocínio matemático e aritmético",
-                "Geometria básica e trigonometria",
-                "Análise combinatória simples",
-                "Matrizes e determinantes",
-                "Sistemas lineares e equações"
+                "Números inteiros, racionais e reais: operações",
+                "Múltiplos, divisores, porcentagem e juros simples",
+                "Razão, proporção e regra de três",
+                "Equações de 1º e 2º graus",
+                "Sistemas lineares e problemas",
+                "Geometria básica: áreas, perímetros e volumes",
+                "Noções de estatística: média, moda e mediana",
+                "Análise combinatória simples e probabilidade",
+                "Matrizes e determinantes (noções)",
+                "Funções elementares e gráficos"
             ]
         },
         direito_constitucional: {
             nome: "⚖️ DIREITO CONSTITUCIONAL",
             icone: "fas fa-gavel",
             conteudos: [
-                "Constituição Federal: princípios fundamentais",
-                "Direitos e garantias fundamentais",
+                "Princípios fundamentais da CF/88",
+                "Direitos e garantias fundamentais (aplicação às polícias)",
                 "Direitos sociais e nacionalidade",
-                "Organização do Estado e dos Poderes",
-                "Poder Legislativo, Executivo e Judiciário",
-                "Funções essenciais à justiça",
-                "Defesa do Estado e das instituições democráticas",
+                "Organização dos Poderes e funções essenciais",
+                "Segurança pública: art. 144 e organização",
+                "Forças Armadas e segurança pública",
                 "Controle de constitucionalidade",
-                "Processo legislativo",
-                "Tribunal de Contas da União",
-                "Ordem social e meio ambiente"
-            ]
-        },
-        direito_administrativo: {
-            nome: "📋 DIREITO ADMINISTRATIVO",
-            icone: "fas fa-building",
-            conteudos: [
-                "Administração pública: princípios e organização",
-                "Agentes públicos e carreiras",
-                "Atos administrativos: conceito, requisitos e atributos",
-                "Poderes da administração pública",
-                "Licitações e contratos administrativos (Lei 14.133/2021)",
-                "Serviços públicos e concessões",
-                "Controle e responsabilização da administração",
-                "Processo administrativo",
-                "Bens públicos e imprescritibilidade",
-                "Lei de improbidade administrativa",
-                "Parcerias público-privadas"
+                "Processo legislativo e emendas",
+                "Defesa do Estado e instituições democráticas"
             ]
         },
         direito_penal: {
             nome: "🔒 DIREITO PENAL",
             icone: "fas fa-balance-scale",
             conteudos: [
-                "Princípios do direito penal",
-                "Teoria da lei penal",
-                "Teoria do crime: conceito, tipicidade, ilicitude, culpabilidade",
-                "Concurso de pessoas",
-                "Penalidades e medidas de segurança",
+                "Aplicação da lei penal no tempo e espaço",
+                "Teoria do crime: fato típico, ilicitude, culpabilidade",
+                "Concurso de pessoas e penas",
                 "Crimes contra a vida, patrimônio e dignidade sexual",
-                "Crimes contra a administração pública",
-                "Lei de drogas (Lei 11.343/2006)",
-                "Lei de crimes hediondos",
-                "Crimes de trânsito (Lei 9.503/97)",
-                "Execução penal e suspensão condicional"
+                "Crimes contra a administração pública (ênfase)",
+                "Lei de drogas (Lei 11.343/2006) – noções",
+                "Crimes de trânsito (Lei 9.503/97) aplicáveis à PM",
+                "Lei de abuso de autoridade",
+                "Execução penal e medidas cautelares"
             ]
         },
         direito_processual_penal: {
-            nome: "⚙️ DIREITO PROCESSUAL PENAL",
-            icone: "fas fa-file-alt",
+            nome: "📜 DIREITO PROCESSUAL PENAL",
+            icone: "fas fa-file-signature",
             conteudos: [
-                "Inquérito policial e procedimentos",
-                "Ação penal: conceito, espécies e condições",
+                "Inquérito policial e atribuições da PM",
+                "Ação penal: espécies e condições",
                 "Jurisdição e competência",
-                "Provas no processo penal",
-                "Prisões cautelares e liberdade provisória",
-                "Processo em espécie: comum, especial e sumário",
-                "Sentença penal e recursos",
-                "Nulidades no processo penal",
-                "Execução penal e incidentes",
-                "Tribunal do Júri",
-                "Lei de abuso de autoridade"
+                "Provas no processo penal: espécies e ilicitude",
+                "Prisões cautelares e flagrante delito",
+                "Procedimentos especiais e comuns",
+                "Sentença e recursos criminais",
+                "Nulidades e habeas corpus",
+                "Execução penal e incidentes"
             ]
         },
-        legislacao_transito: {
-            nome: "🚗 LEGISLAÇÃO DE TRÂNSITO",
-            icone: "fas fa-car",
+        direito_administrativo: {
+            nome: "🏛️ DIREITO ADMINISTRATIVO",
+            icone: "fas fa-building",
             conteudos: [
-                "Código de Trânsito Brasileiro (CTB)",
-                "Sistema Nacional de Trânsito",
-                "Normas de circulação e conduta",
-                "Sinalização de trânsito",
-                "Licenciamento e documentação",
-                "Infrações e penalidades",
-                "Medidas administrativas e recursos",
-                "Acidentes de trânsito: procedimentos",
-                "Primeiros socorros no trânsito",
-                "Direção defensiva e segurança",
-                "Legislação complementar: Resoluções CONTRAN"
+                "Administração direta e indireta",
+                "Princípios da administração pública",
+                "Atos administrativos: requisitos e atributos",
+                "Agentes públicos: regime jurídico e responsabilidade",
+                "Poderes da administração (hierárquico, disciplinar, regulamentar)",
+                "Licitações e contratos (Lei 14.133/2021 – noções)",
+                "Serviços públicos e concessões",
+                "Controle da administração e improbidade administrativa",
+                "Processo administrativo e sindicância"
             ]
         },
-        informatica: {
-            nome: "💻 INFORMÁTICA",
-            icone: "fas fa-laptop-code",
+        legislacao_militar_es: {
+            nome: "🪖 LEGISLAÇÃO MILITAR ESPECÍFICA (PMES)",
+            icone: "fas fa-badge",
             conteudos: [
-                "Conceitos básicos de hardware e software",
-                "Sistemas operacionais (Windows, Linux)",
-                "Pacote Office: Word, Excel, PowerPoint",
-                "Internet e navegadores",
-                "Redes de computadores básica",
-                "Segurança da informação",
-                "Ferramentas de fiscalização eletrônica",
-                "Banco de dados e sistemas corporativos",
-                "Cloud computing e armazenamento",
-                "Lei de acesso à informação"
+                "Estatuto dos Policiais Militares do ES (Lei Complementar 55/2005)",
+                "Regulamento Disciplinar da PMES (RDP)",
+                "Código de Ética da PMES",
+                "Lei de Organização Básica da PMES",
+                "Lei de Promoções dos Oficiais e Praças",
+                "Direitos, deveres e responsabilidades do soldado PM",
+                "Prevenção e combate à violência institucional",
+                "Processo administrativo disciplinar militar"
             ]
         },
-        estatistica: {
-            nome: "📊 ESTATÍSTICA",
-            icone: "fas fa-chart-bar",
+        geografia_historia_es: {
+            nome: "🌎 GEOGRAFIA E HISTÓRIA DO ESPÍRITO SANTO",
+            icone: "fas fa-map-marked-alt",
             conteudos: [
-                "Estatística descritiva: média, mediana, moda",
-                "Medidas de dispersão: variância, desvio padrão",
-                "Probabilidade e distribuições",
-                "Amostragem e inferência estatística",
-                "Correlação e regressão linear",
-                "Análise de dados para fiscalização",
-                "Indicadores de trânsito",
-                "Interpretação de gráficos e tabelas"
+                "Formação socioeconômica e cultural do ES",
+                "Ciclos econômicos (café, mineração, industrialização)",
+                "Geografia física do Espírito Santo: relevo, clima, hidrografia",
+                "Regiões metropolitanas e problemas urbanos",
+                "História política do ES e símbolos estaduais",
+                "Cultura capixaba e movimentos sociais",
+                "Atualidades do estado e políticas públicas",
+                "Consequências ambientais e desenvolvimento"
+            ]
+        },
+        atualidades: {
+            nome: "📰 ATUALIDADES E NOÇÕES DE ADMINISTRAÇÃO PÚBLICA",
+            icone: "fas fa-newspaper",
+            conteudos: [
+                "Atualidades políticas, econômicas e sociais do Brasil",
+                "Segurança pública no ES e no Brasil",
+                "Meio ambiente e sustentabilidade",
+                "Direitos humanos e cidadania",
+                "Administração pública: governança e transparência",
+                "Lei de Acesso à Informação",
+                "Gestão de conflitos e mediação comunitária"
             ]
         }
     };
 
     // ==================== GERENCIAMENTO DE BANCO LOCAL ====================
     function getUsers() {
-        const users = localStorage.getItem('meta_prf_usuarios');
+        const users = localStorage.getItem('meta_pmes_usuarios');
         if (users) return JSON.parse(users);
         const defaultUsers = {
             "admin@mentoria.com": {
                 senha: "admin123",
                 tipo: "admin",
-                nome: "Administrador",
+                nome: "Comandante",
                 criado: new Date().toISOString()
             }
         };
-        localStorage.setItem('meta_prf_usuarios', JSON.stringify(defaultUsers));
+        localStorage.setItem('meta_pmes_usuarios', JSON.stringify(defaultUsers));
         return defaultUsers;
     }
     
     function saveUsers(users) {
-        localStorage.setItem('meta_prf_usuarios', JSON.stringify(users));
+        localStorage.setItem('meta_pmes_usuarios', JSON.stringify(users));
     }
     
     function getProgresso(email) {
-        const progress = localStorage.getItem(`meta_prf_progresso_${email}`);
+        const progress = localStorage.getItem(`meta_pmes_progresso_${email}`);
         return progress ? JSON.parse(progress) : {};
     }
     
     function saveProgresso(email, progresso) {
-        localStorage.setItem(`meta_prf_progresso_${email}`, JSON.stringify(progresso));
+        localStorage.setItem(`meta_pmes_progresso_${email}`, JSON.stringify(progresso));
     }
     
     function getLinksGlobais() {
-        const links = localStorage.getItem('meta_prf_links');
+        const links = localStorage.getItem('meta_pmes_links');
         if (links) return JSON.parse(links);
         const defaultLinks = {};
-        localStorage.setItem('meta_prf_links', JSON.stringify(defaultLinks));
+        localStorage.setItem('meta_pmes_links', JSON.stringify(defaultLinks));
         return defaultLinks;
     }
     
     function saveLinksGlobais(links) {
-        localStorage.setItem('meta_prf_links', JSON.stringify(links));
-    }
-    
-    function contarAlunos() {
-        const users = getUsers();
-        let total = 0;
-        for (const email in users) if (users[email].tipo === 'aluno') total++;
-        return total;
+        localStorage.setItem('meta_pmes_links', JSON.stringify(links));
     }
 
-    // ==================== ESTADO GLOBAL ====================
     let usuarioAtual = null;
     let tipoUsuario = null;
     let disciplinaAtual = null;
@@ -783,7 +770,7 @@
     let linksGlobais = {};
     let linkEditando = null;
 
-    // ==================== AUTENTICAÇÃO ====================
+    // Autenticação
     function login(email, senha) {
         const users = getUsers();
         if (users[email] && users[email].senha === senha) {
@@ -831,9 +818,8 @@
         document.getElementById('loginMsg').innerHTML = '';
     }
 
-    // ==================== PROGRESSO ====================
     function obterProgressoDisciplina(disciplinaId) {
-        const conteudos = DISCIPLINAS_PRF[disciplinaId]?.conteudos || [];
+        const conteudos = DISCIPLINAS_PMES[disciplinaId]?.conteudos || [];
         let concluidos = 0;
         for (let i = 0; i < conteudos.length; i++) {
             if (progresso[disciplinaId]?.[i]) concluidos++;
@@ -845,25 +831,18 @@
     function obterProgressoGeral() {
         let totalConcluidos = 0;
         let totalItens = 0;
-        
-        for (const disciplinaId in DISCIPLINAS_PRF) {
+        for (const disciplinaId in DISCIPLINAS_PMES) {
             const prog = obterProgressoDisciplina(disciplinaId);
             totalConcluidos += prog.concluidos;
             totalItens += prog.total;
         }
-        
-        return {
-            concluidos: totalConcluidos,
-            total: totalItens,
-            percentual: totalItens ? (totalConcluidos / totalItens) * 100 : 0
-        };
+        return { concluidos: totalConcluidos, total: totalItens, percentual: totalItens ? (totalConcluidos / totalItens) * 100 : 0 };
     }
     
     function alternarConteudo(disciplinaId, indice) {
         if (!progresso[disciplinaId]) progresso[disciplinaId] = {};
         progresso[disciplinaId][indice] = !progresso[disciplinaId][indice];
         saveProgresso(usuarioAtual, progresso);
-        
         if (disciplinaAtual === disciplinaId) {
             atualizarProgressoCurso();
             renderizarConteudos();
@@ -872,7 +851,6 @@
         atualizarProgressoGeralUI();
     }
 
-    // ==================== LINKS (ADMIN) ====================
     function abrirModalLink(disciplinaId, indice) {
         if (tipoUsuario !== 'admin') return;
         linkEditando = { disciplinaId, indice };
@@ -911,12 +889,10 @@
         linkEditando = null;
     }
 
-    // ==================== RENDERIZAÇÃO HOME ====================
     function renderizarGradeDisciplinas() {
         const grid = document.getElementById('disciplinesGrid');
         grid.innerHTML = '';
-        
-        for (const [id, dados] of Object.entries(DISCIPLINAS_PRF)) {
+        for (const [id, dados] of Object.entries(DISCIPLINAS_PMES)) {
             const prog = obterProgressoDisciplina(id);
             const card = document.createElement('div');
             card.className = 'discipline-card';
@@ -924,8 +900,8 @@
                 <div class="discipline-icon"><i class="${dados.icone}"></i></div>
                 <h3>${dados.nome}</h3>
                 <div class="progress-bar"><div class="progress-fill" style="width: ${prog.percentual}%;"></div></div>
-                <div style="font-size: 0.85rem; margin-top: 0.2rem;">📌 ${prog.concluidos}/${prog.total} tópicos estudados</div>
-                <button class="filter-btn" style="margin-top: 1rem; background: #1e3a8a; color: white; padding: 0.5rem 1.8rem;">Acessar conteúdo</button>
+                <div style="font-size: 0.85rem; margin-top: 0.2rem;">🎯 ${prog.concluidos}/${prog.total} tópicos estudados</div>
+                <button class="filter-btn" style="margin-top: 1rem; background: #0c2e4e; color: white; padding: 0.5rem 1.8rem;">Estudar agora</button>
             `;
             card.querySelector('button').onclick = () => abrirDisciplina(id);
             grid.appendChild(card);
@@ -943,12 +919,10 @@
         filtroAtual = "all";
         document.getElementById('homeScreen').style.display = 'none';
         document.getElementById('courseScreen').style.display = 'block';
-        
-        const dados = DISCIPLINAS_PRF[disciplinaId];
+        const dados = DISCIPLINAS_PMES[disciplinaId];
         document.getElementById('courseTitle').innerHTML = dados.nome;
         document.getElementById('courseIcon').className = dados.icone;
         document.getElementById('courseUserName').innerHTML = usuarioAtual.split('@')[0];
-        
         const roleSpanCurso = document.getElementById('courseRoleBadge');
         if (tipoUsuario === 'admin') {
             roleSpanCurso.innerText = 'Administrador';
@@ -957,11 +931,8 @@
             roleSpanCurso.innerText = 'Aluno';
             roleSpanCurso.className = 'role-badge role-student';
         }
-        
         atualizarProgressoCurso();
         renderizarConteudos();
-        
-        // Reset active filter
         document.querySelectorAll('#courseScreen .filter-btn').forEach(btn => {
             btn.classList.remove('active');
             if (btn.dataset.filter === 'all') btn.classList.add('active');
@@ -977,35 +948,29 @@
     
     function renderizarConteudos() {
         if (!disciplinaAtual) return;
-        const dados = DISCIPLINAS_PRF[disciplinaAtual];
+        const dados = DISCIPLINAS_PMES[disciplinaAtual];
         const container = document.getElementById('contentsContainer');
         let html = '';
-        
         dados.conteudos.forEach((texto, idx) => {
             const concluido = progresso[disciplinaAtual]?.[idx] || false;
-            const exibir = filtroAtual === 'all' || 
-                          (filtroAtual === 'completed' && concluido) || 
-                          (filtroAtual === 'pending' && !concluido);
+            const exibir = filtroAtual === 'all' || (filtroAtual === 'completed' && concluido) || (filtroAtual === 'pending' && !concluido);
             if (!exibir) return;
-            
             const link = linksGlobais[`${disciplinaAtual}_${idx}`];
             const isAdmin = tipoUsuario === 'admin';
-            
             html += `
                 <div class="content-item ${concluido ? 'completed' : ''}">
                     <div class="content-header">
                         <input type="checkbox" class="content-checkbox" ${concluido ? 'checked' : ''} 
                                onclick="alternarConteudo('${disciplinaAtual}', ${idx})">
                         <div class="content-text">
-                            <strong>Tópico ${idx+1}</strong><br>${texto}
+                            <strong>📌 Tópico ${idx+1}</strong><br>${texto}
                         </div>
                         ${isAdmin ? `<button class="link-btn" onclick="abrirModalLink('${disciplinaAtual}', ${idx})"><i class="fas fa-edit"></i> ${link ? 'Editar' : '+ Link'}</button>` : ''}
                     </div>
-                    ${link ? `<div class="link-container"><a href="${link.url}" target="_blank"><i class="fas fa-external-link-alt"></i> 🔗 ${link.desc || 'Material de apoio'}</a></div>` : (isAdmin ? '<div class="link-container" style="color:#94a3b8;">➕ Adicione um link clicando no botão acima</div>' : '')}
+                    ${link ? `<div class="link-container"><a href="${link.url}" target="_blank"><i class="fas fa-external-link-alt"></i> 🔗 ${link.desc || 'Material de apoio'}</a></div>` : (isAdmin ? '<div class="link-container" style="color:#94a3b8;">➕ Adicione um link para material de apoio</div>' : '')}
                 </div>
             `;
         });
-        
         if (!html) html = '<div style="text-align:center;padding:2rem;">Nenhum conteúdo com esse filtro</div>';
         container.innerHTML = html;
     }
@@ -1015,10 +980,8 @@
         document.getElementById('homeScreen').style.display = 'block';
         document.getElementById('courseScreen').style.display = 'none';
         disciplinaAtual = null;
-        
         document.getElementById('userNameDisplay').innerText = usuarioAtual.split('@')[0];
         const roleSpan = document.getElementById('roleDisplay');
-        
         if (tipoUsuario === 'admin') {
             roleSpan.innerText = 'Administrador';
             roleSpan.className = 'role-badge role-admin';
@@ -1026,12 +989,10 @@
             roleSpan.innerText = 'Aluno';
             roleSpan.className = 'role-badge role-student';
         }
-        
         renderizarGradeDisciplinas();
         atualizarProgressoGeralUI();
     }
 
-    // ==================== EVENTOS ====================
     function configurarEventos() {
         document.getElementById('doLoginBtn').onclick = () => login(document.getElementById('emailInput').value, document.getElementById('passwordInput').value);
         document.getElementById('doRegisterBtn').onclick = () => registrar(document.getElementById('emailInput').value, document.getElementById('passwordInput').value);
@@ -1041,7 +1002,6 @@
         document.getElementById('modalSaveBtn').onclick = salvarLinkModal;
         document.getElementById('modalDeleteBtn').onclick = excluirLinkModal;
         document.getElementById('modalCancelBtn').onclick = fecharModal;
-        
         document.querySelectorAll('#courseScreen .filter-btn').forEach(btn => {
             btn.onclick = () => {
                 document.querySelectorAll('#courseScreen .filter-btn').forEach(b => b.classList.remove('active'));
@@ -1050,14 +1010,11 @@
                 renderizarConteudos();
             };
         });
-        
         window.onclick = (e) => { if (e.target === document.getElementById('linkModal')) fecharModal(); };
     }
 
-    // EXPOR FUNÇÕES GLOBAIS PARA ONCLICK
     window.alternarConteudo = alternarConteudo;
     window.abrirModalLink = abrirModalLink;
-    
     configurarEventos();
     document.getElementById('loginScreen').style.display = 'flex';
 </script>
