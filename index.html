@@ -10,7 +10,7 @@
     <script type="module">
         // Import Firebase SDKs
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, doc, getDoc, setDoc, collection, query, where, getDocs, updateDoc, arrayUnion, arrayRemove } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, doc, getDoc, setDoc, collection, query, where, getDocs, updateDoc, arrayUnion, arrayRemove, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
         import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
         
         // Firebase configuration
@@ -35,6 +35,7 @@
         window.getDoc = getDoc;
         window.setDoc = setDoc;
         window.updateDoc = updateDoc;
+        window.deleteDoc = deleteDoc;
         window.collection = collection;
         window.query = query;
         window.where = where;
@@ -59,7 +60,6 @@
             color: #1e293b;
         }
 
-        /* Cores institucionais PMES: azul marinho e dourado/amarelo */
         .login-overlay {
             position: fixed;
             top: 0;
@@ -142,7 +142,6 @@
             margin-top: 0.5rem;
         }
 
-        /* Header Principal */
         .main-header {
             background: white;
             padding: 1rem 2rem;
@@ -221,7 +220,6 @@
             font-weight: 600;
         }
 
-        /* Hero Section */
         .hero {
             background: linear-gradient(120deg, #e6f0fa, #ffffff);
             padding: 2rem 2rem;
@@ -239,7 +237,6 @@
             margin-top: 0.5rem;
         }
 
-        /* Progresso Geral */
         .global-progress {
             background: white;
             margin: 2rem;
@@ -271,7 +268,6 @@
             transition: width 0.3s ease;
         }
 
-        /* Cards de Disciplinas */
         .section-title {
             text-align: center;
             margin: 2rem 0 1.5rem;
@@ -332,7 +328,6 @@
             border-radius: 10px;
         }
 
-        /* Curso (acompanhamento das matérias) */
         .course-container {
             max-width: 1000px;
             margin: 0 auto;
@@ -392,6 +387,24 @@
             color: white;
         }
 
+        .add-topic-btn {
+            background: #0c2e4e;
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 600;
+            margin: 1rem auto;
+            display: block;
+            font-size: 1rem;
+        }
+
+        .add-topic-btn:hover {
+            background: #f5b042;
+            color: #0c2e4e;
+        }
+
         .contents-list {
             background: white;
             border-radius: 28px;
@@ -403,6 +416,7 @@
             padding: 1.2rem;
             border-bottom: 1px solid #eef2ff;
             transition: 0.1s;
+            position: relative;
         }
 
         .content-item.completed {
@@ -434,6 +448,38 @@
             color: #0c2e4e;
         }
 
+        .topic-actions {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .edit-topic-btn, .delete-topic-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 0.3rem;
+            border-radius: 8px;
+            transition: 0.2s;
+        }
+
+        .edit-topic-btn {
+            color: #0c2e4e;
+        }
+
+        .edit-topic-btn:hover {
+            background: #e2e8f0;
+        }
+
+        .delete-topic-btn {
+            color: #dc2626;
+        }
+
+        .delete-topic-btn:hover {
+            background: #fee2e2;
+        }
+
         .link-btn {
             background: #f5b042;
             color: #0c2e4e;
@@ -458,7 +504,6 @@
             border-bottom: 1px dashed #f5b042;
         }
 
-        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -525,12 +570,6 @@
                 padding: 1rem;
             }
         }
-        
-        .loading {
-            text-align: center;
-            padding: 2rem;
-            color: #0c2e4e;
-        }
     </style>
 </head>
 <body>
@@ -546,7 +585,7 @@
         <button id="doLoginBtn">Entrar</button>
         <button id="doRegisterBtn" class="register-btn">Criar nova conta</button>
         <div id="loginMsg" class="error-msg"></div>
-        <div style="margin-top: 1rem; font-size: 0.7rem; color: #475569;">Crie sua conta ou use admin@mentoria.com / admin123</div>
+        <div style="margin-top: 1rem; font-size: 0.7rem; color: #475569;">Admin: admin@mentoria.com / admin123</div>
     </div>
 </div>
 
@@ -610,159 +649,58 @@
             <button class="filter-btn" data-filter="completed">✅ Concluídos</button>
         </div>
 
+        <button id="addTopicBtn" class="add-topic-btn" style="display: none;">+ Adicionar Novo Tópico</button>
+
         <div id="contentsContainer" class="contents-list"></div>
     </div>
 </div>
 
-<!-- MODAL PARA GERENCIAR LINKS (ADMIN) -->
-<div id="linkModal" class="modal">
+<!-- MODAL PARA GERENCIAR TÓPICOS -->
+<div id="topicModal" class="modal">
     <div class="modal-content">
-        <h3 style="color:#0c2e4e;"><i class="fas fa-link"></i> Gerenciar material de apoio</h3>
-        <input type="url" id="modalUrl" placeholder="URL do material (PDF, vídeo, legislação)">
-        <textarea id="modalDesc" rows="2" placeholder="Descrição do conteúdo (opcional)"></textarea>
+        <h3 style="color:#0c2e4e;" id="topicModalTitle"><i class="fas fa-plus-circle"></i> Adicionar Tópico</h3>
+        <input type="text" id="modalTopicText" placeholder="Título do tópico" style="font-weight: 500;">
+        <textarea id="modalTopicDesc" rows="3" placeholder="Descrição detalhada do conteúdo (opcional)"></textarea>
         <div class="modal-buttons">
-            <button id="modalSaveBtn" style="background:#0c2e4e; color:white;">Salvar link</button>
-            <button id="modalDeleteBtn" style="background:#dc2626; color:white; display:none;">Excluir</button>
+            <button id="modalSaveBtn" style="background:#0c2e4e; color:white;">Salvar</button>
             <button id="modalCancelBtn" style="background:#eef2ff;">Cancelar</button>
         </div>
     </div>
 </div>
 
+<!-- MODAL PARA GERENCIAR LINKS -->
+<div id="linkModal" class="modal">
+    <div class="modal-content">
+        <h3 style="color:#0c2e4e;"><i class="fas fa-link"></i> Gerenciar material de apoio</h3>
+        <input type="url" id="modalUrl" placeholder="URL do material (PDF, vídeo, legislação)">
+        <textarea id="modalDesc" rows="2" placeholder="Descrição do material (opcional)"></textarea>
+        <div class="modal-buttons">
+            <button id="modalLinkSaveBtn" style="background:#0c2e4e; color:white;">Salvar link</button>
+            <button id="modalLinkDeleteBtn" style="background:#dc2626; color:white; display:none;">Excluir</button>
+            <button id="modalLinkCancelBtn" style="background:#eef2ff;">Cancelar</button>
+        </div>
+    </div>
+</div>
+
 <script type="module">
-    // DISCIPLINAS BASEADAS NO ÚLTIMO EDITAL PMES
-    const DISCIPLINAS_PMES = {
+    // DISCIPLINAS INICIAIS (COM TÓPICOS EXEMPLO - ADMIN PODE EDITAR/DELETAR/ADICIONAR)
+    const DISCIPLINAS_INICIAIS = {
         portugues: {
             nome: "📖 LÍNGUA PORTUGUESA",
             icone: "fas fa-language",
             conteudos: [
                 "Compreensão e interpretação de textos",
-                "Tipologia textual e gêneros textuais (oficial, narrativo, descritivo)",
                 "Ortografia oficial e acentuação gráfica",
-                "Morfologia: classes de palavras (ênfase em verbos e conectivos)",
-                "Sintaxe: termos da oração, análise sintática",
-                "Concordância nominal e verbal",
-                "Regência nominal e verbal",
-                "Colocação pronominal e crase",
-                "Pontuação e seu efeito de sentido",
-                "Redação oficial: padrão e correspondência policial militar",
-                "Figuras de linguagem e semântica"
+                "Morfologia: classes de palavras"
             ]
         },
         matematica: {
             nome: "🧮 MATEMÁTICA",
             icone: "fas fa-calculator",
             conteudos: [
-                "Números inteiros, racionais e reais: operações",
-                "Múltiplos, divisores, porcentagem e juros simples",
-                "Razão, proporção e regra de três",
-                "Equações de 1º e 2º graus",
-                "Sistemas lineares e problemas",
-                "Geometria básica: áreas, perímetros e volumes",
-                "Noções de estatística: média, moda e mediana",
-                "Análise combinatória simples e probabilidade",
-                "Matrizes e determinantes (noções)",
-                "Funções elementares e gráficos"
-            ]
-        },
-        direito_constitucional: {
-            nome: "⚖️ DIREITO CONSTITUCIONAL",
-            icone: "fas fa-gavel",
-            conteudos: [
-                "Princípios fundamentais da CF/88",
-                "Direitos e garantias fundamentais (aplicação às polícias)",
-                "Direitos sociais e nacionalidade",
-                "Organização dos Poderes e funções essenciais",
-                "Segurança pública: art. 144 e organização",
-                "Forças Armadas e segurança pública",
-                "Controle de constitucionalidade",
-                "Processo legislativo e emendas",
-                "Defesa do Estado e instituições democráticas"
-            ]
-        },
-        direito_penal: {
-            nome: "🔒 DIREITO PENAL",
-            icone: "fas fa-balance-scale",
-            conteudos: [
-                "Aplicação da lei penal no tempo e espaço",
-                "Teoria do crime: fato típico, ilicitude, culpabilidade",
-                "Concurso de pessoas e penas",
-                "Crimes contra a vida, patrimônio e dignidade sexual",
-                "Crimes contra a administração pública (ênfase)",
-                "Lei de drogas (Lei 11.343/2006) – noções",
-                "Crimes de trânsito (Lei 9.503/97) aplicáveis à PM",
-                "Lei de abuso de autoridade",
-                "Execução penal e medidas cautelares"
-            ]
-        },
-        direito_processual_penal: {
-            nome: "📜 DIREITO PROCESSUAL PENAL",
-            icone: "fas fa-file-signature",
-            conteudos: [
-                "Inquérito policial e atribuições da PM",
-                "Ação penal: espécies e condições",
-                "Jurisdição e competência",
-                "Provas no processo penal: espécies e ilicitude",
-                "Prisões cautelares e flagrante delito",
-                "Procedimentos especiais e comuns",
-                "Sentença e recursos criminais",
-                "Nulidades e habeas corpus",
-                "Execução penal e incidentes"
-            ]
-        },
-        direito_administrativo: {
-            nome: "🏛️ DIREITO ADMINISTRATIVO",
-            icone: "fas fa-building",
-            conteudos: [
-                "Administração direta e indireta",
-                "Princípios da administração pública",
-                "Atos administrativos: requisitos e atributos",
-                "Agentes públicos: regime jurídico e responsabilidade",
-                "Poderes da administração (hierárquico, disciplinar, regulamentar)",
-                "Licitações e contratos (Lei 14.133/2021 – noções)",
-                "Serviços públicos e concessões",
-                "Controle da administração e improbidade administrativa",
-                "Processo administrativo e sindicância"
-            ]
-        },
-        legislacao_militar_es: {
-            nome: "🪖 LEGISLAÇÃO MILITAR ESPECÍFICA (PMES)",
-            icone: "fas fa-badge",
-            conteudos: [
-                "Estatuto dos Policiais Militares do ES (Lei Complementar 55/2005)",
-                "Regulamento Disciplinar da PMES (RDP)",
-                "Código de Ética da PMES",
-                "Lei de Organização Básica da PMES",
-                "Lei de Promoções dos Oficiais e Praças",
-                "Direitos, deveres e responsabilidades do soldado PM",
-                "Prevenção e combate à violência institucional",
-                "Processo administrativo disciplinar militar"
-            ]
-        },
-        geografia_historia_es: {
-            nome: "🌎 GEOGRAFIA E HISTÓRIA DO ESPÍRITO SANTO",
-            icone: "fas fa-map-marked-alt",
-            conteudos: [
-                "Formação socioeconômica e cultural do ES",
-                "Ciclos econômicos (café, mineração, industrialização)",
-                "Geografia física do Espírito Santo: relevo, clima, hidrografia",
-                "Regiões metropolitanas e problemas urbanos",
-                "História política do ES e símbolos estaduais",
-                "Cultura capixaba e movimentos sociais",
-                "Atualidades do estado e políticas públicas",
-                "Consequências ambientais e desenvolvimento"
-            ]
-        },
-        atualidades: {
-            nome: "📰 ATUALIDADES E NOÇÕES DE ADMINISTRAÇÃO PÚBLICA",
-            icone: "fas fa-newspaper",
-            conteudos: [
-                "Atualidades políticas, econômicas e sociais do Brasil",
-                "Segurança pública no ES e no Brasil",
-                "Meio ambiente e sustentabilidade",
-                "Direitos humanos e cidadania",
-                "Administração pública: governança e transparência",
-                "Lei de Acesso à Informação",
-                "Gestão de conflitos e mediação comunitária"
+                "Números inteiros e operações",
+                "Porcentagem e juros simples",
+                "Regra de três e proporções"
             ]
         }
     };
@@ -773,9 +711,36 @@
     let filtroAtual = "all";
     let progresso = {};
     let linksGlobais = {};
+    let disciplinas = {};
+    let topicoEditando = null;
     let linkEditando = null;
 
     // Funções Firebase
+    async function carregarDisciplinasFirebase() {
+        try {
+            const docRef = doc(window.db, "curso", "disciplinas");
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                return docSnap.data().disciplinas;
+            }
+            // Se não existir, criar com disciplinas iniciais
+            await salvarDisciplinasFirebase(DISCIPLINAS_INICIAIS);
+            return DISCIPLINAS_INICIAIS;
+        } catch (error) {
+            console.error("Erro ao carregar disciplinas:", error);
+            return DISCIPLINAS_INICIAIS;
+        }
+    }
+
+    async function salvarDisciplinasFirebase(disciplinasData) {
+        try {
+            const docRef = doc(window.db, "curso", "disciplinas");
+            await setDoc(docRef, { disciplinas: disciplinasData, updatedAt: new Date().toISOString() });
+        } catch (error) {
+            console.error("Erro ao salvar disciplinas:", error);
+        }
+    }
+
     async function carregarProgressoFirebase(email) {
         try {
             const docRef = doc(window.db, "progressos", email);
@@ -829,7 +794,7 @@
             if (docSnap.exists()) {
                 return docSnap.data().tipo === "admin";
             }
-            return email === "admin@mentoria.com"; // Admin padrão
+            return email === "admin@mentoria.com";
         } catch (error) {
             console.error("Erro ao verificar admin:", error);
             return false;
@@ -850,6 +815,7 @@
             const userCredential = await window.signInWithEmailAndPassword(window.auth, email, senha);
             usuarioAtual = userCredential.user.email;
             tipoUsuario = await verificarAdminFirebase(usuarioAtual) ? "admin" : "aluno";
+            disciplinas = await carregarDisciplinasFirebase();
             progresso = await carregarProgressoFirebase(usuarioAtual);
             linksGlobais = await carregarLinksFirebase();
             mostrarTelaHome();
@@ -870,12 +836,12 @@
             usuarioAtual = userCredential.user.email;
             tipoUsuario = "aluno";
             
-            // Se for o email admin padrão, registrar como admin
             if (email === "admin@mentoria.com") {
                 await registrarAdminFirebase(email);
                 tipoUsuario = "admin";
             }
             
+            disciplinas = await carregarDisciplinasFirebase();
             progresso = {};
             await salvarProgressoFirebase(usuarioAtual, progresso);
             linksGlobais = await carregarLinksFirebase();
@@ -901,7 +867,7 @@
     }
 
     function obterProgressoDisciplina(disciplinaId) {
-        const conteudos = DISCIPLINAS_PMES[disciplinaId]?.conteudos || [];
+        const conteudos = disciplinas[disciplinaId]?.conteudos || [];
         let concluidos = 0;
         for (let i = 0; i < conteudos.length; i++) {
             if (progresso[disciplinaId]?.[i]) concluidos++;
@@ -913,7 +879,7 @@
     function obterProgressoGeral() {
         let totalConcluidos = 0;
         let totalItens = 0;
-        for (const disciplinaId in DISCIPLINAS_PMES) {
+        for (const disciplinaId in disciplinas) {
             const prog = obterProgressoDisciplina(disciplinaId);
             totalConcluidos += prog.concluidos;
             totalItens += prog.total;
@@ -933,6 +899,85 @@
         atualizarProgressoGeralUI();
     }
 
+    // CRUD de Tópicos (Admin apenas)
+    function abrirModalTopico(disciplinaId = null, indice = null) {
+        if (tipoUsuario !== 'admin') return;
+        
+        if (indice !== null) {
+            // Editando tópico existente
+            topicoEditando = { disciplinaId, indice };
+            const topico = disciplinas[disciplinaId].conteudos[indice];
+            document.getElementById('topicModalTitle').innerHTML = '<i class="fas fa-edit"></i> Editar Tópico';
+            document.getElementById('modalTopicText').value = topico;
+            document.getElementById('modalTopicDesc').value = '';
+            document.getElementById('modalTopicDesc').placeholder = 'Descrição adicional (será exibida abaixo do título)';
+        } else {
+            // Novo tópico
+            topicoEditando = { disciplinaId, indice: null };
+            document.getElementById('topicModalTitle').innerHTML = '<i class="fas fa-plus-circle"></i> Adicionar Tópico';
+            document.getElementById('modalTopicText').value = '';
+            document.getElementById('modalTopicDesc').value = '';
+            document.getElementById('modalTopicDesc').placeholder = 'Descrição detalhada do conteúdo (opcional)';
+        }
+        document.getElementById('topicModal').style.display = 'flex';
+    }
+
+    async function salvarTopicoModal() {
+        if (!topicoEditando) return;
+        const { disciplinaId, indice } = topicoEditando;
+        const titulo = document.getElementById('modalTopicText').value.trim();
+        const descricao = document.getElementById('modalTopicDesc').value.trim();
+        
+        if (!titulo) {
+            alert("Por favor, insira um título para o tópico");
+            return;
+        }
+        
+        const textoCompleto = descricao ? `${titulo}\n\n${descricao}` : titulo;
+        
+        if (indice !== null) {
+            // Editando
+            disciplinas[disciplinaId].conteudos[indice] = textoCompleto;
+        } else {
+            // Adicionando novo
+            if (!disciplinas[disciplinaId].conteudos) {
+                disciplinas[disciplinaId].conteudos = [];
+            }
+            disciplinas[disciplinaId].conteudos.push(textoCompleto);
+        }
+        
+        await salvarDisciplinasFirebase(disciplinas);
+        fecharModalTopico();
+        if (disciplinaAtual === disciplinaId) {
+            atualizarProgressoCurso();
+            renderizarConteudos();
+        }
+        renderizarGradeDisciplinas();
+        atualizarProgressoGeralUI();
+    }
+
+    async function excluirTopico(disciplinaId, indice) {
+        if (tipoUsuario !== 'admin') return;
+        if (confirm("Tem certeza que deseja excluir este tópico?")) {
+            disciplinas[disciplinaId].conteudos.splice(indice, 1);
+            await salvarDisciplinasFirebase(disciplinas);
+            
+            // Remover progresso dos alunos para este tópico (opcional)
+            if (disciplinaAtual === disciplinaId) {
+                atualizarProgressoCurso();
+                renderizarConteudos();
+            }
+            renderizarGradeDisciplinas();
+            atualizarProgressoGeralUI();
+        }
+    }
+
+    function fecharModalTopico() {
+        document.getElementById('topicModal').style.display = 'none';
+        topicoEditando = null;
+    }
+
+    // Gerenciamento de Links
     function abrirModalLink(disciplinaId, indice) {
         if (tipoUsuario !== 'admin') return;
         linkEditando = { disciplinaId, indice };
@@ -940,7 +985,7 @@
         const link = linksGlobais[chave];
         document.getElementById('modalUrl').value = link?.url || '';
         document.getElementById('modalDesc').value = link?.desc || '';
-        document.getElementById('modalDeleteBtn').style.display = link ? 'block' : 'none';
+        document.getElementById('modalLinkDeleteBtn').style.display = link ? 'block' : 'none';
         document.getElementById('linkModal').style.display = 'flex';
     }
     
@@ -953,7 +998,7 @@
         if (url) linksGlobais[chave] = { url, desc };
         else delete linksGlobais[chave];
         await salvarLinksFirebase(linksGlobais);
-        fecharModal();
+        fecharModalLink();
         if (disciplinaAtual === disciplinaId) renderizarConteudos();
     }
     
@@ -962,11 +1007,11 @@
         const { disciplinaId, indice } = linkEditando;
         delete linksGlobais[`${disciplinaId}_${indice}`];
         await salvarLinksFirebase(linksGlobais);
-        fecharModal();
+        fecharModalLink();
         if (disciplinaAtual === disciplinaId) renderizarConteudos();
     }
     
-    function fecharModal() {
+    function fecharModalLink() {
         document.getElementById('linkModal').style.display = 'none';
         linkEditando = null;
     }
@@ -974,7 +1019,7 @@
     function renderizarGradeDisciplinas() {
         const grid = document.getElementById('disciplinesGrid');
         grid.innerHTML = '';
-        for (const [id, dados] of Object.entries(DISCIPLINAS_PMES)) {
+        for (const [id, dados] of Object.entries(disciplinas)) {
             const prog = obterProgressoDisciplina(id);
             const card = document.createElement('div');
             card.className = 'discipline-card';
@@ -1001,10 +1046,18 @@
         filtroAtual = "all";
         document.getElementById('homeScreen').style.display = 'none';
         document.getElementById('courseScreen').style.display = 'block';
-        const dados = DISCIPLINAS_PMES[disciplinaId];
+        const dados = disciplinas[disciplinaId];
         document.getElementById('courseTitle').innerHTML = dados.nome;
         document.getElementById('courseIcon').className = dados.icone;
         document.getElementById('courseUserName').innerHTML = usuarioAtual.split('@')[0];
+        
+        const addBtn = document.getElementById('addTopicBtn');
+        if (tipoUsuario === 'admin') {
+            addBtn.style.display = 'block';
+        } else {
+            addBtn.style.display = 'none';
+        }
+        
         const roleSpanCurso = document.getElementById('courseRoleBadge');
         if (tipoUsuario === 'admin') {
             roleSpanCurso.innerText = 'Administrador';
@@ -1030,13 +1083,19 @@
     
     function renderizarConteudos() {
         if (!disciplinaAtual) return;
-        const dados = DISCIPLINAS_PMES[disciplinaAtual];
+        const dados = disciplinas[disciplinaAtual];
         const container = document.getElementById('contentsContainer');
         let html = '';
         dados.conteudos.forEach((texto, idx) => {
             const concluido = progresso[disciplinaAtual]?.[idx] || false;
             const exibir = filtroAtual === 'all' || (filtroAtual === 'completed' && concluido) || (filtroAtual === 'pending' && !concluido);
             if (!exibir) return;
+            
+            // Separar título e descrição se existir
+            const partes = texto.split('\n\n');
+            const titulo = partes[0];
+            const descricao = partes[1] || '';
+            
             const link = linksGlobais[`${disciplinaAtual}_${idx}`];
             const isAdmin = tipoUsuario === 'admin';
             html += `
@@ -1045,11 +1104,16 @@
                         <input type="checkbox" class="content-checkbox" ${concluido ? 'checked' : ''} 
                                onclick="window.alternarConteudoFirebase('${disciplinaAtual}', ${idx})">
                         <div class="content-text">
-                            <strong>📌 Tópico ${idx+1}</strong><br>${texto}
+                            <strong>📌 ${titulo}</strong>
+                            ${descricao ? `<br><span style="font-size: 0.9rem; color: #475569;">${descricao}</span>` : ''}
                         </div>
-                        ${isAdmin ? `<button class="link-btn" onclick="window.abrirModalLinkFirebase('${disciplinaAtual}', ${idx})"><i class="fas fa-edit"></i> ${link ? 'Editar' : '+ Link'}</button>` : ''}
+                        <div class="topic-actions">
+                            ${isAdmin ? `<button class="edit-topic-btn" onclick="window.abrirModalTopicoFirebase('${disciplinaAtual}', ${idx})"><i class="fas fa-edit"></i></button>
+                                         <button class="delete-topic-btn" onclick="window.excluirTopicoFirebase('${disciplinaAtual}', ${idx})"><i class="fas fa-trash"></i></button>` : ''}
+                            ${isAdmin ? `<button class="link-btn" onclick="window.abrirModalLinkFirebase('${disciplinaAtual}', ${idx})"><i class="fas fa-link"></i> ${link ? 'Editar Link' : 'Adicionar Link'}</button>` : (link ? `<button class="link-btn" onclick="window.open('${link.url}', '_blank')"><i class="fas fa-external-link-alt"></i> Ver Material</button>` : '')}
+                        </div>
                     </div>
-                    ${link ? `<div class="link-container"><a href="${link.url}" target="_blank"><i class="fas fa-external-link-alt"></i> 🔗 ${link.desc || 'Material de apoio'}</a></div>` : (isAdmin ? '<div class="link-container" style="color:#94a3b8;">➕ Adicione um link para material de apoio</div>' : '')}
+                    ${link && !isAdmin ? `<div class="link-container"><a href="${link.url}" target="_blank"><i class="fas fa-external-link-alt"></i> 🔗 ${link.desc || 'Material de apoio'}</a></div>` : ''}
                 </div>
             `;
         });
@@ -1081,9 +1145,15 @@
         document.getElementById('logoutMainBtn').onclick = logout;
         document.getElementById('backToHomeBtn').onclick = () => mostrarTelaHome();
         document.getElementById('goHomeBtn').onclick = () => mostrarTelaHome();
-        document.getElementById('modalSaveBtn').onclick = salvarLinkModal;
-        document.getElementById('modalDeleteBtn').onclick = excluirLinkModal;
-        document.getElementById('modalCancelBtn').onclick = fecharModal;
+        
+        document.getElementById('addTopicBtn').onclick = () => abrirModalTopico(disciplinaAtual);
+        document.getElementById('modalSaveBtn').onclick = salvarTopicoModal;
+        document.getElementById('modalCancelBtn').onclick = fecharModalTopico;
+        
+        document.getElementById('modalLinkSaveBtn').onclick = salvarLinkModal;
+        document.getElementById('modalLinkDeleteBtn').onclick = excluirLinkModal;
+        document.getElementById('modalLinkCancelBtn').onclick = fecharModalLink;
+        
         document.querySelectorAll('#courseScreen .filter-btn').forEach(btn => {
             btn.onclick = () => {
                 document.querySelectorAll('#courseScreen .filter-btn').forEach(b => b.classList.remove('active'));
@@ -1092,12 +1162,18 @@
                 renderizarConteudos();
             };
         });
-        window.onclick = (e) => { if (e.target === document.getElementById('linkModal')) fecharModal(); };
+        
+        window.onclick = (e) => { 
+            if (e.target === document.getElementById('topicModal')) fecharModalTopico();
+            if (e.target === document.getElementById('linkModal')) fecharModalLink();
+        };
     }
 
     // Expor funções para o escopo global
     window.alternarConteudoFirebase = alternarConteudo;
     window.abrirModalLinkFirebase = abrirModalLink;
+    window.abrirModalTopicoFirebase = abrirModalTopico;
+    window.excluirTopicoFirebase = excluirTopico;
     
     configurarEventos();
     
@@ -1106,6 +1182,7 @@
         if (user) {
             usuarioAtual = user.email;
             tipoUsuario = await verificarAdminFirebase(usuarioAtual) ? "admin" : "aluno";
+            disciplinas = await carregarDisciplinasFirebase();
             progresso = await carregarProgressoFirebase(usuarioAtual);
             linksGlobais = await carregarLinksFirebase();
             mostrarTelaHome();
