@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Meta Concurso - Plataforma de Preparação</title>
+    <title>Meta PMES - Preparação para Soldado PMES 2026</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Firebase SDKs -->
     <script type="module">
+        // Import Firebase SDKs
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, doc, getDoc, setDoc, collection, query, where, getDocs, updateDoc, arrayUnion, arrayRemove, deleteDoc, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, doc, getDoc, setDoc, collection, query, where, getDocs, updateDoc, arrayUnion, arrayRemove, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
         import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
         
+        // Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyC_D_puw38NHgsTzsz29hZHsD8FCq0m-z8",
             authDomain: "meta-pmes.firebaseapp.com",
@@ -21,10 +23,12 @@
             appId: "1:169924841151:web:66b25053d5538e6d03400a"
         };
         
+        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         const auth = getAuth(app);
         
+        // Make Firebase services available globally
         window.db = db;
         window.auth = auth;
         window.doc = doc;
@@ -32,7 +36,6 @@
         window.setDoc = setDoc;
         window.updateDoc = updateDoc;
         window.deleteDoc = deleteDoc;
-        window.addDoc = addDoc;
         window.collection = collection;
         window.query = query;
         window.where = where;
@@ -53,11 +56,92 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            background: #fefce8;
+            color: #1e293b;
         }
 
-        /* Header */
+        .login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #0c2e4e, #1e4a76);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .login-card {
+            background: white;
+            border-radius: 40px;
+            padding: 2.5rem;
+            max-width: 420px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 25px 40px rgba(0,0,0,0.25);
+            border-top: 6px solid #f5b042;
+        }
+
+        .login-card .logo-icon {
+            font-size: 3.5rem;
+            color: #1e4a76;
+            margin-bottom: 1rem;
+        }
+
+        .login-card h2 {
+            color: #0c2e4e;
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+        }
+
+        .login-card input {
+            width: 100%;
+            padding: 0.9rem;
+            margin: 0.6rem 0;
+            border: 2px solid #e2e8f0;
+            border-radius: 20px;
+            font-size: 1rem;
+            transition: 0.2s;
+        }
+
+        .login-card input:focus {
+            outline: none;
+            border-color: #f5b042;
+        }
+
+        .login-card button {
+            width: 100%;
+            padding: 0.9rem;
+            margin-top: 0.6rem;
+            background: #0c2e4e;
+            color: white;
+            border: none;
+            border-radius: 40px;
+            font-size: 1rem;
+            cursor: pointer;
+            font-weight: 700;
+            transition: 0.2s;
+        }
+
+        .login-card button:hover {
+            background: #f5b042;
+            color: #0c2e4e;
+        }
+
+        .login-card .register-btn {
+            background: #eef2ff;
+            color: #0c2e4e;
+            border: 1px solid #cbd5e1;
+        }
+
+        .error-msg {
+            color: #dc2626;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
         .main-header {
             background: white;
             padding: 1rem 2rem;
@@ -65,7 +149,8 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-bottom: 3px solid #f5b042;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
         }
 
         .logo-area {
@@ -76,10 +161,10 @@
         }
 
         .logo-icon {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #0c2e4e;
             width: 45px;
             height: 45px;
-            border-radius: 12px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -89,13 +174,13 @@
 
         .logo-text h1 {
             font-size: 1.5rem;
-            color: #333;
+            color: #0c2e4e;
             font-weight: 800;
         }
 
         .logo-text span {
             font-size: 0.75rem;
-            color: #667eea;
+            color: #f5b042;
             font-weight: 600;
         }
 
@@ -121,7 +206,7 @@
         }
 
         .role-student {
-            background: #10b981;
+            background: #0c2e4e;
             color: white;
         }
 
@@ -135,130 +220,117 @@
             font-weight: 600;
         }
 
-        /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 3rem 2rem;
+            background: linear-gradient(120deg, #e6f0fa, #ffffff);
+            padding: 2rem 2rem;
             text-align: center;
+            border-bottom: 1px solid #f5b04230;
         }
 
         .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+            font-size: 2rem;
+            color: #0c2e4e;
         }
 
         .hero p {
-            font-size: 1.1rem;
-            opacity: 0.95;
+            color: #334155;
+            margin-top: 0.5rem;
         }
 
-        /* Conteúdo Principal */
-        .main-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem;
+        .global-progress {
+            background: white;
+            margin: 2rem;
+            padding: 1.5rem;
+            border-radius: 32px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            text-align: center;
+            border-left: 8px solid #f5b042;
         }
 
-        /* Cards de Concursos */
-        .contests-section {
-            margin-bottom: 3rem;
+        .global-progress h3 {
+            color: #0c2e4e;
+            margin-bottom: 1rem;
+        }
+
+        .progress-bar-large {
+            height: 12px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .progress-fill-large {
+            height: 100%;
+            background: #f5b042;
+            width: 0%;
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1300px;
+            margin: 2rem auto 1.5rem;
+            padding: 0 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
 
         .section-title {
             font-size: 1.8rem;
             font-weight: 700;
-            color: white;
-            margin-bottom: 2rem;
-            text-align: center;
+            color: #0c2e4e;
+            margin: 0;
         }
 
-        .contests-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 2rem;
-        }
-
-        .contest-card {
-            background: white;
-            border-radius: 24px;
-            padding: 2rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .contest-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        }
-
-        .contest-icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-        }
-
-        .contest-card h3 {
-            font-size: 1.5rem;
-            color: #333;
-            margin-bottom: 0.5rem;
-        }
-
-        .contest-badge {
-            display: inline-block;
-            background: #667eea;
-            color: white;
-            padding: 0.3rem 1rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            margin: 0.5rem 0;
-        }
-
-        .contest-stats {
-            display: flex;
-            justify-content: space-around;
-            margin: 1rem 0;
-            padding: 0.5rem;
-            background: #f8fafc;
-            border-radius: 12px;
-        }
-
-        .stat {
-            text-align: center;
-        }
-
-        .stat-value {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #667eea;
-        }
-
-        .stat-label {
-            font-size: 0.7rem;
-            color: #666;
-        }
-
-        .enter-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .add-discipline-btn {
+            background: #0c2e4e;
             color: white;
             border: none;
-            padding: 0.8rem 1.5rem;
+            padding: 0.8rem 1.8rem;
             border-radius: 40px;
             cursor: pointer;
             font-weight: 600;
-            margin-top: 1rem;
-            width: 100%;
-            transition: 0.2s;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .enter-btn:hover {
-            transform: scale(1.05);
+        .add-discipline-btn:hover {
+            background: #f5b042;
+            color: #0c2e4e;
         }
 
-        .admin-actions {
+        .disciplines-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1300px;
+            margin: 0 auto 2rem;
+            padding: 0 2rem;
+        }
+
+        .discipline-card {
+            background: white;
+            border-radius: 32px;
+            padding: 1.8rem;
+            transition: all 0.3s ease;
+            border: 1px solid #fef3c7;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+            position: relative;
+        }
+
+        .discipline-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 30px -10px rgba(0,0,0,0.15);
+            border-color: #f5b042;
+        }
+
+        .discipline-actions {
             position: absolute;
             top: 1rem;
             right: 1rem;
@@ -268,11 +340,11 @@
             transition: opacity 0.3s ease;
         }
 
-        .contest-card:hover .admin-actions {
+        .discipline-card:hover .discipline-actions {
             opacity: 1;
         }
 
-        .admin-action-btn {
+        .discipline-action-btn {
             background: white;
             border: none;
             border-radius: 50%;
@@ -282,10 +354,232 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: 0.2s;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        /* Modal */
+        .discipline-action-btn.edit {
+            color: #0c2e4e;
+        }
+
+        .discipline-action-btn.edit:hover {
+            background: #0c2e4e;
+            color: white;
+        }
+
+        .discipline-action-btn.delete {
+            color: #dc2626;
+        }
+
+        .discipline-action-btn.delete:hover {
+            background: #dc2626;
+            color: white;
+        }
+
+        .discipline-icon {
+            font-size: 3rem;
+            color: #1e4a76;
+            margin-bottom: 1rem;
+        }
+
+        .discipline-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            color: #0c2e4e;
+            padding-right: 2rem;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #f5b042;
+            width: 0%;
+            border-radius: 10px;
+        }
+
+        .course-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .course-header {
+            background: white;
+            border-radius: 32px;
+            padding: 1.8rem;
+            margin-bottom: 1.8rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border-top: 5px solid #f5b042;
+        }
+
+        .back-btn {
+            background: #f1f5f9;
+            color: #0c2e4e;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .course-title {
+            font-size: 1.6rem;
+            color: #0c2e4e;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin: 0.5rem 0;
+            font-weight: 700;
+        }
+
+        .filters {
+            display: flex;
+            gap: 0.8rem;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: #f1f5f9;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+
+        .filter-btn.active {
+            background: #0c2e4e;
+            color: white;
+        }
+
+        .add-topic-btn {
+            background: #0c2e4e;
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 600;
+            margin: 1rem auto;
+            display: block;
+            font-size: 1rem;
+        }
+
+        .add-topic-btn:hover {
+            background: #f5b042;
+            color: #0c2e4e;
+        }
+
+        .contents-list {
+            background: white;
+            border-radius: 28px;
+            padding: 0.5rem;
+            overflow: hidden;
+        }
+
+        .content-item {
+            padding: 1.2rem;
+            border-bottom: 1px solid #eef2ff;
+            transition: 0.1s;
+            position: relative;
+        }
+
+        .content-item.completed {
+            background: #fef9e6;
+            border-left: 5px solid #f5b042;
+        }
+
+        .content-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .content-checkbox {
+            width: 22px;
+            height: 22px;
+            margin-top: 3px;
+            cursor: pointer;
+            accent-color: #f5b042;
+        }
+
+        .content-text {
+            flex: 1;
+            font-weight: 500;
+        }
+
+        .content-text strong {
+            color: #0c2e4e;
+        }
+
+        .topic-actions {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .edit-topic-btn, .delete-topic-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 0.3rem;
+            border-radius: 8px;
+            transition: 0.2s;
+        }
+
+        .edit-topic-btn {
+            color: #0c2e4e;
+        }
+
+        .edit-topic-btn:hover {
+            background: #e2e8f0;
+        }
+
+        .delete-topic-btn {
+            color: #dc2626;
+        }
+
+        .delete-topic-btn:hover {
+            background: #fee2e2;
+        }
+
+        .link-btn {
+            background: #f5b042;
+            color: #0c2e4e;
+            border: none;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        .link-container {
+            margin-top: 0.6rem;
+            padding-left: 2.2rem;
+        }
+
+        .link-container a {
+            color: #1e4a76;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border-bottom: 1px dashed #f5b042;
+        }
+
         .modal {
             display: none;
             position: fixed;
@@ -302,11 +596,9 @@
         .modal-content {
             background: white;
             border-radius: 32px;
-            padding: 2rem;
-            max-width: 500px;
+            padding: 1.8rem;
+            max-width: 480px;
             width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
         }
 
         .modal-content input,
@@ -318,6 +610,13 @@
             border: 1px solid #cbd5e1;
             border-radius: 20px;
             font-family: inherit;
+        }
+
+        .icon-preview {
+            font-size: 2rem;
+            text-align: center;
+            margin: 0.5rem 0;
+            color: #0c2e4e;
         }
 
         .modal-buttons {
@@ -335,31 +634,29 @@
             font-weight: 600;
         }
 
-        /* Loading */
-        .loading {
-            text-align: center;
-            padding: 2rem;
-            color: white;
-        }
-
         .footer {
-            background: #1e293b;
-            color: white;
+            background: #0c2e4e;
+            color: #fef9e6;
             text-align: center;
-            padding: 2rem;
-            margin-top: 3rem;
+            padding: 1.8rem;
+            margin-top: 2rem;
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 680px) {
             .main-header {
                 flex-direction: column;
                 gap: 1rem;
             }
-            .hero h1 {
-                font-size: 1.8rem;
+            .disciplines-grid {
+                padding: 0 1rem;
+                gap: 1.2rem;
             }
-            .contests-grid {
-                grid-template-columns: 1fr;
+            .course-container {
+                padding: 1rem;
+            }
+            .section-header {
+                flex-direction: column;
+                text-align: center;
             }
         }
     </style>
@@ -367,29 +664,26 @@
 <body>
 
 <!-- TELA DE LOGIN -->
-<div id="loginScreen" style="display: flex;" class="login-overlay">
+<div id="loginScreen" class="login-overlay">
     <div class="login-card">
-        <div class="logo-icon"><i class="fas fa-graduation-cap"></i></div>
-        <h2>Meta Concurso</h2>
-        <p style="margin-bottom: 1rem;">Sua plataforma de preparação para concursos</p>
+        <div class="logo-icon"><i class="fas fa-shield-alt"></i></div>
+        <h2>Meta PMES</h2>
+        <p style="margin-bottom: 1rem;">Preparação para Soldado da Polícia Militar do ES 2026</p>
         <input type="email" id="emailInput" placeholder="seu@email.com">
         <input type="password" id="passwordInput" placeholder="Senha">
         <button id="doLoginBtn">Entrar</button>
         <button id="doRegisterBtn" class="register-btn">Criar nova conta</button>
         <div id="loginMsg" class="error-msg"></div>
-        <div style="margin-top: 1rem; font-size: 0.7rem; color: #475569;">Admin: admin@metaconcurso.com / admin123</div>
+        <div style="margin-top: 1rem; font-size: 0.7rem; color: #475569;">Admin: admin@mentoria.com / admin123</div>
     </div>
 </div>
 
-<!-- TELA PRINCIPAL (ESCOLHA DE CONCURSOS) -->
+<!-- TELA PRINCIPAL (HOME) -->
 <div id="homeScreen" style="display: none;">
     <header class="main-header">
         <div class="logo-area" id="goHomeBtn">
-            <div class="logo-icon"><i class="fas fa-graduation-cap"></i></div>
-            <div class="logo-text">
-                <h1>Meta Concurso</h1>
-                <span>Sua aprovação começa aqui</span>
-            </div>
+            <div class="logo-icon"><i class="fas fa-shield-alt"></i></div>
+            <div class="logo-text"><h1>Meta PMES <span>Soldado ES 2026</span></h1></div>
         </div>
         <div class="user-info">
             <i class="fas fa-user-graduate"></i>
@@ -400,40 +694,116 @@
     </header>
 
     <section class="hero">
-        <h1>🏆 Prepare-se para o concurso dos seus sonhos</h1>
-        <p>Escolha o concurso, estude com materiais atualizados e faça simulados</p>
+        <h1>👮‍♂️ Polícia Militar do Espírito Santo</h1>
+        <p>Preparação completa para o concurso de Soldado PMES 2026</p>
     </section>
 
-    <div class="main-content">
-        <div class="contests-section">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
-                <h2 class="section-title" style="margin: 0;">📚 Concursos Disponíveis</h2>
-                <button id="addContestBtn" class="add-discipline-btn" style="background: white; color: #667eea; border: none; padding: 0.8rem 1.5rem; border-radius: 40px; font-weight: 600; cursor: pointer; display: none;">
-                    <i class="fas fa-plus"></i> Novo Concurso
-                </button>
-            </div>
-            <div id="contestsGrid" class="contests-grid">
-                <div class="loading">Carregando concursos...</div>
-            </div>
+    <div class="global-progress">
+        <h3><i class="fas fa-chart-line"></i> Progresso rumo à farda</h3>
+        <div class="progress-bar-large">
+            <div id="globalProgressFill" class="progress-fill-large" style="width: 0%;"></div>
         </div>
+        <span id="globalProgressText">0% concluído</span>
     </div>
 
+    <div class="section-header">
+        <h2 class="section-title">📖 Disciplinas do Curso</h2>
+        <button id="addDisciplineBtn" class="add-discipline-btn" style="display: none;">
+            <i class="fas fa-plus"></i> Nova Disciplina
+        </button>
+    </div>
+    <div id="disciplinesGrid" class="disciplines-grid"></div>
+
     <footer class="footer">
-        <p>© Meta Concurso - Sua preparação para a aprovação</p>
+        <p>© Meta PMES - Sua aprovação na PMES começa aqui | Soldado 2026</p>
     </footer>
 </div>
 
-<!-- MODAL PARA GERENCIAR CONCURSOS -->
-<div id="contestModal" class="modal">
+<!-- TELA DE ACOMPANHAMENTO DO CURSO (MATÉRIAS DETALHADAS) -->
+<div id="courseScreen" style="display: none;">
+    <div class="course-container">
+        <div class="course-header">
+            <button id="backToHomeBtn" class="back-btn"><i class="fas fa-arrow-left"></i> Voltar para disciplinas</button>
+            <div class="course-title">
+                <i id="courseIcon" class="fas fa-book"></i>
+                <span id="courseTitle"></span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-top: 0.8rem; flex-wrap: wrap;">
+                <span><i class="fas fa-user"></i> <span id="courseUserName"></span> <span id="courseRoleBadge" class="role-badge"></span></span>
+                <span><i class="fas fa-chart-line"></i> Progresso: <span id="courseProgressPercent">0%</span></span>
+            </div>
+            <div class="progress-bar" style="margin-top: 0.8rem;">
+                <div id="courseProgressFill" class="progress-fill" style="width: 0%;"></div>
+            </div>
+        </div>
+
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">📚 Todos</button>
+            <button class="filter-btn" data-filter="pending">⏳ Pendentes</button>
+            <button class="filter-btn" data-filter="completed">✅ Concluídos</button>
+        </div>
+
+        <button id="addTopicBtn" class="add-topic-btn" style="display: none;">+ Adicionar Novo Tópico</button>
+
+        <div id="contentsContainer" class="contents-list"></div>
+    </div>
+</div>
+
+<!-- MODAL PARA GERENCIAR DISCIPLINAS -->
+<div id="disciplineModal" class="modal">
     <div class="modal-content">
-        <h3 style="color:#667eea;" id="contestModalTitle"><i class="fas fa-plus-circle"></i> Adicionar Concurso</h3>
-        <input type="text" id="modalContestName" placeholder="Nome do concurso (ex: PMES 2026)">
-        <input type="text" id="modalContestIcon" placeholder="Ícone (ex: 🎯, 👮, ⚖️)">
-        <textarea id="modalContestDesc" rows="3" placeholder="Descrição do concurso"></textarea>
-        <input type="text" id="modalContestYear" placeholder="Ano (ex: 2026)">
+        <h3 style="color:#0c2e4e;" id="disciplineModalTitle"><i class="fas fa-plus-circle"></i> Adicionar Disciplina</h3>
+        <input type="text" id="modalDisciplineName" placeholder="Nome da disciplina">
+        <select id="modalDisciplineIcon">
+            <option value="fas fa-book">📚 Livro</option>
+            <option value="fas fa-language">📖 Língua Portuguesa</option>
+            <option value="fas fa-calculator">🧮 Matemática</option>
+            <option value="fas fa-gavel">⚖️ Direito</option>
+            <option value="fas fa-balance-scale">🔒 Direito Penal</option>
+            <option value="fas fa-file-signature">📜 Processo Penal</option>
+            <option value="fas fa-building">🏛️ Administrativo</option>
+            <option value="fas fa-badge">🪖 Legislação</option>
+            <option value="fas fa-map-marked-alt">🌎 Geografia</option>
+            <option value="fas fa-newspaper">📰 Atualidades</option>
+            <option value="fas fa-chart-line">📊 Estatística</option>
+            <option value="fas fa-code-branch">🔀 Lógica</option>
+            <option value="fas fa-flask">🔬 Ciências</option>
+            <option value="fas fa-history">📜 História</option>
+            <option value="fas fa-globe">🌍 Geografia Geral</option>
+        </select>
+        <div class="icon-preview" id="iconPreview">
+            <i class="fas fa-book"></i>
+        </div>
         <div class="modal-buttons">
-            <button id="modalContestSaveBtn" style="background:#667eea; color:white;">Salvar</button>
-            <button id="modalContestCancelBtn" style="background:#eef2ff;">Cancelar</button>
+            <button id="modalDisciplineSaveBtn" style="background:#0c2e4e; color:white;">Salvar</button>
+            <button id="modalDisciplineCancelBtn" style="background:#eef2ff;">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL PARA GERENCIAR TÓPICOS -->
+<div id="topicModal" class="modal">
+    <div class="modal-content">
+        <h3 style="color:#0c2e4e;" id="topicModalTitle"><i class="fas fa-plus-circle"></i> Adicionar Tópico</h3>
+        <input type="text" id="modalTopicText" placeholder="Título do tópico" style="font-weight: 500;">
+        <textarea id="modalTopicDesc" rows="3" placeholder="Descrição detalhada do conteúdo (opcional)"></textarea>
+        <div class="modal-buttons">
+            <button id="modalTopicSaveBtn" style="background:#0c2e4e; color:white;">Salvar</button>
+            <button id="modalTopicCancelBtn" style="background:#eef2ff;">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL PARA GERENCIAR LINKS -->
+<div id="linkModal" class="modal">
+    <div class="modal-content">
+        <h3 style="color:#0c2e4e;"><i class="fas fa-link"></i> Gerenciar material de apoio</h3>
+        <input type="url" id="modalUrl" placeholder="URL do material (PDF, vídeo, legislação)">
+        <textarea id="modalDesc" rows="2" placeholder="Descrição do material (opcional)"></textarea>
+        <div class="modal-buttons">
+            <button id="modalLinkSaveBtn" style="background:#0c2e4e; color:white;">Salvar link</button>
+            <button id="modalLinkDeleteBtn" style="background:#dc2626; color:white; display:none;">Excluir</button>
+            <button id="modalLinkCancelBtn" style="background:#eef2ff;">Cancelar</button>
         </div>
     </div>
 </div>
@@ -441,41 +811,104 @@
 <script type="module">
     let usuarioAtual = null;
     let tipoUsuario = null;
-    let concursos = {};
+    let disciplinaAtual = null;
+    let filtroAtual = "all";
+    let progresso = {};
+    let linksGlobais = {};
+    let disciplinas = {};
+    let disciplinaEditando = null;
+    let topicoEditando = null;
+    let linkEditando = null;
 
-    // Carregar concursos do Firebase
-    async function carregarConcursosFirebase() {
+    // Funções Firebase
+    async function carregarDisciplinasFirebase() {
         try {
-            const docRef = doc(window.db, "plataforma", "concursos");
+            const docRef = doc(window.db, "curso", "disciplinas");
             const docSnap = await getDoc(docRef);
             if (docSnap.exists()) {
-                return docSnap.data().concursos;
+                return docSnap.data().disciplinas;
             }
-            // Concursos iniciais
-            const concursosIniciais = {
-                pmes_2026: {
-                    nome: "PMES 2026",
-                    icon: "👮‍♂️",
-                    desc: "Polícia Militar do Espírito Santo - Soldado",
-                    year: "2026",
-                    active: true,
-                    createdAt: new Date().toISOString()
+            // Disciplinas iniciais
+            const disciplinasIniciais = {
+                portugues: {
+                    nome: "📖 LÍNGUA PORTUGUESA",
+                    icone: "fas fa-language",
+                    conteudos: [
+                        "Compreensão e interpretação de textos\n\nAprenda a identificar ideias principais, inferências e estruturas textuais.",
+                        "Ortografia oficial e acentuação gráfica\n\nDomine as regras de acentuação e grafia correta das palavras.",
+                        "Morfologia: classes de palavras\n\nEstudo detalhado de substantivos, adjetivos, verbos e suas flexões."
+                    ]
+                },
+                matematica: {
+                    nome: "🧮 MATEMÁTICA",
+                    icone: "fas fa-calculator",
+                    conteudos: [
+                        "Números inteiros e operações\n\nOperações básicas, propriedades e resolução de problemas.",
+                        "Porcentagem e juros simples\n\nCálculos percentuais e aplicações em situações cotidianas.",
+                        "Regra de três e proporções\n\nResolução de problemas envolvendo grandezas direta e inversamente proporcionais."
+                    ]
                 }
             };
-            await salvarConcursosFirebase(concursosIniciais);
-            return concursosIniciais;
+            await salvarDisciplinasFirebase(disciplinasIniciais);
+            return disciplinasIniciais;
         } catch (error) {
-            console.error("Erro ao carregar concursos:", error);
+            console.error("Erro ao carregar disciplinas:", error);
             return {};
         }
     }
 
-    async function salvarConcursosFirebase(concursosData) {
+    async function salvarDisciplinasFirebase(disciplinasData) {
         try {
-            const docRef = doc(window.db, "plataforma", "concursos");
-            await setDoc(docRef, { concursos: concursosData, updatedAt: new Date().toISOString() });
+            const docRef = doc(window.db, "curso", "disciplinas");
+            await setDoc(docRef, { disciplinas: disciplinasData, updatedAt: new Date().toISOString() });
         } catch (error) {
-            console.error("Erro ao salvar concursos:", error);
+            console.error("Erro ao salvar disciplinas:", error);
+        }
+    }
+
+    async function carregarProgressoFirebase(email) {
+        try {
+            const docRef = doc(window.db, "progressos", email);
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                return docSnap.data().progresso || {};
+            }
+            return {};
+        } catch (error) {
+            console.error("Erro ao carregar progresso:", error);
+            return {};
+        }
+    }
+
+    async function salvarProgressoFirebase(email, progressoData) {
+        try {
+            const docRef = doc(window.db, "progressos", email);
+            await setDoc(docRef, { progresso: progressoData, updatedAt: new Date().toISOString() });
+        } catch (error) {
+            console.error("Erro ao salvar progresso:", error);
+        }
+    }
+
+    async function carregarLinksFirebase() {
+        try {
+            const docRef = doc(window.db, "links", "materiais");
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                return docSnap.data().links || {};
+            }
+            return {};
+        } catch (error) {
+            console.error("Erro ao carregar links:", error);
+            return {};
+        }
+    }
+
+    async function salvarLinksFirebase(linksData) {
+        try {
+            const docRef = doc(window.db, "links", "materiais");
+            await setDoc(docRef, { links: linksData, updatedAt: new Date().toISOString() });
+        } catch (error) {
+            console.error("Erro ao salvar links:", error);
         }
     }
 
@@ -486,10 +919,18 @@
             if (docSnap.exists()) {
                 return docSnap.data().tipo === "admin";
             }
-            return email === "admin@metaconcurso.com";
+            return email === "admin@mentoria.com";
         } catch (error) {
             console.error("Erro ao verificar admin:", error);
             return false;
+        }
+    }
+
+    async function registrarAdminFirebase(email) {
+        try {
+            await setDoc(doc(window.db, "usuarios", email), { tipo: "admin", email: email });
+        } catch (error) {
+            console.error("Erro ao registrar admin:", error);
         }
     }
 
@@ -499,7 +940,9 @@
             const userCredential = await window.signInWithEmailAndPassword(window.auth, email, senha);
             usuarioAtual = userCredential.user.email;
             tipoUsuario = await verificarAdminFirebase(usuarioAtual) ? "admin" : "aluno";
-            concursos = await carregarConcursosFirebase();
+            disciplinas = await carregarDisciplinasFirebase();
+            progresso = await carregarProgressoFirebase(usuarioAtual);
+            linksGlobais = await carregarLinksFirebase();
             mostrarTelaHome();
             return true;
         } catch (error) {
@@ -518,12 +961,15 @@
             usuarioAtual = userCredential.user.email;
             tipoUsuario = "aluno";
             
-            if (email === "admin@metaconcurso.com") {
-                await window.setDoc(doc(window.db, "usuarios", email), { tipo: "admin", email: email });
+            if (email === "admin@mentoria.com") {
+                await registrarAdminFirebase(email);
                 tipoUsuario = "admin";
             }
             
-            concursos = await carregarConcursosFirebase();
+            disciplinas = await carregarDisciplinasFirebase();
+            progresso = {};
+            await salvarProgressoFirebase(usuarioAtual, progresso);
+            linksGlobais = await carregarLinksFirebase();
             mostrarTelaHome();
             return true;
         } catch (error) {
@@ -536,186 +982,409 @@
         await window.signOut(window.auth);
         usuarioAtual = null;
         tipoUsuario = null;
+        disciplinaAtual = null;
         document.getElementById('homeScreen').style.display = 'none';
+        document.getElementById('courseScreen').style.display = 'none';
         document.getElementById('loginScreen').style.display = 'flex';
         document.getElementById('emailInput').value = '';
         document.getElementById('passwordInput').value = '';
         document.getElementById('loginMsg').innerHTML = '';
     }
 
-    // CRUD de Concursos
-    let concursoEditando = null;
-
-    function abrirModalConcurso(concursoId = null) {
-        if (tipoUsuario !== 'admin') return;
-        
-        if (concursoId) {
-            concursoEditando = concursoId;
-            const concurso = concursos[concursoId];
-            document.getElementById('contestModalTitle').innerHTML = '<i class="fas fa-edit"></i> Editar Concurso';
-            document.getElementById('modalContestName').value = concurso.nome;
-            document.getElementById('modalContestIcon').value = concurso.icon;
-            document.getElementById('modalContestDesc').value = concurso.desc || '';
-            document.getElementById('modalContestYear').value = concurso.year || '';
-        } else {
-            concursoEditando = null;
-            document.getElementById('contestModalTitle').innerHTML = '<i class="fas fa-plus-circle"></i> Adicionar Concurso';
-            document.getElementById('modalContestName').value = '';
-            document.getElementById('modalContestIcon').value = '';
-            document.getElementById('modalContestDesc').value = '';
-            document.getElementById('modalContestYear').value = '';
+    function obterProgressoDisciplina(disciplinaId) {
+        const conteudos = disciplinas[disciplinaId]?.conteudos || [];
+        let concluidos = 0;
+        for (let i = 0; i < conteudos.length; i++) {
+            if (progresso[disciplinaId]?.[i]) concluidos++;
         }
-        document.getElementById('contestModal').style.display = 'flex';
+        const total = conteudos.length;
+        return { concluidos, total, percentual: total ? (concluidos / total) * 100 : 0 };
+    }
+    
+    function obterProgressoGeral() {
+        let totalConcluidos = 0;
+        let totalItens = 0;
+        for (const disciplinaId in disciplinas) {
+            const prog = obterProgressoDisciplina(disciplinaId);
+            totalConcluidos += prog.concluidos;
+            totalItens += prog.total;
+        }
+        return { concluidos: totalConcluidos, total: totalItens, percentual: totalItens ? (totalConcluidos / totalItens) * 100 : 0 };
+    }
+    
+    async function alternarConteudo(disciplinaId, indice) {
+        if (!progresso[disciplinaId]) progresso[disciplinaId] = {};
+        progresso[disciplinaId][indice] = !progresso[disciplinaId][indice];
+        await salvarProgressoFirebase(usuarioAtual, progresso);
+        if (disciplinaAtual === disciplinaId) {
+            atualizarProgressoCurso();
+            renderizarConteudos();
+        }
+        renderizarGradeDisciplinas();
+        atualizarProgressoGeralUI();
     }
 
-    async function salvarConcursoModal() {
-        const nome = document.getElementById('modalContestName').value.trim();
-        const icon = document.getElementById('modalContestIcon').value.trim() || '📚';
-        const desc = document.getElementById('modalContestDesc').value.trim();
-        const year = document.getElementById('modalContestYear').value.trim();
+    // CRUD de Disciplinas
+    function abrirModalDisciplina(disciplinaId = null) {
+        if (tipoUsuario !== 'admin') return;
+        
+        if (disciplinaId) {
+            // Editando disciplina existente
+            disciplinaEditando = disciplinaId;
+            const disciplina = disciplinas[disciplinaId];
+            document.getElementById('disciplineModalTitle').innerHTML = '<i class="fas fa-edit"></i> Editar Disciplina';
+            document.getElementById('modalDisciplineName').value = disciplina.nome;
+            document.getElementById('modalDisciplineIcon').value = disciplina.icone;
+        } else {
+            // Nova disciplina
+            disciplinaEditando = null;
+            document.getElementById('disciplineModalTitle').innerHTML = '<i class="fas fa-plus-circle"></i> Adicionar Disciplina';
+            document.getElementById('modalDisciplineName').value = '';
+            document.getElementById('modalDisciplineIcon').value = 'fas fa-book';
+        }
+        atualizarPreviewIcone();
+        document.getElementById('disciplineModal').style.display = 'flex';
+    }
+
+    function atualizarPreviewIcone() {
+        const iconClass = document.getElementById('modalDisciplineIcon').value;
+        document.getElementById('iconPreview').innerHTML = `<i class="${iconClass}"></i>`;
+    }
+
+    async function salvarDisciplinaModal() {
+        const nome = document.getElementById('modalDisciplineName').value.trim();
+        const icone = document.getElementById('modalDisciplineIcon').value;
         
         if (!nome) {
-            alert("Por favor, insira o nome do concurso");
+            alert("Por favor, insira o nome da disciplina");
             return;
         }
         
-        if (concursoEditando) {
+        if (disciplinaEditando) {
             // Editando
-            concursos[concursoEditando].nome = nome;
-            concursos[concursoEditando].icon = icon;
-            concursos[concursoEditando].desc = desc;
-            concursos[concursoEditando].year = year;
+            disciplinas[disciplinaEditando].nome = nome;
+            disciplinas[disciplinaEditando].icone = icone;
         } else {
-            // Adicionando novo
+            // Adicionando nova
             const novoId = nome.toLowerCase().replace(/[^a-z0-9]/g, '_') + '_' + Date.now();
-            concursos[novoId] = {
+            disciplinas[novoId] = {
                 nome: nome,
-                icon: icon,
-                desc: desc,
-                year: year,
-                active: true,
-                createdAt: new Date().toISOString()
+                icone: icone,
+                conteudos: []
             };
         }
         
-        await salvarConcursosFirebase(concursos);
-        fecharModalConcurso();
-        renderizarConcursos();
+        await salvarDisciplinasFirebase(disciplinas);
+        fecharModalDisciplina();
+        renderizarGradeDisciplinas();
+        atualizarProgressoGeralUI();
     }
 
-    async function excluirConcurso(concursoId) {
+    async function excluirDisciplina(disciplinaId) {
         if (tipoUsuario !== 'admin') return;
-        if (confirm(`Tem certeza que deseja excluir o concurso "${concursos[concursoId].nome}"?`)) {
-            delete concursos[concursoId];
-            await salvarConcursosFirebase(concursos);
-            renderizarConcursos();
+        if (confirm(`Tem certeza que deseja excluir a disciplina "${disciplinas[disciplinaId].nome}"?\nTodos os tópicos e progresso dos alunos serão perdidos!`)) {
+            delete disciplinas[disciplinaId];
+            await salvarDisciplinasFirebase(disciplinas);
+            renderizarGradeDisciplinas();
+            atualizarProgressoGeralUI();
         }
     }
 
-    function fecharModalConcurso() {
-        document.getElementById('contestModal').style.display = 'none';
-        concursoEditando = null;
+    function fecharModalDisciplina() {
+        document.getElementById('disciplineModal').style.display = 'none';
+        disciplinaEditando = null;
     }
 
-    // Renderizar concursos
-    function renderizarConcursos() {
-        const grid = document.getElementById('contestsGrid');
-        if (!grid) return;
+    // CRUD de Tópicos
+    function abrirModalTopico(disciplinaId = null, indice = null) {
+        if (tipoUsuario !== 'admin') return;
         
-        if (Object.keys(concursos).length === 0) {
-            grid.innerHTML = '<div class="loading" style="color: white;">Nenhum concurso disponível ainda. Aguarde novos cursos!</div>';
+        if (indice !== null) {
+            // Editando tópico existente
+            topicoEditando = { disciplinaId, indice };
+            const topico = disciplinas[disciplinaId].conteudos[indice];
+            const partes = topico.split('\n\n');
+            const titulo = partes[0];
+            const descricao = partes[1] || '';
+            document.getElementById('topicModalTitle').innerHTML = '<i class="fas fa-edit"></i> Editar Tópico';
+            document.getElementById('modalTopicText').value = titulo;
+            document.getElementById('modalTopicDesc').value = descricao;
+        } else {
+            // Novo tópico
+            topicoEditando = { disciplinaId, indice: null };
+            document.getElementById('topicModalTitle').innerHTML = '<i class="fas fa-plus-circle"></i> Adicionar Tópico';
+            document.getElementById('modalTopicText').value = '';
+            document.getElementById('modalTopicDesc').value = '';
+        }
+        document.getElementById('topicModal').style.display = 'flex';
+    }
+
+    async function salvarTopicoModal() {
+        if (!topicoEditando) return;
+        const { disciplinaId, indice } = topicoEditando;
+        const titulo = document.getElementById('modalTopicText').value.trim();
+        const descricao = document.getElementById('modalTopicDesc').value.trim();
+        
+        if (!titulo) {
+            alert("Por favor, insira um título para o tópico");
             return;
         }
         
+        const textoCompleto = descricao ? `${titulo}\n\n${descricao}` : titulo;
+        
+        if (indice !== null) {
+            // Editando
+            disciplinas[disciplinaId].conteudos[indice] = textoCompleto;
+        } else {
+            // Adicionando novo
+            if (!disciplinas[disciplinaId].conteudos) {
+                disciplinas[disciplinaId].conteudos = [];
+            }
+            disciplinas[disciplinaId].conteudos.push(textoCompleto);
+        }
+        
+        await salvarDisciplinasFirebase(disciplinas);
+        fecharModalTopico();
+        if (disciplinaAtual === disciplinaId) {
+            atualizarProgressoCurso();
+            renderizarConteudos();
+        }
+        renderizarGradeDisciplinas();
+        atualizarProgressoGeralUI();
+    }
+
+    async function excluirTopico(disciplinaId, indice) {
+        if (tipoUsuario !== 'admin') return;
+        if (confirm("Tem certeza que deseja excluir este tópico?")) {
+            disciplinas[disciplinaId].conteudos.splice(indice, 1);
+            await salvarDisciplinasFirebase(disciplinas);
+            
+            if (disciplinaAtual === disciplinaId) {
+                atualizarProgressoCurso();
+                renderizarConteudos();
+            }
+            renderizarGradeDisciplinas();
+            atualizarProgressoGeralUI();
+        }
+    }
+
+    function fecharModalTopico() {
+        document.getElementById('topicModal').style.display = 'none';
+        topicoEditando = null;
+    }
+
+    // Gerenciamento de Links
+    function abrirModalLink(disciplinaId, indice) {
+        if (tipoUsuario !== 'admin') return;
+        linkEditando = { disciplinaId, indice };
+        const chave = `${disciplinaId}_${indice}`;
+        const link = linksGlobais[chave];
+        document.getElementById('modalUrl').value = link?.url || '';
+        document.getElementById('modalDesc').value = link?.desc || '';
+        document.getElementById('modalLinkDeleteBtn').style.display = link ? 'block' : 'none';
+        document.getElementById('linkModal').style.display = 'flex';
+    }
+    
+    async function salvarLinkModal() {
+        if (!linkEditando) return;
+        const { disciplinaId, indice } = linkEditando;
+        const url = document.getElementById('modalUrl').value;
+        const desc = document.getElementById('modalDesc').value;
+        const chave = `${disciplinaId}_${indice}`;
+        if (url) linksGlobais[chave] = { url, desc };
+        else delete linksGlobais[chave];
+        await salvarLinksFirebase(linksGlobais);
+        fecharModalLink();
+        if (disciplinaAtual === disciplinaId) renderizarConteudos();
+    }
+    
+    async function excluirLinkModal() {
+        if (!linkEditando) return;
+        const { disciplinaId, indice } = linkEditando;
+        delete linksGlobais[`${disciplinaId}_${indice}`];
+        await salvarLinksFirebase(linksGlobais);
+        fecharModalLink();
+        if (disciplinaAtual === disciplinaId) renderizarConteudos();
+    }
+    
+    function fecharModalLink() {
+        document.getElementById('linkModal').style.display = 'none';
+        linkEditando = null;
+    }
+
+    function renderizarGradeDisciplinas() {
+        const grid = document.getElementById('disciplinesGrid');
         grid.innerHTML = '';
-        for (const [id, concurso] of Object.entries(concursos)) {
+        for (const [id, dados] of Object.entries(disciplinas)) {
+            const prog = obterProgressoDisciplina(id);
             const card = document.createElement('div');
-            card.className = 'contest-card';
+            card.className = 'discipline-card';
             card.innerHTML = `
                 ${tipoUsuario === 'admin' ? `
-                    <div class="admin-actions">
-                        <button class="admin-action-btn" onclick="window.abrirModalConcursoFirebase('${id}')">
+                    <div class="discipline-actions">
+                        <button class="discipline-action-btn edit" onclick="window.abrirModalDisciplinaFirebase('${id}')">
                             <i class="fas fa-edit"></i>
                         </button>
-                        <button class="admin-action-btn" onclick="window.excluirConcursoFirebase('${id}')">
+                        <button class="discipline-action-btn delete" onclick="window.excluirDisciplinaFirebase('${id}')">
                             <i class="fas fa-trash"></i>
                         </button>
                     </div>
                 ` : ''}
-                <div class="contest-icon">${concurso.icon}</div>
-                <h3>${concurso.nome}</h3>
-                <div class="contest-badge">${concurso.year || '2026'}</div>
-                <p style="color: #666; margin: 0.5rem 0;">${concurso.desc || 'Clique para começar sua preparação'}</p>
-                <div class="contest-stats">
-                    <div class="stat">
-                        <div class="stat-value">📚</div>
-                        <div class="stat-label">Disciplinas</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">🎯</div>
-                        <div class="stat-label">Simulados</div>
-                    </div>
-                </div>
-                <button class="enter-btn">Acessar Concurso →</button>
+                <div class="discipline-icon"><i class="${dados.icone}"></i></div>
+                <h3>${dados.nome}</h3>
+                <div class="progress-bar"><div class="progress-fill" style="width: ${prog.percentual}%;"></div></div>
+                <div style="font-size: 0.85rem; margin-top: 0.2rem;">🎯 ${prog.concluidos}/${prog.total} tópicos estudados</div>
+                <button class="filter-btn" style="margin-top: 1rem; background: #0c2e4e; color: white; padding: 0.5rem 1.8rem;">Estudar agora</button>
             `;
-            card.querySelector('.enter-btn').onclick = () => acessarConcurso(id, concurso);
+            card.querySelector('button').onclick = () => abrirDisciplina(id);
             grid.appendChild(card);
         }
     }
-
-    function acessarConcurso(concursoId, concurso) {
-        // Salvar concurso selecionado no localStorage
-        localStorage.setItem('concursoSelecionado', JSON.stringify({
-            id: concursoId,
-            nome: concurso.nome,
-            icon: concurso.icon
-        }));
-        // Redirecionar para a página do concurso (no caso, a PMES)
-        if (concursoId.includes('pmes')) {
-            window.location.href = 'meta-pmes.html'; // Redireciona para a página PMES
+    
+    function atualizarProgressoGeralUI() {
+        const geral = obterProgressoGeral();
+        document.getElementById('globalProgressFill').style.width = `${geral.percentual}%`;
+        document.getElementById('globalProgressText').innerHTML = `${Math.round(geral.percentual)}% concluído (${geral.concluidos}/${geral.total} itens)`;
+    }
+    
+    function abrirDisciplina(disciplinaId) {
+        disciplinaAtual = disciplinaId;
+        filtroAtual = "all";
+        document.getElementById('homeScreen').style.display = 'none';
+        document.getElementById('courseScreen').style.display = 'block';
+        const dados = disciplinas[disciplinaId];
+        document.getElementById('courseTitle').innerHTML = dados.nome;
+        document.getElementById('courseIcon').className = dados.icone;
+        document.getElementById('courseUserName').innerHTML = usuarioAtual.split('@')[0];
+        
+        const addTopicBtn = document.getElementById('addTopicBtn');
+        addTopicBtn.style.display = tipoUsuario === 'admin' ? 'block' : 'none';
+        
+        const roleSpanCurso = document.getElementById('courseRoleBadge');
+        if (tipoUsuario === 'admin') {
+            roleSpanCurso.innerText = 'Administrador';
+            roleSpanCurso.className = 'role-badge role-admin';
         } else {
-            alert(`Concurso ${concurso.nome} em desenvolvimento! Em breve disponível.`);
+            roleSpanCurso.innerText = 'Aluno';
+            roleSpanCurso.className = 'role-badge role-student';
         }
+        atualizarProgressoCurso();
+        renderizarConteudos();
+        document.querySelectorAll('#courseScreen .filter-btn').forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.dataset.filter === 'all') btn.classList.add('active');
+        });
+    }
+    
+    function atualizarProgressoCurso() {
+        if (!disciplinaAtual) return;
+        const prog = obterProgressoDisciplina(disciplinaAtual);
+        document.getElementById('courseProgressFill').style.width = `${prog.percentual}%`;
+        document.getElementById('courseProgressPercent').innerText = `${Math.round(prog.percentual)}%`;
+    }
+    
+    function renderizarConteudos() {
+        if (!disciplinaAtual) return;
+        const dados = disciplinas[disciplinaAtual];
+        const container = document.getElementById('contentsContainer');
+        let html = '';
+        dados.conteudos.forEach((texto, idx) => {
+            const concluido = progresso[disciplinaAtual]?.[idx] || false;
+            const exibir = filtroAtual === 'all' || (filtroAtual === 'completed' && concluido) || (filtroAtual === 'pending' && !concluido);
+            if (!exibir) return;
+            
+            const partes = texto.split('\n\n');
+            const titulo = partes[0];
+            const descricao = partes[1] || '';
+            
+            const link = linksGlobais[`${disciplinaAtual}_${idx}`];
+            const isAdmin = tipoUsuario === 'admin';
+            html += `
+                <div class="content-item ${concluido ? 'completed' : ''}">
+                    <div class="content-header">
+                        <input type="checkbox" class="content-checkbox" ${concluido ? 'checked' : ''} 
+                               onclick="window.alternarConteudoFirebase('${disciplinaAtual}', ${idx})">
+                        <div class="content-text">
+                            <strong>📌 ${titulo}</strong>
+                            ${descricao ? `<br><span style="font-size: 0.9rem; color: #475569;">${descricao}</span>` : ''}
+                        </div>
+                        <div class="topic-actions">
+                            ${isAdmin ? `<button class="edit-topic-btn" onclick="window.abrirModalTopicoFirebase('${disciplinaAtual}', ${idx})"><i class="fas fa-edit"></i></button>
+                                         <button class="delete-topic-btn" onclick="window.excluirTopicoFirebase('${disciplinaAtual}', ${idx})"><i class="fas fa-trash"></i></button>` : ''}
+                            ${isAdmin ? `<button class="link-btn" onclick="window.abrirModalLinkFirebase('${disciplinaAtual}', ${idx})"><i class="fas fa-link"></i> ${link ? 'Editar Link' : 'Adicionar Link'}</button>` : (link ? `<button class="link-btn" onclick="window.open('${link.url}', '_blank')"><i class="fas fa-external-link-alt"></i> Ver Material</button>` : '')}
+                        </div>
+                    </div>
+                    ${link && !isAdmin ? `<div class="link-container"><a href="${link.url}" target="_blank"><i class="fas fa-external-link-alt"></i> 🔗 ${link.desc || 'Material de apoio'}</a></div>` : ''}
+                </div>
+            `;
+        });
+        if (!html) html = '<div style="text-align:center;padding:2rem;">Nenhum conteúdo com esse filtro</div>';
+        container.innerHTML = html;
     }
 
     function mostrarTelaHome() {
         document.getElementById('loginScreen').style.display = 'none';
         document.getElementById('homeScreen').style.display = 'block';
-        
+        document.getElementById('courseScreen').style.display = 'none';
+        disciplinaAtual = null;
         document.getElementById('userNameDisplay').innerText = usuarioAtual.split('@')[0];
         const roleSpan = document.getElementById('roleDisplay');
-        const addBtn = document.getElementById('addContestBtn');
-        
         if (tipoUsuario === 'admin') {
             roleSpan.innerText = 'Administrador';
             roleSpan.className = 'role-badge role-admin';
-            addBtn.style.display = 'block';
+            document.getElementById('addDisciplineBtn').style.display = 'block';
         } else {
             roleSpan.innerText = 'Aluno';
             roleSpan.className = 'role-badge role-student';
-            addBtn.style.display = 'none';
+            document.getElementById('addDisciplineBtn').style.display = 'none';
         }
-        
-        renderizarConcursos();
+        renderizarGradeDisciplinas();
+        atualizarProgressoGeralUI();
     }
 
     function configurarEventos() {
         document.getElementById('doLoginBtn').onclick = () => login(document.getElementById('emailInput').value, document.getElementById('passwordInput').value);
         document.getElementById('doRegisterBtn').onclick = () => registrar(document.getElementById('emailInput').value, document.getElementById('passwordInput').value);
         document.getElementById('logoutMainBtn').onclick = logout;
+        document.getElementById('backToHomeBtn').onclick = () => mostrarTelaHome();
         document.getElementById('goHomeBtn').onclick = () => mostrarTelaHome();
-        document.getElementById('addContestBtn').onclick = () => abrirModalConcurso();
-        document.getElementById('modalContestSaveBtn').onclick = salvarConcursoModal;
-        document.getElementById('modalContestCancelBtn').onclick = fecharModalConcurso;
+        
+        document.getElementById('addDisciplineBtn').onclick = () => abrirModalDisciplina();
+        document.getElementById('modalDisciplineSaveBtn').onclick = salvarDisciplinaModal;
+        document.getElementById('modalDisciplineCancelBtn').onclick = fecharModalDisciplina;
+        document.getElementById('modalDisciplineIcon').onchange = atualizarPreviewIcone;
+        
+        document.getElementById('addTopicBtn').onclick = () => abrirModalTopico(disciplinaAtual);
+        document.getElementById('modalTopicSaveBtn').onclick = salvarTopicoModal;
+        document.getElementById('modalTopicCancelBtn').onclick = fecharModalTopico;
+        
+        document.getElementById('modalLinkSaveBtn').onclick = salvarLinkModal;
+        document.getElementById('modalLinkDeleteBtn').onclick = excluirLinkModal;
+        document.getElementById('modalLinkCancelBtn').onclick = fecharModalLink;
+        
+        document.querySelectorAll('#courseScreen .filter-btn').forEach(btn => {
+            btn.onclick = () => {
+                document.querySelectorAll('#courseScreen .filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                filtroAtual = btn.dataset.filter;
+                renderizarConteudos();
+            };
+        });
         
         window.onclick = (e) => { 
-            if (e.target === document.getElementById('contestModal')) fecharModalConcurso();
+            if (e.target === document.getElementById('disciplineModal')) fecharModalDisciplina();
+            if (e.target === document.getElementById('topicModal')) fecharModalTopico();
+            if (e.target === document.getElementById('linkModal')) fecharModalLink();
         };
     }
 
-    // Expor funções globais
-    window.abrirModalConcursoFirebase = abrirModalConcurso;
-    window.excluirConcursoFirebase = excluirConcurso;
+    // Expor funções para o escopo global
+    window.alternarConteudoFirebase = alternarConteudo;
+    window.abrirModalLinkFirebase = abrirModalLink;
+    window.abrirModalTopicoFirebase = abrirModalTopico;
+    window.excluirTopicoFirebase = excluirTopico;
+    window.abrirModalDisciplinaFirebase = abrirModalDisciplina;
+    window.excluirDisciplinaFirebase = excluirDisciplina;
     
     configurarEventos();
     
@@ -723,131 +1392,14 @@
         if (user) {
             usuarioAtual = user.email;
             tipoUsuario = await verificarAdminFirebase(usuarioAtual) ? "admin" : "aluno";
-            concursos = await carregarConcursosFirebase();
+            disciplinas = await carregarDisciplinasFirebase();
+            progresso = await carregarProgressoFirebase(usuarioAtual);
+            linksGlobais = await carregarLinksFirebase();
             mostrarTelaHome();
         } else {
             document.getElementById('loginScreen').style.display = 'flex';
-            document.getElementById('homeScreen').style.display = 'none';
         }
     });
-</script>
-
-<style>
-    .login-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 1000;
-    }
-
-    .login-card {
-        background: white;
-        border-radius: 40px;
-        padding: 2.5rem;
-        max-width: 420px;
-        width: 90%;
-        text-align: center;
-        box-shadow: 0 25px 40px rgba(0,0,0,0.25);
-    }
-
-    .login-card .logo-icon {
-        font-size: 3.5rem;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 auto 1rem;
-        color: white;
-    }
-
-    .login-card h2 {
-        color: #333;
-        margin-bottom: 0.5rem;
-        font-weight: 800;
-    }
-
-    .login-card input {
-        width: 100%;
-        padding: 0.9rem;
-        margin: 0.6rem 0;
-        border: 2px solid #e2e8f0;
-        border-radius: 20px;
-        font-size: 1rem;
-        transition: 0.2s;
-    }
-
-    .login-card input:focus {
-        outline: none;
-        border-color: #667eea;
-    }
-
-    .login-card button {
-        width: 100%;
-        padding: 0.9rem;
-        margin-top: 0.6rem;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        border: none;
-        border-radius: 40px;
-        font-size: 1rem;
-        cursor: pointer;
-        font-weight: 700;
-        transition: 0.2s;
-    }
-
-    .login-card button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    }
-
-    .login-card .register-btn {
-        background: #eef2ff;
-        color: #667eea;
-    }
-
-    .error-msg {
-        color: #dc2626;
-        font-size: 0.8rem;
-        margin-top: 0.5rem;
-    }
-
-    .add-discipline-btn {
-        background: white;
-        color: #667eea;
-        border: none;
-        padding: 0.8rem 1.5rem;
-        border-radius: 40px;
-        font-weight: 600;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    .add-discipline-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    }
-</style>
-
-<!-- Script para redirecionamento -->
-<script>
-    // Verificar se há um concurso selecionado ao carregar a página PMES
-    if (window.location.pathname.includes('meta-pmes.html')) {
-        const concursoSelecionado = localStorage.getItem('concursoSelecionado');
-        if (concursoSelecionado) {
-            console.log('Concurso selecionado:', JSON.parse(concursoSelecionado));
-        }
-    }
 </script>
 </body>
 </html>
