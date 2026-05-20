@@ -268,11 +268,40 @@
             transition: width 0.3s ease;
         }
 
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1300px;
+            margin: 2rem auto 1.5rem;
+            padding: 0 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
         .section-title {
-            text-align: center;
-            margin: 2rem 0 1.5rem;
             font-size: 1.8rem;
             font-weight: 700;
+            color: #0c2e4e;
+            margin: 0;
+        }
+
+        .add-discipline-btn {
+            background: #0c2e4e;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.8rem;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .add-discipline-btn:hover {
+            background: #f5b042;
             color: #0c2e4e;
         }
 
@@ -289,16 +318,62 @@
             background: white;
             border-radius: 32px;
             padding: 1.8rem;
-            cursor: pointer;
             transition: all 0.3s ease;
             border: 1px solid #fef3c7;
             box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+            position: relative;
         }
 
         .discipline-card:hover {
             transform: translateY(-6px);
             box-shadow: 0 20px 30px -10px rgba(0,0,0,0.15);
             border-color: #f5b042;
+        }
+
+        .discipline-actions {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            display: flex;
+            gap: 0.5rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .discipline-card:hover .discipline-actions {
+            opacity: 1;
+        }
+
+        .discipline-action-btn {
+            background: white;
+            border: none;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .discipline-action-btn.edit {
+            color: #0c2e4e;
+        }
+
+        .discipline-action-btn.edit:hover {
+            background: #0c2e4e;
+            color: white;
+        }
+
+        .discipline-action-btn.delete {
+            color: #dc2626;
+        }
+
+        .discipline-action-btn.delete:hover {
+            background: #dc2626;
+            color: white;
         }
 
         .discipline-icon {
@@ -311,6 +386,7 @@
             font-size: 1.4rem;
             margin-bottom: 0.8rem;
             color: #0c2e4e;
+            padding-right: 2rem;
         }
 
         .progress-bar {
@@ -526,12 +602,21 @@
         }
 
         .modal-content input,
-        .modal-content textarea {
+        .modal-content textarea,
+        .modal-content select {
             width: 100%;
             padding: 0.8rem;
             margin: 0.6rem 0;
             border: 1px solid #cbd5e1;
             border-radius: 20px;
+            font-family: inherit;
+        }
+
+        .icon-preview {
+            font-size: 2rem;
+            text-align: center;
+            margin: 0.5rem 0;
+            color: #0c2e4e;
         }
 
         .modal-buttons {
@@ -568,6 +653,10 @@
             }
             .course-container {
                 padding: 1rem;
+            }
+            .section-header {
+                flex-direction: column;
+                text-align: center;
             }
         }
     </style>
@@ -606,7 +695,7 @@
 
     <section class="hero">
         <h1>👮‍♂️ Polícia Militar do Espírito Santo</h1>
-        <p>Baseado no último edital (Edital PMES nº 001/2022) — Preparação para o concurso de Soldado PMES 2026</p>
+        <p>Preparação completa para o concurso de Soldado PMES 2026</p>
     </section>
 
     <div class="global-progress">
@@ -617,7 +706,12 @@
         <span id="globalProgressText">0% concluído</span>
     </div>
 
-    <h2 class="section-title">📖 Disciplinas do Edital PMES 2026</h2>
+    <div class="section-header">
+        <h2 class="section-title">📖 Disciplinas do Curso</h2>
+        <button id="addDisciplineBtn" class="add-discipline-btn" style="display: none;">
+            <i class="fas fa-plus"></i> Nova Disciplina
+        </button>
+    </div>
     <div id="disciplinesGrid" class="disciplines-grid"></div>
 
     <footer class="footer">
@@ -655,6 +749,38 @@
     </div>
 </div>
 
+<!-- MODAL PARA GERENCIAR DISCIPLINAS -->
+<div id="disciplineModal" class="modal">
+    <div class="modal-content">
+        <h3 style="color:#0c2e4e;" id="disciplineModalTitle"><i class="fas fa-plus-circle"></i> Adicionar Disciplina</h3>
+        <input type="text" id="modalDisciplineName" placeholder="Nome da disciplina">
+        <select id="modalDisciplineIcon">
+            <option value="fas fa-book">📚 Livro</option>
+            <option value="fas fa-language">📖 Língua Portuguesa</option>
+            <option value="fas fa-calculator">🧮 Matemática</option>
+            <option value="fas fa-gavel">⚖️ Direito</option>
+            <option value="fas fa-balance-scale">🔒 Direito Penal</option>
+            <option value="fas fa-file-signature">📜 Processo Penal</option>
+            <option value="fas fa-building">🏛️ Administrativo</option>
+            <option value="fas fa-badge">🪖 Legislação</option>
+            <option value="fas fa-map-marked-alt">🌎 Geografia</option>
+            <option value="fas fa-newspaper">📰 Atualidades</option>
+            <option value="fas fa-chart-line">📊 Estatística</option>
+            <option value="fas fa-code-branch">🔀 Lógica</option>
+            <option value="fas fa-flask">🔬 Ciências</option>
+            <option value="fas fa-history">📜 História</option>
+            <option value="fas fa-globe">🌍 Geografia Geral</option>
+        </select>
+        <div class="icon-preview" id="iconPreview">
+            <i class="fas fa-book"></i>
+        </div>
+        <div class="modal-buttons">
+            <button id="modalDisciplineSaveBtn" style="background:#0c2e4e; color:white;">Salvar</button>
+            <button id="modalDisciplineCancelBtn" style="background:#eef2ff;">Cancelar</button>
+        </div>
+    </div>
+</div>
+
 <!-- MODAL PARA GERENCIAR TÓPICOS -->
 <div id="topicModal" class="modal">
     <div class="modal-content">
@@ -662,8 +788,8 @@
         <input type="text" id="modalTopicText" placeholder="Título do tópico" style="font-weight: 500;">
         <textarea id="modalTopicDesc" rows="3" placeholder="Descrição detalhada do conteúdo (opcional)"></textarea>
         <div class="modal-buttons">
-            <button id="modalSaveBtn" style="background:#0c2e4e; color:white;">Salvar</button>
-            <button id="modalCancelBtn" style="background:#eef2ff;">Cancelar</button>
+            <button id="modalTopicSaveBtn" style="background:#0c2e4e; color:white;">Salvar</button>
+            <button id="modalTopicCancelBtn" style="background:#eef2ff;">Cancelar</button>
         </div>
     </div>
 </div>
@@ -683,28 +809,6 @@
 </div>
 
 <script type="module">
-    // DISCIPLINAS INICIAIS (COM TÓPICOS EXEMPLO - ADMIN PODE EDITAR/DELETAR/ADICIONAR)
-    const DISCIPLINAS_INICIAIS = {
-        portugues: {
-            nome: "📖 LÍNGUA PORTUGUESA",
-            icone: "fas fa-language",
-            conteudos: [
-                "Compreensão e interpretação de textos",
-                "Ortografia oficial e acentuação gráfica",
-                "Morfologia: classes de palavras"
-            ]
-        },
-        matematica: {
-            nome: "🧮 MATEMÁTICA",
-            icone: "fas fa-calculator",
-            conteudos: [
-                "Números inteiros e operações",
-                "Porcentagem e juros simples",
-                "Regra de três e proporções"
-            ]
-        }
-    };
-
     let usuarioAtual = null;
     let tipoUsuario = null;
     let disciplinaAtual = null;
@@ -712,6 +816,7 @@
     let progresso = {};
     let linksGlobais = {};
     let disciplinas = {};
+    let disciplinaEditando = null;
     let topicoEditando = null;
     let linkEditando = null;
 
@@ -723,12 +828,32 @@
             if (docSnap.exists()) {
                 return docSnap.data().disciplinas;
             }
-            // Se não existir, criar com disciplinas iniciais
-            await salvarDisciplinasFirebase(DISCIPLINAS_INICIAIS);
-            return DISCIPLINAS_INICIAIS;
+            // Disciplinas iniciais
+            const disciplinasIniciais = {
+                portugues: {
+                    nome: "📖 LÍNGUA PORTUGUESA",
+                    icone: "fas fa-language",
+                    conteudos: [
+                        "Compreensão e interpretação de textos\n\nAprenda a identificar ideias principais, inferências e estruturas textuais.",
+                        "Ortografia oficial e acentuação gráfica\n\nDomine as regras de acentuação e grafia correta das palavras.",
+                        "Morfologia: classes de palavras\n\nEstudo detalhado de substantivos, adjetivos, verbos e suas flexões."
+                    ]
+                },
+                matematica: {
+                    nome: "🧮 MATEMÁTICA",
+                    icone: "fas fa-calculator",
+                    conteudos: [
+                        "Números inteiros e operações\n\nOperações básicas, propriedades e resolução de problemas.",
+                        "Porcentagem e juros simples\n\nCálculos percentuais e aplicações em situações cotidianas.",
+                        "Regra de três e proporções\n\nResolução de problemas envolvendo grandezas direta e inversamente proporcionais."
+                    ]
+                }
+            };
+            await salvarDisciplinasFirebase(disciplinasIniciais);
+            return disciplinasIniciais;
         } catch (error) {
             console.error("Erro ao carregar disciplinas:", error);
-            return DISCIPLINAS_INICIAIS;
+            return {};
         }
     }
 
@@ -899,7 +1024,78 @@
         atualizarProgressoGeralUI();
     }
 
-    // CRUD de Tópicos (Admin apenas)
+    // CRUD de Disciplinas
+    function abrirModalDisciplina(disciplinaId = null) {
+        if (tipoUsuario !== 'admin') return;
+        
+        if (disciplinaId) {
+            // Editando disciplina existente
+            disciplinaEditando = disciplinaId;
+            const disciplina = disciplinas[disciplinaId];
+            document.getElementById('disciplineModalTitle').innerHTML = '<i class="fas fa-edit"></i> Editar Disciplina';
+            document.getElementById('modalDisciplineName').value = disciplina.nome;
+            document.getElementById('modalDisciplineIcon').value = disciplina.icone;
+        } else {
+            // Nova disciplina
+            disciplinaEditando = null;
+            document.getElementById('disciplineModalTitle').innerHTML = '<i class="fas fa-plus-circle"></i> Adicionar Disciplina';
+            document.getElementById('modalDisciplineName').value = '';
+            document.getElementById('modalDisciplineIcon').value = 'fas fa-book';
+        }
+        atualizarPreviewIcone();
+        document.getElementById('disciplineModal').style.display = 'flex';
+    }
+
+    function atualizarPreviewIcone() {
+        const iconClass = document.getElementById('modalDisciplineIcon').value;
+        document.getElementById('iconPreview').innerHTML = `<i class="${iconClass}"></i>`;
+    }
+
+    async function salvarDisciplinaModal() {
+        const nome = document.getElementById('modalDisciplineName').value.trim();
+        const icone = document.getElementById('modalDisciplineIcon').value;
+        
+        if (!nome) {
+            alert("Por favor, insira o nome da disciplina");
+            return;
+        }
+        
+        if (disciplinaEditando) {
+            // Editando
+            disciplinas[disciplinaEditando].nome = nome;
+            disciplinas[disciplinaEditando].icone = icone;
+        } else {
+            // Adicionando nova
+            const novoId = nome.toLowerCase().replace(/[^a-z0-9]/g, '_') + '_' + Date.now();
+            disciplinas[novoId] = {
+                nome: nome,
+                icone: icone,
+                conteudos: []
+            };
+        }
+        
+        await salvarDisciplinasFirebase(disciplinas);
+        fecharModalDisciplina();
+        renderizarGradeDisciplinas();
+        atualizarProgressoGeralUI();
+    }
+
+    async function excluirDisciplina(disciplinaId) {
+        if (tipoUsuario !== 'admin') return;
+        if (confirm(`Tem certeza que deseja excluir a disciplina "${disciplinas[disciplinaId].nome}"?\nTodos os tópicos e progresso dos alunos serão perdidos!`)) {
+            delete disciplinas[disciplinaId];
+            await salvarDisciplinasFirebase(disciplinas);
+            renderizarGradeDisciplinas();
+            atualizarProgressoGeralUI();
+        }
+    }
+
+    function fecharModalDisciplina() {
+        document.getElementById('disciplineModal').style.display = 'none';
+        disciplinaEditando = null;
+    }
+
+    // CRUD de Tópicos
     function abrirModalTopico(disciplinaId = null, indice = null) {
         if (tipoUsuario !== 'admin') return;
         
@@ -907,17 +1103,18 @@
             // Editando tópico existente
             topicoEditando = { disciplinaId, indice };
             const topico = disciplinas[disciplinaId].conteudos[indice];
+            const partes = topico.split('\n\n');
+            const titulo = partes[0];
+            const descricao = partes[1] || '';
             document.getElementById('topicModalTitle').innerHTML = '<i class="fas fa-edit"></i> Editar Tópico';
-            document.getElementById('modalTopicText').value = topico;
-            document.getElementById('modalTopicDesc').value = '';
-            document.getElementById('modalTopicDesc').placeholder = 'Descrição adicional (será exibida abaixo do título)';
+            document.getElementById('modalTopicText').value = titulo;
+            document.getElementById('modalTopicDesc').value = descricao;
         } else {
             // Novo tópico
             topicoEditando = { disciplinaId, indice: null };
             document.getElementById('topicModalTitle').innerHTML = '<i class="fas fa-plus-circle"></i> Adicionar Tópico';
             document.getElementById('modalTopicText').value = '';
             document.getElementById('modalTopicDesc').value = '';
-            document.getElementById('modalTopicDesc').placeholder = 'Descrição detalhada do conteúdo (opcional)';
         }
         document.getElementById('topicModal').style.display = 'flex';
     }
@@ -962,7 +1159,6 @@
             disciplinas[disciplinaId].conteudos.splice(indice, 1);
             await salvarDisciplinasFirebase(disciplinas);
             
-            // Remover progresso dos alunos para este tópico (opcional)
             if (disciplinaAtual === disciplinaId) {
                 atualizarProgressoCurso();
                 renderizarConteudos();
@@ -1024,6 +1220,16 @@
             const card = document.createElement('div');
             card.className = 'discipline-card';
             card.innerHTML = `
+                ${tipoUsuario === 'admin' ? `
+                    <div class="discipline-actions">
+                        <button class="discipline-action-btn edit" onclick="window.abrirModalDisciplinaFirebase('${id}')">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="discipline-action-btn delete" onclick="window.excluirDisciplinaFirebase('${id}')">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                ` : ''}
                 <div class="discipline-icon"><i class="${dados.icone}"></i></div>
                 <h3>${dados.nome}</h3>
                 <div class="progress-bar"><div class="progress-fill" style="width: ${prog.percentual}%;"></div></div>
@@ -1051,12 +1257,8 @@
         document.getElementById('courseIcon').className = dados.icone;
         document.getElementById('courseUserName').innerHTML = usuarioAtual.split('@')[0];
         
-        const addBtn = document.getElementById('addTopicBtn');
-        if (tipoUsuario === 'admin') {
-            addBtn.style.display = 'block';
-        } else {
-            addBtn.style.display = 'none';
-        }
+        const addTopicBtn = document.getElementById('addTopicBtn');
+        addTopicBtn.style.display = tipoUsuario === 'admin' ? 'block' : 'none';
         
         const roleSpanCurso = document.getElementById('courseRoleBadge');
         if (tipoUsuario === 'admin') {
@@ -1091,7 +1293,6 @@
             const exibir = filtroAtual === 'all' || (filtroAtual === 'completed' && concluido) || (filtroAtual === 'pending' && !concluido);
             if (!exibir) return;
             
-            // Separar título e descrição se existir
             const partes = texto.split('\n\n');
             const titulo = partes[0];
             const descricao = partes[1] || '';
@@ -1131,9 +1332,11 @@
         if (tipoUsuario === 'admin') {
             roleSpan.innerText = 'Administrador';
             roleSpan.className = 'role-badge role-admin';
+            document.getElementById('addDisciplineBtn').style.display = 'block';
         } else {
             roleSpan.innerText = 'Aluno';
             roleSpan.className = 'role-badge role-student';
+            document.getElementById('addDisciplineBtn').style.display = 'none';
         }
         renderizarGradeDisciplinas();
         atualizarProgressoGeralUI();
@@ -1146,9 +1349,14 @@
         document.getElementById('backToHomeBtn').onclick = () => mostrarTelaHome();
         document.getElementById('goHomeBtn').onclick = () => mostrarTelaHome();
         
+        document.getElementById('addDisciplineBtn').onclick = () => abrirModalDisciplina();
+        document.getElementById('modalDisciplineSaveBtn').onclick = salvarDisciplinaModal;
+        document.getElementById('modalDisciplineCancelBtn').onclick = fecharModalDisciplina;
+        document.getElementById('modalDisciplineIcon').onchange = atualizarPreviewIcone;
+        
         document.getElementById('addTopicBtn').onclick = () => abrirModalTopico(disciplinaAtual);
-        document.getElementById('modalSaveBtn').onclick = salvarTopicoModal;
-        document.getElementById('modalCancelBtn').onclick = fecharModalTopico;
+        document.getElementById('modalTopicSaveBtn').onclick = salvarTopicoModal;
+        document.getElementById('modalTopicCancelBtn').onclick = fecharModalTopico;
         
         document.getElementById('modalLinkSaveBtn').onclick = salvarLinkModal;
         document.getElementById('modalLinkDeleteBtn').onclick = excluirLinkModal;
@@ -1164,6 +1372,7 @@
         });
         
         window.onclick = (e) => { 
+            if (e.target === document.getElementById('disciplineModal')) fecharModalDisciplina();
             if (e.target === document.getElementById('topicModal')) fecharModalTopico();
             if (e.target === document.getElementById('linkModal')) fecharModalLink();
         };
@@ -1174,10 +1383,11 @@
     window.abrirModalLinkFirebase = abrirModalLink;
     window.abrirModalTopicoFirebase = abrirModalTopico;
     window.excluirTopicoFirebase = excluirTopico;
+    window.abrirModalDisciplinaFirebase = abrirModalDisciplina;
+    window.excluirDisciplinaFirebase = excluirDisciplina;
     
     configurarEventos();
     
-    // Verificar se já está logado
     window.onAuthStateChanged(window.auth, async (user) => {
         if (user) {
             usuarioAtual = user.email;
