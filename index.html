@@ -6,6 +6,46 @@
     <title>Meta PMES - Preparação para Soldado PMES 2026</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Firebase SDKs -->
+    <script type="module">
+        // Import Firebase SDKs
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, doc, getDoc, setDoc, collection, query, where, getDocs, updateDoc, arrayUnion, arrayRemove } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyC_D_puw38NHgsTzsz29hZHsD8FCq0m-z8",
+            authDomain: "meta-pmes.firebaseapp.com",
+            projectId: "meta-pmes",
+            storageBucket: "meta-pmes.firebasestorage.app",
+            messagingSenderId: "169924841151",
+            appId: "1:169924841151:web:66b25053d5538e6d03400a"
+        };
+        
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+        
+        // Make Firebase services available globally
+        window.db = db;
+        window.auth = auth;
+        window.doc = doc;
+        window.getDoc = getDoc;
+        window.setDoc = setDoc;
+        window.updateDoc = updateDoc;
+        window.collection = collection;
+        window.query = query;
+        window.where = where;
+        window.getDocs = getDocs;
+        window.arrayUnion = arrayUnion;
+        window.arrayRemove = arrayRemove;
+        window.createUserWithEmailAndPassword = createUserWithEmailAndPassword;
+        window.signInWithEmailAndPassword = signInWithEmailAndPassword;
+        window.signOut = signOut;
+        window.onAuthStateChanged = onAuthStateChanged;
+    </script>
     <style>
         * {
             margin: 0;
@@ -485,6 +525,12 @@
                 padding: 1rem;
             }
         }
+        
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #0c2e4e;
+        }
     </style>
 </head>
 <body>
@@ -500,7 +546,7 @@
         <button id="doLoginBtn">Entrar</button>
         <button id="doRegisterBtn" class="register-btn">Criar nova conta</button>
         <div id="loginMsg" class="error-msg"></div>
-        <div style="margin-top: 1rem; font-size: 0.7rem; color: #475569;">Demo: admin@mentoria.com / admin123</div>
+        <div style="margin-top: 1rem; font-size: 0.7rem; color: #475569;">Crie sua conta ou use admin@mentoria.com / admin123</div>
     </div>
 </div>
 
@@ -582,8 +628,8 @@
     </div>
 </div>
 
-<script>
-    // DISCIPLINAS BASEADAS NO ÚLTIMO EDITAL PMES (SOLDADO) - Edital 001/2022 e atualizações comuns
+<script type="module">
+    // DISCIPLINAS BASEADAS NO ÚLTIMO EDITAL PMES
     const DISCIPLINAS_PMES = {
         portugues: {
             nome: "📖 LÍNGUA PORTUGUESA",
@@ -721,47 +767,6 @@
         }
     };
 
-    // ==================== GERENCIAMENTO DE BANCO LOCAL ====================
-    function getUsers() {
-        const users = localStorage.getItem('meta_pmes_usuarios');
-        if (users) return JSON.parse(users);
-        const defaultUsers = {
-            "admin@mentoria.com": {
-                senha: "admin123",
-                tipo: "admin",
-                nome: "Comandante",
-                criado: new Date().toISOString()
-            }
-        };
-        localStorage.setItem('meta_pmes_usuarios', JSON.stringify(defaultUsers));
-        return defaultUsers;
-    }
-    
-    function saveUsers(users) {
-        localStorage.setItem('meta_pmes_usuarios', JSON.stringify(users));
-    }
-    
-    function getProgresso(email) {
-        const progress = localStorage.getItem(`meta_pmes_progresso_${email}`);
-        return progress ? JSON.parse(progress) : {};
-    }
-    
-    function saveProgresso(email, progresso) {
-        localStorage.setItem(`meta_pmes_progresso_${email}`, JSON.stringify(progresso));
-    }
-    
-    function getLinksGlobais() {
-        const links = localStorage.getItem('meta_pmes_links');
-        if (links) return JSON.parse(links);
-        const defaultLinks = {};
-        localStorage.setItem('meta_pmes_links', JSON.stringify(defaultLinks));
-        return defaultLinks;
-    }
-    
-    function saveLinksGlobais(links) {
-        localStorage.setItem('meta_pmes_links', JSON.stringify(links));
-    }
-
     let usuarioAtual = null;
     let tipoUsuario = null;
     let disciplinaAtual = null;
@@ -770,43 +775,120 @@
     let linksGlobais = {};
     let linkEditando = null;
 
+    // Funções Firebase
+    async function carregarProgressoFirebase(email) {
+        try {
+            const docRef = doc(window.db, "progressos", email);
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                return docSnap.data().progresso || {};
+            }
+            return {};
+        } catch (error) {
+            console.error("Erro ao carregar progresso:", error);
+            return {};
+        }
+    }
+
+    async function salvarProgressoFirebase(email, progressoData) {
+        try {
+            const docRef = doc(window.db, "progressos", email);
+            await setDoc(docRef, { progresso: progressoData, updatedAt: new Date().toISOString() });
+        } catch (error) {
+            console.error("Erro ao salvar progresso:", error);
+        }
+    }
+
+    async function carregarLinksFirebase() {
+        try {
+            const docRef = doc(window.db, "links", "materiais");
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                return docSnap.data().links || {};
+            }
+            return {};
+        } catch (error) {
+            console.error("Erro ao carregar links:", error);
+            return {};
+        }
+    }
+
+    async function salvarLinksFirebase(linksData) {
+        try {
+            const docRef = doc(window.db, "links", "materiais");
+            await setDoc(docRef, { links: linksData, updatedAt: new Date().toISOString() });
+        } catch (error) {
+            console.error("Erro ao salvar links:", error);
+        }
+    }
+
+    async function verificarAdminFirebase(email) {
+        try {
+            const docRef = doc(window.db, "usuarios", email);
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                return docSnap.data().tipo === "admin";
+            }
+            return email === "admin@mentoria.com"; // Admin padrão
+        } catch (error) {
+            console.error("Erro ao verificar admin:", error);
+            return false;
+        }
+    }
+
+    async function registrarAdminFirebase(email) {
+        try {
+            await setDoc(doc(window.db, "usuarios", email), { tipo: "admin", email: email });
+        } catch (error) {
+            console.error("Erro ao registrar admin:", error);
+        }
+    }
+
     // Autenticação
-    function login(email, senha) {
-        const users = getUsers();
-        if (users[email] && users[email].senha === senha) {
-            usuarioAtual = email;
-            tipoUsuario = users[email].tipo;
-            progresso = getProgresso(email);
-            linksGlobais = getLinksGlobais();
+    async function login(email, senha) {
+        try {
+            const userCredential = await window.signInWithEmailAndPassword(window.auth, email, senha);
+            usuarioAtual = userCredential.user.email;
+            tipoUsuario = await verificarAdminFirebase(usuarioAtual) ? "admin" : "aluno";
+            progresso = await carregarProgressoFirebase(usuarioAtual);
+            linksGlobais = await carregarLinksFirebase();
             mostrarTelaHome();
             return true;
+        } catch (error) {
+            document.getElementById('loginMsg').innerHTML = `<span style="color:#dc2626;">❌ ${error.message}</span>`;
+            return false;
         }
-        document.getElementById('loginMsg').innerHTML = '<span style="color:#dc2626;">❌ Email ou senha inválidos!</span>';
-        return false;
     }
     
-    function registrar(email, senha) {
+    async function registrar(email, senha) {
         if (!email || !senha) {
             document.getElementById('loginMsg').innerHTML = '<span style="color:#dc2626;">❌ Preencha todos os campos!</span>';
             return false;
         }
-        const users = getUsers();
-        if (users[email]) {
-            document.getElementById('loginMsg').innerHTML = '<span style="color:#dc2626;">❌ Email já cadastrado!</span>';
+        try {
+            const userCredential = await window.createUserWithEmailAndPassword(window.auth, email, senha);
+            usuarioAtual = userCredential.user.email;
+            tipoUsuario = "aluno";
+            
+            // Se for o email admin padrão, registrar como admin
+            if (email === "admin@mentoria.com") {
+                await registrarAdminFirebase(email);
+                tipoUsuario = "admin";
+            }
+            
+            progresso = {};
+            await salvarProgressoFirebase(usuarioAtual, progresso);
+            linksGlobais = await carregarLinksFirebase();
+            mostrarTelaHome();
+            return true;
+        } catch (error) {
+            document.getElementById('loginMsg').innerHTML = `<span style="color:#dc2626;">❌ ${error.message}</span>`;
             return false;
         }
-        users[email] = {
-            senha: senha,
-            tipo: "aluno",
-            nome: email.split('@')[0],
-            criado: new Date().toISOString()
-        };
-        saveUsers(users);
-        document.getElementById('loginMsg').innerHTML = '<span style="color:#059669;">✅ Conta criada! Faça login.</span>';
-        return true;
     }
     
-    function logout() {
+    async function logout() {
+        await window.signOut(window.auth);
         usuarioAtual = null;
         tipoUsuario = null;
         disciplinaAtual = null;
@@ -839,10 +921,10 @@
         return { concluidos: totalConcluidos, total: totalItens, percentual: totalItens ? (totalConcluidos / totalItens) * 100 : 0 };
     }
     
-    function alternarConteudo(disciplinaId, indice) {
+    async function alternarConteudo(disciplinaId, indice) {
         if (!progresso[disciplinaId]) progresso[disciplinaId] = {};
         progresso[disciplinaId][indice] = !progresso[disciplinaId][indice];
-        saveProgresso(usuarioAtual, progresso);
+        await salvarProgressoFirebase(usuarioAtual, progresso);
         if (disciplinaAtual === disciplinaId) {
             atualizarProgressoCurso();
             renderizarConteudos();
@@ -862,7 +944,7 @@
         document.getElementById('linkModal').style.display = 'flex';
     }
     
-    function salvarLinkModal() {
+    async function salvarLinkModal() {
         if (!linkEditando) return;
         const { disciplinaId, indice } = linkEditando;
         const url = document.getElementById('modalUrl').value;
@@ -870,16 +952,16 @@
         const chave = `${disciplinaId}_${indice}`;
         if (url) linksGlobais[chave] = { url, desc };
         else delete linksGlobais[chave];
-        saveLinksGlobais(linksGlobais);
+        await salvarLinksFirebase(linksGlobais);
         fecharModal();
         if (disciplinaAtual === disciplinaId) renderizarConteudos();
     }
     
-    function excluirLinkModal() {
+    async function excluirLinkModal() {
         if (!linkEditando) return;
         const { disciplinaId, indice } = linkEditando;
         delete linksGlobais[`${disciplinaId}_${indice}`];
-        saveLinksGlobais(linksGlobais);
+        await salvarLinksFirebase(linksGlobais);
         fecharModal();
         if (disciplinaAtual === disciplinaId) renderizarConteudos();
     }
@@ -961,11 +1043,11 @@
                 <div class="content-item ${concluido ? 'completed' : ''}">
                     <div class="content-header">
                         <input type="checkbox" class="content-checkbox" ${concluido ? 'checked' : ''} 
-                               onclick="alternarConteudo('${disciplinaAtual}', ${idx})">
+                               onclick="window.alternarConteudoFirebase('${disciplinaAtual}', ${idx})">
                         <div class="content-text">
                             <strong>📌 Tópico ${idx+1}</strong><br>${texto}
                         </div>
-                        ${isAdmin ? `<button class="link-btn" onclick="abrirModalLink('${disciplinaAtual}', ${idx})"><i class="fas fa-edit"></i> ${link ? 'Editar' : '+ Link'}</button>` : ''}
+                        ${isAdmin ? `<button class="link-btn" onclick="window.abrirModalLinkFirebase('${disciplinaAtual}', ${idx})"><i class="fas fa-edit"></i> ${link ? 'Editar' : '+ Link'}</button>` : ''}
                     </div>
                     ${link ? `<div class="link-container"><a href="${link.url}" target="_blank"><i class="fas fa-external-link-alt"></i> 🔗 ${link.desc || 'Material de apoio'}</a></div>` : (isAdmin ? '<div class="link-container" style="color:#94a3b8;">➕ Adicione um link para material de apoio</div>' : '')}
                 </div>
@@ -1013,10 +1095,24 @@
         window.onclick = (e) => { if (e.target === document.getElementById('linkModal')) fecharModal(); };
     }
 
-    window.alternarConteudo = alternarConteudo;
-    window.abrirModalLink = abrirModalLink;
+    // Expor funções para o escopo global
+    window.alternarConteudoFirebase = alternarConteudo;
+    window.abrirModalLinkFirebase = abrirModalLink;
+    
     configurarEventos();
-    document.getElementById('loginScreen').style.display = 'flex';
+    
+    // Verificar se já está logado
+    window.onAuthStateChanged(window.auth, async (user) => {
+        if (user) {
+            usuarioAtual = user.email;
+            tipoUsuario = await verificarAdminFirebase(usuarioAtual) ? "admin" : "aluno";
+            progresso = await carregarProgressoFirebase(usuarioAtual);
+            linksGlobais = await carregarLinksFirebase();
+            mostrarTelaHome();
+        } else {
+            document.getElementById('loginScreen').style.display = 'flex';
+        }
+    });
 </script>
 </body>
 </html>
